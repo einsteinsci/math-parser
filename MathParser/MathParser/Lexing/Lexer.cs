@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 using MathParser.Tokens;
 
-namespace MathParser
+namespace MathParser.Lexing
 {
-    public class Lexer
+    public sealed class Lexer
     {
 		public static readonly Lexer Instance = new Lexer();
 
 		public string Expression
 		{ get; set; }
 
-		public List<Token> Tokens
+		public List<Lexeme> Lexed
 		{ get; private set; }
     }
 }

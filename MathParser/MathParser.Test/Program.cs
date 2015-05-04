@@ -12,6 +12,11 @@ namespace MathParser.Test
 	{
 		static void Main(string[] args)
 		{
+			string input = "1 + 2";
+
+			Console.WriteLine("Input> " + input);
+
+			Console.ReadKey(true);
 		}
 	}
 }
