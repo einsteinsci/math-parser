@@ -6,23 +6,19 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[Token("number")]
-	public sealed class TokenNumber : Token
+	public abstract class TokenOperator : Token
 	{
-		public override bool SingleChar
-		{
-			get { return false; }
-		}
+		public abstract string Operator
+		{ get; }
 
 		public override bool Matches(string lexeme)
 		{
-			int res;
-			return int.TryParse(lexeme, out res);
+			return lexeme == Operator;
 		}
 
 		public override string ToString()
 		{
-			return "[T] Number";
+			return "[T] Operator " + Operator;
 		}
 	}
 }

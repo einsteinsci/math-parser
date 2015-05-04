@@ -21,5 +21,10 @@ namespace MathParser.Lexing
 			Token = token;
 			Lexed = lexed;
 		}
+
+		public override string ToString()
+		{
+			return Token.ToString() + ": " + Lexed;
+		}
 	}
 }

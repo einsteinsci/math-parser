@@ -13,7 +13,12 @@ namespace MathParser.Tokens
 		public static Dictionary<string, Token> Registry
 		{ get; private set; }
 
+		public abstract bool SingleChar
+		{ get; }
+
 		public abstract bool Matches(string lexeme);
+
+		public static Token Number { get { return Token.Registry["number"]; } }
 
 		public static void RegisterTokens()
 		{
@@ -28,8 +33,43 @@ namespace MathParser.Tokens
 				TokenAttribute att = t.GetCustomAttributes<TokenAttribute>().FirstOrDefault();
 				if (att != null)
 				{
-					Token tok = Activator.CreateInstance(t) as Token;
+					Token token = Activator.CreateInstance(t) as Token;
+					Registry.Add(att.TokenName, token);
 				}
+			}
+		}
+
+		public static List<Token> SingleCharTokens
+		{
+			get
+			{
+				List<Token> res = new List<Token>();
+				foreach (Token t in Token.Registry.Values)
+				{
+					if (t.SingleChar)
+					{
+						res.Add(t);
+					}
+				}
+
+				return res;
+			}
+		}
+
+		public static List<Token> MultiCharTokens
+		{
+			get
+			{
+				List<Token> res = new List<Token>();
+				foreach (Token t in Token.Registry.Values)
+				{
+					if (!t.SingleChar)
+					{
+						res.Add(t);
+					}
+				}
+
+				return res;
 			}
 		}
 	}

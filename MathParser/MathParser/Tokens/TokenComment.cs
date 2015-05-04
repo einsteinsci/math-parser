@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[Token("number")]
-	public sealed class TokenNumber : Token
+	[Token("comment")]
+	public class TokenComment : Token
 	{
 		public override bool SingleChar
 		{
@@ -16,13 +16,12 @@ namespace MathParser.Tokens
 
 		public override bool Matches(string lexeme)
 		{
-			int res;
-			return int.TryParse(lexeme, out res);
+			return lexeme.StartsWith("/*") && lexeme.EndsWith("*/");
 		}
 
 		public override string ToString()
 		{
-			return "[T] Number";
+			return "[T] Comment";
 		}
 	}
 }
