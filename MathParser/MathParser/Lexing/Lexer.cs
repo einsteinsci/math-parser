@@ -31,13 +31,15 @@ namespace MathParser.Lexing
 			{
 				char c = Expression[index];
 
-				if (lexeme == "")
+				if (!c.IsWhitespace())
 				{
-					foreach (Token t in Token.SingleCharTokens)
-					{
-
-					}
+					// OVER HERE
 				}
+
+				IEnumerable<Token> possibleTokens = 
+					from tok in Token.Registry.Values
+					where tok.Matches(lexeme)
+					select tok;
 			}
 		}
 
