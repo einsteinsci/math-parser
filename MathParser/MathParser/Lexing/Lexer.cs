@@ -29,18 +29,33 @@ namespace MathParser.Lexing
 
 			for (int index = 0; index < Expression.Length; index++)
 			{
+				bool done = false;
 				char c = Expression[index];
 
-				if (!c.IsWhitespace())
+				List<Token> currentValid = ValidTokens(lexeme);
+				List<Token> nextValid = ValidTokens(lexeme + c);
+
+				if (nextValid.Count() == 0)
 				{
 					// OVER HERE
 				}
 
-				IEnumerable<Token> possibleTokens = 
-					from tok in Token.Registry.Values
-					where tok.Matches(lexeme)
-					select tok;
+				if (!c.IsWhitespace())
+				{
+					done = true;
+				}
 			}
+		}
+
+		public static List<Token> ValidTokens(string lexeme)
+		{
+			List<Token> res = new List<Token>();
+			foreach (Token token in Token.Registry.Values)
+			{
+				res.Add(token);
+			}
+
+			return res;
 		}
 
 		public static List<Lexeme> Lex(string expression)
