@@ -21,7 +21,7 @@ namespace MathParser.Tokens
 
 		public override string ToString()
 		{
-			return "[T] Comment";
+			return "[Comment]";
 		}
 	}
 }

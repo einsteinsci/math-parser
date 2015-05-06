@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logger.cs" />
     <Compile Include="TextUtils.cs" />
     <Compile Include="Lexing\Lexeme.cs" />
     <Compile Include="Lexing\Lexer.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Tokens\TokenNumber.cs" />
     <Compile Include="Tokens\TokenOperator.cs" />
     <Compile Include="Tokens\TokenOperatorPlus.cs" />
+    <Compile Include="Tokens\TokenRegistry.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

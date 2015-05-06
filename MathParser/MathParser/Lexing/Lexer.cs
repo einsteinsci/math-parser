@@ -20,6 +20,11 @@ namespace MathParser.Lexing
 
 		public void Lex()
 		{
+			if (Token.Registry == null)
+			{
+				Token.RegisterTokens();
+			}
+
 			if (Expression == null)
 			{
 				return;
@@ -27,32 +32,105 @@ namespace MathParser.Lexing
 
 			string lexeme = "";
 
+			#region for
 			for (int index = 0; index < Expression.Length; index++)
 			{
-				bool done = false;
 				char c = Expression[index];
 
-				List<Token> currentValid = ValidTokens(lexeme);
-				List<Token> nextValid = ValidTokens(lexeme + c);
-
-				if (nextValid.Count() == 0)
+				if (c == '+')
 				{
-					// OVER HERE
+					int stuppid = 0;
 				}
 
-				if (!c.IsWhitespace())
+				if (c.IsWhitespace())
 				{
-					done = true;
+					continue;
 				}
+
+				if (lexeme == "")
+				{
+					lexeme += c;
+					continue;
+				}
+
+				List<Token> validNext = ValidTokens(lexeme + c);
+				if (validNext.Count > 0)
+				{
+					lexeme += c;
+					continue;
+				}
+
+				List<Token> validCurrent = ValidTokens(lexeme);
+
+				if (validCurrent.Count == 0)
+				{
+					Logger.Log(LogLevel.Error, "lexer", 
+						"No last-choice Tokens. Disposing " + lexeme);
+					lexeme = "";
+					continue;
+				}
+
+				if (validCurrent.Count > 1)
+				{
+					Logger.Log(LogLevel.Warning, "lexer",
+						"Multiple last-choice Tokens:  " +
+						TokensToString(validCurrent));
+				}
+
+				Token t = validCurrent.FirstOrDefault();
+				Logger.Log(LogLevel.Debug, "lexer",
+					"Finalizing Token " + t.ToString() + " for lexeme: " + lexeme);
+				Lexed.Add(new Lexeme(t, lexeme));
+				lexeme = c.ToString();
 			}
+
+			List<Token> validCurrent_ = ValidTokens(lexeme);
+
+			if (validCurrent_.Count == 0)
+			{
+				Logger.Log(LogLevel.Error, "lexer", 
+					"No last-choice Tokens. Disposing " + lexeme);
+			}
+
+			if (validCurrent_.Count > 1)
+			{
+				Logger.Log(LogLevel.Warning, "lexer",
+					"Multiple last-choice Tokens:  " +
+					TokensToString(validCurrent_));
+			}
+
+			Token tok = validCurrent_.FirstOrDefault();
+			Logger.Log(LogLevel.Debug, "lexer",
+				"Finalizing Token " + tok.ToString() + " for lexeme: " + lexeme);
+			Lexed.Add(new Lexeme(tok, lexeme));
+			#endregion
+		}
+		
+		public static string TokensToString(List<Token> tokens)
+		{
+			string res = "{ ";
+			foreach (Token t in tokens)
+			{
+				res += t.ToString() + ",";
+			}
+
+			return res.TrimEnd(',') + " }";
 		}
 
 		public static List<Token> ValidTokens(string lexeme)
 		{
+			if (lexeme == "")
+			{
+				return Token.Registry.Values.ToList();
+			}
+
 			List<Token> res = new List<Token>();
 			foreach (Token token in Token.Registry.Values)
 			{
-				res.Add(token);
+				if (token.Matches(lexeme))
+				{
+					res.Add(token);
+				}
 			}
 
 			return res;

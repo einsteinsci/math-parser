@@ -16,13 +16,21 @@ namespace MathParser.Tokens
 
 		public override bool Matches(string lexeme)
 		{
+			foreach (Token t in TokenRegistry.Tokens)
+			{
+				if (t.IsOperator && t.Matches(lexeme))
+				{
+					return false;
+				}
+			}
+
 			int res;
 			return int.TryParse(lexeme, out res);
 		}
 
 		public override string ToString()
 		{
-			return "[T] Number";
+			return "[Number]";
 		}
 	}
 }

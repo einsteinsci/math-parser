@@ -8,6 +8,14 @@ namespace MathParser.Tokens
 {
 	public abstract class TokenOperator : Token
 	{
+		public override bool IsOperator
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		public abstract string Operator
 		{ get; }
 
@@ -18,7 +26,7 @@ namespace MathParser.Tokens
 
 		public override string ToString()
 		{
-			return "[T] Operator " + Operator;
+			return "[Operator" + Operator + "]";
 		}
 	}
 }

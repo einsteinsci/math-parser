@@ -12,9 +12,13 @@ namespace MathParser.Tokens
 		public string TokenName
 		{ get; private set; }
 
-		public TokenAttribute(string tokenName)
+		public int Priority
+		{ get; private set; }
+
+		public TokenAttribute(string tokenName, int priority)
 		{
 			TokenName = tokenName.ToLower();
+			Priority = priority;
 		}
 	}
 }

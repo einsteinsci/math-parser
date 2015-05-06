@@ -10,15 +10,22 @@ namespace MathParser.Tokens
 {
 	public abstract class Token
 	{
-		public static Dictionary<string, Token> Registry
-		{ get; private set; }
+		public virtual bool IsOperator
+		{
+			get
+			{
+				return false;
+			}
+		}
 
 		public abstract bool SingleChar
 		{ get; }
 
 		public abstract bool Matches(string lexeme);
 
-		public static Token Number { get { return Token.Registry["number"]; } }
+		public static Token Number { get { return TokenRegistry.Get("number"); } }
+		public static Token Comment { get { return TokenRegistry.Get("comment"); } }
+		public static Token OperatorPlus { get { return TokenRegistry.Get("operatorPlus"); } }
 
 		public static void RegisterTokens()
 		{
@@ -34,7 +41,7 @@ namespace MathParser.Tokens
 				if (att != null)
 				{
 					Token token = Activator.CreateInstance(t) as Token;
-					Registry.Add(att.TokenName, token);
+					TokenRegistry.Register(att.TokenName, token, att.Priority);
 				}
 			}
 		}
