@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[Token("number")]
+	[Token("number", 5)]
 	public sealed class TokenNumber : Token
 	{
 		public override bool SingleChar
@@ -22,6 +22,11 @@ namespace MathParser.Tokens
 				{
 					return false;
 				}
+			}
+
+			if (!lexeme[0].IsNumeric())
+			{
+				return false;
 			}
 
 			int res;

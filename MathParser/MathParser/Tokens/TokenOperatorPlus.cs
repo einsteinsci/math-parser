@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[Token("operatorPlus")]
+	[Token("operatorPlus", PRIORITY)]
 	public class TokenOperatorPlus : TokenOperator
 	{
 		public override string Operator

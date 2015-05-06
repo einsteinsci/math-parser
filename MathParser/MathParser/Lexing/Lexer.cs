@@ -20,9 +20,9 @@ namespace MathParser.Lexing
 
 		public void Lex()
 		{
-			if (Token.Registry == null)
+			if (!TokenRegistry.HasRegistered)
 			{
-				Token.RegisterTokens();
+				TokenRegistry.RegisterTokens();
 			}
 
 			if (Expression == null)
@@ -37,11 +37,6 @@ namespace MathParser.Lexing
 			{
 				char c = Expression[index];
 
-				if (c == '+')
-				{
-					int stuppid = 0;
-				}
-
 				if (c.IsWhitespace())
 				{
 					continue;
@@ -53,34 +48,38 @@ namespace MathParser.Lexing
 					continue;
 				}
 
+				List<Token> validCurrent = ValidTokens(lexeme);
 				List<Token> validNext = ValidTokens(lexeme + c);
+
+				if (validCurrent.Count == 2 /* && validCurrent.First().SingleChar */) // excluding unrecognized
+				{
+					FinalizeToken(validCurrent.First(), lexeme);
+					lexeme = c.ToString();
+					continue;
+				}
+
 				if (validNext.Count > 0)
 				{
 					lexeme += c;
 					continue;
 				}
 
-				List<Token> validCurrent = ValidTokens(lexeme);
-
 				if (validCurrent.Count == 0)
 				{
-					Logger.Log(LogLevel.Error, "lexer", 
-						"No last-choice Tokens. Disposing " + lexeme);
-					lexeme = "";
+					Logger.Log(LogLevel.Debug, "lexer", 
+						"No last-choice Tokens. Waiting on " + lexeme);
+					lexeme += c;
 					continue;
 				}
 
-				if (validCurrent.Count > 1)
+				if (validCurrent.Count > 2) // excluding unrecognized
 				{
 					Logger.Log(LogLevel.Warning, "lexer",
 						"Multiple last-choice Tokens:  " +
 						TokensToString(validCurrent));
 				}
 
-				Token t = validCurrent.FirstOrDefault();
-				Logger.Log(LogLevel.Debug, "lexer",
-					"Finalizing Token " + t.ToString() + " for lexeme: " + lexeme);
-				Lexed.Add(new Lexeme(t, lexeme));
+				FinalizeToken(validCurrent.FirstOrDefault(), lexeme);
 				lexeme = c.ToString();
 			}
 
@@ -92,7 +91,7 @@ namespace MathParser.Lexing
 					"No last-choice Tokens. Disposing " + lexeme);
 			}
 
-			if (validCurrent_.Count > 1)
+			if (validCurrent_.Count > 2) // excluding unrecognized
 			{
 				Logger.Log(LogLevel.Warning, "lexer",
 					"Multiple last-choice Tokens:  " +
@@ -100,10 +99,23 @@ namespace MathParser.Lexing
 			}
 
 			Token tok = validCurrent_.FirstOrDefault();
-			Logger.Log(LogLevel.Debug, "lexer",
-				"Finalizing Token " + tok.ToString() + " for lexeme: " + lexeme);
-			Lexed.Add(new Lexeme(tok, lexeme));
+			FinalizeToken(tok, lexeme);
 			#endregion
+
+			string info = "";
+			foreach (Lexeme l in Lexed)
+			{
+				info += l.ToString() + " ";
+			}
+			Logger.Log(LogLevel.Debug, "lexer",
+				"Lexing complete: " + info);
+		}
+
+		public void FinalizeToken(Token token, string lexeme)
+		{
+			Logger.Log(LogLevel.Debug, "lexer",
+				"Finalizing Token " + token.ToString() + " for lexeme: " + lexeme);
+			Lexed.Add(new Lexeme(token, lexeme));
 		}
 		
 		public static string TokensToString(List<Token> tokens)
@@ -121,13 +133,13 @@ namespace MathParser.Lexing
 		{
 			if (lexeme == "")
 			{
-				return Token.Registry.Values.ToList();
+				return TokenRegistry.Tokens;
 			}
 
 			List<Token> res = new List<Token>();
-			foreach (Token token in Token.Registry.Values)
+			foreach (Token token in TokenRegistry.Tokens)
 			{
-				if (token.Matches(lexeme))
+				if (token.Matches(lexeme) && token != Token.Unrecognized)
 				{
 					res.Add(token);
 				}

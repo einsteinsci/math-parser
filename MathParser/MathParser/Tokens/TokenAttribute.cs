@@ -15,6 +15,9 @@ namespace MathParser.Tokens
 		public int Priority
 		{ get; private set; }
 
+		// named
+		public bool Custom;
+
 		public TokenAttribute(string tokenName, int priority)
 		{
 			TokenName = tokenName.ToLower();

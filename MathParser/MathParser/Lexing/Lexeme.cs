@@ -24,7 +24,7 @@ namespace MathParser.Lexing
 
 		public override string ToString()
 		{
-			return Token.ToString() + ": " + Lexed;
+			return "{" + Token.ToString() + ":'" + Lexed + "'}";
 		}
 	}
 }

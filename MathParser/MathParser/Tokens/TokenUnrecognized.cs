@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[Token("comment", 1)]
-	public class TokenComment : Token
+	[Token("unrecognized", int.MaxValue)]
+	public sealed class TokenUnrecognized : Token
 	{
 		public override bool SingleChar
 		{
@@ -16,13 +16,12 @@ namespace MathParser.Tokens
 
 		public override bool Matches(string lexeme)
 		{
-			return lexeme.StartsWith("/*") && lexeme.EndsWith("*/") &&
-				lexeme.Length >= 4; /**/
+			return true;
 		}
 
 		public override string ToString()
 		{
-			return "[Comment]";
+			return "[UNRECOGNIZED]";
 		}
 	}
 }

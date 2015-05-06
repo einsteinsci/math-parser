@@ -50,10 +50,13 @@
     <Compile Include="Tokens\Token.cs" />
     <Compile Include="Tokens\TokenAttribute.cs" />
     <Compile Include="Tokens\TokenComment.cs" />
+    <Compile Include="Tokens\TokenEncloser.cs" />
     <Compile Include="Tokens\TokenNumber.cs" />
     <Compile Include="Tokens\TokenOperator.cs" />
     <Compile Include="Tokens\TokenOperatorPlus.cs" />
+    <Compile Include="Tokens\TokenParenthesis.cs" />
     <Compile Include="Tokens\TokenRegistry.cs" />
+    <Compile Include="Tokens\TokenUnrecognized.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

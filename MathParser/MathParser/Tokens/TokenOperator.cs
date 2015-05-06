@@ -8,6 +8,8 @@ namespace MathParser.Tokens
 {
 	public abstract class TokenOperator : Token
 	{
+		public const int PRIORITY = 4;
+
 		public override bool IsOperator
 		{
 			get
