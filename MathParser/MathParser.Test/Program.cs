@@ -17,9 +17,10 @@ namespace MathParser.Test
 			Logger.OnLog += Log;
 			Logger.DebugLogging = true;
 
-			string input = "3 << (5 >-> 2)";
+			string input = "3 << (5 >> 2)";
 
-			Token t = Token.OperatorDivide;
+			// TODO: Figure out why tokens aren't recognized this way.
+			Token t = Token.ParenthesisIn;
 
 			Console.WriteLine("Input> " + input);
 			var res = Lexing.Lexer.Lex(input);

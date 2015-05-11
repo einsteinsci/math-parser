@@ -38,10 +38,8 @@ namespace MathParser.Tokens
 			}
 		}
 
-		public TokenParenthesis()
-		{
-			Side = EncloserSide.Opening;
-		}
+		public TokenParenthesis() : this(EncloserSide.Opening)
+		{ }
 
 		public TokenParenthesis(EncloserSide side)
 		{

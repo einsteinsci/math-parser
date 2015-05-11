@@ -25,6 +25,9 @@ namespace MathParser.Tokens
 
 		public static Token Comma					{ get { return TokenRegistry.Get("comma"); } }
 
+		public static Token ParenthesisIn			{ get { return TokenRegistry.Get("parenthesisIn"); } }
+		public static Token ParenthesisOut			{ get { return TokenRegistry.Get("parenthesisOut"); } }
+
 		public static Token OperatorPlus			{ get { return TokenRegistry.Get("operatorPlus"); } }
 		public static Token OperatorMinus			{ get { return TokenRegistry.Get("operatorMinus"); } }
 		public static Token OperatorMultiply		{ get { return TokenRegistry.Get("operatorMultiply"); } }

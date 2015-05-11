@@ -39,6 +39,11 @@ namespace MathParser.Tokens
 				Token = token;
 				Priority = priority;
 			}
+
+			public override string ToString()
+			{
+				return "[" + Key + "] [" + Priority + "] " + Token.ToString();
+			}
 		}
 
 		public static List<RegistryItem> Registry
@@ -72,7 +77,7 @@ namespace MathParser.Tokens
 
 			foreach (RegistryItem ri in Registry)
 			{
-				if (ri.Key == key)
+				if (ri.Key.ToLower() == key.ToLower())
 				{
 					return ri.Token;
 				}
