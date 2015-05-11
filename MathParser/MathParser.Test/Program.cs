@@ -18,7 +18,7 @@ namespace MathParser.Test
 			Logger.OnLog += Log;
 			Logger.DebugLogging = false;
 
-			string input = "3 << (5 % 2)";
+			string input = "6 * (3 + 4 / 2)";
 
 			Token t = Token.ParenthesisIn;
 
