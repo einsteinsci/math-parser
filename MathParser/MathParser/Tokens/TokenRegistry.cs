@@ -65,6 +65,11 @@ namespace MathParser.Tokens
 
 		public static Token Get(string key)
 		{
+			if (Registry == null)
+			{
+				RegisterTokens();
+			}
+
 			foreach (RegistryItem ri in Registry)
 			{
 				if (ri.Key == key)

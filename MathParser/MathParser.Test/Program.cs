@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using MathParser;
+using MathParser.Tokens;
 
 namespace MathParser.Test
 {
@@ -16,7 +17,9 @@ namespace MathParser.Test
 			Logger.OnLog += Log;
 			Logger.DebugLogging = true;
 
-			string input = "1 + (2 + 3) + 4";
+			string input = "3 << (5 >-> 2)";
+
+			Token t = Token.OperatorDivide;
 
 			Console.WriteLine("Input> " + input);
 			var res = Lexing.Lexer.Lex(input);
@@ -48,7 +51,7 @@ namespace MathParser.Test
 				break;
 			}
 
-			Console.WriteLine("  " + message);
+			Console.WriteLine("" + message);
 
 			Console.ForegroundColor = ConsoleColor.White;
 		}

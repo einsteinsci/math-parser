@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MathParser.Lexing;
+
 namespace MathParser.Tokens
 {
-	[Token("number", 5)]
-	public sealed class TokenNumber : Token
+	[Token("identifier", 6)]
+	public class TokenIdentifier : Token
 	{
 		public override bool SingleChar
 		{
@@ -16,26 +18,30 @@ namespace MathParser.Tokens
 
 		public override bool Matches(string lexeme)
 		{
-			foreach (Token t in TokenRegistry.Tokens)
+			if (lexeme == "")
 			{
-				if (t.IsOperator && t.Matches(lexeme))
+				return true;
+			}
+
+			if (!lexeme[0].IsAlphabetic() && lexeme[0] != '_')
+			{
+				return false;
+			}
+
+			foreach (char c in lexeme)
+			{
+				if (!c.IsAlphaNumeric() && c != '_')
 				{
 					return false;
 				}
 			}
 
-			if (!lexeme[0].IsNumeric() && lexeme[0] != '.')
-			{
-				return false;
-			}
-
-			float res;
-			return float.TryParse(lexeme, out res);
+			return true;
 		}
 
 		public override string ToString()
 		{
-			return "[Number]";
+			return "[Identifier]";
 		}
 	}
 }

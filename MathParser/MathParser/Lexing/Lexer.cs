@@ -37,8 +37,13 @@ namespace MathParser.Lexing
 			{
 				char c = Expression[index];
 
+				List<Token> validCurrent = ValidTokens(lexeme);
+				List<Token> validNext = ValidTokens(lexeme + c);
+
 				if (c.IsWhitespace())
 				{
+					FinalizeToken(validCurrent.FirstOrDefault(), lexeme);
+					lexeme = "";
 					continue;
 				}
 
@@ -48,12 +53,9 @@ namespace MathParser.Lexing
 					continue;
 				}
 
-				List<Token> validCurrent = ValidTokens(lexeme);
-				List<Token> validNext = ValidTokens(lexeme + c);
-
 				if (validCurrent.Count == 2 /* && validCurrent.First().SingleChar */) // excluding unrecognized
 				{
-					FinalizeToken(validCurrent.First(), lexeme);
+					FinalizeToken(validCurrent.FirstOrDefault(), lexeme);
 					lexeme = c.ToString();
 					continue;
 				}
@@ -66,7 +68,7 @@ namespace MathParser.Lexing
 
 				if (validCurrent.Count == 0)
 				{
-					Logger.Log(LogLevel.Debug, "lexer", 
+					Logger.Log(LogLevel.Warning, "lexer", 
 						"No last-choice Tokens. Waiting on " + lexeme);
 					lexeme += c;
 					continue;
@@ -102,17 +104,26 @@ namespace MathParser.Lexing
 			FinalizeToken(tok, lexeme);
 			#endregion
 
-			string info = "";
+			string info = "\n\t";
 			foreach (Lexeme l in Lexed)
 			{
-				info += l.ToString() + " ";
+				info += l.ToString() + "\n\t";
 			}
+			Logger.Log(LogLevel.Debug, "lexer", "");
 			Logger.Log(LogLevel.Debug, "lexer",
 				"Lexing complete: " + info);
 		}
 
 		public void FinalizeToken(Token token, string lexeme)
 		{
+			if (token == null)
+			{
+				Logger.Log(LogLevel.Error, "lexer", 
+					"Token is null. Filling with Unrecognized.");
+				Lexed.Add(new Lexeme(Token.Unrecognized, lexeme));
+				return;
+			}
+
 			Logger.Log(LogLevel.Debug, "lexer",
 				"Finalizing Token " + token.ToString() + " for lexeme: " + lexeme);
 			Lexed.Add(new Lexeme(token, lexeme));

@@ -21,10 +21,20 @@ namespace MathParser.Tokens
 		public virtual List<Token> CustomRegistry
 		{ get { return null; } }
 
-		public static Token Comment { get { return TokenRegistry.Get("comment"); } }
-		public static Token OperatorPlus { get { return TokenRegistry.Get("operatorPlus"); } }
-		public static Token Number { get { return TokenRegistry.Get("number"); } }
+		public static Token Comment					{ get { return TokenRegistry.Get("comment"); } }
 
-		public static Token Unrecognized { get { return TokenRegistry.Get("unrecognized"); } }
+		public static Token Comma					{ get { return TokenRegistry.Get("comma"); } }
+
+		public static Token OperatorPlus			{ get { return TokenRegistry.Get("operatorPlus"); } }
+		public static Token OperatorMinus			{ get { return TokenRegistry.Get("operatorMinus"); } }
+		public static Token OperatorMultiply		{ get { return TokenRegistry.Get("operatorMultiply"); } }
+		public static Token OperatorDivide			{ get { return TokenRegistry.Get("operatorDivide"); } }
+		public static Token OperatorExponent		{ get { return TokenRegistry.Get("operatorExponent"); } }
+		public static Token OperatorBitShiftLeft	{ get { return TokenRegistry.Get("operatorBitShiftLeft"); } }
+		public static Token OperatorBitShiftRight	{ get { return TokenRegistry.Get("operatorBitShiftRight"); } }
+
+		public static Token Number					{ get { return TokenRegistry.Get("number"); } }
+
+		public static Token Unrecognized			{ get { return TokenRegistry.Get("unrecognized"); } }
 	}
 }
