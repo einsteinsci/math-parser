@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using MathParser;
 using MathParser.Tokens;
+using MathParser.Lexing;
 
 namespace MathParser.Test
 {
@@ -15,15 +16,15 @@ namespace MathParser.Test
 		{
 			Console.ForegroundColor = ConsoleColor.White;
 			Logger.OnLog += Log;
-			Logger.DebugLogging = true;
+			Logger.DebugLogging = false;
 
-			string input = "3 << (5 >> 2)";
+			string input = "3 << (5 % 2)";
 
-			// TODO: Figure out why tokens aren't recognized this way.
 			Token t = Token.ParenthesisIn;
 
 			Console.WriteLine("Input> " + input);
-			var res = Lexing.Lexer.Lex(input);
+			Logger.DebugLogging = true;
+			List<Lexeme> res = Lexing.Lexer.Lex(input);
 
 			Console.ReadKey(true);
 		}

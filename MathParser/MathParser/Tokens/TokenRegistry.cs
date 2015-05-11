@@ -20,7 +20,7 @@ namespace MathParser.Tokens
 				_hasRegistered = value;
 			}
 		}
-		static bool _hasRegistered;
+		static bool _hasRegistered = false;
 
 		public class RegistryItem
 		{
@@ -114,17 +114,23 @@ namespace MathParser.Tokens
 					Token token = Activator.CreateInstance(t) as Token;
 					if (att.Custom)
 					{
-						foreach (Token ct in token.CustomRegistry)
+						foreach (KeyValuePair<string, Token> kvp in token.CustomRegistry)
 						{
-							Register(att.TokenName, ct, att.Priority);
+							Register(kvp.Key, kvp.Value, att.Priority);
+							Logger.Log(LogLevel.Debug, "register", 
+								"Token registered: " + kvp.Key + " = " + kvp.Value.ToString());
 						}
 					}
 					else
 					{
 						Register(att.TokenName, token, att.Priority);
+						Logger.Log(LogLevel.Debug, "register", "Token registered: " + 
+							att.TokenName + " = " + token.ToString());
 					}
 				}
 			}
+
+			HasRegistered = true;
 		}
 
 		public static void Register(string key, Token token, int priority)

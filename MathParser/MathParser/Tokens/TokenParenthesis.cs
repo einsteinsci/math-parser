@@ -27,23 +27,23 @@ namespace MathParser.Tokens
 			get { return "Parenthesis"; }
 		}
 
-		public override List<Token> CustomRegistry
+		public override Dictionary<string, Token> CustomRegistry
 		{
 			get
 			{
-				return new List<Token>(new Token[] { 
-					new TokenParenthesis(EncloserSide.Opening), 
-					new TokenParenthesis(EncloserSide.Closing) 
-				});
+				Dictionary<string, Token> res = new Dictionary<string, Token>();
+				res.Add("parenthesisOpen", new TokenParenthesis(EncloserSide.Opening));
+				res.Add("parenthesisClose", new TokenParenthesis(EncloserSide.Closing));
+				return res;
 			}
 		}
-
-		public TokenParenthesis() : this(EncloserSide.Opening)
-		{ }
 
 		public TokenParenthesis(EncloserSide side)
 		{
 			Side = side;
 		}
+
+		public TokenParenthesis() : this(EncloserSide.Opening)
+		{ }
 	}
 }

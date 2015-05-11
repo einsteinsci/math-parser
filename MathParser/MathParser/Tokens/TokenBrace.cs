@@ -27,14 +27,14 @@ namespace MathParser.Tokens
 			get { return "}"; }
 		}
 
-		public override List<Token> CustomRegistry
+		public override Dictionary<string, Token> CustomRegistry
 		{
 			get
 			{
-				return new List<Token>(new Token[] {
-					new TokenBrace(EncloserSide.Opening),
-					new TokenBrace(EncloserSide.Closing)
-				});
+				Dictionary<string, Token> res = new Dictionary<string, Token>();
+				res.Add("braceOpen", new TokenBrace(EncloserSide.Opening));
+				res.Add("braceClose", new TokenBrace(EncloserSide.Closing));
+				return res;
 			}
 		}
 
