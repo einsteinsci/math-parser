@@ -48,7 +48,10 @@
     <Compile Include="Lexing\LexStream.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="ParseTree\Factor.cs" />
+    <Compile Include="ParseTree\MathFunctions.cs" />
+    <Compile Include="ParseTree\NodeFunction.cs" />
     <Compile Include="ParseTree\IEvaluatable.cs" />
+    <Compile Include="ParseTree\ITextDisplayable.cs" />
     <Compile Include="ParseTree\Literal.cs" />
     <Compile Include="ParseTree\OperatorBinary.cs" />
     <Compile Include="ParseTree\OperatorDivide.cs" />

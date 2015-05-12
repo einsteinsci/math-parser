@@ -10,11 +10,16 @@ namespace MathParser.ParseTree
 	/// Not necessarily multiplication.
 	/// </summary>
 	/// <typeparam name="T">Result type</typeparam>
-	public abstract class Factor<T> : IEvaluatable<T>
+	public abstract class Factor<T> : IEvaluatable<T>, ITextDisplayable
 	{
 		public abstract List<Factor<T>> Children
 		{ get; }
 
 		public abstract T GetResult();
+
+		public virtual string GetResultString()
+		{
+			return GetResult().ToString();
+		}
 	}
 }

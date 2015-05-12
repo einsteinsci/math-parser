@@ -10,9 +10,10 @@ namespace MathParser.Tokens
 	public sealed class TokenUnrecognized : Token
 	{
 		public override bool SingleChar
-		{
-			get { return false; }
-		}
+		{ get { return false; } }
+
+		public override TokenType Type
+		{ get { return TokenType.Ignored; } }
 
 		public override bool Matches(string lexeme)
 		{

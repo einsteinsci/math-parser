@@ -8,6 +8,16 @@ using System.Reflection;
 
 namespace MathParser.Tokens
 {
+	public enum TokenType
+	{
+		Operator,
+		Literal,
+		Name,
+		Delimiter,
+		Encloser,
+		Ignored
+	}
+
 	public abstract class Token
 	{
 		public abstract bool SingleChar
@@ -15,8 +25,8 @@ namespace MathParser.Tokens
 
 		public abstract bool Matches(string lexeme);
 
-		public virtual bool IsOperator
-		{ get { return false; } }
+		public abstract TokenType Type
+		{ get; }
 
 		public virtual Dictionary<string, Token> CustomRegistry
 		{ get { return null; } }

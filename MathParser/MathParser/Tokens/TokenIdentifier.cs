@@ -39,6 +39,9 @@ namespace MathParser.Tokens
 			return true;
 		}
 
+		public override TokenType Type
+		{ get { return TokenType.Name; } }
+
 		public override string ToString()
 		{
 			return "[Identifier]";

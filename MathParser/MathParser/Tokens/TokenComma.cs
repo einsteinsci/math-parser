@@ -12,8 +12,10 @@ namespace MathParser.Tokens
 		public override bool SingleChar
 		{ get { return true; } }
 
-		public override bool IsOperator
-		{ get { return true; } }
+		public override TokenType Type
+		{
+			get { return TokenType.Delimiter; }
+		}
 
 		public override bool Matches(string lexeme)
 		{

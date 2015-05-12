@@ -16,6 +16,9 @@ namespace MathParser.Lexing
 		public string Lexed
 		{ get; protected set; }
 
+		public TokenType Type
+		{ get { return Token.Type; } }
+
 		public Lexeme(Token token, string lexed)
 		{
 			Token = token;

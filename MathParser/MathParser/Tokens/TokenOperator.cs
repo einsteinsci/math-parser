@@ -10,16 +10,11 @@ namespace MathParser.Tokens
 	{
 		public const int PRIORITY = 4;
 
-		public override bool IsOperator
-		{
-			get
-			{
-				return true;
-			}
-		}
-
 		public abstract string Operator
 		{ get; }
+
+		public override TokenType Type
+		{ get { return TokenType.Operator; } }
 
 		public override bool Matches(string lexeme)
 		{
