@@ -20,11 +20,9 @@ namespace MathParser.Test
 
 			string input = "6 * (3 + 4 / 2)";
 
-			Token t = Token.ParenthesisIn;
-
 			Console.WriteLine("Input> " + input);
 			Logger.DebugLogging = true;
-			List<Lexeme> res = Lexing.Lexer.Lex(input);
+			LexStream res = Lexing.Lexer.Lex(input);
 
 			Console.ReadKey(true);
 		}

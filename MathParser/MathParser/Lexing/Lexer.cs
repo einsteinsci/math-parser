@@ -15,7 +15,7 @@ namespace MathParser.Lexing
 		public string Expression
 		{ get; set; }
 
-		public List<Lexeme> Lexed
+		public LexStream Lexed
 		{ get; private set; }
 
 		public void Lex()
@@ -159,9 +159,9 @@ namespace MathParser.Lexing
 			return res;
 		}
 
-		public static List<Lexeme> Lex(string expression)
+		public static LexStream Lex(string expression)
 		{
-			Instance.Lexed = new List<Lexeme>();
+			Instance.Lexed = new LexStream();
 			Instance.Expression = expression;
 
 			Instance.Lex();

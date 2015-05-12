@@ -34,7 +34,10 @@
       <HintPath>..\..\..\..\MathPlusLib.Desktop.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,7 +45,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Lexing\LexStream.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="ParseTree\Factor.cs" />
+    <Compile Include="ParseTree\IEvaluatable.cs" />
+    <Compile Include="ParseTree\Literal.cs" />
+    <Compile Include="ParseTree\OperatorBinary.cs" />
+    <Compile Include="ParseTree\OperatorDivide.cs" />
+    <Compile Include="ParseTree\OperatorExponent.cs" />
+    <Compile Include="ParseTree\OperatorMinus.cs" />
+    <Compile Include="ParseTree\OperatorModulus.cs" />
+    <Compile Include="ParseTree\OperatorMultiply.cs" />
+    <Compile Include="ParseTree\OperatorPlus.cs" />
+    <Compile Include="ParseTree\Parser.cs" />
     <Compile Include="TextUtils.cs" />
     <Compile Include="Lexing\Lexeme.cs" />
     <Compile Include="Lexing\Lexer.cs" />

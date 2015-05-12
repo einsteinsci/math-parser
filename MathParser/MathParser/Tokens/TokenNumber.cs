@@ -29,8 +29,8 @@ namespace MathParser.Tokens
 				return false;
 			}
 
-			float res;
-			return float.TryParse(lexeme, out res);
+			double res;
+			return double.TryParse(lexeme, out res);
 		}
 
 		public override string ToString()
