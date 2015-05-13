@@ -14,10 +14,10 @@ namespace MathParser.ParseTree
 		{ get { return arguments; } }
 		private List<Factor<T>> arguments;
 
-		public MathFunc<T> Function
+		public FunctionInfo<T> Function
 		{ get; private set; }
 
-		public NodeFunction(MathFunc<T> func)
+		public NodeFunction(FunctionInfo<T> func)
 		{
 			Function = func;
 		}
@@ -25,7 +25,15 @@ namespace MathParser.ParseTree
 		public override T GetResult()
 		{
 			List<object> argumentValues = new List<object>();
-			// TODO: Check argument types
+			for (int i = 0; i < Function.Arguments.Length; i++)
+			{
+				if (Function.Arguments[i].IsAssignableFrom(argumentValues[i].GetType()))
+				{
+					throw new ArgumentException("Cannot assign " + 
+						argumentValues[i].GetType().ToString() + 
+						" to " + Function.Arguments[i].ToString());
+				}
+			}
 
 			foreach (Factor<T> factor in arguments)
 			{

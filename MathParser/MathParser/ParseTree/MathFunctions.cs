@@ -8,7 +8,7 @@ using MathPlusLib;
 
 namespace MathParser.ParseTree
 {
-	public sealed class MathFunc<T>
+	public sealed class FunctionInfo
 	{
 		public string Name
 		{ get; private set; }
@@ -16,10 +16,10 @@ namespace MathParser.ParseTree
 		public Type[] Arguments
 		{ get; private set; }
 
-		public Func<object[], T> Evaluate
+		public Func<object[], double> Evaluate
 		{ get; private set; }
 
-		public MathFunc(string name, Type[] args, Func<object[], T> func)
+		public FunctionInfo(string name, Type[] args, Func<object[], double> func)
 		{
 			Name = name;
 			Arguments = args;
@@ -29,7 +29,17 @@ namespace MathParser.ParseTree
 
 	public static class MathFunctions
 	{
-		public static MathFunc<double> Sine = new MathFunc<double>(
-			"sin", new Type[] { typeof(double) }, (args) => MathPlus.Trig.Sin((double)args[0]));
+		public static FunctionInfo Sine = new FunctionInfo("sin",
+			new Type[] { typeof(double) }, (args) => MathPlus.Trig.Sin((double)args[0]));
+
+		public static List<FunctionInfo> AllFunctions
+		{ get; private set; }
+
+		static MathFunctions()
+		{
+			AllFunctions = new List<FunctionInfo>();
+
+			AllFunctions.Add(Sine);
+		}
 	}
 }

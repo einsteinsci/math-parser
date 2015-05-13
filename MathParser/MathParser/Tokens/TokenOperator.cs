@@ -16,6 +16,12 @@ namespace MathParser.Tokens
 		public override TokenType Type
 		{ get { return TokenType.Operator; } }
 
+		public virtual bool IsRightAssociative
+		{ get { return false; } }
+
+		public abstract int Precedence
+		{ get; }
+
 		public override bool Matches(string lexeme)
 		{
 			return lexeme == Operator;
