@@ -20,5 +20,11 @@ namespace MathParser.ParseTree
 		{
 			return MathPlus.Pow(First.GetResult(), Second.GetResult());
 		}
+
+		public OperatorExponent(Factor<double> first, Factor<double> second)
+		{
+			First = first;
+			Second = second;
+		}
 	}
 }

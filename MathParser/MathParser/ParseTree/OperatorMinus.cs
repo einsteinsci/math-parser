@@ -17,5 +17,11 @@ namespace MathParser.ParseTree
 		{
 			return First.GetResult() - Second.GetResult();
 		}
+
+		public OperatorMinus(Factor<double> first, Factor<double> second)
+		{
+			First = first;
+			Second = second;
+		}
 	}
 }

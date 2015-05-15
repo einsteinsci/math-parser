@@ -19,5 +19,11 @@ namespace MathParser.ParseTree
 		{
 			return (int)First.GetResult() % (int)Second.GetResult();
 		}
+
+		public OperatorModulus(Factor<double> first, Factor<double> second)
+		{
+			First = first;
+			Second = second;
+		}
 	}
 }

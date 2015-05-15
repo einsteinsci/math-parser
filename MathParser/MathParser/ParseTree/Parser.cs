@@ -43,6 +43,12 @@ namespace MathParser.ParseTree
 						operatorStack.Push(lex);
 						continue;
 					}
+					else
+					{
+						Logger.Log(LogLevel.Error, "parser", 
+							"Custom identifiers are not supported yet.");
+						continue;
+					}
 					break;
 				case TokenType.Delimiter:
 					#region Delimiter
@@ -95,14 +101,14 @@ namespace MathParser.ParseTree
 			}
 			#endregion
 
-			string seq = "Parsed:\n    ";
+			string seq = "Parsed:\n\t";
 			foreach (Lexeme l in outputQueue)
 			{
-				seq += l.ToString() + "\n    ";
+				seq += l.ToString() + "\n\t";
 			}
 			Logger.Log(LogLevel.Debug, "parser", seq);
 
-			List<Lexeme> arguments = new List<Lexeme>();
+			Stack<Factor<double>> arguments = new Stack<Factor<double>>();
 			
 			#region parsing
 			while (outputQueue.Count > 0)
@@ -111,13 +117,59 @@ namespace MathParser.ParseTree
 
 				if (lex.Type == TokenType.Literal)
 				{
-					arguments.Add(lex);
+					string lit = lex.Lexed;
+					double d = double.Parse(lit);
+					arguments.Push(new Literal<double>(d));
+					continue;
+				}
+				if (lex.Type == TokenType.Operator)
+				{
+					TokenOperator op = lex.Token as TokenOperator;
+					if (arguments.Count < op.ArgumentCount)
+					{
+						Logger.Log(LogLevel.Error, "parsing", "Too many arguments for token " + op.ToString());
+					}
+
+					List<Factor<double>> argsTaken = new List<Factor<double>>();
+					for (int i = 0; i < op.ArgumentCount; i++)
+					{
+						Factor<double> arg = arguments.Pop();
+						argsTaken.Add(arg);
+					}
+
+					Factor<double> branch = MakeOperator(argsTaken, op);
+					arguments.Push(branch);
+				}
+				if (lex.Type == TokenType.Literal) // function
+				{
+					throw new NotImplementedException();
 				}
 			}
 			#endregion
 		}
 
-		private static void FinishParentheses(Stack<Lexeme> operatorStack, 
+		public static Factor<double> MakeOperator(List<Factor<double>> arguments, TokenOperator op)
+		{
+			switch (op.Operator)
+			{
+			case "+":
+				return new OperatorPlus(arguments[0], arguments[1]);
+			case "-":
+				return new OperatorMinus(arguments[0], arguments[1]);
+			case "*":
+				return new OperatorMultiply(arguments[0], arguments[1]);
+			case "/":
+				return new OperatorDivide(arguments[0], arguments[1]);
+			case "^":
+				return new OperatorExponent(arguments[0], arguments[1]);
+			case "%":
+				return new OperatorModulus(arguments[0], arguments[1]);
+			default:
+				throw new ArgumentException("Unrecognized operator");
+			}
+		}
+
+		public static void FinishParentheses(Stack<Lexeme> operatorStack, 
 			Queue<Lexeme> outputQueue)
 		{
 			try
@@ -161,7 +213,15 @@ namespace MathParser.ParseTree
 				}
 
 				TokenOperator o2 = l2.Token as TokenOperator;
-				// HELP!!!!
+
+				bool leftWorks = o1.Precedence <= o2.Precedence;
+				bool rightWorks = o1.Precedence < o2.Precedence;
+				bool leftAssociative = !o1.IsRightAssociative;
+				
+				if (!((leftAssociative && leftWorks) || (!leftAssociative && rightWorks)))
+				{
+					break;
+				}
 
 				l2 = operatorStack.Pop();
 				outputQueue.Enqueue(l2);

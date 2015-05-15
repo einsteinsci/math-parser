@@ -7,15 +7,12 @@ using System.Threading.Tasks;
 namespace MathParser.Tokens
 {
 	[Token("number", 5)]
-	public sealed class TokenNumber : Token
+	public sealed class TokenNumber : TokenLiteral
 	{
 		public override bool SingleChar
 		{
 			get { return false; }
 		}
-
-		public override TokenType Type
-		{ get { return TokenType.Literal; } }
 
 		public override bool Matches(string lexeme)
 		{

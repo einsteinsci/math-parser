@@ -10,6 +10,9 @@ namespace MathParser.Tokens
 	{
 		public const int PRIORITY = 4;
 
+		public virtual int ArgumentCount
+		{ get { return 2; } }
+
 		public abstract string Operator
 		{ get; }
 

@@ -72,6 +72,7 @@
     <Compile Include="Tokens\TokenComma.cs" />
     <Compile Include="Tokens\TokenComment.cs" />
     <Compile Include="Tokens\TokenIdentifier.cs" />
+    <Compile Include="Tokens\TokenLiteral.cs" />
     <Compile Include="Tokens\TokenOperatorBitShiftLeft.cs" />
     <Compile Include="Tokens\TokenOperatorBitShiftRight.cs" />
     <Compile Include="Tokens\TokenOperatorDivide.cs" />

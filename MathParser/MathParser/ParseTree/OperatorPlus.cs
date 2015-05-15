@@ -19,5 +19,11 @@ namespace MathParser.ParseTree
 		{
 			return First.GetResult() + Second.GetResult();
 		}
+
+		public OperatorPlus(Factor<double> first, Factor<double> second)
+		{
+			First = first;
+			Second = second;
+		}
 	}
 }

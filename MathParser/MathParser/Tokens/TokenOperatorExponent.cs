@@ -15,7 +15,7 @@ namespace MathParser.Tokens
 		}
 
 		public override int Precedence
-		{ get { return 1; } }
+		{ get { return 4; } }
 
 		public override bool IsRightAssociative
 		{ get { return true; } }
