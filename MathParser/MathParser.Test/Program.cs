@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MathParser;
 using MathParser.Tokens;
 using MathParser.Lexing;
+using MathParser.ParseTree;
 
 namespace MathParser.Test
 {
@@ -18,11 +19,13 @@ namespace MathParser.Test
 			Logger.OnLog += Log;
 			Logger.DebugLogging = false;
 
-			string input = "6 * (3 + 4 / 2)";
+			string input = "1 + 2 * 3 - 4";
 
 			Console.WriteLine("Input> " + input);
 			Logger.DebugLogging = true;
 			LexStream res = Lexing.Lexer.Lex(input);
+
+			Factor<double> fact = Parser.Parse(res);
 
 			Console.ReadKey(true);
 		}

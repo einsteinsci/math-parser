@@ -14,10 +14,10 @@ namespace MathParser.ParseTree
 		{ get { return arguments; } }
 		private List<Factor<T>> arguments;
 
-		public FunctionInfo<T> Function
+		public FunctionInfo Function
 		{ get; private set; }
 
-		public NodeFunction(FunctionInfo<T> func)
+		public NodeFunction(FunctionInfo func)
 		{
 			Function = func;
 		}
@@ -40,7 +40,7 @@ namespace MathParser.ParseTree
 				argumentValues.Add(factor.GetResult());
 			}
 
-			return Function.Evaluate(argumentValues.ToArray());
+			return (T)((IConvertible)Function.Evaluate(argumentValues.ToArray())).ToType(typeof(T), null);
 		}
 	}
 }

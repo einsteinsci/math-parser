@@ -18,7 +18,7 @@ namespace MathParser.ParseTree
 		public Factor<double> ParseTree
 		{ get; private set; }
 
-		// Shunting-yard algorithm
+		// Shunting-yard algorithm (http://en.wikipedia.org/wiki/Shunting-yard_algorithm)
 		public void Parse()
 		{
 			Stack<Lexeme> operatorStack = new Stack<Lexeme>();
@@ -32,22 +32,8 @@ namespace MathParser.ParseTree
 				switch (lex.Type)
 				{
 				case TokenType.Operator:
-					#region Operator
-					while (operatorStack.Count > 0 && operatorStack.Peek().Type == TokenType.Operator)
-					{
-						TokenOperator o2 = operatorStack.Peek().Token as TokenOperator;
-						TokenOperator o1 = lex.Token as TokenOperator;
-
-						if ((!o1.IsRightAssociative && o1.Precedence <= o2.Precedence) ||
-							(o1.IsRightAssociative && o1.Precedence < o2.Precedence))
-						{
-							Lexeme op = operatorStack.Pop();
-							outputQueue.Enqueue(op);
-						}
-						operatorStack.Push(lex);
-					}
+					OperatorShuffle(operatorStack, outputQueue, lex);
 					continue;
-					#endregion
 				case TokenType.Literal:
 					outputQueue.Enqueue(lex);
 					continue;
@@ -84,28 +70,7 @@ namespace MathParser.ParseTree
 					}
 					else if (lex.Token == Token.ParenthesisOut)
 					{
-						try
-						{
-							while (operatorStack.Peek().Token != Token.ParenthesisIn)
-							{
-								Lexeme l = operatorStack.Pop();
-								outputQueue.Enqueue(l);
-							}
-						}
-						catch (InvalidOperationException)
-						{
-							Logger.Log(LogLevel.Fatal, "parsing", "Mismatched Parentheses Found.");
-							throw new Exception("Mismatched Parentheses.");
-						}
-						Lexeme parin = operatorStack.Pop();
-						if (operatorStack.Count > 0)
-						{
-							if (operatorStack.Peek().Type == TokenType.Name) // function
-							{
-								Lexeme func = operatorStack.Pop();
-								outputQueue.Enqueue(func);
-							}
-						}
+						FinishParentheses(operatorStack, outputQueue);
 					}
 					break;
 					#endregion
@@ -117,10 +82,25 @@ namespace MathParser.ParseTree
 					throw new Exception("Impossible Token Type.");
 				}
 			}
+
+			while (operatorStack.Count > 0)
+			{
+				Lexeme l = operatorStack.Pop();
+				if (l.Token == Token.ParenthesisIn)
+				{
+					Logger.Log(LogLevel.Error, "parsing", "Mismatched parentheses.");
+				}
+
+				outputQueue.Enqueue(l);
+			}
 			#endregion
 
-			string seq = "";
-			//foreach (Lexeme l )
+			string seq = "Parsed:\n    ";
+			foreach (Lexeme l in outputQueue)
+			{
+				seq += l.ToString() + "\n    ";
+			}
+			Logger.Log(LogLevel.Debug, "parser", seq);
 
 			List<Lexeme> arguments = new List<Lexeme>();
 			
@@ -135,6 +115,59 @@ namespace MathParser.ParseTree
 				}
 			}
 			#endregion
+		}
+
+		private static void FinishParentheses(Stack<Lexeme> operatorStack, 
+			Queue<Lexeme> outputQueue)
+		{
+			try
+			{
+				while (operatorStack.Peek().Token != Token.ParenthesisIn)
+				{
+					Lexeme l = operatorStack.Pop();
+					outputQueue.Enqueue(l);
+				}
+			}
+			catch (InvalidOperationException)
+			{
+				Logger.Log(LogLevel.Fatal, "parsing", "Mismatched Parentheses Found.");
+				throw new Exception("Mismatched Parentheses.");
+			}
+			Lexeme parin = operatorStack.Pop();
+			if (operatorStack.Count > 0)
+			{
+				if (operatorStack.Peek().Type == TokenType.Name) // function
+				{
+					Lexeme func = operatorStack.Pop();
+					outputQueue.Enqueue(func);
+				}
+			}
+		}
+
+		public static void OperatorShuffle(Stack<Lexeme> operatorStack, 
+			Queue<Lexeme> outputQueue, Lexeme current)
+		{
+			TokenOperator o1 = current.Token as TokenOperator;
+			while (true)
+			{
+				if (operatorStack.Count == 0)
+				{
+					break;
+				}
+				Lexeme l2 = operatorStack.Peek();
+				if (l2.Type != TokenType.Operator)
+				{
+					break;
+				}
+
+				TokenOperator o2 = l2.Token as TokenOperator;
+				// HELP!!!!
+
+				l2 = operatorStack.Pop();
+				outputQueue.Enqueue(l2);
+			}
+
+			operatorStack.Push(current);
 		}
 
 		public static bool IsFunctionValid(string func)
