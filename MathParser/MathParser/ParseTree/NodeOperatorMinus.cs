@@ -6,19 +6,22 @@ using System.Threading.Tasks;
 
 namespace MathParser.ParseTree
 {
-	public class OperatorMinus : OperatorBinary<double>
+	public class NodeOperatorMinus : NodeOperatorBinary
 	{
 		public override Tokens.Token Operator
 		{
 			get { return Tokens.Token.OperatorMinus; }
 		}
 
+		public override string StringForm
+		{ get { return "-"; } }
+
 		public override double GetResult()
 		{
-			return First.GetResult() - Second.GetResult();
+			return First.GetResult().ToDouble() - Second.GetResult().ToDouble();
 		}
 
-		public OperatorMinus(Factor<double> first, Factor<double> second)
+		public NodeOperatorMinus(NodeFactor first, NodeFactor second)
 		{
 			First = first;
 			Second = second;

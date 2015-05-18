@@ -9,19 +9,20 @@ using MathPlusLib;
 
 namespace MathParser.ParseTree
 {
-	public class OperatorExponent : OperatorBinary<double>
+	public class NodeOperatorExponent : NodeOperatorBinary
 	{
 		public override Token Operator
-		{
-			get { return Token.OperatorExponent; }
-		}
+		{ get { return Token.OperatorExponent; } }
+
+		public override string StringForm
+		{ get { return "^"; } }
 
 		public override double GetResult()
 		{
-			return MathPlus.Pow(First.GetResult(), Second.GetResult());
+			return MathPlus.Pow(First.GetResult().ToDouble(), Second.GetResult().ToDouble());
 		}
 
-		public OperatorExponent(Factor<double> first, Factor<double> second)
+		public NodeOperatorExponent(NodeFactor first, NodeFactor second)
 		{
 			First = first;
 			Second = second;

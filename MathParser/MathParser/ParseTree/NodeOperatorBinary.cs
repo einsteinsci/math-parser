@@ -7,19 +7,22 @@ using System.Threading.Tasks;
 
 namespace MathParser.ParseTree
 {
-	public abstract class OperatorBinary<T> : Factor<T>
+	public abstract class NodeOperatorBinary : NodeFactor
 	{
-		public virtual Factor<T> First
+		public virtual NodeFactor First
 		{ get; protected set; }
 
-		public virtual Factor<T> Second
+		public virtual NodeFactor Second
 		{ get; protected set; }
 
-		public override List<Factor<T>> Children
+		public abstract string StringForm
+		{ get; }
+
+		public override List<NodeFactor> Children
 		{
 			get
 			{
-				List<Factor<T>> res = new List<Factor<T>>();
+				List<NodeFactor> res = new List<NodeFactor>();
 				res.Add(First);
 				res.Add(Second);
 				return res;
@@ -31,5 +34,10 @@ namespace MathParser.ParseTree
 
 		public virtual bool IsRightAssociative
 		{ get { return false; } }
+
+		public override string ToString()
+		{
+			return "(" + First.ToString() + " " + StringForm + " " + Second.ToString() + ")";
+		}
 	}
 }

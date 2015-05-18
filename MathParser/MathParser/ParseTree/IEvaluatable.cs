@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MathParser.ParseTree
 {
-	public interface IEvaluatable<T>
+	public interface IEvaluatable
 	{
-		T GetResult();
+		 GetResult();
 	}
 }

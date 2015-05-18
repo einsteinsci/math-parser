@@ -15,7 +15,7 @@ namespace MathParser.ParseTree
 		public LexStream Input
 		{ get; private set; }
 
-		public Factor<double> ParseTree
+		public NodeFactor ParseTree
 		{ get; private set; }
 
 		// Shunting-yard algorithm (http://en.wikipedia.org/wiki/Shunting-yard_algorithm)
@@ -108,7 +108,7 @@ namespace MathParser.ParseTree
 			}
 			Logger.Log(LogLevel.Debug, "parser", seq);
 
-			Stack<Factor<double>> arguments = new Stack<Factor<double>>();
+			Stack<NodeFactor> arguments = new Stack<NodeFactor>();
 			
 			#region parsing
 			while (outputQueue.Count > 0)
@@ -119,7 +119,7 @@ namespace MathParser.ParseTree
 				{
 					string lit = lex.Lexed;
 					double d = double.Parse(lit);
-					arguments.Push(new Literal<double>(d));
+					arguments.Push(new NodeLiteral(new ResultNumber(d)));
 					continue;
 				}
 				if (lex.Type == TokenType.Operator)
@@ -130,40 +130,43 @@ namespace MathParser.ParseTree
 						Logger.Log(LogLevel.Error, "parsing", "Too many arguments for token " + op.ToString());
 					}
 
-					List<Factor<double>> argsTaken = new List<Factor<double>>();
+					List<NodeFactor> argsTaken = new List<NodeFactor>();
 					for (int i = 0; i < op.ArgumentCount; i++)
 					{
-						Factor<double> arg = arguments.Pop();
+						NodeFactor arg = arguments.Pop();
 						argsTaken.Add(arg);
 					}
 
-					Factor<double> branch = MakeOperator(argsTaken, op);
+					NodeFactor branch = MakeOperator(argsTaken, op);
 					arguments.Push(branch);
 				}
-				if (lex.Type == TokenType.Literal) // function
+				if (lex.Type == TokenType.Name) // function
 				{
 					throw new NotImplementedException();
 				}
 			}
+
+			int stuppid = 0;
 			#endregion
 		}
 
-		public static Factor<double> MakeOperator(List<Factor<double>> arguments, TokenOperator op)
+		public static NodeFactor MakeOperator(List<NodeFactor> arguments, TokenOperator op)
 		{
 			switch (op.Operator)
 			{
 			case "+":
-				return new OperatorPlus(arguments[0], arguments[1]);
+				// Weird fix by reversing arguments for operator
+				return new NodeOperatorPlus(arguments[1], arguments[0]);
 			case "-":
-				return new OperatorMinus(arguments[0], arguments[1]);
+				return new NodeOperatorMinus(arguments[1], arguments[0]);
 			case "*":
-				return new OperatorMultiply(arguments[0], arguments[1]);
+				return new NodeOperatorMultiply(arguments[1], arguments[0]);
 			case "/":
-				return new OperatorDivide(arguments[0], arguments[1]);
+				return new NodeOperatorDivide(arguments[1], arguments[0]);
 			case "^":
-				return new OperatorExponent(arguments[0], arguments[1]);
+				return new NodeOperatorExponent(arguments[1], arguments[0]);
 			case "%":
-				return new OperatorModulus(arguments[0], arguments[1]);
+				return new NodeOperatorModulus(arguments[1], arguments[0]);
 			default:
 				throw new ArgumentException("Unrecognized operator");
 			}

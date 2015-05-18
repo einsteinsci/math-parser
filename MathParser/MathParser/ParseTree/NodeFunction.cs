@@ -4,43 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using MathParser.Tokens;
-
 namespace MathParser.ParseTree
 {
-	public class NodeFunction<T> : Factor<T>
+	public class NodeFunction : NodeFactor
 	{
-		public override List<Factor<T>> Children
-		{ get { return arguments; } }
-		private List<Factor<T>> arguments;
+		public override MathType Type
+		{ get { return FuncInfo.ReturnType; } }
 
-		public FunctionInfo Function
-		{ get; private set; }
+		public FunctionInfo FuncInfo
+		{ get; protected set; }
 
-		public NodeFunction(FunctionInfo func)
+		public override List<NodeFactor> Children
 		{
-			Function = func;
+			get { return arguments; }
+		}
+		protected List<NodeFactor> arguments;
+
+		public NodeFunction(FunctionInfo info, params NodeFactor[] args)
+		{
+			arguments = args.ToList();
+			FuncInfo = info;
 		}
 
-		public override T GetResult()
+		public override ResultValue GetResult()
 		{
-			List<object> argumentValues = new List<object>();
-			for (int i = 0; i < Function.Arguments.Length; i++)
-			{
-				if (Function.Arguments[i].IsAssignableFrom(argumentValues[i].GetType()))
-				{
-					throw new ArgumentException("Cannot assign " + 
-						argumentValues[i].GetType().ToString() + 
-						" to " + Function.Arguments[i].ToString());
-				}
-			}
-
-			foreach (Factor<T> factor in arguments)
-			{
-				argumentValues.Add(factor.GetResult());
-			}
-
-			return (T)((IConvertible)Function.Evaluate(argumentValues.ToArray())).ToType(typeof(T), null);
+			throw new NotImplementedException();
 		}
 	}
 }

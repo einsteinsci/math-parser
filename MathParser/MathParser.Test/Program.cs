@@ -25,7 +25,7 @@ namespace MathParser.Test
 			Logger.DebugLogging = true;
 			LexStream res = Lexing.Lexer.Lex(input);
 
-			Factor<double> fact = Parser.Parse(res);
+			NodeFactor<double> fact = Parser.Parse(res);
 
 			Console.ReadKey(true);
 		}

@@ -8,19 +8,22 @@ using MathParser.Tokens;
 
 namespace MathParser.ParseTree
 {
-	public class OperatorModulus : OperatorBinary<double>
+	public class NodeOperatorMultiply : NodeOperatorBinary
 	{
 		public override Token Operator
 		{
-			get { return Token.OperatorModulus; }
+			get { return Token.OperatorMultiply; }
 		}
+
+		public override string StringForm
+		{ get { return "*"; } }
 
 		public override double GetResult()
 		{
-			return (int)First.GetResult() % (int)Second.GetResult();
+			return First.GetResult().ToDouble() * Second.GetResult().ToDouble();
 		}
 
-		public OperatorModulus(Factor<double> first, Factor<double> second)
+		public NodeOperatorMultiply(NodeFactor first, NodeFactor second)
 		{
 			First = first;
 			Second = second;
