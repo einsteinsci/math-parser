@@ -19,6 +19,36 @@ namespace MathParser.ParseTree
 			(Func<double, double>)MathPlus.Trig.Sin, 
 			MathType.Number, "sin", MathType.Number);
 
+		public static FunctionInfo Cosine
+		{ get { return cosine; } }
+		private static FunctionInfo cosine = new FunctionInfo(
+			(Func<double, double>)MathPlus.Trig.Cos, 
+			MathType.Number, "cos", MathType.Number);
+
+		public static FunctionInfo Tangent
+		{ get { return tangent; } }
+		private static FunctionInfo tangent = new FunctionInfo(
+			(Func<double, double>)MathPlus.Trig.Tan, 
+			MathType.Number, "tan", MathType.Number);
+
+		public static FunctionInfo Cosecant
+		{ get { return cosecant; } }
+		private static FunctionInfo cosecant = new FunctionInfo(
+			(Func<double, double>)MathPlus.Trig.Csc, 
+			MathType.Number, "csc", MathType.Number);
+
+		public static FunctionInfo Secant
+		{ get { return secant; } }
+		private static FunctionInfo secant = new FunctionInfo(
+			(Func<double, double>)MathPlus.Trig.Sec, 
+			MathType.Number, "sec", MathType.Number);
+
+		public static FunctionInfo Cotangent
+		{ get { return cotangent; } }
+		private static FunctionInfo cotangent = new FunctionInfo(
+			(Func<double, double>)MathPlus.Trig.Cot, 
+			MathType.Number, "cot", MathType.Number);
+
 		public static FunctionInfo GetFunction(string name)
 		{
 			foreach (FunctionInfo inf in AllFunctions)
@@ -37,6 +67,11 @@ namespace MathParser.ParseTree
 			AllFunctions = new List<FunctionInfo>();
 
 			AllFunctions.Add(Sine);
+			AllFunctions.Add(Cosine);
+			AllFunctions.Add(Tangent);
+			AllFunctions.Add(Cosecant);
+			AllFunctions.Add(Secant);
+			AllFunctions.Add(Cotangent);
 		}
 	}
 }
