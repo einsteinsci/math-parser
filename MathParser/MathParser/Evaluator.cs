@@ -32,6 +32,7 @@ namespace MathParser
 			Instance = new Evaluator();
 		}
 
+		#region parts
 		public void Lex()
 		{
 			Lexed = Lexer.Lex(Input);
@@ -67,6 +68,7 @@ namespace MathParser
 			Instance.Calculate();
 			return Instance.Result;
 		}
+		#endregion
 
 		public void Evaluate()
 		{

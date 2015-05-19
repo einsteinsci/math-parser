@@ -36,9 +36,10 @@ namespace MathParser.Lexing
 			for (int index = 0; index < Expression.Length; index++)
 			{
 				char c = Expression[index];
+				Token previous = Lexed.LastUsefulToken();
 
-				List<Token> validCurrent = ValidTokens(lexeme);
-				List<Token> validNext = ValidTokens(lexeme + c);
+				List<Token> validCurrent = ValidTokens(previous, lexeme);
+				List<Token> validNext = ValidTokens(previous, lexeme + c);
 
 				if (c.IsWhitespace())
 				{
@@ -85,7 +86,7 @@ namespace MathParser.Lexing
 				lexeme = c.ToString();
 			}
 
-			List<Token> validCurrent_ = ValidTokens(lexeme);
+			List<Token> validCurrent_ = ValidTokens(Lexed.LastUsefulToken(), lexeme);
 
 			if (validCurrent_.Count == 0)
 			{
@@ -140,7 +141,7 @@ namespace MathParser.Lexing
 			return res.TrimEnd(',') + " }";
 		}
 
-		public static List<Token> ValidTokens(string lexeme)
+		public static List<Token> ValidTokens(Token previous, string lexeme)
 		{
 			if (lexeme == "")
 			{
@@ -150,7 +151,7 @@ namespace MathParser.Lexing
 			List<Token> res = new List<Token>();
 			foreach (Token token in TokenRegistry.Tokens)
 			{
-				if (token.Matches(lexeme) && token != Token.Unrecognized)
+				if (token.Matches(previous, lexeme) && token != Token.Unrecognized)
 				{
 					res.Add(token);
 				}

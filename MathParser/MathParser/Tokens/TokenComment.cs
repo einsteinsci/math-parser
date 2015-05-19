@@ -17,7 +17,7 @@ namespace MathParser.Tokens
 			get { return TokenType.Ignored; }
 		}
 
-		public override bool Matches(string lexeme)
+		public override bool Matches(Token prev, string lexeme)
 		{
 			return lexeme.StartsWith("/*") && lexeme.EndsWith("*/") &&
 				lexeme.Length >= 4; /**/

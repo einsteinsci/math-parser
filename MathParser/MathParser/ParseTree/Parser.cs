@@ -207,7 +207,14 @@ namespace MathParser.ParseTree
 				// Weird fix by reversing arguments for operator
 				return new NodeOperatorPlus(arguments[0], arguments[1]);
 			case "-":
-				return new NodeOperatorMinus(arguments[0], arguments[1]);
+				if (op.ArgumentCount == 1) // negative
+				{
+					return new NodeOperatorNegative(arguments[0]);
+				}
+				else // minus
+				{
+					return new NodeOperatorMinus(arguments[0], arguments[1]);
+				}
 			case "*":
 				return new NodeOperatorMultiply(arguments[0], arguments[1]);
 			case "/":

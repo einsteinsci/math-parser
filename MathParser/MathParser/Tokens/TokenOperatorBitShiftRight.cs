@@ -10,16 +10,12 @@ namespace MathParser.Tokens
 	public class TokenOperatorBitShiftRight : TokenOperator
 	{
 		public override string Operator
-		{
-			get { return ">>"; }
-		}
+		{ get { return ">>"; } }
 
 		public override int Precedence
-		{ get { return 1; } }
+		{ get { return PREC_BITSHIFT; } }
 
 		public override bool SingleChar
-		{
-			get { return false; }
-		}
+		{ get { return false; } }
 	}
 }

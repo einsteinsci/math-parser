@@ -14,11 +14,11 @@ namespace MathParser.Tokens
 			get { return false; }
 		}
 
-		public override bool Matches(string lexeme)
+		public override bool Matches(Token prev, string lexeme)
 		{
 			foreach (Token t in TokenRegistry.Tokens)
 			{
-				if (t.Type == TokenType.Operator && t.Matches(lexeme))
+				if (t.Type == TokenType.Operator && t.Matches(prev, lexeme))
 				{
 					return false;
 				}

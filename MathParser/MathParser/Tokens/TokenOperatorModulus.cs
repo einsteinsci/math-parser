@@ -10,16 +10,12 @@ namespace MathParser.Tokens
 	public class TokenOperatorModulus : TokenOperator
 	{
 		public override string Operator
-		{
-			get { return "%"; }
-		}
+		{ get { return "%"; } }
 
 		public override int Precedence
-		{ get { return 3; } }
+		{ get { return PREC_MULTIPLICATIVE; } }
 
 		public override bool SingleChar
-		{
-			get { return true; }
-		}
+		{ get { return true; } }
 	}
 }

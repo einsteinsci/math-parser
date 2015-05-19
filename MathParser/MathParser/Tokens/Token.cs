@@ -23,7 +23,7 @@ namespace MathParser.Tokens
 		public abstract bool SingleChar
 		{ get; }
 
-		public abstract bool Matches(string lexeme);
+		public abstract bool Matches(Token previous, string lexeme);
 
 		public abstract TokenType Type
 		{ get; }
@@ -50,6 +50,8 @@ namespace MathParser.Tokens
 		public static Token OperatorModulus			{ get { return TokenRegistry.Get("operatorModulus"); } }
 		public static Token OperatorBitShiftLeft	{ get { return TokenRegistry.Get("operatorBitShiftLeft"); } }
 		public static Token OperatorBitShiftRight	{ get { return TokenRegistry.Get("operatorBitShiftRight"); } }
+
+		public static Token OperatorNegative		{ get { return TokenRegistry.Get("operatorNegative"); } }
 
 		public static Token Number					{ get { return TokenRegistry.Get("number"); } }
 

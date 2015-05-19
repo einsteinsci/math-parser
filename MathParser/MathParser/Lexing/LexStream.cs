@@ -92,6 +92,26 @@ namespace MathParser.Lexing
 			return res;
 		}
 
+		public Token LastUsefulToken()
+		{
+			if (Lexemes.Count == 0)
+			{
+				return null;
+			}
+
+			for (int i = Lexemes.Count - 1; i > 0; i++)
+			{
+				Token t = Lexemes[i].Token;
+				if (t.Type != TokenType.Ignored)
+				{
+					return t;
+				}
+			}
+
+			// only if no actual code
+			return null;
+		}
+
 		public void Reset()
 		{
 			Index = 0;
@@ -110,6 +130,16 @@ namespace MathParser.Lexing
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
 			return Lexemes.GetEnumerator();
+		}
+
+		public override string ToString()
+		{
+			string res = "";
+			foreach (Lexeme lex in Lexemes)
+			{
+				res += lex + " ";
+			}
+			return res.Trim();
 		}
 	}
 }

@@ -6,20 +6,21 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[Token("OperatorMinus", PRIORITY)]
+	[Token("operatorMinus", PRIORITY)]
 	public class TokenOperatorMinus : TokenOperator
 	{
 		public override string Operator
-		{
-			get { return "-"; }
-		}
+		{ get { return "-"; } }
 
 		public override int Precedence
-		{ get { return 2; } }
+		{ get { return PREC_ADDITIVE; } }
 
 		public override bool SingleChar
+		{ get { return true; } }
+
+		public override bool Matches(Token previous, string lexeme)
 		{
-			get { return true; }
+			return base.Matches(previous, lexeme) && !Token.OperatorNegative.Matches(previous, lexeme);
 		}
 	}
 }

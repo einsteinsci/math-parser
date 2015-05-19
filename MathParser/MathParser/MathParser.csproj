@@ -52,6 +52,8 @@
     <Compile Include="ParseTree\MathFunctions.cs" />
     <Compile Include="ParseTree\NodeFactor.cs" />
     <Compile Include="ParseTree\NodeFunction.cs" />
+    <Compile Include="ParseTree\NodeOperatorNegative.cs" />
+    <Compile Include="ParseTree\NodeOperatorUnary.cs" />
     <Compile Include="ParseTree\ResultNumber.cs" />
     <Compile Include="ParseTree\ResultString.cs" />
     <Compile Include="ParseTree\ResultValue.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Tokens\TokenComment.cs" />
     <Compile Include="Tokens\TokenIdentifier.cs" />
     <Compile Include="Tokens\TokenLiteral.cs" />
+    <Compile Include="Tokens\TokenOperatorNegative.cs" />
     <Compile Include="Tokens\TokenOperatorBitShiftLeft.cs" />
     <Compile Include="Tokens\TokenOperatorBitShiftRight.cs" />
     <Compile Include="Tokens\TokenOperatorDivide.cs" />

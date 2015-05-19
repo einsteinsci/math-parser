@@ -15,7 +15,7 @@ namespace MathParser.Tokens
 		public override TokenType Type
 		{ get { return TokenType.Ignored; } }
 
-		public override bool Matches(string lexeme)
+		public override bool Matches(Token prev, string lexeme)
 		{
 			return true;
 		}

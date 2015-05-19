@@ -17,7 +17,7 @@ namespace MathParser.Tokens
 			get { return TokenType.Delimiter; }
 		}
 
-		public override bool Matches(string lexeme)
+		public override bool Matches(Token prev, string lexeme)
 		{
 			return lexeme == ",";
 		}

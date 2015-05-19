@@ -16,7 +16,7 @@ namespace MathParser.Tokens
 			get { return false; }
 		}
 
-		public override bool Matches(string lexeme)
+		public override bool Matches(Token previous, string lexeme)
 		{
 			if (lexeme == "")
 			{

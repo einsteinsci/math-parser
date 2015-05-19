@@ -6,23 +6,19 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[Token("OperatorExponent", PRIORITY)]
+	[Token("operatorExponent", PRIORITY)]
 	public class TokenOperatorExponent : TokenOperator
 	{
 		public override string Operator
-		{
-			get { return "^"; }
-		}
+		{ get { return "^"; } }
 
 		public override int Precedence
-		{ get { return 4; } }
+		{ get { return PREC_EXPONENTIAL; } }
 
 		public override bool IsRightAssociative
 		{ get { return true; } }
 
 		public override bool SingleChar
-		{
-			get { return true; }
-		}
+		{ get { return true; } }
 	}
 }
