@@ -21,9 +21,14 @@ namespace MathParser.ParseTree
 			return Value;
 		}
 
+		public override MathType Type
+		{ get { return _type; } }
+		private MathType _type;
+
 		public NodeLiteral(ResultValue val)
 		{
 			Value = val;
+			_type = val.Type;
 		}
 
 		public override string ToString()

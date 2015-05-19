@@ -15,12 +15,15 @@ namespace MathParser.ParseTree
 			get { return Token.OperatorMultiply; }
 		}
 
+		public override MathType Type
+		{ get { return MathType.Number; } }
+
 		public override string StringForm
 		{ get { return "*"; } }
 
-		public override double GetResult()
+		public override ResultValue GetResult()
 		{
-			return First.GetResult().ToDouble() * Second.GetResult().ToDouble();
+			return new ResultNumber(First.GetResult().ToDouble() * Second.GetResult().ToDouble());
 		}
 
 		public NodeOperatorMultiply(NodeFactor first, NodeFactor second)

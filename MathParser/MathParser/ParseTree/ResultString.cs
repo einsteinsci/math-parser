@@ -32,5 +32,10 @@ namespace MathParser.ParseTree
 		{
 			return new MathMatrix(new double[,] { { ToDouble() } });
 		}
+
+		public override string ToString()
+		{
+			return Value;
+		}
 	}
 }

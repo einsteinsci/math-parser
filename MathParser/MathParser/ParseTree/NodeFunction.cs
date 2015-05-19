@@ -15,9 +15,7 @@ namespace MathParser.ParseTree
 		{ get; protected set; }
 
 		public override List<NodeFactor> Children
-		{
-			get { return arguments; }
-		}
+		{ get { return arguments; } }
 		protected List<NodeFactor> arguments;
 
 		public NodeFunction(FunctionInfo info, params NodeFactor[] args)
@@ -28,7 +26,25 @@ namespace MathParser.ParseTree
 
 		public override ResultValue GetResult()
 		{
-			throw new NotImplementedException();
+			List<ResultValue> argResults = new List<ResultValue>();
+			foreach (NodeFactor fact in Children)
+			{
+				argResults.Add(fact.GetResult());
+			}
+
+			return FuncInfo.Invoke(argResults.ToArray());
+		}
+
+		public override string ToString()
+		{
+			string args = "";
+			foreach (NodeFactor fact in Children)
+			{
+				args += fact.ToString() + ",";
+			}
+			args = args.TrimEnd(',');
+
+			return FuncInfo.Name + "(" + args + ")";
 		}
 	}
 }

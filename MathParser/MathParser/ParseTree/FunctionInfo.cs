@@ -110,7 +110,25 @@ namespace MathParser.ParseTree
 				}
 			}
 
-			//object res =  // HERE
+			object res = Function.DynamicInvoke(argvals);
+			if (res is double)
+			{
+				return new ResultNumber((double)res);
+			}
+			else if (res is string)
+			{
+				return new ResultString((string)res);
+			}
+			else if (res is MathMatrix)
+			{
+				return null;
+			}
+			else
+			{
+				throw new NotSupportedException(
+					"Return type is of invalid Type: " +
+					res.GetType().ToString());
+			}
 		}
 	}
 }

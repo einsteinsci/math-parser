@@ -15,17 +15,20 @@ namespace MathParser.Test
 	{
 		static void Main(string[] args)
 		{
-			Console.ForegroundColor = ConsoleColor.White;
+			Console.ForegroundColor = ConsoleColor.Green;
 			Logger.OnLog += Log;
 			Logger.DebugLogging = false;
 
-			string input = "1 + 2 * 3 - 4";
+			string input = "1.1 + 2.2 * 3.3 - 4.4";
 
 			Console.WriteLine("Input> " + input);
 			Logger.DebugLogging = true;
-			LexStream res = Lexing.Lexer.Lex(input);
 
-			NodeFactor<double> fact = Parser.Parse(res);
+			// This is where evaluation occurs
+			ResultValue res = Evaluator.Evaluate(input);
+			
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine("Evaluated: " + input + " = " + res.ToString());
 
 			Console.ReadKey(true);
 		}

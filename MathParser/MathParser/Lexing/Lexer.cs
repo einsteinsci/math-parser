@@ -104,14 +104,14 @@ namespace MathParser.Lexing
 			FinalizeToken(tok, lexeme);
 			#endregion
 
-			string info = "\n\t";
+			string info = "";
 			foreach (Lexeme l in Lexed)
 			{
 				info += l.ToString() + "\n\t";
 			}
-			Logger.Log(LogLevel.Debug, "lexer", "");
+			info = info.Trim();
 			Logger.Log(LogLevel.Debug, "lexer",
-				"Lexing complete: " + info);
+				"Lexing complete:\n\t" + info);
 		}
 
 		public void FinalizeToken(Token token, string lexeme)

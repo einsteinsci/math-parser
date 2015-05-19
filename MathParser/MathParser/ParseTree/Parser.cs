@@ -45,11 +45,10 @@ namespace MathParser.ParseTree
 					}
 					else
 					{
-						Logger.Log(LogLevel.Error, "parser", 
+						Logger.Log(LogLevel.Error, "sequencer", 
 							"Custom identifiers are not supported yet.");
 						continue;
 					}
-					break;
 				case TokenType.Delimiter:
 					#region Delimiter
 					try
@@ -84,7 +83,7 @@ namespace MathParser.ParseTree
 					// NEXT!
 					continue;
 				default:
-					Logger.Log(LogLevel.Fatal, "parsing", "Impossible Token Type.");
+					Logger.Log(LogLevel.Fatal, "sequencer", "Impossible Token Type.");
 					throw new Exception("Impossible Token Type.");
 				}
 			}
@@ -94,7 +93,7 @@ namespace MathParser.ParseTree
 				Lexeme l = operatorStack.Pop();
 				if (l.Token == Token.ParenthesisIn)
 				{
-					Logger.Log(LogLevel.Error, "parsing", "Mismatched parentheses.");
+					Logger.Log(LogLevel.Error, "sequencer", "Mismatched parentheses.");
 				}
 
 				outputQueue.Enqueue(l);
@@ -106,7 +105,8 @@ namespace MathParser.ParseTree
 			{
 				seq += l.ToString() + "\n\t";
 			}
-			Logger.Log(LogLevel.Debug, "parser", seq);
+			seq = seq.Trim();
+			Logger.Log(LogLevel.Debug, "sequencer", seq);
 
 			Stack<NodeFactor> arguments = new Stack<NodeFactor>();
 			
@@ -127,7 +127,7 @@ namespace MathParser.ParseTree
 					TokenOperator op = lex.Token as TokenOperator;
 					if (arguments.Count < op.ArgumentCount)
 					{
-						Logger.Log(LogLevel.Error, "parsing", "Too many arguments for token " + op.ToString());
+						Logger.Log(LogLevel.Error, "parser", "Too many arguments for token " + op.ToString());
 					}
 
 					List<NodeFactor> argsTaken = new List<NodeFactor>();
@@ -136,17 +136,44 @@ namespace MathParser.ParseTree
 						NodeFactor arg = arguments.Pop();
 						argsTaken.Add(arg);
 					}
+					argsTaken.Reverse();
 
 					NodeFactor branch = MakeOperator(argsTaken, op);
 					arguments.Push(branch);
 				}
 				if (lex.Type == TokenType.Name) // function
 				{
-					throw new NotImplementedException();
+					TokenIdentifier id = lex.Token as TokenIdentifier;
+					string name = lex.Lexed;
+					FunctionInfo fInfo = MathFunctions.GetFunction(name);
+					if (fInfo == null)
+					{
+						Logger.Log(LogLevel.Error, "parser", "No such function: " + name + "(...)");
+						throw new MissingMethodException("No such function: " + name + "(...)");
+					}
+
+					List<NodeFactor> argsTaken = new List<NodeFactor>();
+					for (int i = 0; i < fInfo.ArgumentCount; i++)
+					{
+						NodeFactor arg = arguments.Pop();
+						argsTaken.Add(arg);
+					}
+					argsTaken.Reverse();
+
+					NodeFactor branch = new NodeFunction(fInfo, argsTaken.ToArray());
+					arguments.Push(branch);
 				}
 			}
 
-			int stuppid = 0;
+			NodeFactor root = arguments.FirstOrDefault();
+			if (root == null)
+			{
+				throw new Exception("This should never happen.");
+			}
+
+			Logger.Log(LogLevel.Debug, "parser", "Stringified form of parse tree: " + root.ToString());
+
+			ParseTree = root;
 			#endregion
 		}
 
@@ -156,17 +183,17 @@ namespace MathParser.ParseTree
 			{
 			case "+":
 				// Weird fix by reversing arguments for operator
-				return new NodeOperatorPlus(arguments[1], arguments[0]);
+				return new NodeOperatorPlus(arguments[0], arguments[1]);
 			case "-":
-				return new NodeOperatorMinus(arguments[1], arguments[0]);
+				return new NodeOperatorMinus(arguments[0], arguments[1]);
 			case "*":
-				return new NodeOperatorMultiply(arguments[1], arguments[0]);
+				return new NodeOperatorMultiply(arguments[0], arguments[1]);
 			case "/":
-				return new NodeOperatorDivide(arguments[1], arguments[0]);
+				return new NodeOperatorDivide(arguments[0], arguments[1]);
 			case "^":
-				return new NodeOperatorExponent(arguments[1], arguments[0]);
+				return new NodeOperatorExponent(arguments[0], arguments[1]);
 			case "%":
-				return new NodeOperatorModulus(arguments[1], arguments[0]);
+				return new NodeOperatorModulus(arguments[0], arguments[1]);
 			default:
 				throw new ArgumentException("Unrecognized operator");
 			}
@@ -246,7 +273,7 @@ namespace MathParser.ParseTree
 			return false;
 		}
 
-		public static Factor<double> Parse(LexStream stream)
+		public static NodeFactor Parse(LexStream stream)
 		{
 			Instance.Input = stream;
 
