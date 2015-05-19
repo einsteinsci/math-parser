@@ -22,14 +22,23 @@ namespace MathParser
 		public static bool DebugLogging
 		{ get; set; }
 
+		public static List<string> DisabledCategories
+		{ get; private set; }
+
 		static Logger()
 		{
 			DebugLogging = true;
+			DisabledCategories = new List<string>();
 		}
 
 		public static void Log(LogLevel level, string category, string message)
 		{
 			if (level == LogLevel.Debug && !DebugLogging)
+			{
+				return;
+			}
+
+			if (DisabledCategories.Contains(category.ToLower()))
 			{
 				return;
 			}
@@ -40,19 +49,20 @@ namespace MathParser
 			}
 		}
 
-		public static void Log(LogLevel level, string message)
+		public static void DisableLogging(params string[] categories)
 		{
-			Log(level, "misc", message);
+			foreach (string s in categories)
+			{
+				DisabledCategories.Add(s.ToLower());
+			}
 		}
 
-		public static void Log(string category, string message)
+		public static void EnableLogging(params string[] categories)
 		{
-			Log(LogLevel.Info, category, message);
-		}
-
-		public static void Log(string message)
-		{
-			Log(LogLevel.Info, message);
+			foreach (string s in categories)
+			{
+				DisabledCategories.Remove(s.ToLower());
+			}
 		}
 	}
 }

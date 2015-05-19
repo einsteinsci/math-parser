@@ -17,12 +17,11 @@ namespace MathParser.Test
 		{
 			Console.ForegroundColor = ConsoleColor.Green;
 			Logger.OnLog += Log;
-			Logger.DebugLogging = false;
+			Logger.DisableLogging("register");
 
-			string input = "1.1 + 2.2 * 3.3 - 4.4";
-
-			Console.WriteLine("Input> " + input);
-			Logger.DebugLogging = true;
+			string input = "";
+			Console.Write("Input> ");
+			input = Console.ReadLine();
 
 			// This is where evaluation occurs
 			ResultValue res = Evaluator.Evaluate(input);
