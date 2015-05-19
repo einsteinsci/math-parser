@@ -52,6 +52,7 @@ namespace MathParser.Tokens
 		public static Token OperatorBitShiftRight	{ get { return TokenRegistry.Get("operatorBitShiftRight"); } }
 
 		public static Token OperatorNegative		{ get { return TokenRegistry.Get("operatorNegative"); } }
+		public static Token OperatorFactorial		{ get { return TokenRegistry.Get("operatorFactorial"); } }
 
 		public static Token Number					{ get { return TokenRegistry.Get("number"); } }
 

@@ -80,6 +80,7 @@
     <Compile Include="Tokens\TokenComment.cs" />
     <Compile Include="Tokens\TokenIdentifier.cs" />
     <Compile Include="Tokens\TokenLiteral.cs" />
+    <Compile Include="Tokens\TokenOperatorFactorial.cs" />
     <Compile Include="Tokens\TokenOperatorNegative.cs" />
     <Compile Include="Tokens\TokenOperatorBitShiftLeft.cs" />
     <Compile Include="Tokens\TokenOperatorBitShiftRight.cs" />
