@@ -25,7 +25,7 @@ namespace MathParser.Test
 			//input = "5!";
 
 			// This is where evaluation occurs
-			ResultValue res = Evaluator.Evaluate(input);
+			IResultValue res = Evaluator.Evaluate(input);
 			
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine("Evaluated: " + input + " = " + res.ToString());

@@ -14,14 +14,14 @@ namespace MathParser.ParseTree
 		}
 
 		public override MathType Type
-		{ get { return MathType.Number; } }
+		{ get { return MathType.Real; } }
 
 		public override string StringForm
 		{ get { return "-"; } }
 
-		public override ResultValue GetResult()
+		public override IResultValue GetResult()
 		{
-			return new ResultNumber(First.GetResult().ToDouble() - Second.GetResult().ToDouble());
+			return new ResultNumberReal(First.GetResult().ToDouble() - Second.GetResult().ToDouble());
 		}
 
 		public NodeOperatorMinus(NodeFactor first, NodeFactor second)

@@ -8,6 +8,6 @@ namespace MathParser.ParseTree
 {
 	public interface IEvaluatable
 	{
-		 ResultValue GetResult();
+		 IResultValue GetResult();
 	}
 }

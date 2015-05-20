@@ -8,7 +8,7 @@ namespace MathParser.ParseTree
 {
 	public class NodeLiteral : NodeFactor
 	{
-		public ResultValue Value
+		public IResultValue Value
 		{ get; set; }
 
 		public override List<NodeFactor> Children
@@ -16,7 +16,7 @@ namespace MathParser.ParseTree
 			get { return new List<NodeFactor>(); }
 		}
 
-		public override ResultValue GetResult()
+		public override IResultValue GetResult()
 		{
 			return Value;
 		}
@@ -25,7 +25,7 @@ namespace MathParser.ParseTree
 		{ get { return _type; } }
 		private MathType _type;
 
-		public NodeLiteral(ResultValue val)
+		public NodeLiteral(IResultValue val)
 		{
 			Value = val;
 			_type = val.Type;

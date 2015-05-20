@@ -16,14 +16,14 @@ namespace MathParser.ParseTree
 		}
 
 		public override MathType Type
-		{ get { return MathType.Number; } }
+		{ get { return MathType.Integer; } }
 
 		public override string StringForm
 		{ get { return "%"; } }
 
-		public override ResultValue GetResult()
+		public override IResultValue GetResult()
 		{
-			return new ResultNumber((int)First.GetResult().ToDouble() % (int)Second.GetResult().ToDouble());
+			return new ResultNumberReal(First.GetResult().ToInteger() % Second.GetResult().ToInteger());
 		}
 
 		public NodeOperatorModulus(NodeFactor first, NodeFactor second)

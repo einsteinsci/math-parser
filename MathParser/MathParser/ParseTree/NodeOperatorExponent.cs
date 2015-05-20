@@ -15,14 +15,14 @@ namespace MathParser.ParseTree
 		{ get { return Token.OperatorExponent; } }
 
 		public override MathType Type
-		{ get { return MathType.Number; } }
+		{ get { return MathType.Real; } }
 
 		public override string StringForm
 		{ get { return "^"; } }
 
-		public override ResultValue GetResult()
+		public override IResultValue GetResult()
 		{
-			return new ResultNumber(MathPlus.Pow(First.GetResult().ToDouble(), Second.GetResult().ToDouble()));
+			return new ResultNumberReal(MathPlus.Pow(First.GetResult().ToDouble(), Second.GetResult().ToDouble()));
 		}
 
 		public NodeOperatorExponent(NodeFactor first, NodeFactor second)

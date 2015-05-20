@@ -19,79 +19,79 @@ namespace MathParser.ParseTree
 		{ get { return sine; } }
 		private static FunctionInfo sine = new FunctionInfo(
 			(Func<double, double>)MathPlus.Trig.Sin, 
-			MathType.Number, "sin", MathType.Number);
+			MathType.Real, "sin", MathType.Real);
 
 		public static FunctionInfo Cosine
 		{ get { return cosine; } }
 		private static FunctionInfo cosine = new FunctionInfo(
 			(Func<double, double>)MathPlus.Trig.Cos, 
-			MathType.Number, "cos", MathType.Number);
+			MathType.Real, "cos", MathType.Real);
 
 		public static FunctionInfo Tangent
 		{ get { return tangent; } }
 		private static FunctionInfo tangent = new FunctionInfo(
 			(Func<double, double>)MathPlus.Trig.Tan, 
-			MathType.Number, "tan", MathType.Number);
+			MathType.Real, "tan", MathType.Real);
 
 		public static FunctionInfo Cosecant
 		{ get { return cosecant; } }
 		private static FunctionInfo cosecant = new FunctionInfo(
 			(Func<double, double>)MathPlus.Trig.Csc, 
-			MathType.Number, "csc", MathType.Number);
+			MathType.Real, "csc", MathType.Real);
 
 		public static FunctionInfo Secant
 		{ get { return secant; } }
 		private static FunctionInfo secant = new FunctionInfo(
 			(Func<double, double>)MathPlus.Trig.Sec, 
-			MathType.Number, "sec", MathType.Number);
+			MathType.Real, "sec", MathType.Real);
 
 		public static FunctionInfo Cotangent
 		{ get { return cotangent; } }
 		private static FunctionInfo cotangent = new FunctionInfo(
 			(Func<double, double>)MathPlus.Trig.Cot, 
-			MathType.Number, "cot", MathType.Number);
+			MathType.Real, "cot", MathType.Real);
 
 		public static FunctionInfo LogarithmN
 		{ get { return logarithmN; } }
 		private static FunctionInfo logarithmN = new FunctionInfo(
 			(Func<double, double, double>)MathPlus.Log, 
-			MathType.Number, "logn", MathType.Number, MathType.Number);
+			MathType.Real, "logn", MathType.Real, MathType.Real);
 
 		public static FunctionInfo LogarithmE
 		{ get { return logarithmE; } }
 		private static FunctionInfo logarithmE = new FunctionInfo(
 			(Func<double, double>)MathPlus.Ln, 
-			MathType.Number, "ln", MathType.Number);
+			MathType.Real, "ln", MathType.Real);
 
 		public static FunctionInfo Logarithm
 		{ get { return logarithm; } }
 		private static FunctionInfo logarithm = new FunctionInfo(
 			(Func<double, double>)MathPlus.Log10, 
-			MathType.Number, "log", MathType.Number);
+			MathType.Real, "log", MathType.Real);
 
 		public static FunctionInfo AbsoluteVal
 		{ get { return absoluteVal; } }
 		private static FunctionInfo absoluteVal = new FunctionInfo(
 			(Func<double, double>)MathPlus.Abs, 
-			MathType.Number, "abs", MathType.Number);
+			MathType.Real, "abs", MathType.Real);
 
 		public static FunctionInfo Sign
 		{ get { return sign; } }
 		private static FunctionInfo sign = new FunctionInfo(
 			(Func<double, double>)((d) => MathPlus.Sign(d)),
-			MathType.Number, "sign", MathType.Number);
+			MathType.Real, "sign", MathType.Real);
 
 		public static FunctionInfo Max
 		{ get { return max; } }
 		private static FunctionInfo max = new FunctionInfo(
 			(Func<double, double, double>)MathPlus.Max,
-			MathType.Number, "max", MathType.Number, MathType.Number);
+			MathType.Real, "max", MathType.Real, MathType.Real);
 
 		public static FunctionInfo Min
 		{ get { return min; } }
 		private static FunctionInfo min = new FunctionInfo(
 			(Func<double, double, double>)MathPlus.Min,
-			MathType.Number, "min", MathType.Number, MathType.Number);
+			MathType.Real, "min", MathType.Real, MathType.Real);
 
 		#endregion
 

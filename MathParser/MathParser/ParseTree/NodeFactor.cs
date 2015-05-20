@@ -17,7 +17,7 @@ namespace MathParser.ParseTree
 		public abstract List<NodeFactor> Children
 		{ get; }
 
-		public abstract ResultValue GetResult();
+		public abstract IResultValue GetResult();
 
 		public virtual string GetResultString()
 		{

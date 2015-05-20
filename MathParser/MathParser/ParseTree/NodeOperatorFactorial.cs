@@ -18,16 +18,21 @@ namespace MathParser.ParseTree
 		{ get { return Token.OperatorFactorial; } }
 
 		public override MathType Type
-		{ get { return MathType.Number; } }
+		{ get { return MathType.Integer; } }
 
 		public NodeOperatorFactorial(NodeFactor term)
 		{
 			Term = term;
 		}
 
-		public override ResultValue GetResult()
+		public override IResultValue GetResult()
 		{
-			return new ResultNumber(MathPlus.Probability.Factorial((long)Term.GetResult().ToDouble()));
+			return new ResultNumberReal(MathPlus.Probability.Factorial((long)Term.GetResult().ToDouble()));
+		}
+
+		public override string ToString()
+		{
+			return "(" + Term.ToString() + "!)";
 		}
 	}
 }

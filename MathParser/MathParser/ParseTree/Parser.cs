@@ -137,7 +137,7 @@ namespace MathParser.ParseTree
 					double d = double.Parse(lit);
 					Logger.Log(LogLevel.Debug, "parser",
 						"Creating literal node from value: " + lex.ToString());
-					arguments.Push(new NodeLiteral(new ResultNumber(d)));
+					arguments.Push(new NodeLiteral(new ResultNumberReal(d)));
 					continue;
 				}
 				if (lex.Type == TokenType.Operator)

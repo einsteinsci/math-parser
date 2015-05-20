@@ -16,16 +16,16 @@ namespace MathParser.ParseTree
 		{ get { return Token.OperatorMinus; } }
 
 		public override MathType Type
-		{ get { return MathType.Number; } }
+		{ get { return MathType.Real; } }
 
 		public NodeOperatorNegative(NodeFactor term)
 		{
 			Term = term;
 		}
 
-		public override ResultValue GetResult()
+		public override IResultValue GetResult()
 		{
-			return new ResultNumber(-1.0 * Term.GetResult().ToDouble());
+			return new ResultNumberReal(-1.0 * Term.GetResult().ToDouble());
 		}
 	}
 }

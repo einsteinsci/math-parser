@@ -55,9 +55,10 @@
     <Compile Include="ParseTree\NodeOperatorFactorial.cs" />
     <Compile Include="ParseTree\NodeOperatorNegative.cs" />
     <Compile Include="ParseTree\NodeOperatorUnary.cs" />
-    <Compile Include="ParseTree\ResultNumber.cs" />
+    <Compile Include="ParseTree\ResultNumberInteger.cs" />
+    <Compile Include="ParseTree\ResultNumberReal.cs" />
     <Compile Include="ParseTree\ResultString.cs" />
-    <Compile Include="ParseTree\ResultValue.cs" />
+    <Compile Include="ParseTree\IResultValue.cs" />
     <Compile Include="ParseTree\IEvaluatable.cs" />
     <Compile Include="ParseTree\ITextDisplayable.cs" />
     <Compile Include="ParseTree\NodeLiteral.cs" />

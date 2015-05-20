@@ -24,9 +24,9 @@ namespace MathParser.ParseTree
 			FuncInfo = info;
 		}
 
-		public override ResultValue GetResult()
+		public override IResultValue GetResult()
 		{
-			List<ResultValue> argResults = new List<ResultValue>();
+			List<IResultValue> argResults = new List<IResultValue>();
 			foreach (NodeFactor fact in Children)
 			{
 				argResults.Add(fact.GetResult());

@@ -24,7 +24,7 @@ namespace MathParser
 		public NodeFactor ParseTree
 		{ get; private set; }
 
-		public ResultValue Result
+		public IResultValue Result
 		{ get; private set; }
 
 		static Evaluator()
@@ -62,7 +62,7 @@ namespace MathParser
 			Result = ParseTree.GetResult();
 		}
 
-		public static ResultValue Calculate(NodeFactor factor)
+		public static IResultValue Calculate(NodeFactor factor)
 		{
 			Instance.ParseTree = factor;
 			Instance.Calculate();
@@ -77,7 +77,7 @@ namespace MathParser
 			Calculate();
 		}
 
-		public static ResultValue Evaluate(string expression)
+		public static IResultValue Evaluate(string expression)
 		{
 			Instance.Input = expression;
 			Instance.Evaluate();

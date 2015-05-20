@@ -1,32 +1,29 @@
-﻿using System;
+﻿using MathPlusLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using MathPlusLib;
-
 namespace MathParser.ParseTree
 {
-	public sealed class ResultNumber : ResultValue
+	public class ResultNumberInteger : IResultValue
 	{
 		public MathType Type
-		{
-			get { return MathType.Number; }
-		}
+		{ get { return MathType.Integer; } }
 
 		public object CoreValue
 		{ get { return Value; } }
 
-		public double Value
+		public long Value
 		{ get; set; }
 
-		public ResultNumber(double d)
+		public double ToDouble()
 		{
-			Value = d;
+			return (double)Value;
 		}
 
-		public double ToDouble()
+		public long ToInteger()
 		{
 			return Value;
 		}
@@ -36,9 +33,9 @@ namespace MathParser.ParseTree
 			return new MathMatrix(new double[,] { { Value } });
 		}
 
-		public override string ToString()
+		public static implicit operator ResultNumberReal(ResultNumberInteger _int)
 		{
-			return Value.ToString();
+			return new ResultNumberReal(_int.ToDouble());
 		}
 	}
 }

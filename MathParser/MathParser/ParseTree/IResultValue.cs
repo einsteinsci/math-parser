@@ -9,12 +9,13 @@ namespace MathParser.ParseTree
 {
 	public enum MathType
 	{
-		Number = 0,
+		Real = 0,
+		Integer,
 		String,
 		Matrix
 	}
 
-	public interface ResultValue
+	public interface IResultValue
 	{
 		MathType Type
 		{ get; }
@@ -23,6 +24,7 @@ namespace MathParser.ParseTree
 		{ get; }
 
 		double ToDouble();
+		long ToInteger();
 		MathMatrix ToMatrix();
 	}
 }

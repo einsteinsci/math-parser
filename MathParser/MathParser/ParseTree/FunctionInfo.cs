@@ -38,9 +38,13 @@ namespace MathParser.ParseTree
 			Function = function;
 
 			Type ret = function.Method.ReturnType;
-			if (ret == typeof(double))
+			if (ret == typeof(double) || ret == typeof(float))
 			{
-				ReturnType = MathType.Number;
+				ReturnType = MathType.Real;
+			}
+			else if (ret == typeof(long) || ret == typeof(int) || ret == typeof(short))
+			{
+				ReturnType = MathType.Integer;
 			}
 			else if (ret == typeof(string))
 			{
@@ -60,9 +64,13 @@ namespace MathParser.ParseTree
 			foreach (ParameterInfo arg in args)
 			{
 				Type t = arg.GetType();
-				if (t == typeof(double))
+				if (t == typeof(double) || t == typeof(float))
 				{
-					ArgumentTypes.Add(MathType.Number);
+					ArgumentTypes.Add(MathType.Real);
+				}
+				else if (t == typeof(long) || t == typeof(int) || t == typeof(short))
+				{
+					ArgumentTypes.Add(MathType.Integer);
 				}
 				else if (t == typeof(string))
 				{
@@ -79,7 +87,7 @@ namespace MathParser.ParseTree
 			}
 		}
 
-		public ResultValue Invoke(params ResultValue[] args)
+		public IResultValue Invoke(params IResultValue[] args)
 		{
 			if (args.Length != ArgumentCount)
 			{
@@ -94,8 +102,11 @@ namespace MathParser.ParseTree
 			{
 				switch (args[i].Type)
 				{
-				case MathType.Number:
+				case MathType.Real:
 					argvals[i] = args[i].ToDouble();
+					continue;
+				case MathType.Integer:
+					argvals[i] = args[i].ToInteger();
 					continue;
 				case MathType.String:
 					argvals[i] = args[i].ToString();
@@ -113,7 +124,7 @@ namespace MathParser.ParseTree
 			object res = Function.DynamicInvoke(argvals);
 			if (res is double)
 			{
-				return new ResultNumber((double)res);
+				return new ResultNumberReal((double)res);
 			}
 			else if (res is string)
 			{
