@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MathParser.Tokens
 {
 	[AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-	sealed class TokenAttribute : Attribute
+	sealed class MakeTokenAttribute : Attribute
 	{
 		public string TokenName
 		{ get; private set; }
@@ -18,7 +18,7 @@ namespace MathParser.Tokens
 		// named
 		public bool Custom;
 
-		public TokenAttribute(string tokenName, int priority)
+		public MakeTokenAttribute(string tokenName, int priority)
 		{
 			TokenName = tokenName.ToLower();
 			Priority = priority;

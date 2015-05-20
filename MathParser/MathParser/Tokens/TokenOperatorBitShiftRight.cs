@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[Token("operatorBitShiftRight", PRIORITY)]
+	[MakeToken("operatorBitShiftRight", PRIORITY)]
 	public class TokenOperatorBitShiftRight : TokenOperator
 	{
 		public override string Operator

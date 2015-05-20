@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[Token("operatorNegative", PRIORITY)]
+	[MakeToken("operatorNegative", PRIORITY)]
 	public class TokenOperatorNegative : TokenOperator
 	{
 		public override string Operator
@@ -21,7 +21,7 @@ namespace MathParser.Tokens
 		public override int ArgumentCount
 		{ get { return 1; } }
 
-		public override bool Matches(Token previous, string lexeme)
+		public override bool Matches(string lexeme)
 		{
 			return false;
 		}

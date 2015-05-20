@@ -8,7 +8,7 @@ using MathParser.Lexing;
 
 namespace MathParser.Tokens
 {
-	[Token("identifier", 6)]
+	[MakeToken("identifier", 6)]
 	public class TokenIdentifier : Token
 	{
 		public override bool SingleChar
@@ -19,7 +19,7 @@ namespace MathParser.Tokens
 		public override int LexerPriority
 		{ get { return 6; } }
 
-		public override bool Matches(Token previous, string lexeme)
+		public override bool Matches(string lexeme)
 		{
 			if (lexeme == "")
 			{

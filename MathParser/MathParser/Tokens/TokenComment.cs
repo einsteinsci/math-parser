@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[Token("comment", 1)]
+	[MakeToken("comment", 1)]
 	public class TokenComment : Token
 	{
 		public override bool SingleChar
@@ -20,7 +20,7 @@ namespace MathParser.Tokens
 			get { return TokenType.Ignored; }
 		}
 
-		public override bool Matches(Token prev, string lexeme)
+		public override bool Matches(string lexeme)
 		{
 			return lexeme.StartsWith("/*") && lexeme.EndsWith("*/") &&
 				lexeme.Length >= 4; /**/

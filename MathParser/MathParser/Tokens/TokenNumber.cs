@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[Token("number", 5)]
+	[MakeToken("number", 5)]
 	public sealed class TokenNumber : TokenLiteral
 	{
 		public override bool SingleChar
@@ -15,11 +15,11 @@ namespace MathParser.Tokens
 		public override int LexerPriority
 		{ get { return 5; } }
 
-		public override bool Matches(Token prev, string lexeme)
+		public override bool Matches(string lexeme)
 		{
 			foreach (Token t in TokenRegistry.Tokens)
 			{
-				if (t.Type == TokenType.Operator && t.Matches(prev, lexeme))
+				if (t.Type == TokenType.Operator && t.Matches(lexeme))
 				{
 					return false;
 				}

@@ -44,7 +44,7 @@ namespace MathParser.Tokens
 		public abstract int Precedence
 		{ get; }
 
-		public override bool Matches(Token previous, string lexeme)
+		public override bool Matches(string lexeme)
 		{
 			return lexeme == Operator;
 		}

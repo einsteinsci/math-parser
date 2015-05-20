@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[Token("unrecognized", int.MaxValue)]
+	[MakeToken("unrecognized", int.MaxValue)]
 	public sealed class TokenUnrecognized : Token
 	{
 		public override bool SingleChar
@@ -18,7 +18,7 @@ namespace MathParser.Tokens
 		public override TokenType Type
 		{ get { return TokenType.Ignored; } }
 
-		public override bool Matches(Token prev, string lexeme)
+		public override bool Matches(string lexeme)
 		{
 			return true;
 		}

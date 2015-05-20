@@ -31,15 +31,14 @@ namespace MathParser.Lexing
 			}
 
 			string lexeme = "";
-			Token previous = null;
 
 			#region lexing
 			for (int index = 0; index < Expression.Length; index++)
 			{
 				char c = Expression[index];
 
-				List<Token> validCurrent = ValidTokens(previous, lexeme);
-				List<Token> validNext = ValidTokens(previous, lexeme + c);
+				List<Token> validCurrent = ValidTokens(lexeme);
+				List<Token> validNext = ValidTokens(lexeme + c);
 
 				//if (validCurrent.Count == 1)
 				//{
@@ -91,10 +90,9 @@ namespace MathParser.Lexing
 
 				FinalizeToken(validCurrent.FirstOrDefault(), lexeme);
 				lexeme = c.ToString();
-				previous = Lexed.LastUsefulToken();
 			}
 
-			List<Token> validCurrent_ = ValidTokens(Lexed.LastUsefulToken(), lexeme);
+			List<Token> validCurrent_ = ValidTokens(lexeme);
 
 			if (validCurrent_.Count == 0)
 			{
@@ -217,7 +215,7 @@ namespace MathParser.Lexing
 			return res.TrimEnd(',') + " }";
 		}
 
-		public static List<Token> ValidTokens(Token previous, string lexeme)
+		public static List<Token> ValidTokens(string lexeme)
 		{
 			if (lexeme == "")
 			{
@@ -227,7 +225,7 @@ namespace MathParser.Lexing
 			List<Token> res = new List<Token>();
 			foreach (Token token in TokenRegistry.Tokens)
 			{
-				if (token.Matches(previous, lexeme) && token != Token.Unrecognized)
+				if (token.Matches(lexeme) && token != Token.Unrecognized)
 				{
 					res.Add(token);
 				}

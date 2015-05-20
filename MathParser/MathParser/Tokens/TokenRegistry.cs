@@ -108,7 +108,7 @@ namespace MathParser.Tokens
 					continue;
 				}
 
-				TokenAttribute att = t.GetCustomAttributes<TokenAttribute>().FirstOrDefault();
+				MakeTokenAttribute att = t.GetCustomAttributes<MakeTokenAttribute>().FirstOrDefault();
 				if (att != null)
 				{
 					Token token = Activator.CreateInstance(t) as Token;

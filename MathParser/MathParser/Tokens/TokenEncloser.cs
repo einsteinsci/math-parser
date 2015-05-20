@@ -37,7 +37,7 @@ namespace MathParser.Tokens
 		public override TokenType Type
 		{ get { return TokenType.Encloser; } }
 
-		public override bool Matches(Token previous, string lexeme)
+		public override bool Matches(string lexeme)
 		{
 			if (Side == EncloserSide.Opening)
 			{
