@@ -52,6 +52,7 @@
     <Compile Include="ParseTree\MathFunctions.cs" />
     <Compile Include="ParseTree\NodeFactor.cs" />
     <Compile Include="ParseTree\NodeFunction.cs" />
+    <Compile Include="ParseTree\NodeOperatorFactorial.cs" />
     <Compile Include="ParseTree\NodeOperatorNegative.cs" />
     <Compile Include="ParseTree\NodeOperatorUnary.cs" />
     <Compile Include="ParseTree\ResultNumber.cs" />

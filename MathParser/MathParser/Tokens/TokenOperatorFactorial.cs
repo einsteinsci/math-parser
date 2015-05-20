@@ -17,5 +17,8 @@ namespace MathParser.Tokens
 
 		public override bool SingleChar
 		{ get { return true; } }
+
+		public override int ArgumentCount
+		{ get { return 1; } }
 	}
 }

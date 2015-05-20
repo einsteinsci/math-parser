@@ -223,6 +223,8 @@ namespace MathParser.ParseTree
 				return new NodeOperatorExponent(arguments[0], arguments[1]);
 			case "%":
 				return new NodeOperatorModulus(arguments[0], arguments[1]);
+			case "!":
+				return new NodeOperatorFactorial(arguments[0]);
 			default:
 				throw new ArgumentException("Unrecognized operator");
 			}
