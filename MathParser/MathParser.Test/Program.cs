@@ -21,8 +21,8 @@ namespace MathParser.Test
 
 			string input = "";
 			Console.Write("Input> ");
-			//input = Console.ReadLine();
-			input = "5 + -3";
+			input = Console.ReadLine();
+			//input = "5!";
 
 			// This is where evaluation occurs
 			ResultValue res = Evaluator.Evaluate(input);

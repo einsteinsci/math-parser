@@ -23,7 +23,11 @@ namespace MathParser.Tokens
 		public abstract bool SingleChar
 		{ get; }
 
+		[Obsolete]
 		public abstract bool Matches(Token previous, string lexeme);
+
+		public abstract bool CanMatch(string lexeme);
+		public abstract bool DoesMatch(string lexeme);
 
 		public abstract TokenType Type
 		{ get; }

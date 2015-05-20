@@ -13,7 +13,7 @@ namespace MathParser.Tokens
 		{ get { return "!"; } }
 
 		public override int Precedence
-		{ get { return PREC_EXPONENTIAL; } }
+		{ get { return PREC_PRIMARY; } } // highest precedence
 
 		public override bool SingleChar
 		{ get { return true; } }

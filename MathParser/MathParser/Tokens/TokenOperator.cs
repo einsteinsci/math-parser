@@ -24,7 +24,7 @@ namespace MathParser.Tokens
 		public const int PREC_MULTIPLICATIVE = 11;
 		public const int PREC_UNARY = 12;
 		public const int PREC_EXPONENTIAL = 13;
-		//public const int PREC_PRIMARY = 14;
+		public const int PREC_PRIMARY = 14;
 
 		public virtual int ArgumentCount
 		{ get { return 2; } }
@@ -44,6 +44,16 @@ namespace MathParser.Tokens
 		public override bool Matches(Token previous, string lexeme)
 		{
 			return lexeme == Operator;
+		}
+
+		public override bool CanMatch(string lexeme)
+		{
+			return Operator.StartsWith(lexeme);
+		}
+
+		public override bool DoesMatch(string lexeme)
+		{
+			return Operator == lexeme;
 		}
 
 		public override string ToString()
