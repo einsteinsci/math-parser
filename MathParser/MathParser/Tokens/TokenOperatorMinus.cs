@@ -17,10 +17,5 @@ namespace MathParser.Tokens
 
 		public override bool SingleChar
 		{ get { return true; } }
-
-		public override bool Matches(Token previous, string lexeme)
-		{
-			return false; // resolved via disambiguation
-		}
 	}
 }

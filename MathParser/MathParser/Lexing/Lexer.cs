@@ -8,9 +8,9 @@ using MathParser.Tokens;
 
 namespace MathParser.Lexing
 {
-    public sealed class Lexer2
+    public sealed class Lexer
     {
-		public static readonly Lexer2 Instance = new Lexer2();
+		public static readonly Lexer Instance = new Lexer();
 
 		public string Expression
 		{ get; set; }
@@ -41,12 +41,12 @@ namespace MathParser.Lexing
 				List<Token> validCurrent = ValidTokens(previous, lexeme);
 				List<Token> validNext = ValidTokens(previous, lexeme + c);
 
-				if (validCurrent.Count == 1)
-				{
-					previous = validCurrent[0];
-					validCurrent = ValidTokens(previous, lexeme);
-					validNext = ValidTokens(previous, lexeme + c);
-				}
+				//if (validCurrent.Count == 1)
+				//{
+				//	previous = validCurrent[0];
+				//	validCurrent = ValidTokens(previous, lexeme);
+				//	validNext = ValidTokens(previous, lexeme + c);
+				//}
 
 				if (c.IsWhitespace())
 				{

@@ -23,33 +23,7 @@ namespace MathParser.Tokens
 
 		public override bool Matches(Token previous, string lexeme)
 		{
-			if (!base.Matches(previous, lexeme))
-			{
-				return false;
-			}
-
-			bool minus = false;
-			if (previous != null)
-			{
-				if (previous.Type == TokenType.Literal)
-				{
-					minus = true;
-				}
-				else if (previous.Type == TokenType.Encloser)
-				{
-					TokenEncloser enc = previous as TokenEncloser;
-					if (enc.Side == EncloserSide.Closing)
-					{
-						minus = true;
-					}
-				}
-				else if (previous.Type == TokenType.Name)
-				{
-					return true;
-				}
-			}
-
-			return !minus;
+			return false;
 		}
 
 		public override string ToString()

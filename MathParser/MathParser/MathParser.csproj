@@ -70,7 +70,7 @@
     <Compile Include="ParseTree\Parser.cs" />
     <Compile Include="TextUtils.cs" />
     <Compile Include="Lexing\Lexeme.cs" />
-    <Compile Include="Lexing\Lexer2.cs" />
+    <Compile Include="Lexing\Lexer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tokens\Token.cs" />
     <Compile Include="Tokens\TokenAttribute.cs" />
