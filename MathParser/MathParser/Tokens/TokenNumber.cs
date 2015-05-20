@@ -10,9 +10,10 @@ namespace MathParser.Tokens
 	public sealed class TokenNumber : TokenLiteral
 	{
 		public override bool SingleChar
-		{
-			get { return false; }
-		}
+		{ get { return false; } }
+
+		public override int LexerPriority
+		{ get { return 5; } }
 
 		public override bool Matches(Token prev, string lexeme)
 		{

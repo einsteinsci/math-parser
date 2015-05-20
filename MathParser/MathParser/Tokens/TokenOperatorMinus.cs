@@ -20,7 +20,7 @@ namespace MathParser.Tokens
 
 		public override bool Matches(Token previous, string lexeme)
 		{
-			return base.Matches(previous, lexeme) && !Token.OperatorNegative.Matches(previous, lexeme);
+			return false; // resolved via disambiguation
 		}
 	}
 }

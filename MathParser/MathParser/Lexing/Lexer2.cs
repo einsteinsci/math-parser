@@ -8,9 +8,9 @@ using MathParser.Tokens;
 
 namespace MathParser.Lexing
 {
-    public sealed class LexerOld
+    public sealed class Lexer2
     {
-		public static readonly LexerOld Instance = new LexerOld();
+		public static readonly Lexer2 Instance = new Lexer2();
 
 		public string Expression
 		{ get; set; }
@@ -33,7 +33,7 @@ namespace MathParser.Lexing
 			string lexeme = "";
 			Token previous = null;
 
-			#region for
+			#region lexing
 			for (int index = 0; index < Expression.Length; index++)
 			{
 				char c = Expression[index];
@@ -111,6 +111,74 @@ namespace MathParser.Lexing
 
 			Token tok = validCurrent_.FirstOrDefault();
 			FinalizeToken(tok, lexeme);
+			#endregion
+
+			#region resolve disambiguations
+			for (int i = 0; i < Lexed.Count; i++)
+			{
+				Lexeme l = Lexed[i];
+
+				// minus
+				if (l.Token == Token.OperatorMinus)
+				{
+					if (i == 0) // first
+					{
+						Logger.Log(LogLevel.Debug, "lexer",
+							"Converting minus (index " + i.ToString() + ") to negative.");
+						l.Token = Token.OperatorNegative;
+						continue;
+					}
+
+					Lexeme prev = Lexed[i - 1];
+					if (prev.Token.Type == TokenType.Ignored)
+					{
+						bool found = false;
+						for (int j = i - 1; j >= 0; j--)
+						{
+							if (Lexed[j].Token.Type != TokenType.Ignored)
+							{
+								found = true;
+								prev = Lexed[j];
+								break;
+							}
+						}
+						if (!found)
+						{
+							// minus is first meaningful token
+							l.Token = Token.OperatorNegative;
+							Logger.Log(LogLevel.Debug, "lexer",
+								"Converting minus (index " + i.ToString() + ") to negative.");
+							continue;
+						}
+					}
+
+					if (prev.Token.Type == TokenType.Encloser)
+					{
+						TokenEncloser encl = prev.Token as TokenEncloser;
+						if (encl.Side == EncloserSide.Opening)
+						{
+							l.Token = Token.OperatorNegative;
+							Logger.Log(LogLevel.Debug, "lexer",
+								"Converting minus (index " + i.ToString() + ") to negative.");
+							continue;
+						}
+					}
+					else if (prev.Token.Type == TokenType.Delimiter)
+					{
+						l.Token = Token.OperatorNegative;
+						Logger.Log(LogLevel.Debug, "lexer",
+							"Converting minus (index " + i.ToString() + ") to negative.");
+						continue;
+					}
+					else if (prev.Token.Type == TokenType.Operator)
+					{
+						l.Token = Token.OperatorNegative;
+						Logger.Log(LogLevel.Debug, "lexer",
+							"Converting minus (index " + i.ToString() + ") to negative.");
+						continue;
+					}
+				}
+			}
 			#endregion
 
 			string info = "";

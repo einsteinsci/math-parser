@@ -12,6 +12,9 @@ namespace MathParser.Tokens
 		public override bool SingleChar
 		{ get { return true; } }
 
+		public override int LexerPriority
+		{ get { return TokenOperator.PRIORITY; } }
+
 		public override TokenType Type
 		{
 			get { return TokenType.Delimiter; }

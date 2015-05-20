@@ -12,6 +12,9 @@ namespace MathParser.Tokens
 		public override bool SingleChar
 		{ get { return false; } }
 
+		public override int LexerPriority
+		{ get { return int.MaxValue; } }
+
 		public override TokenType Type
 		{ get { return TokenType.Ignored; } }
 

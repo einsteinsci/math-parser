@@ -11,7 +11,7 @@ namespace MathParser.Lexing
 	public class Lexeme
 	{
 		public Token Token
-		{ get; protected set; }
+		{ get; internal set; }
 
 		public string Lexed
 		{ get; protected set; }

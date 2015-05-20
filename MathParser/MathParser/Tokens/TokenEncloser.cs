@@ -19,6 +19,9 @@ namespace MathParser.Tokens
 		public abstract EncloserSide Side
 		{ get; protected set; }
 
+		public override int LexerPriority
+		{ get { return PRIORITY; } }
+
 		public abstract string EncloserName
 		{ get; }
 

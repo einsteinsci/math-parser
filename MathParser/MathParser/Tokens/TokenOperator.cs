@@ -32,6 +32,9 @@ namespace MathParser.Tokens
 		public abstract string Operator
 		{ get; }
 
+		public override int LexerPriority
+		{ get { return PRIORITY; } }
+
 		public override TokenType Type
 		{ get { return TokenType.Operator; } }
 
@@ -44,16 +47,6 @@ namespace MathParser.Tokens
 		public override bool Matches(Token previous, string lexeme)
 		{
 			return lexeme == Operator;
-		}
-
-		public override bool CanMatch(string lexeme)
-		{
-			return Operator.StartsWith(lexeme);
-		}
-
-		public override bool DoesMatch(string lexeme)
-		{
-			return Operator == lexeme;
 		}
 
 		public override string ToString()

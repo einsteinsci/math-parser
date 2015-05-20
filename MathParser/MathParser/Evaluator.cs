@@ -35,7 +35,7 @@ namespace MathParser
 		#region parts
 		public void Lex()
 		{
-			Lexed = LexerOld.Lex(Input);
+			Lexed = Lexer2.Lex(Input);
 		}
 
 		public static LexStream Lex(string expression)
