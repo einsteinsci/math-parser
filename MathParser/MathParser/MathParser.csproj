@@ -99,6 +99,7 @@
     <Compile Include="Tokens\TokenOperatorPlus.cs" />
     <Compile Include="Tokens\TokenParenthesis.cs" />
     <Compile Include="Tokens\TokenRegistry.cs" />
+    <Compile Include="Tokens\TokenString.cs" />
     <Compile Include="Tokens\TokenUnrecognized.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

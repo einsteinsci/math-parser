@@ -10,5 +10,8 @@ namespace MathParser.Tokens
 	{
 		public override TokenType Type
 		{ get { return TokenType.Literal; } }
+
+		public override int LexerPriority
+		{ get { return 5; } }
 	}
 }

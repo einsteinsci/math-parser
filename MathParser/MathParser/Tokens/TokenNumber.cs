@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("number", 5)]
+	[MakeToken("number")]
 	public sealed class TokenNumber : TokenLiteral
 	{
 		public override bool SingleChar
 		{ get { return false; } }
-
-		public override int LexerPriority
-		{ get { return 5; } }
 
 		public override bool Matches(string lexeme)
 		{

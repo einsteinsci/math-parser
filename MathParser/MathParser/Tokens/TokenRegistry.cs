@@ -112,18 +112,19 @@ namespace MathParser.Tokens
 				if (att != null)
 				{
 					Token token = Activator.CreateInstance(t) as Token;
+					int priority = token.LexerPriority;
 					if (att.Custom)
 					{
 						foreach (KeyValuePair<string, Token> kvp in token.CustomRegistry)
 						{
-							Register(kvp.Key, kvp.Value, att.Priority);
+							Register(kvp.Key, kvp.Value, priority);
 							Logger.Log(LogLevel.Debug, "register", 
 								"Token registered: " + kvp.Key + " = " + kvp.Value.ToString());
 						}
 					}
 					else
 					{
-						Register(att.TokenName, token, att.Priority);
+						Register(att.TokenName, token, priority);
 						Logger.Log(LogLevel.Debug, "register", "Token registered: " + 
 							att.TokenName + " = " + token.ToString());
 					}

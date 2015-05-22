@@ -12,16 +12,12 @@ namespace MathParser.Tokens
 		public string TokenName
 		{ get; private set; }
 
-		public int Priority
-		{ get; private set; }
-
 		// named
 		public bool Custom;
 
-		public MakeTokenAttribute(string tokenName, int priority)
+		public MakeTokenAttribute(string tokenName)
 		{
 			TokenName = tokenName.ToLower();
-			Priority = priority;
 		}
 	}
 }

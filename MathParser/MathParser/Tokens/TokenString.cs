@@ -6,29 +6,20 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("comment")]
-	public class TokenComment : Token
+	[MakeToken("string")]
+	public class TokenString : TokenLiteral
 	{
 		public override bool SingleChar
 		{ get { return false; } }
 
-		public override int LexerPriority
-		{ get { return 1; } }
-
-		public override TokenType Type
-		{
-			get { return TokenType.Ignored; }
-		}
-
 		public override bool Matches(string lexeme)
 		{
-			return lexeme.StartsWith("/*") && lexeme.EndsWith("*/") &&
-				lexeme.Length >= 4; /**/
+			return lexeme.StartsWith("\"") && lexeme.EndsWith("\"");
 		}
 
 		public override string ToString()
 		{
-			return "[Comment]";
+			return "[String]";
 		}
 	}
 }

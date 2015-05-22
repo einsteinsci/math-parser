@@ -7,7 +7,7 @@ using MathParser.ParseTree;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("operatorMultiply", PRIORITY)]
+	[MakeToken("operatorMultiply")]
 	public class TokenOperatorMultiply : TokenOperator
 	{
 		public override string Operator

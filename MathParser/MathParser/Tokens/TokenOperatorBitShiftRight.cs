@@ -7,7 +7,7 @@ using MathParser.ParseTree;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("operatorBitShiftRight", PRIORITY)]
+	[MakeToken("operatorBitShiftRight")]
 	public class TokenOperatorBitShiftRight : TokenOperator
 	{
 		public override string Operator

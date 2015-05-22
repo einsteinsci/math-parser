@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("bracket", PRIORITY, Custom = true)]
+	[MakeToken("bracket", Custom = true)]
 	public class TokenBracket : TokenEncloser
 	{
 		public override EncloserSide Side

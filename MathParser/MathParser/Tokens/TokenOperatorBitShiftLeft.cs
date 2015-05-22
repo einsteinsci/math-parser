@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("operatorBitShiftLeft", PRIORITY)]
+	[MakeToken("operatorBitShiftLeft")]
 	public class TokenOperatorBitShiftLeft : TokenOperator
 	{
 		public override string Operator

@@ -8,7 +8,7 @@ using MathParser.Lexing;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("identifier", 6)]
+	[MakeToken("identifier")]
 	public class TokenIdentifier : Token
 	{
 		public override bool SingleChar
