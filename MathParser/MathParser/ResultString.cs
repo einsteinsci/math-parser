@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathParser.ParseTree
+namespace MathParser
 {
 	public sealed class ResultString : IResultValue
 	{
