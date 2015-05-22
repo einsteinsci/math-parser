@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathParser.ParseTree;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,5 +18,10 @@ namespace MathParser.Tokens
 
 		public override bool SingleChar
 		{ get { return false; } }
+
+		public override NodeFactor MakeFactor(NodeFactor[] args)
+		{
+			return new NodeOperatorBitShiftLeft(args[0], args[1]);
+		}
 	}
 }

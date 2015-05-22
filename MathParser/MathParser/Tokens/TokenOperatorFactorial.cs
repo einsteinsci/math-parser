@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MathParser.ParseTree;
 
 namespace MathParser.Tokens
 {
@@ -20,5 +21,10 @@ namespace MathParser.Tokens
 
 		public override int ArgumentCount
 		{ get { return 1; } }
+
+		public override NodeFactor MakeFactor(NodeFactor[] args)
+		{
+			return new NodeOperatorFactorial(args[0]);
+		}
 	}
 }

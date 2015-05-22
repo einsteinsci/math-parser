@@ -52,6 +52,8 @@
     <Compile Include="ParseTree\MathFunctions.cs" />
     <Compile Include="ParseTree\NodeFactor.cs" />
     <Compile Include="ParseTree\NodeFunction.cs" />
+    <Compile Include="ParseTree\NodeOperatorBitShiftLeft.cs" />
+    <Compile Include="ParseTree\NodeOperatorBitShiftRight.cs" />
     <Compile Include="ParseTree\NodeOperatorFactorial.cs" />
     <Compile Include="ParseTree\NodeOperatorNegative.cs" />
     <Compile Include="ParseTree\NodeOperatorUnary.cs" />

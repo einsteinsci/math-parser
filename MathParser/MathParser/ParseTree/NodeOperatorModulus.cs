@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using MathParser.Tokens;
+using MathPlusLib.Extensions;
 
 namespace MathParser.ParseTree
 {
@@ -23,7 +24,21 @@ namespace MathParser.ParseTree
 
 		public override IResultValue GetResult()
 		{
-			return new ResultNumberReal(First.GetResult().ToInteger() % Second.GetResult().ToInteger());
+			IResultValue res1 = First.GetResult();
+			IResultValue res2 = Second.GetResult();
+
+			if (!res1.ToDouble().IsInteger(8))
+			{
+				throw new ArgumentOutOfRangeException("[FIELD]:First", 
+					"Cannot use floating-point types in modulus calculation.");
+			}
+			if (!res2.ToDouble().IsInteger(8))
+			{
+				throw new ArgumentOutOfRangeException("[FIELD]:Second", 
+					"Cannot use floating-point types in modulus calculation.");
+			}
+
+			return new ResultNumberReal(res1.ToInteger() % res2.ToInteger());
 		}
 
 		public NodeOperatorModulus(NodeFactor first, NodeFactor second)

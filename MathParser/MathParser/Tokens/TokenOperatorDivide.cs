@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MathParser.ParseTree;
 
 namespace MathParser.Tokens
 {
@@ -17,5 +18,10 @@ namespace MathParser.Tokens
 
 		public override bool SingleChar
 		{ get { return true; } }
+
+		public override NodeFactor MakeFactor(NodeFactor[] args)
+		{
+			return new NodeOperatorDivide(args[0], args[1]);
+		}
 	}
 }

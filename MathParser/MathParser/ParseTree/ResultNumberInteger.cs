@@ -28,9 +28,23 @@ namespace MathParser.ParseTree
 			return Value;
 		}
 
+		public ResultNumberInteger(long value)
+		{
+			Value = value;
+		}
+		public ResultNumberInteger(int value)
+		{
+			Value = value;
+		}
+
 		public MathMatrix ToMatrix()
 		{
 			return new MathMatrix(new double[,] { { Value } });
+		}
+
+		public override string ToString()
+		{
+			return Value.ToString();
 		}
 
 		public static implicit operator ResultNumberReal(ResultNumberInteger _int)

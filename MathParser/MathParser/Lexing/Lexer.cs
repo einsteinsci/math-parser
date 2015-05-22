@@ -36,16 +36,17 @@ namespace MathParser.Lexing
 			for (int index = 0; index < Expression.Length; index++)
 			{
 				char c = Expression[index];
+				char? nextC = index < Expression.Length - 1 ? (char?)Expression[index + 1] : null;
 
 				List<Token> validCurrent = ValidTokens(lexeme);
 				List<Token> validNext = ValidTokens(lexeme + c);
+				List<Token> validNextNext = nextC != null ? ValidTokens(lexeme + c + nextC.Value) : new List<Token>();
 
-				//if (validCurrent.Count == 1)
-				//{
-				//	previous = validCurrent[0];
-				//	validCurrent = ValidTokens(previous, lexeme);
-				//	validNext = ValidTokens(previous, lexeme + c);
-				//}
+				if (lexeme == "")
+				{
+					lexeme += c;
+					continue;
+				}
 
 				if (c.IsWhitespace())
 				{
@@ -54,13 +55,7 @@ namespace MathParser.Lexing
 					continue;
 				}
 
-				if (lexeme == "")
-				{
-					lexeme += c;
-					continue;
-				}
-
-				if (validCurrent.Count == 1)
+				if (validCurrent.Count == 1 && validNext.Count == 0)
 				{
 					FinalizeToken(validCurrent.FirstOrDefault(), lexeme);
 					lexeme = c.ToString();
@@ -81,7 +76,7 @@ namespace MathParser.Lexing
 					continue;
 				}
 
-				if (validCurrent.Count > 2) // excluding unrecognized
+				if (validCurrent.Count > 1)
 				{
 					Logger.Log(LogLevel.Warning, "lexer",
 						"Multiple last-choice Tokens:  " +

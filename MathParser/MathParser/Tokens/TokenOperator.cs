@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathParser.ParseTree;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,6 +44,8 @@ namespace MathParser.Tokens
 
 		public abstract int Precedence
 		{ get; }
+
+		public abstract NodeFactor MakeFactor(NodeFactor[] args);
 
 		public override bool Matches(string lexeme)
 		{

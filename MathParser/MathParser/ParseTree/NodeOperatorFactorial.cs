@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using MathPlusLib;
+using MathPlusLib.Extensions;
 
 namespace MathParser.ParseTree
 {
@@ -27,7 +28,15 @@ namespace MathParser.ParseTree
 
 		public override IResultValue GetResult()
 		{
-			return new ResultNumberReal(MathPlus.Probability.Factorial((long)Term.GetResult().ToDouble()));
+			IResultValue res = Term.GetResult();
+
+			if (!res.ToDouble().IsInteger(8))
+			{
+				throw new ArgumentOutOfRangeException("[FIELD]:Term",
+					"Cannot use floating-point types in factorial calculation.");
+			}
+
+			return new ResultNumberReal(MathPlus.Probability.Factorial(res.ToInteger()));
 		}
 
 		public override string ToString()

@@ -201,33 +201,7 @@ namespace MathParser.ParseTree
 
 		public static NodeFactor MakeOperator(List<NodeFactor> arguments, TokenOperator op)
 		{
-			switch (op.Operator)
-			{
-			case "+":
-				// Weird fix by reversing arguments for operator
-				return new NodeOperatorPlus(arguments[0], arguments[1]);
-			case "-":
-				if (op.ArgumentCount == 1) // negative
-				{
-					return new NodeOperatorNegative(arguments[0]);
-				}
-				else // minus
-				{
-					return new NodeOperatorMinus(arguments[0], arguments[1]);
-				}
-			case "*":
-				return new NodeOperatorMultiply(arguments[0], arguments[1]);
-			case "/":
-				return new NodeOperatorDivide(arguments[0], arguments[1]);
-			case "^":
-				return new NodeOperatorExponent(arguments[0], arguments[1]);
-			case "%":
-				return new NodeOperatorModulus(arguments[0], arguments[1]);
-			case "!":
-				return new NodeOperatorFactorial(arguments[0]);
-			default:
-				throw new ArgumentException("Unrecognized operator");
-			}
+			return op.MakeFactor(arguments.ToArray());
 		}
 
 		public static void FinishParentheses(Stack<Lexeme> operatorStack, 
