@@ -40,7 +40,7 @@ namespace MathParser
 
 		public override string ToString()
 		{
-			return Value;
+			return "\"" + Value + "\"";
 		}
 	}
 }

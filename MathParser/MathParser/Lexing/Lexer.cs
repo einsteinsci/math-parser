@@ -48,7 +48,7 @@ namespace MathParser.Lexing
 					continue;
 				}
 
-				if (c.IsWhitespace())
+				if (c.IsWhitespace() && !lexeme.StartsWith("\""))
 				{
 					FinalizeToken(validCurrent.FirstOrDefault(), lexeme);
 					lexeme = "";
@@ -68,7 +68,7 @@ namespace MathParser.Lexing
 					continue;
 				}
 
-				if (validCurrent.Count == 0)
+				if (validCurrent.Count == 0 && !lexeme.StartsWith("\""))
 				{
 					Logger.Log(LogLevel.Warning, "lexer", 
 						"No last-choice Tokens. Waiting on " + lexeme);

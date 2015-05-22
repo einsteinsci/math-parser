@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathParser.ParseTree;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,7 @@ namespace MathParser.Tokens
 
 		public override int LexerPriority
 		{ get { return 5; } }
+
+		public abstract NodeLiteral MakeNode(string lexeme);
 	}
 }

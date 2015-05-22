@@ -134,10 +134,10 @@ namespace MathParser.ParseTree
 				if (lex.Type == TokenType.Literal)
 				{
 					string lit = lex.Lexed;
-					double d = double.Parse(lit);
+					TokenLiteral toklit = lex.Token as TokenLiteral;
 					Logger.Log(LogLevel.Debug, "parser",
 						"Creating literal node from value: " + lex.ToString());
-					arguments.Push(new NodeLiteral(new ResultNumberReal(d)));
+					arguments.Push(toklit.MakeNode(lit));
 					continue;
 				}
 				if (lex.Type == TokenType.Operator)

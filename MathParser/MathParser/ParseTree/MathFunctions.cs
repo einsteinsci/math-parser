@@ -93,6 +93,14 @@ namespace MathParser.ParseTree
 			(Func<double, double, double>)MathPlus.Min,
 			MathType.Real, "min", MathType.Real, MathType.Real);
 
+		[Function]
+		public static FunctionInfo Substring
+		{ get { return substring; } }
+		private static FunctionInfo substring = new FunctionInfo(
+			(Func<string, long, long, string>)((string str, long start, long len) => 
+				str.Substring((int)start, (int)len)),
+			MathType.String, "substring", MathType.String, MathType.Integer, MathType.Integer);
+
 		#endregion
 
 		public static FunctionInfo GetFunction(string name)
@@ -112,6 +120,19 @@ namespace MathParser.ParseTree
 		{
 			AllFunctions = new List<FunctionInfo>();
 
+			Type mathFunctionClass = typeof(MathFunctions);
+			PropertyInfo[] properties = mathFunctionClass.GetProperties();
+			FieldInfo[] fields = mathFunctionClass.GetFields();
+
+			foreach (PropertyInfo prop in properties)
+			{
+				IEnumerable<Attribute> atts = prop.GetCustomAttributes<FunctionAttribute>();
+				if (atts.Count() > 0)
+				{
+					// HERE
+				}
+			}
+
 			AllFunctions.Add(Sine);
 			AllFunctions.Add(Cosine);
 			AllFunctions.Add(Tangent);
@@ -128,6 +149,8 @@ namespace MathParser.ParseTree
 
 			AllFunctions.Add(Max);
 			AllFunctions.Add(Min);
+
+			AllFunctions.Add(Substring);
 		}
 	}
 }
