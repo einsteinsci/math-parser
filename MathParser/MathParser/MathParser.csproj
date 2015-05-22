@@ -46,10 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Evaluator.cs" />
+    <Compile Include="Extensibility.cs" />
     <Compile Include="Lexing\LexStream.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="ParseTree\FunctionAttribute.cs" />
     <Compile Include="ParseTree\FunctionInfo.cs" />
+    <Compile Include="ParseTree\FunctionLibraryAttribute.cs" />
     <Compile Include="ParseTree\MathFunctions.cs" />
     <Compile Include="ParseTree\NodeFactor.cs" />
     <Compile Include="ParseTree\NodeFunction.cs" />

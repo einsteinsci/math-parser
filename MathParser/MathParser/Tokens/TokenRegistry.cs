@@ -95,38 +95,40 @@ namespace MathParser.Tokens
 
 			Registry = new List<RegistryItem>();
 
-			Assembly current = Assembly.GetCallingAssembly();
-			foreach (Type t in current.GetTypes())
+			foreach (Assembly assembly in Extensibility.AllAssemblies)
 			{
-				if (!typeof(Token).IsAssignableFrom(t))
+				foreach (Type t in assembly.GetTypes())
 				{
-					continue;
-				}
-
-				if (t.IsAbstract)
-				{
-					continue;
-				}
-
-				MakeTokenAttribute att = t.GetCustomAttributes<MakeTokenAttribute>().FirstOrDefault();
-				if (att != null)
-				{
-					Token token = Activator.CreateInstance(t) as Token;
-					int priority = token.LexerPriority;
-					if (att.Custom)
+					if (!typeof(Token).IsAssignableFrom(t))
 					{
-						foreach (KeyValuePair<string, Token> kvp in token.CustomRegistry)
-						{
-							Register(kvp.Key, kvp.Value, priority);
-							Logger.Log(LogLevel.Debug, "register", 
-								"Token registered: " + kvp.Key + " = " + kvp.Value.ToString());
-						}
+						continue;
 					}
-					else
+
+					if (t.IsAbstract)
 					{
-						Register(att.TokenName, token, priority);
-						Logger.Log(LogLevel.Debug, "register", "Token registered: " + 
-							att.TokenName + " = " + token.ToString());
+						continue;
+					}
+
+					MakeTokenAttribute att = t.GetCustomAttributes<MakeTokenAttribute>().FirstOrDefault();
+					if (att != null)
+					{
+						Token token = Activator.CreateInstance(t) as Token;
+						int priority = token.LexerPriority;
+						if (att.Custom)
+						{
+							foreach (KeyValuePair<string, Token> kvp in token.CustomRegistry)
+							{
+								Register(kvp.Key, kvp.Value, priority);
+								Logger.Log(LogLevel.Debug, "register",
+									"Token registered: " + kvp.Key + " = " + kvp.Value.ToString());
+							}
+						}
+						else
+						{
+							Register(att.TokenName, token, priority);
+							Logger.Log(LogLevel.Debug, "register", "Token registered: " +
+								att.TokenName + " = " + token.ToString());
+						}
 					}
 				}
 			}
