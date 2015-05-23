@@ -32,26 +32,26 @@ namespace MathParser.ParseTree
 				switch (lex.Type)
 				{
 				case TokenType.Operator:
-					Logger.Log(LogLevel.Debug, "sequencer",
+					Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 						"Found operator: " + lex.ToString());
 					OperatorShuffle(operatorStack, outputQueue, lex);
 					continue;
 				case TokenType.Literal:
-					Logger.Log(LogLevel.Debug, "sequencer",
+					Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 						"Moving to output queue: " + lex.ToString());
 					outputQueue.Enqueue(lex);
 					continue;
 				case TokenType.Name:
 					if (IsFunctionValid(lex.Lexed)) // its a function
 					{
-						Logger.Log(LogLevel.Debug, "sequencer",
+						Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 							"Moving to output queue: " + lex.ToString());
 						operatorStack.Push(lex);
 						continue;
 					}
 					else
 					{
-						Logger.Log(LogLevel.Error, "sequencer", 
+						Logger.Log(LogLevel.Error, Logger.SEQUENCER, 
 							"Custom identifiers are not supported yet.");
 						continue;
 					}
@@ -62,7 +62,7 @@ namespace MathParser.ParseTree
 						while (operatorStack.Peek().Token != Token.ParenthesisIn)
 						{
 							Lexeme l = operatorStack.Pop();
-							Logger.Log(LogLevel.Debug, "sequencer",
+							Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 								"Popping operator to output queue: " + l.ToString());
 							outputQueue.Enqueue(l);
 						}
@@ -70,7 +70,7 @@ namespace MathParser.ParseTree
 					}
 					catch (InvalidOperationException)
 					{
-						Logger.Log(LogLevel.Fatal, "sequencer", "Impossible Token Type.");
+						Logger.Log(LogLevel.Fatal, Logger.SEQUENCER, "Impossible Token Type.");
 						throw new Exception("Mismatched Parentheses.");
 					}
 					#endregion
@@ -78,26 +78,26 @@ namespace MathParser.ParseTree
 					#region Encloser
 					if (lex.Token == Token.ParenthesisIn)
 					{
-						Logger.Log(LogLevel.Debug, "sequencer",
+						Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 							"Moving entry parenthesis to operator stack.");
 						operatorStack.Push(lex);
 						continue;
 					}
 					else if (lex.Token == Token.ParenthesisOut)
 					{
-						Logger.Log(LogLevel.Debug, "sequencer",
+						Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 							"Found exit parenthesis. Finishing parenthesis pair.");
 						FinishParentheses(operatorStack, outputQueue);
 					}
 					break;
 					#endregion
 				case TokenType.Ignored:
-					Logger.Log(LogLevel.Debug, "sequencer",
+					Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 						"Foud ignored token. Discarding " + lex.ToString());
 					// NEXT!
 					continue;
 				default:
-					Logger.Log(LogLevel.Fatal, "sequencer", "Impossible Token Type.");
+					Logger.Log(LogLevel.Fatal, Logger.SEQUENCER, "Impossible Token Type.");
 					throw new Exception("Impossible Token Type.");
 				}
 			}
@@ -105,11 +105,11 @@ namespace MathParser.ParseTree
 			while (operatorStack.Count > 0)
 			{
 				Lexeme l = operatorStack.Pop();
-				Logger.Log(LogLevel.Debug, "sequencer",
+				Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 					"Popping operator to output queue: " + l.ToString());
 				if (l.Token == Token.ParenthesisIn)
 				{
-					Logger.Log(LogLevel.Error, "sequencer", "Mismatched parentheses.");
+					Logger.Log(LogLevel.Error, Logger.SEQUENCER, "Mismatched parentheses.");
 				}
 
 				outputQueue.Enqueue(l);
@@ -122,7 +122,7 @@ namespace MathParser.ParseTree
 				seq += l.ToString() + "\n\t";
 			}
 			seq = seq.Trim();
-			Logger.Log(LogLevel.Debug, "sequencer", seq);
+			Logger.Log(LogLevel.Debug, Logger.SEQUENCER, seq);
 
 			Stack<NodeFactor> arguments = new Stack<NodeFactor>();
 			
@@ -135,7 +135,7 @@ namespace MathParser.ParseTree
 				{
 					string lit = lex.Lexed;
 					TokenLiteral toklit = lex.Token as TokenLiteral;
-					Logger.Log(LogLevel.Debug, "parser",
+					Logger.Log(LogLevel.Debug, Logger.PARSER,
 						"Creating literal node from value: " + lex.ToString());
 					arguments.Push(toklit.MakeNode(lit));
 					continue;
@@ -145,7 +145,7 @@ namespace MathParser.ParseTree
 					TokenOperator op = lex.Token as TokenOperator;
 					if (arguments.Count < op.ArgumentCount)
 					{
-						Logger.Log(LogLevel.Error, "parser", "Too many arguments for token " + op.ToString());
+						Logger.Log(LogLevel.Error, Logger.PARSER, "Too many arguments for token " + op.ToString());
 					}
 
 					List<NodeFactor> argsTaken = new List<NodeFactor>();
@@ -156,7 +156,7 @@ namespace MathParser.ParseTree
 					}
 					argsTaken.Reverse();
 
-					Logger.Log(LogLevel.Debug, "parser",
+					Logger.Log(LogLevel.Debug, Logger.PARSER,
 						"Creating operator node from token: " + lex.ToString());
 					NodeFactor branch = MakeOperator(argsTaken, op);
 					arguments.Push(branch);
@@ -168,7 +168,7 @@ namespace MathParser.ParseTree
 					FunctionInfo fInfo = MathFunctions.GetFunction(name);
 					if (fInfo == null)
 					{
-						Logger.Log(LogLevel.Error, "parser", "No such function: " + name + "(...)");
+						Logger.Log(LogLevel.Error, Logger.PARSER, "No such function: " + name + "(...)");
 						throw new MissingMethodException("No such function: " + name + "(...)");
 					}
 
@@ -180,7 +180,7 @@ namespace MathParser.ParseTree
 					}
 					argsTaken.Reverse();
 
-					Logger.Log(LogLevel.Debug, "parser",
+					Logger.Log(LogLevel.Debug, Logger.PARSER,
 						"Creating function node from token: " + lex.ToString());
 					NodeFactor branch = new NodeFunction(fInfo, argsTaken.ToArray());
 					arguments.Push(branch);
@@ -193,7 +193,7 @@ namespace MathParser.ParseTree
 				throw new Exception("This should never happen.");
 			}
 
-			Logger.Log(LogLevel.Debug, "parser", "Stringified form of parse tree: " + root.ToString());
+			Logger.Log(LogLevel.Debug, Logger.PARSER, "Stringified form of parse tree: " + root.ToString());
 
 			ParseTree = root;
 			#endregion
@@ -212,14 +212,14 @@ namespace MathParser.ParseTree
 				while (operatorStack.Peek().Token != Token.ParenthesisIn)
 				{
 					Lexeme l = operatorStack.Pop();
-					Logger.Log(LogLevel.Debug, "sequencer",
+					Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 						"Popping operator into output queue: " + l.ToString());
 					outputQueue.Enqueue(l);
 				}
 			}
 			catch (InvalidOperationException)
 			{
-				Logger.Log(LogLevel.Fatal, "sequencer", "Mismatched Parentheses Found.");
+				Logger.Log(LogLevel.Fatal, Logger.SEQUENCER, "Mismatched Parentheses Found.");
 				throw new Exception("Mismatched Parentheses.");
 			}
 			Lexeme parin = operatorStack.Pop();
@@ -228,7 +228,7 @@ namespace MathParser.ParseTree
 				if (operatorStack.Peek().Type == TokenType.Name) // function
 				{
 					Lexeme func = operatorStack.Pop();
-					Logger.Log(LogLevel.Debug, "sequencer",
+					Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 						"Popping function name into output queue: " + func.ToString());
 					outputQueue.Enqueue(func);
 				}
@@ -259,18 +259,18 @@ namespace MathParser.ParseTree
 				
 				if (!((leftAssociative && leftWorks) || (!leftAssociative && rightWorks)))
 				{
-					Logger.Log(LogLevel.Debug, "sequencer",
+					Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 						"Done popping higher-precedence operators to output queue.");
 					break;
 				}
 
 				l2 = operatorStack.Pop();
-				Logger.Log(LogLevel.Debug, "sequencer",
+				Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 					"Popping higher-precedence operator to output queue: " + l2.ToString());
 				outputQueue.Enqueue(l2);
 			}
 
-			Logger.Log(LogLevel.Debug, "sequencer",
+			Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 				"Pushing low-precedence operator onto stack: " + current.ToString());
 			operatorStack.Push(current);
 		}

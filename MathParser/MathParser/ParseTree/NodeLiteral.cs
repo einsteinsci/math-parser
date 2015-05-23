@@ -33,7 +33,7 @@ namespace MathParser.ParseTree
 
 		public override string ToString()
 		{
-			return Value.ToString();
+			return Value.ToDisplay();
 		}
 	}
 }

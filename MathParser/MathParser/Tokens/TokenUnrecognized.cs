@@ -9,9 +9,6 @@ namespace MathParser.Tokens
 	[MakeToken("unrecognized")]
 	public sealed class TokenUnrecognized : Token
 	{
-		public override bool SingleChar
-		{ get { return false; } }
-
 		public override int LexerPriority
 		{ get { return int.MaxValue; } }
 

@@ -9,9 +9,6 @@ namespace MathParser.Tokens
 	[MakeToken("comma")]
 	public class TokenComma : Token
 	{
-		public override bool SingleChar
-		{ get { return true; } }
-
 		public override int LexerPriority
 		{ get { return TokenOperator.PRIORITY; } }
 

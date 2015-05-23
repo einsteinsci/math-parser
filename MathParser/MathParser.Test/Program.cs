@@ -28,7 +28,7 @@ namespace MathParser.Test
 			IResultValue res = Evaluator.Evaluate(input);
 			
 			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine("Evaluated: " + input + " = " + res.ToString());
+			Console.WriteLine("\nEvaluated: " + input + " = " + res.ToDisplay());
 
 			Console.ReadKey(true);
 		}

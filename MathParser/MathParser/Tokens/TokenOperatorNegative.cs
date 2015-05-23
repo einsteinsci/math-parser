@@ -16,9 +16,6 @@ namespace MathParser.Tokens
 		public override int Precedence
 		{ get { return PREC_UNARY; } }
 
-		public override bool SingleChar
-		{ get { return true; } }
-
 		public override int ArgumentCount
 		{ get { return 1; } }
 

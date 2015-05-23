@@ -10,9 +10,6 @@ namespace MathParser.Tokens
 	[MakeToken("string")]
 	public class TokenString : TokenLiteral
 	{
-		public override bool SingleChar
-		{ get { return false; } }
-
 		public override bool Matches(string lexeme)
 		{
 			return lexeme.StartsWith("\"") && lexeme.EndsWith("\"") && lexeme.Length > 2;

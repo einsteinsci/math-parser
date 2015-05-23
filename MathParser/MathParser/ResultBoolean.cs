@@ -3,55 +3,54 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using MathPlusLib;
 
 namespace MathParser
 {
-	public sealed class ResultNumberReal : IResultValue
+	public class ResultBoolean : IResultValue
 	{
-		public MathType Type
-		{ get { return MathType.Real; } }
-
 		public object CoreValue
 		{ get { return Value; } }
 
-		public double Value
+		public bool Value
 		{ get; set; }
 
-		public ResultNumberReal(double d)
-		{
-			Value = d;
-		}
+		public MathType Type
+		{ get { return MathType.Boolean; } }
 
-		public double ToDouble()
+		public ResultBoolean(bool value)
 		{
-			return Value;
-		}
-
-		public long ToInteger()
-		{
-			return (long)Value;
-		}
-
-		public bool ToBoolean()
-		{
-			return ToInteger() == 0 ? false : true;
-		}
-
-		public MathMatrix ToMatrix()
-		{
-			return new MathMatrix(new double[,] { { Value } });
+			Value = value;
 		}
 
 		public string ToDisplay()
 		{
-			return Value.ToString();
+			return ToString();
+		}
+
+		public double ToDouble()
+		{
+			return (double)ToInteger();
+		}
+
+		public long ToInteger()
+		{
+			return Value ? 1 : 0;
+		}
+
+		public bool ToBoolean()
+		{
+			return Value;
+		}
+
+		public MathMatrix ToMatrix()
+		{
+			return new MathMatrix(new double[,] { { ToDouble() } });
 		}
 
 		public override string ToString()
 		{
-			return Value.ToString();
+			return Value ? "true" : "false";
 		}
 	}
 }

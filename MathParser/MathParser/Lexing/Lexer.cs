@@ -65,20 +65,28 @@ namespace MathParser.Lexing
 				if (validNext.Count > 0)
 				{
 					lexeme += c;
+					if (!lexeme.StartsWith("\""))
+					{
+						lexeme = lexeme.Trim();
+					}
 					continue;
 				}
 
-				if (validCurrent.Count == 0 && !lexeme.StartsWith("\""))
+				if (validCurrent.Count == 0)
 				{
-					Logger.Log(LogLevel.Warning, "lexer", 
+					Logger.Log(LogLevel.Warning, Logger.LEXER, 
 						"No last-choice Tokens. Waiting on " + lexeme);
 					lexeme += c;
+					if (!lexeme.StartsWith("\""))
+					{
+						lexeme = lexeme.Trim();
+					}
 					continue;
 				}
 
 				if (validCurrent.Count > 1)
 				{
-					Logger.Log(LogLevel.Warning, "lexer",
+					Logger.Log(LogLevel.Warning, Logger.LEXER,
 						"Multiple last-choice Tokens:  " +
 						TokensToString(validCurrent));
 				}
@@ -91,13 +99,13 @@ namespace MathParser.Lexing
 
 			if (validCurrent_.Count == 0)
 			{
-				Logger.Log(LogLevel.Error, "lexer", 
+				Logger.Log(LogLevel.Error, Logger.LEXER, 
 					"No last-choice Tokens. Disposing " + lexeme);
 			}
 
 			if (validCurrent_.Count > 2) // excluding unrecognized
 			{
-				Logger.Log(LogLevel.Warning, "lexer",
+				Logger.Log(LogLevel.Warning, Logger.LEXER,
 					"Multiple last-choice Tokens:  " +
 					TokensToString(validCurrent_));
 			}
@@ -116,7 +124,7 @@ namespace MathParser.Lexing
 				{
 					if (i == 0) // first
 					{
-						Logger.Log(LogLevel.Debug, "lexer",
+						Logger.Log(LogLevel.Debug, Logger.LEXER,
 							"Converting minus (index " + i.ToString() + ") to negative.");
 						l.Token = Token.OperatorNegative;
 						continue;
@@ -139,7 +147,7 @@ namespace MathParser.Lexing
 						{
 							// minus is first meaningful token
 							l.Token = Token.OperatorNegative;
-							Logger.Log(LogLevel.Debug, "lexer",
+							Logger.Log(LogLevel.Debug, Logger.LEXER,
 								"Converting minus (index " + i.ToString() + ") to negative.");
 							continue;
 						}
@@ -151,7 +159,7 @@ namespace MathParser.Lexing
 						if (encl.Side == EncloserSide.Opening)
 						{
 							l.Token = Token.OperatorNegative;
-							Logger.Log(LogLevel.Debug, "lexer",
+							Logger.Log(LogLevel.Debug, Logger.LEXER,
 								"Converting minus (index " + i.ToString() + ") to negative.");
 							continue;
 						}
@@ -159,14 +167,14 @@ namespace MathParser.Lexing
 					else if (prev.Token.Type == TokenType.Delimiter)
 					{
 						l.Token = Token.OperatorNegative;
-						Logger.Log(LogLevel.Debug, "lexer",
+						Logger.Log(LogLevel.Debug, Logger.LEXER,
 							"Converting minus (index " + i.ToString() + ") to negative.");
 						continue;
 					}
 					else if (prev.Token.Type == TokenType.Operator)
 					{
 						l.Token = Token.OperatorNegative;
-						Logger.Log(LogLevel.Debug, "lexer",
+						Logger.Log(LogLevel.Debug, Logger.LEXER,
 							"Converting minus (index " + i.ToString() + ") to negative.");
 						continue;
 					}
@@ -180,7 +188,7 @@ namespace MathParser.Lexing
 				info += l.ToString() + "\n\t";
 			}
 			info = info.Trim();
-			Logger.Log(LogLevel.Debug, "lexer",
+			Logger.Log(LogLevel.Debug, Logger.LEXER,
 				"Lexing complete:\n\t" + info);
 		}
 
@@ -188,13 +196,14 @@ namespace MathParser.Lexing
 		{
 			if (token == null)
 			{
-				Logger.Log(LogLevel.Error, "lexer", 
+				Logger.Log(LogLevel.Error, Logger.LEXER, 
 					"Token is null. Filling with Unrecognized.");
 				Lexed.Add(new Lexeme(Token.Unrecognized, lexeme));
+				System.Diagnostics.Debugger.Break();
 				return;
 			}
 
-			Logger.Log(LogLevel.Debug, "lexer",
+			Logger.Log(LogLevel.Debug, Logger.LEXER,
 				"Finalizing Token " + token.ToString() + " for lexeme: " + lexeme);
 			Lexed.Add(new Lexeme(token, lexeme));
 		}

@@ -11,9 +11,7 @@ namespace MathParser.ParseTree
 	public class NodeOperatorDivide : NodeOperatorBinary
 	{
 		public override Token Operator
-		{
-			get { return Token.OperatorDivide; }
-		}
+		{ get { return Token.OperatorDivide; } }
 
 		public override MathType Type
 		{ get { return MathType.Real; } }

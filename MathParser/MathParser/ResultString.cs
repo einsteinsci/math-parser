@@ -33,14 +33,24 @@ namespace MathParser
 			return long.Parse(Value);
 		}
 
+		public bool ToBoolean()
+		{
+			return ToInteger() == 0 ? false : true;
+		}
+
 		public MathMatrix ToMatrix()
 		{
 			return new MathMatrix(new double[,] { { ToDouble() } });
 		}
 
-		public override string ToString()
+		public string ToDisplay()
 		{
 			return "\"" + Value + "\"";
+		}
+
+		public override string ToString()
+		{
+			return Value;
 		}
 	}
 }

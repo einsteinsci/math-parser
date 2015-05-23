@@ -19,6 +19,11 @@ namespace MathParser
 	{
 		public static event Action<LogLevel, string> OnLog;
 
+		public const string LEXER = "lexer";
+		public const string SEQUENCER = "sequencer";
+		public const string PARSER = "parser";
+		public const string EVALUATOR = "evaluator";
+
 		public static bool DebugLogging
 		{ get; set; }
 

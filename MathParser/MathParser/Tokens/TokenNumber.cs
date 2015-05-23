@@ -12,9 +12,6 @@ namespace MathParser.Tokens
 	[MakeToken("number")]
 	public sealed class TokenNumber : TokenLiteral
 	{
-		public override bool SingleChar
-		{ get { return false; } }
-
 		public override bool Matches(string lexeme)
 		{
 			// no european types here

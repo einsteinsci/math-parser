@@ -31,9 +31,6 @@ namespace MathParser.Tokens
 		public abstract string Closer
 		{ get; }
 
-		public override bool SingleChar
-		{ get { return true; } }
-
 		public override TokenType Type
 		{ get { return TokenType.Encloser; } }
 

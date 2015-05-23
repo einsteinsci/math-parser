@@ -9,9 +9,6 @@ namespace MathParser.Tokens
 	[MakeToken("comment")]
 	public class TokenComment : Token
 	{
-		public override bool SingleChar
-		{ get { return false; } }
-
 		public override int LexerPriority
 		{ get { return 1; } }
 

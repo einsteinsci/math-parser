@@ -12,6 +12,7 @@ namespace MathParser
 		Real = 0,
 		Integer,
 		String,
+		Boolean,
 		Matrix
 	}
 
@@ -25,6 +26,8 @@ namespace MathParser
 
 		double ToDouble();
 		long ToInteger();
+		bool ToBoolean();
 		MathMatrix ToMatrix();
+		string ToDisplay();
 	}
 }

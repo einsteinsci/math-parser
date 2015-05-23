@@ -7,21 +7,18 @@ using MathParser.ParseTree;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("operatorExponent")]
-	public class TokenOperatorExponent : TokenOperator
+	[MakeToken("operatorConditionalAnd")]
+	public class TokenOperatorConditionalAnd : TokenOperator
 	{
 		public override string Operator
-		{ get { return "^"; } }
+		{ get { return "&&"; } }
 
 		public override int Precedence
-		{ get { return PREC_EXPONENTIAL; } }
-
-		public override bool IsRightAssociative
-		{ get { return true; } }
+		{ get { return PREC_CONDITIONAL_AND; } }
 
 		public override NodeFactor MakeFactor(NodeFactor[] args)
 		{
-			return new NodeOperatorExponent(args[0], args[1]);
+			return new NodeOperatorConditionalAnd(args[0], args[1]);
 		}
 	}
 }

@@ -16,9 +16,6 @@ namespace MathParser.Tokens
 		public override int Precedence
 		{ get { return PREC_MULTIPLICATIVE; } }
 
-		public override bool SingleChar
-		{ get { return true; } }
-
 		public override NodeFactor MakeFactor(NodeFactor[] args)
 		{
 			return new NodeOperatorModulus(args[0], args[1]);

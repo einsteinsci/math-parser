@@ -11,11 +11,6 @@ namespace MathParser.Tokens
 	[MakeToken("identifier")]
 	public class TokenIdentifier : Token
 	{
-		public override bool SingleChar
-		{
-			get { return false; }
-		}
-
 		public override int LexerPriority
 		{ get { return 6; } }
 

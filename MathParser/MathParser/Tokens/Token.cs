@@ -20,9 +20,6 @@ namespace MathParser.Tokens
 
 	public abstract class Token
 	{
-		public abstract bool SingleChar
-		{ get; }
-
 		public abstract bool Matches(string lexeme);
 
 		public abstract TokenType Type
@@ -57,7 +54,12 @@ namespace MathParser.Tokens
 		public static Token OperatorNegative		{ get { return TokenRegistry.Get("operatorNegative"); } }
 		public static Token OperatorFactorial		{ get { return TokenRegistry.Get("operatorFactorial"); } }
 
+		public static Token OperatorConditionalAnd	{ get { return TokenRegistry.Get("operatorConditionalAnd"); } }
+		public static Token OperatorConditionalOr	{ get { return TokenRegistry.Get("operatorConditionalOr"); } }
+
 		public static Token Number					{ get { return TokenRegistry.Get("number"); } }
+		public static Token String					{ get { return TokenRegistry.Get("string"); } }
+		public static Token Boolean					{ get { return TokenRegistry.Get("boolean"); } }
 
 		public static Token Unrecognized			{ get { return TokenRegistry.Get("unrecognized"); } }
 	}

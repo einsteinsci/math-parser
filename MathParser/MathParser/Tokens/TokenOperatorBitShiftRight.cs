@@ -16,9 +16,6 @@ namespace MathParser.Tokens
 		public override int Precedence
 		{ get { return PREC_BITSHIFT; } }
 
-		public override bool SingleChar
-		{ get { return false; } }
-
 		public override NodeFactor MakeFactor(NodeFactor[] args)
 		{
 			return new NodeOperatorBitShiftRight(args[0], args[1]);

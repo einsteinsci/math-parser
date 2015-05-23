@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MathPlusLib.Desktop">
-      <HintPath>..\..\..\..\MathPlusLib.Desktop.dll</HintPath>
+      <HintPath>..\ref\MathPlusLib.Desktop.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
@@ -57,9 +57,13 @@
     <Compile Include="ParseTree\NodeFunction.cs" />
     <Compile Include="ParseTree\NodeOperatorBitShiftLeft.cs" />
     <Compile Include="ParseTree\NodeOperatorBitShiftRight.cs" />
+    <Compile Include="ParseTree\NodeOperatorConcatenate.cs" />
+    <Compile Include="ParseTree\NodeOperatorConditionalAnd.cs" />
+    <Compile Include="ParseTree\NodeOperatorConditionalOr.cs" />
     <Compile Include="ParseTree\NodeOperatorFactorial.cs" />
     <Compile Include="ParseTree\NodeOperatorNegative.cs" />
     <Compile Include="ParseTree\NodeOperatorUnary.cs" />
+    <Compile Include="ResultBoolean.cs" />
     <Compile Include="ResultNumberInteger.cs" />
     <Compile Include="ResultNumberReal.cs" />
     <Compile Include="ResultString.cs" />
@@ -81,12 +85,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tokens\Token.cs" />
     <Compile Include="Tokens\MakeTokenAttribute.cs" />
+    <Compile Include="Tokens\TokenBoolean.cs" />
     <Compile Include="Tokens\TokenBrace.cs" />
     <Compile Include="Tokens\TokenBracket.cs" />
     <Compile Include="Tokens\TokenComma.cs" />
     <Compile Include="Tokens\TokenComment.cs" />
     <Compile Include="Tokens\TokenIdentifier.cs" />
     <Compile Include="Tokens\TokenLiteral.cs" />
+    <Compile Include="Tokens\TokenOperatorConditionalAnd.cs" />
+    <Compile Include="Tokens\TokenOperatorConditionalOr.cs" />
     <Compile Include="Tokens\TokenOperatorFactorial.cs" />
     <Compile Include="Tokens\TokenOperatorNegative.cs" />
     <Compile Include="Tokens\TokenOperatorBitShiftLeft.cs" />

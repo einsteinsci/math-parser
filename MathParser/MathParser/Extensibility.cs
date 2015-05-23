@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.IO;
 
 namespace MathParser
 {
@@ -26,6 +27,33 @@ namespace MathParser
 		static Extensibility()
 		{
 			LoadedExtensions = new List<Assembly>();
+		}
+
+		public static void AddAllAssembliesInPath(string folderPath)
+		{
+			DirectoryInfo di = new DirectoryInfo(folderPath);
+			FileInfo[] files = di.GetFiles("*", SearchOption.TopDirectoryOnly);
+
+			foreach (FileInfo file in files)
+			{
+				try
+				{
+					Assembly assem = Assembly.LoadFile(file.FullName);
+					LoadedExtensions.Add(assem);
+				}
+				catch (FileLoadException)
+				{
+					continue;
+				}
+				catch (FileNotFoundException)
+				{
+					continue;
+				}
+				catch (BadImageFormatException)
+				{
+					continue;
+				}
+			}
 		}
 	}
 }

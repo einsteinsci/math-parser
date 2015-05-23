@@ -13,8 +13,8 @@ namespace MathParser.Tokens
 
 		//public const int PREC_ASSIGNMENT = 0;
 		//public const int PREC_CONDITIONAL_TERNARY = 1;
-		//public const int PREC_CONDITIONAL_OR = 2;
-		//public const int PREC_CONDITIONAL_AND = 3;
+		public const int PREC_CONDITIONAL_OR = 2;
+		public const int PREC_CONDITIONAL_AND = 3;
 		//public const int PREC_LOGICAL_OR = 4;
 		//public const int PREC_LOGICAL_XOR = 5;
 		//public const int PREC_LOGICAL_AND = 6;

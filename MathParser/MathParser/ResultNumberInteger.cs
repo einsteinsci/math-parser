@@ -18,6 +18,15 @@ namespace MathParser
 		public long Value
 		{ get; set; }
 
+		public ResultNumberInteger(long value)
+		{
+			Value = value;
+		}
+		public ResultNumberInteger(int value)
+		{
+			Value = value;
+		}
+
 		public double ToDouble()
 		{
 			return (double)Value;
@@ -28,18 +37,19 @@ namespace MathParser
 			return Value;
 		}
 
-		public ResultNumberInteger(long value)
+		public bool ToBoolean()
 		{
-			Value = value;
-		}
-		public ResultNumberInteger(int value)
-		{
-			Value = value;
+			return ToInteger() == 0 ? false : true;
 		}
 
 		public MathMatrix ToMatrix()
 		{
 			return new MathMatrix(new double[,] { { Value } });
+		}
+
+		public string ToDisplay()
+		{
+			return Value.ToString();
 		}
 
 		public override string ToString()

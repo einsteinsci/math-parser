@@ -50,6 +50,10 @@ namespace MathParser.ParseTree
 			{
 				ReturnType = MathType.String;
 			}
+			else if (ret == typeof(bool))
+			{
+				ReturnType = MathType.Boolean;
+			}
 			else if (ret == typeof(MathMatrix))
 			{
 				ReturnType = MathType.Matrix;
@@ -75,6 +79,10 @@ namespace MathParser.ParseTree
 				else if (t == typeof(string))
 				{
 					ArgumentTypes.Add(MathType.String);
+				}
+				else if (t == typeof(bool))
+				{
+					ArgumentTypes.Add(MathType.Boolean);
 				}
 				else if (t == typeof(MathMatrix))
 				{
@@ -111,6 +119,9 @@ namespace MathParser.ParseTree
 				case MathType.String:
 					argvals[i] = args[i].ToString();
 					continue;
+				case MathType.Boolean:
+					argvals[i] = args[i].ToBoolean();
+					continue;
 				case MathType.Matrix:
 					argvals[i] = args[i].ToMatrix();
 					continue;
@@ -122,13 +133,21 @@ namespace MathParser.ParseTree
 			}
 
 			object res = Function.DynamicInvoke(argvals);
-			if (res is double)
+			if (res is double || res is float)
 			{
 				return new ResultNumberReal((double)res);
+			}
+			if (res is long || res is int || res is short)
+			{
+				return new ResultNumberInteger((long)res);
 			}
 			else if (res is string)
 			{
 				return new ResultString((string)res);
+			}
+			else if (res is bool)
+			{
+				return new ResultBoolean((bool)res);
 			}
 			else if (res is MathMatrix)
 			{
