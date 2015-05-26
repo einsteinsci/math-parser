@@ -24,6 +24,9 @@ namespace MathParser.ParseTree
 			Stack<Lexeme> operatorStack = new Stack<Lexeme>();
 			Queue<Lexeme> outputQueue = new Queue<Lexeme>();
 
+			bool isInList = false;
+			int listSize = 0;
+
 			#region sequencing
 			for (int index = 0; index < Input.Count; index++)
 			{
@@ -32,16 +35,31 @@ namespace MathParser.ParseTree
 				switch (lex.Type)
 				{
 				case TokenType.Operator:
+					if (isInList && IsTopLevelBrace(operatorStack) && listSize == 0)
+					{
+						listSize++;
+					}
+
 					Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 						"Found operator: " + lex.ToString());
 					OperatorShuffle(operatorStack, outputQueue, lex);
 					continue;
 				case TokenType.Literal:
+					if (isInList && IsTopLevelBrace(operatorStack) && listSize == 0)
+					{
+						listSize++;
+					}
+
 					Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 						"Moving to output queue: " + lex.ToString());
 					outputQueue.Enqueue(lex);
 					continue;
 				case TokenType.Name:
+					if (isInList && IsTopLevelBrace(operatorStack) && listSize == 0)
+					{
+						listSize++;
+					}
+
 					if (IsFunctionValid(lex.Lexed)) // its a function
 					{
 						Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
@@ -58,6 +76,11 @@ namespace MathParser.ParseTree
 					}
 				case TokenType.Delimiter:
 					#region Delimiter
+					if (isInList && IsTopLevelBrace(operatorStack))
+					{
+						// HERE
+					}
+
 					try
 					{
 						while (operatorStack.Peek().Token != Token.ParenthesisIn)
@@ -90,11 +113,27 @@ namespace MathParser.ParseTree
 							"Found exit parenthesis. Finishing parenthesis pair.");
 						FinishParentheses(operatorStack, outputQueue);
 					}
+					else if (lex.Token == Token.BraceIn) // list
+					{
+						Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
+							"Found entry brace. Entering list mode.");
+						isInList = true;
+						continue;
+					}
+					else if (lex.Token == Token.BraceOut) // end list
+					{
+						Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
+							"Found exit brace. Finishing brace group.");
+						isInList = false;
+						listSize = 0;
+						FinishBraces(operatorStack, outputQueue, listSize);
+						// HERE
+					}
 					break;
 					#endregion
 				case TokenType.Ignored:
 					Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
-						"Foud ignored token. Discarding " + lex.ToString());
+						"Found ignored token. Discarding " + lex.ToString());
 					// NEXT!
 					continue;
 				default:
@@ -246,6 +285,12 @@ namespace MathParser.ParseTree
 			}
 		}
 
+		public static void FinishBraces(Stack<Lexeme> operatorStack,
+			Queue<Lexeme> outputQueue, int listSize)
+		{
+
+		}
+
 		public static void OperatorShuffle(Stack<Lexeme> operatorStack, 
 			Queue<Lexeme> outputQueue, Lexeme current)
 		{
@@ -284,6 +329,23 @@ namespace MathParser.ParseTree
 			Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 				"Pushing low-precedence operator onto stack: " + current.ToString());
 			operatorStack.Push(current);
+		}
+
+		public static bool IsTopLevelBrace(Stack<Lexeme> operatorStack)
+		{
+			foreach (Lexeme lex in operatorStack)
+			{
+				if (lex.Token is TokenParenthesis)
+				{
+					return false;
+				}
+				else if (lex.Token is TokenBrace)
+				{
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		public static bool IsFunctionValid(string func)
