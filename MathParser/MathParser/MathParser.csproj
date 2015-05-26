@@ -55,6 +55,8 @@
     <Compile Include="ParseTree\MathFunctions.cs" />
     <Compile Include="ParseTree\NodeFactor.cs" />
     <Compile Include="ParseTree\NodeFunction.cs" />
+    <Compile Include="ParseTree\NodeIdentifier.cs" />
+    <Compile Include="ParseTree\NodeOperatorAssigment.cs" />
     <Compile Include="ParseTree\NodeOperatorBitShiftLeft.cs" />
     <Compile Include="ParseTree\NodeOperatorBitShiftRight.cs" />
     <Compile Include="ParseTree\NodeOperatorConcatenate.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="ParseTree\NodeOperatorNotEqual.cs" />
     <Compile Include="ParseTree\NodeOperatorUnary.cs" />
     <Compile Include="ResultBoolean.cs" />
+    <Compile Include="ResultList.cs" />
     <Compile Include="ResultNumberInteger.cs" />
     <Compile Include="ResultNumberReal.cs" />
     <Compile Include="ResultString.cs" />
@@ -99,6 +102,7 @@
     <Compile Include="Tokens\TokenComment.cs" />
     <Compile Include="Tokens\TokenIdentifier.cs" />
     <Compile Include="Tokens\TokenLiteral.cs" />
+    <Compile Include="Tokens\TokenOperatorAssignment.cs" />
     <Compile Include="Tokens\TokenOperatorConditionalAnd.cs" />
     <Compile Include="Tokens\TokenOperatorConditionalOr.cs" />
     <Compile Include="Tokens\TokenOperatorEqual.cs" />
@@ -125,6 +129,7 @@
     <Compile Include="Tokens\TokenRegistry.cs" />
     <Compile Include="Tokens\TokenString.cs" />
     <Compile Include="Tokens\TokenUnrecognized.cs" />
+    <Compile Include="VariableRegistry.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

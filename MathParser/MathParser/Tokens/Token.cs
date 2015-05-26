@@ -65,6 +65,8 @@ namespace MathParser.Tokens
 		public static Token OperatorGreaterThanOrEqual		{ get { return TokenRegistry.Get("operatorGreaterThanOrEqual"); } }
 		public static Token OperatorLessThanOrEqual			{ get { return TokenRegistry.Get("operatorLessThanOrEqual"); } }
 
+		public static Token OperatorAssignment		{ get { return TokenRegistry.Get("operatorAssigment"); } }
+
 		public static Token Number					{ get { return TokenRegistry.Get("number"); } }
 		public static Token String					{ get { return TokenRegistry.Get("string"); } }
 		public static Token Boolean					{ get { return TokenRegistry.Get("boolean"); } }

@@ -45,14 +45,15 @@ namespace MathParser.ParseTree
 					if (IsFunctionValid(lex.Lexed)) // its a function
 					{
 						Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
-							"Moving to output queue: " + lex.ToString());
+							"Pushing to operator stack: " + lex.ToString());
 						operatorStack.Push(lex);
 						continue;
 					}
 					else
 					{
-						Logger.Log(LogLevel.Error, Logger.SEQUENCER, 
-							"Custom identifiers are not supported yet.");
+						Logger.Log(LogLevel.Debug, Logger.SEQUENCER, 
+							"Moving to output queue: " + lex.ToString());
+						outputQueue.Enqueue(lex);
 						continue;
 					}
 				case TokenType.Delimiter:
@@ -165,25 +166,35 @@ namespace MathParser.ParseTree
 				{
 					TokenIdentifier id = lex.Token as TokenIdentifier;
 					string name = lex.Lexed;
-					FunctionInfo fInfo = MathFunctions.GetFunction(name);
-					if (fInfo == null)
-					{
-						Logger.Log(LogLevel.Error, Logger.PARSER, "No such function: " + name + "(...)");
-						throw new MissingMethodException("No such function: " + name + "(...)");
-					}
 
-					List<NodeFactor> argsTaken = new List<NodeFactor>();
-					for (int i = 0; i < fInfo.ArgumentCount; i++)
+					if (MathFunctions.GetFunction(name) == null)
 					{
-						NodeFactor arg = arguments.Pop();
-						argsTaken.Add(arg);
+						Logger.Log(LogLevel.Debug, Logger.PARSER,
+							"Creating identifier node from variable: " + name);
+						arguments.Push(new NodeIdentifier(name));
 					}
-					argsTaken.Reverse();
+					else
+					{
+						FunctionInfo fInfo = MathFunctions.GetFunction(name);
+						//if (fInfo == null)
+						//{
+						//	Logger.Log(LogLevel.Error, Logger.PARSER, "No such function: " + name + "(...)");
+						//	throw new MissingMethodException("No such function: " + name + "(...)");
+						//}
 
-					Logger.Log(LogLevel.Debug, Logger.PARSER,
-						"Creating function node from token: " + lex.ToString());
-					NodeFactor branch = new NodeFunction(fInfo, argsTaken.ToArray());
-					arguments.Push(branch);
+						List<NodeFactor> argsTaken = new List<NodeFactor>();
+						for (int i = 0; i < fInfo.ArgumentCount; i++)
+						{
+							NodeFactor arg = arguments.Pop();
+							argsTaken.Add(arg);
+						}
+						argsTaken.Reverse();
+
+						Logger.Log(LogLevel.Debug, Logger.PARSER,
+							"Creating function node from token: " + lex.ToString());
+						NodeFactor branch = new NodeFunction(fInfo, argsTaken.ToArray());
+						arguments.Push(branch);
+					}
 				}
 			}
 

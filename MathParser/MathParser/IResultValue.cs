@@ -13,6 +13,7 @@ namespace MathParser
 		Integer,
 		String,
 		Boolean,
+		List,
 		Matrix
 	}
 
@@ -28,6 +29,7 @@ namespace MathParser
 		long ToInteger();
 		bool ToBoolean();
 		MathMatrix ToMatrix();
+		List<double> ToList();
 		string ToDisplay();
 	}
 }

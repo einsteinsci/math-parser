@@ -43,6 +43,11 @@ namespace MathParser
 			return Value;
 		}
 
+		public List<double> ToList()
+		{
+			return new List<double>() { ToDouble() };
+		}
+
 		public MathMatrix ToMatrix()
 		{
 			return new MathMatrix(new double[,] { { ToDouble() } });
