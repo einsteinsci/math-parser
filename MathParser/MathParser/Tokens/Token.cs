@@ -53,9 +53,17 @@ namespace MathParser.Tokens
 
 		public static Token OperatorNegative		{ get { return TokenRegistry.Get("operatorNegative"); } }
 		public static Token OperatorFactorial		{ get { return TokenRegistry.Get("operatorFactorial"); } }
+		public static Token OperatorNot				{ get { return TokenRegistry.Get("operatorNot"); } }
 
 		public static Token OperatorConditionalAnd	{ get { return TokenRegistry.Get("operatorConditionalAnd"); } }
 		public static Token OperatorConditionalOr	{ get { return TokenRegistry.Get("operatorConditionalOr"); } }
+
+		public static Token OperatorEqual			{ get { return TokenRegistry.Get("operatorEqual"); } }
+		public static Token OperatorNotEqual		{ get { return TokenRegistry.Get("operatorNotEqual"); } }
+		public static Token OperatorGreaterThan		{ get { return TokenRegistry.Get("operatorGreaterThan"); } }
+		public static Token OperatorLessThan		{ get { return TokenRegistry.Get("operatorLessThan"); } }
+		public static Token OperatorGreaterThanOrEqual		{ get { return TokenRegistry.Get("operatorGreaterThanOrEqual"); } }
+		public static Token OperatorLessThanOrEqual			{ get { return TokenRegistry.Get("operatorLessThanOrEqual"); } }
 
 		public static Token Number					{ get { return TokenRegistry.Get("number"); } }
 		public static Token String					{ get { return TokenRegistry.Get("string"); } }

@@ -18,8 +18,8 @@ namespace MathParser.Tokens
 		//public const int PREC_LOGICAL_OR = 4;
 		//public const int PREC_LOGICAL_XOR = 5;
 		//public const int PREC_LOGICAL_AND = 6;
-		//public const int PREC_EQUALITY = 7;
-		//public const int PREC_RELATIONAL = 8;
+		public const int PREC_EQUALITY = 7;
+		public const int PREC_RELATIONAL = 8;
 		public const int PREC_BITSHIFT = 9;
 		public const int PREC_ADDITIVE = 10;
 		public const int PREC_MULTIPLICATIVE = 11;

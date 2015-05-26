@@ -60,8 +60,15 @@
     <Compile Include="ParseTree\NodeOperatorConcatenate.cs" />
     <Compile Include="ParseTree\NodeOperatorConditionalAnd.cs" />
     <Compile Include="ParseTree\NodeOperatorConditionalOr.cs" />
+    <Compile Include="ParseTree\NodeOperatorEqual.cs" />
     <Compile Include="ParseTree\NodeOperatorFactorial.cs" />
+    <Compile Include="ParseTree\NodeOperatorGreaterThan.cs" />
+    <Compile Include="ParseTree\NodeOperatorGreaterThanOrEqual.cs" />
+    <Compile Include="ParseTree\NodeOperatorLessThan.cs" />
+    <Compile Include="ParseTree\NodeOperatorLessThanOrEqual.cs" />
     <Compile Include="ParseTree\NodeOperatorNegative.cs" />
+    <Compile Include="ParseTree\NodeOperatorNot.cs" />
+    <Compile Include="ParseTree\NodeOperatorNotEqual.cs" />
     <Compile Include="ParseTree\NodeOperatorUnary.cs" />
     <Compile Include="ResultBoolean.cs" />
     <Compile Include="ResultNumberInteger.cs" />
@@ -94,7 +101,12 @@
     <Compile Include="Tokens\TokenLiteral.cs" />
     <Compile Include="Tokens\TokenOperatorConditionalAnd.cs" />
     <Compile Include="Tokens\TokenOperatorConditionalOr.cs" />
+    <Compile Include="Tokens\TokenOperatorEqual.cs" />
     <Compile Include="Tokens\TokenOperatorFactorial.cs" />
+    <Compile Include="Tokens\TokenOperatorGreaterThan.cs" />
+    <Compile Include="Tokens\TokenOperatorGreaterThanOrEqual.cs" />
+    <Compile Include="Tokens\TokenOperatorLessThan.cs" />
+    <Compile Include="Tokens\TokenOperatorLessThanOrEqual.cs" />
     <Compile Include="Tokens\TokenOperatorNegative.cs" />
     <Compile Include="Tokens\TokenOperatorBitShiftLeft.cs" />
     <Compile Include="Tokens\TokenOperatorBitShiftRight.cs" />
@@ -106,6 +118,8 @@
     <Compile Include="Tokens\TokenOperatorMinus.cs" />
     <Compile Include="Tokens\TokenOperatorModulus.cs" />
     <Compile Include="Tokens\TokenOperatorMultiply.cs" />
+    <Compile Include="Tokens\TokenOperatorNot.cs" />
+    <Compile Include="Tokens\TokenOperatorNotEqual.cs" />
     <Compile Include="Tokens\TokenOperatorPlus.cs" />
     <Compile Include="Tokens\TokenParenthesis.cs" />
     <Compile Include="Tokens\TokenRegistry.cs" />
