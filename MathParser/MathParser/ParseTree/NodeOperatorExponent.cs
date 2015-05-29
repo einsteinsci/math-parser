@@ -11,8 +11,8 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorExponent : NodeOperatorBinary
 	{
-		public override Token Operator
-		{ get { return Token.OperatorExponent; } }
+		public override TokenClass Operator
+		{ get { return TokenClass.OperatorExponent; } }
 
 		public override MathType Type
 		{ get { return MathType.Real; } }

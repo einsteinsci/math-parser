@@ -24,7 +24,7 @@ namespace MathParser.Tokens
 
 		public class RegistryItem
 		{
-			public Token Token
+			public TokenClass Token
 			{ get; private set; }
 
 			public int Priority
@@ -33,7 +33,7 @@ namespace MathParser.Tokens
 			public string Key
 			{ get; private set; }
 
-			public RegistryItem(string key, Token token, int priority)
+			public RegistryItem(string key, TokenClass token, int priority)
 			{
 				Key = key;
 				Token = token;
@@ -49,11 +49,11 @@ namespace MathParser.Tokens
 		public static List<RegistryItem> Registry
 		{ get; private set; }
 
-		public static List<Token> Tokens
+		public static List<TokenClass> Tokens
 		{
 			get
 			{
-				List<Token> res = new List<Token>();
+				List<TokenClass> res = new List<TokenClass>();
 				foreach (RegistryItem r in Registry)
 				{
 					res.Add(r.Token);
@@ -68,7 +68,7 @@ namespace MathParser.Tokens
 			}
 		}
 
-		public static Token Get(string key)
+		public static TokenClass Get(string key)
 		{
 			if (Registry == null)
 			{
@@ -99,7 +99,7 @@ namespace MathParser.Tokens
 			{
 				foreach (Type t in assembly.GetTypes())
 				{
-					if (!typeof(Token).IsAssignableFrom(t))
+					if (!typeof(TokenClass).IsAssignableFrom(t))
 					{
 						continue;
 					}
@@ -112,11 +112,11 @@ namespace MathParser.Tokens
 					MakeTokenAttribute att = t.GetCustomAttributes<MakeTokenAttribute>().FirstOrDefault();
 					if (att != null)
 					{
-						Token token = Activator.CreateInstance(t) as Token;
+						TokenClass token = Activator.CreateInstance(t) as TokenClass;
 						int priority = token.LexerPriority;
 						if (att.Custom)
 						{
-							foreach (KeyValuePair<string, Token> kvp in token.CustomRegistry)
+							foreach (KeyValuePair<string, TokenClass> kvp in token.CustomRegistry)
 							{
 								Register(kvp.Key, kvp.Value, priority);
 								Logger.Log(LogLevel.Debug, "register",
@@ -136,19 +136,19 @@ namespace MathParser.Tokens
 			HasRegistered = true;
 		}
 
-		public static void Register(string key, Token token, int priority)
+		public static void Register(string key, TokenClass token, int priority)
 		{
 			Registry.Add(new RegistryItem(key, token, priority));
 		}
 
-		public static Dictionary<int, List<Token>> TokensByPriority()
+		public static Dictionary<int, List<TokenClass>> TokensByPriority()
 		{
-			Dictionary<int, List<Token>> res = new Dictionary<int, List<Token>>();
+			Dictionary<int, List<TokenClass>> res = new Dictionary<int, List<TokenClass>>();
 			foreach (RegistryItem item in Registry)
 			{
 				if (!res.ContainsKey(item.Priority))
 				{
-					res.Add(item.Priority, new List<Token>());
+					res.Add(item.Priority, new List<TokenClass>());
 				}
 
 				res[item.Priority].Add(item.Token);
@@ -157,12 +157,12 @@ namespace MathParser.Tokens
 			return res;
 		}
 
-		public static List<Token> TokensByPriority(int priority)
+		public static List<TokenClass> TokensByPriority(int priority)
 		{
 			return TokensByPriority()[priority];
 		}
 
-		public static int PriorityOf(Token token)
+		public static int PriorityOf(TokenClass token)
 		{
 			foreach (RegistryItem r in Registry)
 			{
@@ -175,7 +175,7 @@ namespace MathParser.Tokens
 			return -1;
 		}
 
-		public static string KeyOf(Token token)
+		public static string KeyOf(TokenClass token)
 		{
 			foreach (RegistryItem r in Registry)
 			{

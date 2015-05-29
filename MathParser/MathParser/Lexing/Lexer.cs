@@ -15,7 +15,7 @@ namespace MathParser.Lexing
 		public string Expression
 		{ get; set; }
 
-		public LexStream Lexed
+		public TokenStream Lexed
 		{ get; private set; }
 
 		public void Lex()
@@ -38,9 +38,9 @@ namespace MathParser.Lexing
 				char c = Expression[index];
 				char? nextC = index < Expression.Length - 1 ? (char?)Expression[index + 1] : null;
 
-				List<Token> validCurrent = ValidTokens(lexeme);
-				List<Token> validNext = ValidTokens(lexeme + c);
-				List<Token> validNextNext = nextC != null ? ValidTokens(lexeme + c + nextC.Value) : new List<Token>();
+				List<TokenClass> validCurrent = ValidTokens(lexeme);
+				List<TokenClass> validNext = ValidTokens(lexeme + c);
+				List<TokenClass> validNextNext = nextC != null ? ValidTokens(lexeme + c + nextC.Value) : new List<TokenClass>();
 
 				if (lexeme == "")
 				{
@@ -95,7 +95,7 @@ namespace MathParser.Lexing
 				lexeme = c.ToString();
 			}
 
-			List<Token> validCurrent_ = ValidTokens(lexeme);
+			List<TokenClass> validCurrent_ = ValidTokens(lexeme);
 
 			if (validCurrent_.Count == 0)
 			{
@@ -110,7 +110,7 @@ namespace MathParser.Lexing
 					TokensToString(validCurrent_));
 			}
 
-			Token tok = validCurrent_.FirstOrDefault();
+			TokenClass tok = validCurrent_.FirstOrDefault();
 			FinalizeToken(tok, lexeme);
 			#endregion
 
@@ -120,13 +120,13 @@ namespace MathParser.Lexing
 				Lexeme l = Lexed[i];
 
 				// minus
-				if (l.Token == Token.OperatorMinus)
+				if (l.Token == TokenClass.OperatorMinus)
 				{
 					if (i == 0) // first
 					{
 						Logger.Log(LogLevel.Debug, Logger.LEXER,
 							"Converting minus (index " + i.ToString() + ") to negative.");
-						l.Token = Token.OperatorNegative;
+						l.Token = TokenClass.OperatorNegative;
 						continue;
 					}
 
@@ -146,7 +146,7 @@ namespace MathParser.Lexing
 						if (!found)
 						{
 							// minus is first meaningful token
-							l.Token = Token.OperatorNegative;
+							l.Token = TokenClass.OperatorNegative;
 							Logger.Log(LogLevel.Debug, Logger.LEXER,
 								"Converting minus (index " + i.ToString() + ") to negative.");
 							continue;
@@ -155,10 +155,10 @@ namespace MathParser.Lexing
 
 					if (prev.Token.Type == TokenType.Encloser)
 					{
-						TokenEncloser encl = prev.Token as TokenEncloser;
+						TokenClassEncloser encl = prev.Token as TokenClassEncloser;
 						if (encl.Side == EncloserSide.Opening)
 						{
-							l.Token = Token.OperatorNegative;
+							l.Token = TokenClass.OperatorNegative;
 							Logger.Log(LogLevel.Debug, Logger.LEXER,
 								"Converting minus (index " + i.ToString() + ") to negative.");
 							continue;
@@ -166,14 +166,14 @@ namespace MathParser.Lexing
 					}
 					else if (prev.Token.Type == TokenType.Delimiter)
 					{
-						l.Token = Token.OperatorNegative;
+						l.Token = TokenClass.OperatorNegative;
 						Logger.Log(LogLevel.Debug, Logger.LEXER,
 							"Converting minus (index " + i.ToString() + ") to negative.");
 						continue;
 					}
 					else if (prev.Token.Type == TokenType.Operator)
 					{
-						l.Token = Token.OperatorNegative;
+						l.Token = TokenClass.OperatorNegative;
 						Logger.Log(LogLevel.Debug, Logger.LEXER,
 							"Converting minus (index " + i.ToString() + ") to negative.");
 						continue;
@@ -192,13 +192,13 @@ namespace MathParser.Lexing
 				"Lexing complete:\n\t" + info);
 		}
 
-		public void FinalizeToken(Token token, string lexeme)
+		public void FinalizeToken(TokenClass token, string lexeme)
 		{
 			if (token == null)
 			{
 				Logger.Log(LogLevel.Error, Logger.LEXER, 
 					"Token is null. Filling with Unrecognized.");
-				Lexed.Add(new Lexeme(Token.Unrecognized, lexeme));
+				Lexed.Add(new Lexeme(TokenClass.Unrecognized, lexeme));
 				System.Diagnostics.Debugger.Break();
 				return;
 			}
@@ -208,10 +208,10 @@ namespace MathParser.Lexing
 			Lexed.Add(new Lexeme(token, lexeme));
 		}
 		
-		public static string TokensToString(List<Token> tokens)
+		public static string TokensToString(List<TokenClass> tokens)
 		{
 			string res = "{ ";
-			foreach (Token t in tokens)
+			foreach (TokenClass t in tokens)
 			{
 				res += t.ToString() + ",";
 			}
@@ -219,17 +219,17 @@ namespace MathParser.Lexing
 			return res.TrimEnd(',') + " }";
 		}
 
-		public static List<Token> ValidTokens(string lexeme)
+		public static List<TokenClass> ValidTokens(string lexeme)
 		{
 			if (lexeme == "")
 			{
 				return TokenRegistry.Tokens;
 			}
 
-			List<Token> res = new List<Token>();
-			foreach (Token token in TokenRegistry.Tokens)
+			List<TokenClass> res = new List<TokenClass>();
+			foreach (TokenClass token in TokenRegistry.Tokens)
 			{
-				if (token.Matches(lexeme) && token != Token.Unrecognized)
+				if (token.Matches(lexeme) && token != TokenClass.Unrecognized)
 				{
 					res.Add(token);
 				}
@@ -238,9 +238,9 @@ namespace MathParser.Lexing
 			return res;
 		}
 
-		public static LexStream Lex(string expression)
+		public static TokenStream Lex(string expression)
 		{
-			Instance.Lexed = new LexStream();
+			Instance.Lexed = new TokenStream();
 			Instance.Expression = expression;
 
 			Instance.Lex();

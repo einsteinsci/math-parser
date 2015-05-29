@@ -10,7 +10,7 @@ namespace MathParser.Lexing
 {
 	public class Lexeme
 	{
-		public Token Token
+		public TokenClass Token
 		{ get; internal set; }
 
 		public string Lexed
@@ -19,7 +19,7 @@ namespace MathParser.Lexing
 		public TokenType Type
 		{ get { return Token.Type; } }
 
-		public Lexeme(Token token, string lexed)
+		public Lexeme(TokenClass token, string lexed)
 		{
 			Token = token;
 			Lexed = lexed;

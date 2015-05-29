@@ -9,8 +9,8 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorConditionalOr : NodeOperatorBinary
 	{
-		public override Token Operator
-		{ get { return Token.OperatorConditionalOr; } }
+		public override TokenClass Operator
+		{ get { return TokenClass.OperatorConditionalOr; } }
 
 		public override string StringForm
 		{ get { return "||"; } }

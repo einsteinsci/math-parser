@@ -12,8 +12,8 @@ namespace MathParser.ParseTree
 		public override string StringForm
 		{ get { return "-"; } }
 
-		public override Token Operator
-		{ get { return Token.OperatorMinus; } }
+		public override TokenClass Operator
+		{ get { return TokenClass.OperatorMinus; } }
 
 		public override MathType Type
 		{ get { return MathType.Real; } }

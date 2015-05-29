@@ -29,7 +29,7 @@ namespace MathParser.ParseTree
 			}
 		}
 
-		public abstract Token Operator
+		public abstract TokenClass Operator
 		{ get; }
 
 		public virtual bool IsRightAssociative

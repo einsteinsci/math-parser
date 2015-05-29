@@ -10,8 +10,8 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorDivide : NodeOperatorBinary
 	{
-		public override Token Operator
-		{ get { return Token.OperatorDivide; } }
+		public override TokenClass Operator
+		{ get { return TokenClass.OperatorDivide; } }
 
 		public override MathType Type
 		{ get { return MathType.Real; } }

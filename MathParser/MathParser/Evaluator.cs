@@ -18,7 +18,7 @@ namespace MathParser
 		public string Input
 		{ get; private set; }
 
-		public LexStream Lexed
+		public TokenStream Lexed
 		{ get; private set; }
 
 		public NodeFactor ParseTree
@@ -38,7 +38,7 @@ namespace MathParser
 			Lexed = Lexer.Lex(Input);
 		}
 
-		public static LexStream Lex(string expression)
+		public static TokenStream Lex(string expression)
 		{
 			Instance.Input = expression;
 			Instance.Lex();
@@ -50,7 +50,7 @@ namespace MathParser
 			ParseTree = Parser.Parse(Lexed);
 		}
 
-		public static NodeFactor Parse(LexStream stream)
+		public static NodeFactor Parse(TokenStream stream)
 		{
 			Instance.Lexed = stream;
 			Instance.Parse();

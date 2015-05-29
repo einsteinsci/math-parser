@@ -15,8 +15,8 @@ namespace MathParser.ParseTree
 		public override bool IsRightAssociative
 		{ get { return true; } }
 
-		public override Token Operator
-		{ get { return Token.OperatorAssignment; } }
+		public override TokenClass Operator
+		{ get { return TokenClass.OperatorAssignment; } }
 
 		public override MathType Type
 		{ get { return First.Type; } }

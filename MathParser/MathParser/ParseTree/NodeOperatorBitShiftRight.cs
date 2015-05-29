@@ -14,8 +14,8 @@ namespace MathParser.ParseTree
 		public override string StringForm
 		{ get { return ">>"; } }
 
-		public override Token Operator
-		{ get { return Token.OperatorBitShiftLeft; } }
+		public override TokenClass Operator
+		{ get { return TokenClass.OperatorBitShiftLeft; } }
 
 		public override MathType Type
 		{ get { return MathType.Integer; } }
