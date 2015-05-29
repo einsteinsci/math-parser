@@ -10,12 +10,12 @@ namespace MathParser.Lexing
 	/// <summary>
 	/// Not really a stream
 	/// </summary>
-	public sealed class TokenStream : IEnumerable<Lexeme>
+	public sealed class TokenStream : IEnumerable<Token>
 	{
-		public List<Lexeme> Lexemes
+		public List<Token> Lexemes
 		{ get; private set; }
 
-		public Lexeme this[int index]
+		public Token this[int index]
 		{
 			get
 			{
@@ -40,31 +40,31 @@ namespace MathParser.Lexing
 
 		public TokenStream()
 		{
-			Lexemes = new List<Lexeme>();
+			Lexemes = new List<Token>();
 			Index = 0;
 		}
 
-		public TokenStream(IEnumerable<Lexeme> startData) : this()
+		public TokenStream(IEnumerable<Token> startData) : this()
 		{
 			Lexemes.AddRange(startData);
 		}
 
-		public TokenStream(params Lexeme[] startData) : this()
+		public TokenStream(params Token[] startData) : this()
 		{
 			Lexemes.AddRange(startData);
 		}
 
-		public void Add(Lexeme lex)
+		public void Add(Token lex)
 		{
 			Lexemes.Add(lex);
 		}
 
-		public void AddRange(IEnumerable<Lexeme> all)
+		public void AddRange(IEnumerable<Token> all)
 		{
 			Lexemes.AddRange(all);
 		}
 
-		public void Insert(int index, Lexeme lex)
+		public void Insert(int index, Token lex)
 		{
 			Lexemes.Insert(index, lex);
 		}
@@ -75,7 +75,7 @@ namespace MathParser.Lexing
 			Type t = typeof(void);
 		}
 
-		public bool Remove(Lexeme rem)
+		public bool Remove(Token rem)
 		{
 			return Lexemes.Remove(rem);
 		}
@@ -85,9 +85,9 @@ namespace MathParser.Lexing
 			return Count > 0;
 		}
 
-		public Lexeme Next()
+		public Token Next()
 		{
-			Lexeme res = this[Index];
+			Token res = this[Index];
 			Index++;
 			return res;
 		}
@@ -102,7 +102,7 @@ namespace MathParser.Lexing
 			return Index < Count;
 		}
 
-		public IEnumerator<Lexeme> GetEnumerator()
+		public IEnumerator<Token> GetEnumerator()
 		{
 			return Lexemes.GetEnumerator();
 		}
@@ -115,7 +115,7 @@ namespace MathParser.Lexing
 		public override string ToString()
 		{
 			string res = "";
-			foreach (Lexeme lex in Lexemes)
+			foreach (Token lex in Lexemes)
 			{
 				res += lex + " ";
 			}

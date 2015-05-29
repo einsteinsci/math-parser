@@ -8,7 +8,7 @@ using MathParser.Tokens;
 
 namespace MathParser.Lexing
 {
-	public class Lexeme
+	public class Token
 	{
 		public TokenClass Token
 		{ get; internal set; }
@@ -19,7 +19,7 @@ namespace MathParser.Lexing
 		public TokenType Type
 		{ get { return Token.Type; } }
 
-		public Lexeme(TokenClass token, string lexed)
+		public Token(TokenClass token, string lexed)
 		{
 			Token = token;
 			Lexed = lexed;

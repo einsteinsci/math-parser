@@ -117,7 +117,7 @@ namespace MathParser.Lexing
 			#region resolve disambiguations
 			for (int i = 0; i < Lexed.Count; i++)
 			{
-				Lexeme l = Lexed[i];
+				Token l = Lexed[i];
 
 				// minus
 				if (l.Token == TokenClass.OperatorMinus)
@@ -130,7 +130,7 @@ namespace MathParser.Lexing
 						continue;
 					}
 
-					Lexeme prev = Lexed[i - 1];
+					Token prev = Lexed[i - 1];
 					if (prev.Token.Type == TokenType.Ignored)
 					{
 						bool found = false;
@@ -183,7 +183,7 @@ namespace MathParser.Lexing
 			#endregion
 
 			string info = "";
-			foreach (Lexeme l in Lexed)
+			foreach (Token l in Lexed)
 			{
 				info += l.ToString() + "\n\t";
 			}
@@ -198,14 +198,14 @@ namespace MathParser.Lexing
 			{
 				Logger.Log(LogLevel.Error, Logger.LEXER, 
 					"Token is null. Filling with Unrecognized.");
-				Lexed.Add(new Lexeme(TokenClass.Unrecognized, lexeme));
+				Lexed.Add(new Token(TokenClass.Unrecognized, lexeme));
 				System.Diagnostics.Debugger.Break();
 				return;
 			}
 
 			Logger.Log(LogLevel.Debug, Logger.LEXER,
 				"Finalizing Token " + token.ToString() + " for lexeme: " + lexeme);
-			Lexed.Add(new Lexeme(token, lexeme));
+			Lexed.Add(new Token(token, lexeme));
 		}
 		
 		public static string TokensToString(List<TokenClass> tokens)

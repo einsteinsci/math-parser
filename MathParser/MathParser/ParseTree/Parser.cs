@@ -21,8 +21,8 @@ namespace MathParser.ParseTree
 		// Shunting-yard algorithm (http://en.wikipedia.org/wiki/Shunting-yard_algorithm)
 		public void Parse()
 		{
-			Stack<Lexeme> operatorStack = new Stack<Lexeme>();
-			Queue<Lexeme> outputQueue = new Queue<Lexeme>();
+			Stack<Token> operatorStack = new Stack<Token>();
+			Queue<Token> outputQueue = new Queue<Token>();
 
 			bool isInList = false;
 			int listSize = 0;
@@ -30,7 +30,7 @@ namespace MathParser.ParseTree
 			#region sequencing
 			for (int index = 0; index < Input.Count; index++)
 			{
-				Lexeme lex = Input[index];
+				Token lex = Input[index];
 
 				switch (lex.Type)
 				{
@@ -86,7 +86,7 @@ namespace MathParser.ParseTree
 					{
 						while (operatorStack.Peek().Token != TokenClass.ParenthesisIn)
 						{
-							Lexeme l = operatorStack.Pop();
+							Token l = operatorStack.Pop();
 							Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 								"Popping operator to output queue: " + l.ToString());
 							outputQueue.Enqueue(l);
@@ -146,7 +146,7 @@ namespace MathParser.ParseTree
 
 			while (operatorStack.Count > 0)
 			{
-				Lexeme l = operatorStack.Pop();
+				Token l = operatorStack.Pop();
 				Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 					"Popping operator to output queue: " + l.ToString());
 				if (l.Token == TokenClass.ParenthesisIn)
@@ -159,7 +159,7 @@ namespace MathParser.ParseTree
 			#endregion
 
 			string seq = "Parsed:\n\t";
-			foreach (Lexeme l in outputQueue)
+			foreach (Token l in outputQueue)
 			{
 				seq += l.ToString() + "\n\t";
 			}
@@ -171,7 +171,7 @@ namespace MathParser.ParseTree
 			#region parsing
 			while (outputQueue.Count > 0)
 			{
-				Lexeme lex = outputQueue.Dequeue();
+				Token lex = outputQueue.Dequeue();
 
 				if (lex.Type == TokenType.Literal)
 				{
@@ -256,14 +256,14 @@ namespace MathParser.ParseTree
 			return op.MakeFactor(arguments.ToArray());
 		}
 
-		public static void FinishParentheses(Stack<Lexeme> operatorStack, 
-			Queue<Lexeme> outputQueue)
+		public static void FinishParentheses(Stack<Token> operatorStack, 
+			Queue<Token> outputQueue)
 		{
 			try
 			{
 				while (operatorStack.Peek().Token != TokenClass.ParenthesisIn)
 				{
-					Lexeme l = operatorStack.Pop();
+					Token l = operatorStack.Pop();
 					Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 						"Popping operator into output queue: " + l.ToString());
 					outputQueue.Enqueue(l);
@@ -274,12 +274,12 @@ namespace MathParser.ParseTree
 				Logger.Log(LogLevel.Fatal, Logger.SEQUENCER, "Mismatched Parentheses Found.");
 				throw new Exception("Mismatched Parentheses.");
 			}
-			Lexeme parin = operatorStack.Pop();
+			Token parin = operatorStack.Pop();
 			if (operatorStack.Count > 0)
 			{
 				if (operatorStack.Peek().Type == TokenType.Name) // function
 				{
-					Lexeme func = operatorStack.Pop();
+					Token func = operatorStack.Pop();
 					Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 						"Popping function name into output queue: " + func.ToString());
 					outputQueue.Enqueue(func);
@@ -287,14 +287,14 @@ namespace MathParser.ParseTree
 			}
 		}
 
-		public static void FinishBraces(Stack<Lexeme> operatorStack,
-			Queue<Lexeme> outputQueue, int listSize)
+		public static void FinishBraces(Stack<Token> operatorStack,
+			Queue<Token> outputQueue, int listSize)
 		{
 			try
 			{
 				while (operatorStack.Peek().Token != TokenClass.BraceIn)
 				{
-					Lexeme l = operatorStack.Pop();
+					Token l = operatorStack.Pop();
 				}
 			}
 			catch
@@ -303,8 +303,8 @@ namespace MathParser.ParseTree
 			}
 		}
 
-		public static void OperatorShuffle(Stack<Lexeme> operatorStack, 
-			Queue<Lexeme> outputQueue, Lexeme current)
+		public static void OperatorShuffle(Stack<Token> operatorStack, 
+			Queue<Token> outputQueue, Token current)
 		{
 			TokenClassOperator o1 = current.Token as TokenClassOperator;
 			while (true)
@@ -313,7 +313,7 @@ namespace MathParser.ParseTree
 				{
 					break;
 				}
-				Lexeme l2 = operatorStack.Peek();
+				Token l2 = operatorStack.Peek();
 				if (l2.Type != TokenType.Operator)
 				{
 					break;
@@ -343,9 +343,9 @@ namespace MathParser.ParseTree
 			operatorStack.Push(current);
 		}
 
-		public static bool IsTopLevelBrace(Stack<Lexeme> operatorStack)
+		public static bool IsTopLevelBrace(Stack<Token> operatorStack)
 		{
-			foreach (Lexeme lex in operatorStack)
+			foreach (Token lex in operatorStack)
 			{
 				if (lex.Token is TokenClassParenthesis)
 				{
