@@ -9,7 +9,7 @@ using MathPlusLib.Extensions;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("number")]
+	[MakeTokenClass("number")]
 	public sealed class TokenClassNumber : TokenClassLiteral
 	{
 		public override bool Matches(string lexeme)

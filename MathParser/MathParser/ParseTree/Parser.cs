@@ -84,7 +84,7 @@ namespace MathParser.ParseTree
 
 					try
 					{
-						while (operatorStack.Peek().Token != TokenClass.ParenthesisIn)
+						while (operatorStack.Peek().Class != TokenClass.ParenthesisIn)
 						{
 							Token l = operatorStack.Pop();
 							Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
@@ -101,28 +101,28 @@ namespace MathParser.ParseTree
 					#endregion
 				case TokenType.Encloser:
 					#region Encloser
-					if (lex.Token == TokenClass.ParenthesisIn)
+					if (lex.Class == TokenClass.ParenthesisIn)
 					{
 						Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 							"Moving entry parenthesis to operator stack.");
 						operatorStack.Push(lex);
 						continue;
 					}
-					else if (lex.Token == TokenClass.ParenthesisOut)
+					else if (lex.Class == TokenClass.ParenthesisOut)
 					{
 						Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 							"Found exit parenthesis. Finishing parenthesis pair.");
 						FinishParentheses(operatorStack, outputQueue);
 						continue;
 					}
-					else if (lex.Token == TokenClass.BraceIn) // list
+					else if (lex.Class == TokenClass.BraceIn) // list
 					{
 						Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 							"Found entry brace. Entering list mode.");
 						isInList = true;
 						continue;
 					}
-					else if (lex.Token == TokenClass.BraceOut) // end list
+					else if (lex.Class == TokenClass.BraceOut) // end list
 					{
 						Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 							"Found exit brace. Finishing brace group.");
@@ -149,7 +149,7 @@ namespace MathParser.ParseTree
 				Token l = operatorStack.Pop();
 				Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
 					"Popping operator to output queue: " + l.ToString());
-				if (l.Token == TokenClass.ParenthesisIn)
+				if (l.Class == TokenClass.ParenthesisIn)
 				{
 					Logger.Log(LogLevel.Error, Logger.SEQUENCER, "Mismatched parentheses.");
 				}
@@ -176,7 +176,7 @@ namespace MathParser.ParseTree
 				if (lex.Type == TokenType.Literal)
 				{
 					string lit = lex.Lexed;
-					TokenClassLiteral toklit = lex.Token as TokenClassLiteral;
+					TokenClassLiteral toklit = lex.Class as TokenClassLiteral;
 					Logger.Log(LogLevel.Debug, Logger.PARSER,
 						"Creating literal node from value: " + lex.ToString());
 					arguments.Push(toklit.MakeNode(lit));
@@ -184,7 +184,7 @@ namespace MathParser.ParseTree
 				}
 				if (lex.Type == TokenType.Operator)
 				{
-					TokenClassOperator op = lex.Token as TokenClassOperator;
+					TokenClassOperator op = lex.Class as TokenClassOperator;
 					if (arguments.Count < op.ArgumentCount)
 					{
 						Logger.Log(LogLevel.Error, Logger.PARSER, "Too many arguments for token " + op.ToString());
@@ -205,7 +205,7 @@ namespace MathParser.ParseTree
 				}
 				if (lex.Type == TokenType.Name) // function
 				{
-					TokenClassIdentifier id = lex.Token as TokenClassIdentifier;
+					TokenClassIdentifier id = lex.Class as TokenClassIdentifier;
 					string name = lex.Lexed;
 
 					if (MathFunctions.GetFunction(name) == null)
@@ -261,7 +261,7 @@ namespace MathParser.ParseTree
 		{
 			try
 			{
-				while (operatorStack.Peek().Token != TokenClass.ParenthesisIn)
+				while (operatorStack.Peek().Class != TokenClass.ParenthesisIn)
 				{
 					Token l = operatorStack.Pop();
 					Logger.Log(LogLevel.Debug, Logger.SEQUENCER,
@@ -292,7 +292,7 @@ namespace MathParser.ParseTree
 		{
 			try
 			{
-				while (operatorStack.Peek().Token != TokenClass.BraceIn)
+				while (operatorStack.Peek().Class != TokenClass.BraceIn)
 				{
 					Token l = operatorStack.Pop();
 				}
@@ -306,7 +306,7 @@ namespace MathParser.ParseTree
 		public static void OperatorShuffle(Stack<Token> operatorStack, 
 			Queue<Token> outputQueue, Token current)
 		{
-			TokenClassOperator o1 = current.Token as TokenClassOperator;
+			TokenClassOperator o1 = current.Class as TokenClassOperator;
 			while (true)
 			{
 				if (operatorStack.Count == 0)
@@ -319,10 +319,10 @@ namespace MathParser.ParseTree
 					break;
 				}
 
-				TokenClassOperator o2 = l2.Token as TokenClassOperator;
+				TokenClassOperator o2 = l2.Class as TokenClassOperator;
 
-				bool leftWorks = o1.Precedence <= o2.Precedence;
-				bool rightWorks = o1.Precedence < o2.Precedence;
+				bool leftWorks = o1.PrecedenceLevel <= o2.PrecedenceLevel;
+				bool rightWorks = o1.PrecedenceLevel < o2.PrecedenceLevel;
 				bool leftAssociative = !o1.IsRightAssociative;
 				
 				if (!((leftAssociative && leftWorks) || (!leftAssociative && rightWorks)))
@@ -347,11 +347,11 @@ namespace MathParser.ParseTree
 		{
 			foreach (Token lex in operatorStack)
 			{
-				if (lex.Token is TokenClassParenthesis)
+				if (lex.Class is TokenClassParenthesis)
 				{
 					return false;
 				}
-				else if (lex.Token is TokenClassBrace)
+				else if (lex.Class is TokenClassBrace)
 				{
 					return true;
 				}

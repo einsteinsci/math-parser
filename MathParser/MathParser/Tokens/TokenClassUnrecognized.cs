@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("unrecognized")]
+	[MakeTokenClass("unrecognized")]
 	public sealed class TokenClassUnrecognized : TokenClass
 	{
 		public override int LexerPriority

@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MathParser.Pratt;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("operatorNot")]
+	[MakeTokenClass("operatorNot")]
 	public class TokenClassOperatorNot : TokenClassOperator
 	{
 		public override string Operator
 		{ get { return "~"; } }
 
-		public override int Precedence
-		{ get { return PREC_UNARY; } }
+		public override int PrecedenceLevel
+		{ get { return Precedence.PREFIX; } }
 
 		public override int ArgumentCount
 		{ get { return 1; } }

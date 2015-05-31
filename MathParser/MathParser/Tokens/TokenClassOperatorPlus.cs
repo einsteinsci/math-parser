@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MathParser.ParseTree;
+using MathParser.Pratt;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("operatorPlus")]
+	[MakeTokenClass("operatorPlus")]
 	public class TokenClassOperatorPlus : TokenClassOperator
 	{
 		public override string Operator
 		{ get { return "+"; } }
 
-		public override int Precedence
-		{ get { return PREC_ADDITIVE; } }
+		public override int PrecedenceLevel
+		{ get { return Precedence.ADDITIVE; } }
 
 		public override NodeFactor MakeFactor(NodeFactor[] args)
 		{

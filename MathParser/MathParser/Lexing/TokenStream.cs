@@ -87,14 +87,30 @@ namespace MathParser.Lexing
 
 		public Token Next()
 		{
+			if (Index >= Count)
+			{
+				return null;
+			}
+
 			Token res = this[Index];
 			Index++;
 			return res;
 		}
 
-		public void Reset()
+		public Token Peek(int ahead = 0)
 		{
-			Index = 0;
+			return this[Index + ahead];
+		}
+
+		public Token Previous()
+		{
+			Index--;
+			return this[Index];
+		}
+
+		public void Reset(int index = 0)
+		{
+			Index = index;
 		}
 
 		public bool HasNext()

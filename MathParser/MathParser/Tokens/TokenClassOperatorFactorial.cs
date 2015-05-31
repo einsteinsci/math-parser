@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MathParser.ParseTree;
+using MathParser.Pratt;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("operatorFactorial")]
+	[MakeTokenClass("operatorFactorial")]
 	public class TokenClassOperatorFactorial : TokenClassOperator
 	{
 		public override string Operator
 		{ get { return "!"; } }
 
-		public override int Precedence
-		{ get { return PREC_PRIMARY; } } // highest precedence
+		public override int PrecedenceLevel
+		{ get { return Precedence.PRIMARY; } } // highest precedence
 
 		public override int ArgumentCount
 		{ get { return 1; } }

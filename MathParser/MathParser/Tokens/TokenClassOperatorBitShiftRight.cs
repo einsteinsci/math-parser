@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MathParser.ParseTree;
+using MathParser.Pratt;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("operatorBitShiftRight")]
+	[MakeTokenClass("operatorBitShiftRight")]
 	public class TokenClassOperatorBitShiftRight : TokenClassOperator
 	{
 		public override string Operator
 		{ get { return ">>"; } }
 
-		public override int Precedence
-		{ get { return PREC_BITSHIFT; } }
+		public override int PrecedenceLevel
+		{ get { return Precedence.BITSHIFT; } }
 
 		public override NodeFactor MakeFactor(NodeFactor[] args)
 		{

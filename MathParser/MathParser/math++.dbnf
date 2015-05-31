@@ -1,0 +1,58 @@
+! Math++
+
+<ROOT> := <Factor> ;
+
+! predefined tokens
+! identifier
+! integer
+! real
+! string
+! boolean
+! comment
+
+<literal> := integer | real | string | boolean ;
+
+<factor> := <opAssign> ;
+
+<opAssign> := [identifier '='] <opAssign> ;
+
+<opPostfix> := <opOr> ['!'] ;
+
+<opOr> := <opAnd> ['||' <opOr>] ;
+
+<opAnd> := <opEquality> ['&&' <opAnd>] ;
+
+<opEquality> := <opBitShift> ['==' <opEquality>]
+			  | <opBitShift> ['~=' <opEquality>] ;
+			  
+<opBitShift> := <opAdd> ['<<' <opBitShift>]
+			  | <opAdd> ['>>' <opBitShift>] ;
+			  
+<opAdd> := <opMult> ['+' <opAdd>]
+		 | <opMult> ['-' <opAdd>] ;
+		 
+<opMult> := <opExp> ['*' <opMult>]
+		  | <opExp> ['/' <opMult>]
+		  | <opExp> ['%' <opMult>] ;
+		  
+<opExp> := [<opPrefix> '^'] <opExp> ; ! ERR: left recursion
+
+<opPrefix> := '~' <opPrefix>
+			| '-' <opPrefix>
+			| <primary> ;
+
+<primary> := <primaryNonList>
+		   | <listLiteral> ;
+		   
+<primaryNonList> := <literal> 
+				  | identifier
+				  | <parenthetical> 
+				  | <methodCall> ;
+				  
+<parenthetical> := '(' <factor> ')' ; ! And down the list we go again...
+
+<methodCall> := identifier '(' [<argList>] ')' ;
+
+<argList> := <factor> [',' <argList>] ;
+
+<listLiteral> := '{' [<argList>] '}'

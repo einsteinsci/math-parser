@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("comment")]
+	[MakeTokenClass("comment")]
 	public class TokenClassComment : TokenClass
 	{
 		public override int LexerPriority

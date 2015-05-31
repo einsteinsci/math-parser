@@ -10,24 +10,24 @@ namespace MathParser.Lexing
 {
 	public class Token
 	{
-		public TokenClass Token
+		public TokenClass Class
 		{ get; internal set; }
 
 		public string Lexed
 		{ get; protected set; }
 
 		public TokenType Type
-		{ get { return Token.Type; } }
+		{ get { return Class.Type; } }
 
 		public Token(TokenClass token, string lexed)
 		{
-			Token = token;
+			Class = token;
 			Lexed = lexed;
 		}
 
 		public override string ToString()
 		{
-			return "{" + Token.ToString() + ":'" + Lexed + "'}";
+			return "{" + Class.ToString() + ":'" + Lexed + "'}";
 		}
 	}
 }

@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MathParser.ParseTree;
+using MathParser.Pratt;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("operatorConditionalOr")]
+	[MakeTokenClass("operatorConditionalOr")]
 	public class TokenClassOperatorConditionalOr : TokenClassOperator
 	{
 		public override string Operator
 		{ get { return "||"; } }
 
-		public override int Precedence
-		{ get { return PREC_CONDITIONAL_OR; } }
+		public override int PrecedenceLevel
+		{ get { return Precedence.CONDITIONAL_OR; } }
 
 		public override NodeFactor MakeFactor(NodeFactor[] args)
 		{

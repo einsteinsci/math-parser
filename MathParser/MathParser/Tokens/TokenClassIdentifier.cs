@@ -8,7 +8,7 @@ using MathParser.Lexing;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("identifier")]
+	[MakeTokenClass("identifier")]
 	public class TokenClassIdentifier : TokenClass
 	{
 		public override int LexerPriority

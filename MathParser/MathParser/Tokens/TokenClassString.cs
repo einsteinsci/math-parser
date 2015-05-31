@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("string")]
+	[MakeTokenClass("string")]
 	public class TokenClassString : TokenClassLiteral
 	{
 		public override bool Matches(string lexeme)

@@ -7,7 +7,7 @@ using MathParser.ParseTree;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("boolean")]
+	[MakeTokenClass("boolean")]
 	public class TokenClassBoolean : TokenClassLiteral
 	{
 		public override NodeLiteral MakeNode(string lexeme)

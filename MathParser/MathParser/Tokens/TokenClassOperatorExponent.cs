@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MathParser.ParseTree;
+using MathParser.Pratt;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("operatorExponent")]
+	[MakeTokenClass("operatorExponent")]
 	public class TokenClassOperatorExponent : TokenClassOperator
 	{
 		public override string Operator
 		{ get { return "^"; } }
 
-		public override int Precedence
-		{ get { return PREC_EXPONENTIAL; } }
+		public override int PrecedenceLevel
+		{ get { return Precedence.EXPONENTIAL; } }
 
 		public override bool IsRightAssociative
 		{ get { return true; } }

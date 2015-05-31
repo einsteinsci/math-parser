@@ -45,9 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConcreteTree\CNodeFactor.cs" />
+    <Compile Include="ConcreteTree\INonTerminal.cs" />
     <Compile Include="Evaluator.cs" />
     <Compile Include="Extensibility.cs" />
-    <Compile Include="Grammar\LiteralAttribute.cs" />
     <Compile Include="Lexing\TokenStream.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="ParseTree\FunctionAttribute.cs" />
@@ -73,7 +74,15 @@
     <Compile Include="ParseTree\NodeOperatorNot.cs" />
     <Compile Include="ParseTree\NodeOperatorNotEqual.cs" />
     <Compile Include="ParseTree\NodeOperatorUnary.cs" />
-    <Compile Include="ParseTree\ParserLALR.cs" />
+    <Compile Include="ConcreteTree\ParserLL.cs" />
+    <Compile Include="Pratt\BinaryOperatorParselet.cs" />
+    <Compile Include="Pratt\IInfixParselet.cs" />
+    <Compile Include="Pratt\IPrefixParselet.cs" />
+    <Compile Include="Pratt\NameParselet.cs" />
+    <Compile Include="Pratt\PostfixOperatorParselet.cs" />
+    <Compile Include="Pratt\PrattParser.cs" />
+    <Compile Include="Pratt\Precedence.cs" />
+    <Compile Include="Pratt\PrefixOperatorParselet.cs" />
     <Compile Include="ResultBoolean.cs" />
     <Compile Include="ResultList.cs" />
     <Compile Include="ResultNumberInteger.cs" />
@@ -91,13 +100,15 @@
     <Compile Include="ParseTree\NodeOperatorMultiply.cs" />
     <Compile Include="ParseTree\NodeOperatorPlus.cs" />
     <Compile Include="ParseTree\Parser.cs" />
+    <Compile Include="Rules\ITerm.cs" />
+    <Compile Include="Rules\MismatchedRuleException.cs" />
     <Compile Include="Rules\Terminal.cs" />
     <Compile Include="TextUtils.cs" />
     <Compile Include="Lexing\Token.cs" />
     <Compile Include="Lexing\Lexer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tokens\TokenClass.cs" />
-    <Compile Include="Tokens\MakeTokenAttribute.cs" />
+    <Compile Include="Tokens\MakeTokenClassAttribute.cs" />
     <Compile Include="Tokens\TokenClassBoolean.cs" />
     <Compile Include="Tokens\TokenClassBrace.cs" />
     <Compile Include="Tokens\TokenClassBracket.cs" />
@@ -134,7 +145,11 @@
     <Compile Include="Tokens\TokenClassUnrecognized.cs" />
     <Compile Include="VariableRegistry.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Grammar.grm" />
+    <None Include="math++.bnf" />
+    <None Include="math++.dbnf" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

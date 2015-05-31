@@ -7,14 +7,8 @@ using MathParser.Lexing;
 
 namespace MathParser.Rules
 {
-	public class Terminal : ITerm
+	public interface ITerm
 	{
-		public Token ExpectedToken
-		{ get; private set; }
-
-		public bool Matches(ITerm state, Token next)
-		{
-			return next == ExpectedToken;
-		}
+		bool Matches(ITerm state, Token next);
 	}
 }

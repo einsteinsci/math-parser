@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathParser.Tokens
 {
-	[MakeToken("comma")]
+	[MakeTokenClass("comma")]
 	public class TokenClassComma : TokenClass
 	{
 		public override int LexerPriority

@@ -8,6 +8,7 @@ using MathParser;
 using MathParser.Tokens;
 using MathParser.Lexing;
 using MathParser.ParseTree;
+using MathParser.Pratt;
 
 namespace MathParser.Test
 {
@@ -22,7 +23,16 @@ namespace MathParser.Test
 			string input = "";
 			Console.Write("Input> ");
 			input = Console.ReadLine();
-			//input = "5!";
+
+			VariableRegistry.Global.Create("a", new ResultNumberReal(0));
+			VariableRegistry.Global.Create("b", new ResultNumberReal(0));
+			VariableRegistry.Global.Create("c", new ResultNumberReal(0));
+			VariableRegistry.Global.Create("d", new ResultNumberReal(0));
+			VariableRegistry.Global.Create("e", new ResultNumberReal(0));
+
+			TokenStream stream = Lexer.Lex(input);
+			PrattParser pratt = new PrattParser(stream);
+			NodeFactor root = pratt.Parse();
 
 			// This is where evaluation occurs
 			IResultValue res = Evaluator.Evaluate(input);
