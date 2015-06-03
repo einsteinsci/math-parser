@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MathPlusLib;
 using System.Reflection;
+using MathParser.ParseTree;
 
-namespace MathParser.ParseTree
+namespace MathParser.Functions
 {
 	[FunctionLibrary("primary")]
 	public static class MathFunctions
@@ -115,6 +116,13 @@ namespace MathParser.ParseTree
 				str.Substring((int)start, (int)len)),
 			MathType.String, "substring", MathType.String, MathType.Integer, MathType.Integer);
 
+		[Function]
+		public static FunctionInfo Help
+		{ get { return help; } }
+		private static FunctionInfo help = new FunctionInfo(
+			(Func<string, string>)HelpLibrary.GetHelp,
+			MathType.String, "help", MathType.String);
+
 		#endregion
 
 		public static FunctionInfo GetFunction(string name)
@@ -135,7 +143,7 @@ namespace MathParser.ParseTree
 			AllFunctions = new List<FunctionInfo>();
 			foreach (Assembly assembly in Extensibility.AllAssemblies)
 			{
-				foreach (Type type in assembly.GetExportedTypes())
+				foreach (Type type in assembly.GetTypes())
 				{
 					IEnumerable<FunctionLibraryAttribute> libatts = 
 						type.GetCustomAttributes<FunctionLibraryAttribute>();

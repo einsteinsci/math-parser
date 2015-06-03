@@ -32,6 +32,12 @@ namespace MathParser.Pratt
 			Init();
 		}
 
+		public static NodeFactor Parse(TokenStream stream)
+		{
+			PrattParser inst = new PrattParser(stream);
+			return inst.Parse();
+		}
+
 		public void Init()
 		{
 			PrefixParselets = new Dictionary<TokenClass, IPrefixParselet>();
@@ -42,6 +48,8 @@ namespace MathParser.Pratt
 			PrefixParselets.Add(TokenClass.Boolean, new BooleanParselet());
 
 			PrefixParselets.Add(TokenClass.ParenthesisIn, new ParenthesisParselet());
+
+			PrefixParselets.Add(TokenClass.BraceIn, new ListLiteralParselet());
 
 			if (PrefixLoading != null)
 			{

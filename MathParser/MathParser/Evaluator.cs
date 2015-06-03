@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MathParser.Tokens;
 using MathParser.Lexing;
 using MathParser.ParseTree;
+using MathParser.Pratt;
 
 namespace MathParser
 {
@@ -47,7 +48,7 @@ namespace MathParser
 
 		public void Parse()
 		{
-			ParseTree = Parser.Parse(Lexed);
+			ParseTree = PrattParser.Parse(Lexed);
 		}
 
 		public static NodeFactor Parse(TokenStream stream)

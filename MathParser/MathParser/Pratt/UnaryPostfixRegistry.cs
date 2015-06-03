@@ -28,7 +28,7 @@ namespace MathParser.Pratt
 
 			if (registry.ContainsKey(token))
 			{
-				Logger.Log(LogLevel.Warning, Logger.OPERATOR_REGISTRY,
+				Logger.Log(LogLevel.Warning, Logger.REGISTRY,
 					"Key for " + token.ToString() + " already exists. Replacing with type " +
 					nodeType.ToString() + ".");
 

@@ -23,9 +23,8 @@ namespace MathParser
 		[Obsolete]
 		public const string SEQUENCER = "sequencer";
 		public const string PARSER = "parse";
-		public const string CONVERTER = "ast-convert";
 		public const string EVALUATOR = "evaluate";
-		public const string OPERATOR_REGISTRY = "reg-operator";
+		public const string REGISTRY = "register";
 
 		public static bool DebugLogging
 		{ get; set; }

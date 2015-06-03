@@ -1,4 +1,5 @@
-﻿using MathParser.Lexing;
+﻿using MathParser.Functions;
+using MathParser.Lexing;
 using MathParser.ParseTree;
 using MathParser.Tokens;
 using System;
@@ -20,10 +21,11 @@ namespace MathParser.Pratt
 
 			if (!parser.Match(TokenClass.ParenthesisOut))
 			{
-				do
+				do 
 				{
 					args.Add(parser.Parse());
-				} while (parser.Match(TokenClass.Comma));
+				} 
+				while (parser.Match(TokenClass.Comma));
 
 				parser.Consume(TokenClass.ParenthesisOut);
 			}

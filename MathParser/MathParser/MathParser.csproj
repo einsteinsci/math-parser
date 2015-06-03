@@ -47,15 +47,17 @@
   <ItemGroup>
     <Compile Include="Evaluator.cs" />
     <Compile Include="Extensibility.cs" />
+    <Compile Include="HelpLibrary.cs" />
     <Compile Include="Lexing\TokenStream.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="ParseTree\FunctionAttribute.cs" />
-    <Compile Include="ParseTree\FunctionInfo.cs" />
-    <Compile Include="ParseTree\FunctionLibraryAttribute.cs" />
-    <Compile Include="ParseTree\MathFunctions.cs" />
+    <Compile Include="Functions\FunctionAttribute.cs" />
+    <Compile Include="Functions\FunctionInfo.cs" />
+    <Compile Include="Functions\FunctionLibraryAttribute.cs" />
+    <Compile Include="Functions\MathFunctions.cs" />
     <Compile Include="ParseTree\NodeFactor.cs" />
     <Compile Include="ParseTree\NodeFunction.cs" />
     <Compile Include="ParseTree\NodeIdentifier.cs" />
+    <Compile Include="ParseTree\NodeListLiteral.cs" />
     <Compile Include="ParseTree\NodeOperatorAssigment.cs" />
     <Compile Include="ParseTree\NodeOperatorBitShiftLeft.cs" />
     <Compile Include="ParseTree\NodeOperatorBitShiftRight.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="ParseTree\NodeOperatorNot.cs" />
     <Compile Include="ParseTree\NodeOperatorNotEqual.cs" />
     <Compile Include="ParseTree\NodeOperatorUnary.cs" />
+    <Compile Include="Pratt\ListLiteralParselet.cs" />
     <Compile Include="Pratt\BinaryInfixRegistry.cs" />
     <Compile Include="Pratt\BinaryOperatorAttribute.cs" />
     <Compile Include="Pratt\BinaryOperatorParselet.cs" />
@@ -106,7 +109,6 @@
     <Compile Include="ParseTree\NodeOperatorModulus.cs" />
     <Compile Include="ParseTree\NodeOperatorMultiply.cs" />
     <Compile Include="ParseTree\NodeOperatorPlus.cs" />
-    <Compile Include="ParseTree\Parser.cs" />
     <Compile Include="Rules\ITerm.cs" />
     <Compile Include="Rules\MismatchedRuleException.cs" />
     <Compile Include="Rules\Terminal.cs" />
@@ -153,7 +155,6 @@
     <Compile Include="VariableRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Grammar.grm" />
     <None Include="math++.bnf" />
     <None Include="math++.dbnf" />
   </ItemGroup>
