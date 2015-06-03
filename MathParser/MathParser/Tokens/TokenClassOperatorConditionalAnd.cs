@@ -8,6 +8,7 @@ using MathParser.Pratt;
 
 namespace MathParser.Tokens
 {
+	[BinaryOperator("operatorConditionalAnd", typeof(NodeOperatorConditionalAnd), Precedence.CONDITIONAL_AND)]
 	[MakeTokenClass("operatorConditionalAnd")]
 	public class TokenClassOperatorConditionalAnd : TokenClassOperator
 	{

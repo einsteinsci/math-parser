@@ -8,6 +8,7 @@ using MathParser.Pratt;
 
 namespace MathParser.Tokens
 {
+	[BinaryOperator("operatorBitShiftLeft", typeof(NodeOperatorBitShiftLeft), Precedence.BITSHIFT)]
 	[MakeTokenClass("operatorBitShiftLeft")]
 	public class TokenClassOperatorBitShiftLeft : TokenClassOperator
 	{

@@ -8,6 +8,7 @@ using MathParser.Pratt;
 
 namespace MathParser.Tokens
 {
+	[BinaryOperator("operatorLessThan", typeof(NodeOperatorLessThan), Precedence.RELATIONAL)]
 	[MakeTokenClass("operatorLessThan")]
 	public class TokenClassOperatorLessThan : TokenClassOperator
 	{

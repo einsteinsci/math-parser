@@ -39,6 +39,8 @@ namespace MathParser.Pratt
 			PrefixParselets.Add(TokenClass.Identifier, new NameParselet());
 			PrefixParselets.Add(TokenClass.Number, new NumberParselet());
 			PrefixParselets.Add(TokenClass.String, new StringParselet());
+			PrefixParselets.Add(TokenClass.Boolean, new BooleanParselet());
+
 			PrefixParselets.Add(TokenClass.ParenthesisIn, new ParenthesisParselet());
 
 			if (PrefixLoading != null)

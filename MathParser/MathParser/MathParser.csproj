@@ -75,6 +75,7 @@
     <Compile Include="Pratt\BinaryInfixRegistry.cs" />
     <Compile Include="Pratt\BinaryOperatorAttribute.cs" />
     <Compile Include="Pratt\BinaryOperatorParselet.cs" />
+    <Compile Include="Pratt\BooleanParselet.cs" />
     <Compile Include="Pratt\FunctionCallParselet.cs" />
     <Compile Include="Pratt\IInfixParselet.cs" />
     <Compile Include="Pratt\IPrefixParselet.cs" />
