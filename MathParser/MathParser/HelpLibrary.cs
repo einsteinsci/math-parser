@@ -12,6 +12,18 @@ namespace MathParser
 	{
 		private static Dictionary<string, string> library = new Dictionary<string, string>();
 
+		static HelpLibrary()
+		{
+			Init();
+		}
+
+		public static void Init()
+		{
+			library.Clear();
+
+			RegisterHelp("sin", "Returns the sine of a value");
+		}
+
 		public static void RegisterHelp(string functionName, string help)
 		{
 			if (library.ContainsKey(functionName))
