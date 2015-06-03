@@ -88,7 +88,6 @@ namespace MathParser.Pratt
 		}
 
 		// Pratt Parser (http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/)
-		// TODO: Add the assignments back in
 		public NodeFactor Parse(int precedence = 0)
 		{
 			Token token = Consume();
