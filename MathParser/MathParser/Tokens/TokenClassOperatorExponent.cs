@@ -8,6 +8,7 @@ using MathParser.Pratt;
 
 namespace MathParser.Tokens
 {
+	[BinaryOperator("operatorExponent", typeof(NodeOperatorExponent), Precedence.EXPONENTIAL)]
 	[MakeTokenClass("operatorExponent")]
 	public class TokenClassOperatorExponent : TokenClassOperator
 	{

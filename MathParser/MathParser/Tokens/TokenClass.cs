@@ -50,7 +50,7 @@ namespace MathParser.Tokens
 		public static TokenClass OperatorModulus		{ get { return TokenRegistry.Get("operatorModulus"); } }
 		public static TokenClass OperatorBitShiftLeft	{ get { return TokenRegistry.Get("operatorBitShiftLeft"); } }
 		public static TokenClass OperatorBitShiftRight	{ get { return TokenRegistry.Get("operatorBitShiftRight"); } }
-
+		[Obsolete]
 		public static TokenClass OperatorNegative		{ get { return TokenRegistry.Get("operatorNegative"); } }
 		public static TokenClass OperatorFactorial		{ get { return TokenRegistry.Get("operatorFactorial"); } }
 		public static TokenClass OperatorNot			{ get { return TokenRegistry.Get("operatorNot"); } }

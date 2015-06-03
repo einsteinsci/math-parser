@@ -34,16 +34,25 @@ namespace MathParser.Pratt
 			PrefixParselets = new Dictionary<TokenClass, IPrefixParselet>();
 
 			PrefixParselets.Add(TokenClass.Identifier, new NameParselet());
-			RegisterPrefix(TokenClass.OperatorNot);
-			RegisterPrefix(TokenClass.OperatorNegative);
-			RegisterPrefix(TokenClass.OperatorMinus);
+
+			foreach (TokenClass tc in UnaryPrefixRegistry.GetTokens())
+			{
+				RegisterPrefix(tc);
+			}
 
 			InfixParselets = new Dictionary<TokenClass, IInfixParselet>();
 
-			RegisterBinary(TokenClass.OperatorPlus, Precedence.ADDITIVE);
-			RegisterBinary(TokenClass.OperatorMinus, Precedence.ADDITIVE);
-			RegisterBinary(TokenClass.OperatorMultiply, Precedence.MULTIPLICATIVE);
-			RegisterBinary(TokenClass.OperatorDivide, Precedence.MULTIPLICATIVE);
+			foreach (TokenClass tc in BinaryInfixRegistry.GetTokens())
+			{
+				BinaryInfixRegistry.RegItem reg = BinaryInfixRegistry.Get(tc);
+				RegisterBinary(tc, reg.PrecedenceLevel, reg.IsRightAssociative);
+			}
+
+			//RegisterBinary(TokenClass.OperatorPlus, Precedence.ADDITIVE);
+			//RegisterBinary(TokenClass.OperatorMinus, Precedence.ADDITIVE);
+			//RegisterBinary(TokenClass.OperatorMultiply, Precedence.MULTIPLICATIVE);
+			//RegisterBinary(TokenClass.OperatorDivide, Precedence.MULTIPLICATIVE);
+			//RegisterBinary(TokenClass.OperatorExponent, Precedence.EXPONENTIAL, true);
 
 			RegisterPostfix(TokenClass.OperatorFactorial, Precedence.POSTFIX);
 		}

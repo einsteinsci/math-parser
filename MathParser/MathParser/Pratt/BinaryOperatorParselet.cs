@@ -27,10 +27,13 @@ namespace MathParser.Pratt
 		public NodeFactor Parse(PrattParser parser, NodeFactor left, Token token)
 		{
 			NodeFactor right = parser.Parse(RightAssociative ? Precedence - 1 : Precedence);
-			return MakeNode(token.Class as TokenClassOperator, left, right);
+			return BinaryInfixRegistry.MakeNode(token.Class, left, right);
+
+			//return MakeNode(token.Class as TokenClassOperator, left, right);
 		}
 
 		// TODO: Make this load via reflection or something, for extensibility
+		[Obsolete]
 		public NodeOperatorBinary MakeNode(TokenClassOperator op, 
 			NodeFactor left, NodeFactor right)
 		{
@@ -49,6 +52,10 @@ namespace MathParser.Pratt
 			else if (op == TokenClass.OperatorDivide)
 			{
 				return new NodeOperatorDivide(left, right);
+			}
+			else if (op == TokenClass.OperatorExponent)
+			{
+				return new NodeOperatorExponent(left, right);
 			}
 			else
 			{

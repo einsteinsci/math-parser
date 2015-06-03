@@ -8,6 +8,7 @@ using MathParser.Pratt;
 
 namespace MathParser.Tokens
 {
+	[BinaryOperator("operatorMultiply", typeof(NodeOperatorMultiply), Precedence.MULTIPLICATIVE)]
 	[MakeTokenClass("operatorMultiply")]
 	public class TokenClassOperatorMultiply : TokenClassOperator
 	{

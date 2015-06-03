@@ -55,5 +55,33 @@ namespace MathParser
 				}
 			}
 		}
+
+		public static List<Type> GetAllTypesWithAttribute(Type attType)
+		{
+			List<Type> res = new List<Type>();
+
+			foreach (Assembly asm in AllAssemblies)
+			{
+				foreach (Type t in asm.GetTypes())
+				{
+					if (t.GetCustomAttribute(attType) != null)
+					{
+						res.Add(t);
+					}
+				}
+			}
+
+			return res;
+		}
+
+		public static List<Type> GetAllTypesWithAttribute<AttType>()
+		{
+			return GetAllTypesWithAttribute(typeof(AttType));
+		}
+
+		public static List<Type> GetAllTypesWithAttribute(Attribute attInstance)
+		{
+			return GetAllTypesWithAttribute(attInstance.GetType());
+		}
 	}
 }

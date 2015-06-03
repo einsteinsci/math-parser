@@ -24,6 +24,7 @@ namespace MathParser.Pratt
 			return MakePostfix(token.Class as TokenClassOperator, left);
 		}
 
+		[Obsolete]
 		public NodeOperatorUnary MakePostfix(TokenClassOperator op, NodeFactor operand)
 		{
 			if (op == TokenClass.OperatorFactorial)

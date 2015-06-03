@@ -8,6 +8,7 @@ using MathParser.Pratt;
 
 namespace MathParser.Tokens
 {
+	[PrefixOperator("operatorNot", typeof(NodeOperatorNot))]
 	[MakeTokenClass("operatorNot")]
 	public class TokenClassOperatorNot : TokenClassOperator
 	{

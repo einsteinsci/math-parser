@@ -23,9 +23,10 @@ namespace MathParser.Pratt
 		public NodeFactor Parse(PrattParser parser, Token token)
 		{
 			NodeFactor operand = parser.Parse(Precedence);
-			return MakeNode(token.Class as TokenClassOperator, operand);
+			return UnaryPrefixRegistry.MakeNode(token.Class, operand);
 		}
 
+		[Obsolete]
 		public NodeOperatorUnary MakeNode(TokenClassOperator op, NodeFactor operand)
 		{
 			if (op == TokenClass.OperatorNot)

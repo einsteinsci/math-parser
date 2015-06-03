@@ -45,8 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConcreteTree\CNodeFactor.cs" />
-    <Compile Include="ConcreteTree\INonTerminal.cs" />
     <Compile Include="Evaluator.cs" />
     <Compile Include="Extensibility.cs" />
     <Compile Include="Lexing\TokenStream.cs" />
@@ -74,7 +72,8 @@
     <Compile Include="ParseTree\NodeOperatorNot.cs" />
     <Compile Include="ParseTree\NodeOperatorNotEqual.cs" />
     <Compile Include="ParseTree\NodeOperatorUnary.cs" />
-    <Compile Include="ConcreteTree\ParserLL.cs" />
+    <Compile Include="Pratt\BinaryInfixRegistry.cs" />
+    <Compile Include="Pratt\BinaryOperatorAttribute.cs" />
     <Compile Include="Pratt\BinaryOperatorParselet.cs" />
     <Compile Include="Pratt\IInfixParselet.cs" />
     <Compile Include="Pratt\IPrefixParselet.cs" />
@@ -82,7 +81,10 @@
     <Compile Include="Pratt\PostfixOperatorParselet.cs" />
     <Compile Include="Pratt\PrattParser.cs" />
     <Compile Include="Pratt\Precedence.cs" />
+    <Compile Include="Pratt\PrefixOperatorAttribute.cs" />
     <Compile Include="Pratt\PrefixOperatorParselet.cs" />
+    <Compile Include="Pratt\UnaryPostfixRegistry.cs" />
+    <Compile Include="Pratt\UnaryPrefixRegistry.cs" />
     <Compile Include="ResultBoolean.cs" />
     <Compile Include="ResultList.cs" />
     <Compile Include="ResultNumberInteger.cs" />
