@@ -23,6 +23,9 @@ namespace MathParser.Pratt
 
 		List<Token> readTokens = new List<Token>();
 
+		public event Action<Dictionary<TokenClass, IPrefixParselet>> PrefixLoading;
+		public event Action<Dictionary<TokenClass, IInfixParselet>> InfixLoading;
+
 		public PrattParser(TokenStream stream)
 		{
 			Stream = stream;
@@ -34,6 +37,14 @@ namespace MathParser.Pratt
 			PrefixParselets = new Dictionary<TokenClass, IPrefixParselet>();
 
 			PrefixParselets.Add(TokenClass.Identifier, new NameParselet());
+			PrefixParselets.Add(TokenClass.Number, new NumberParselet());
+			PrefixParselets.Add(TokenClass.String, new StringParselet());
+			PrefixParselets.Add(TokenClass.ParenthesisIn, new ParenthesisParselet());
+
+			if (PrefixLoading != null)
+			{
+				PrefixLoading(PrefixParselets);
+			}
 
 			foreach (TokenClass tc in UnaryPrefixRegistry.GetTokens())
 			{
@@ -42,17 +53,18 @@ namespace MathParser.Pratt
 
 			InfixParselets = new Dictionary<TokenClass, IInfixParselet>();
 
+			InfixParselets.Add(TokenClass.ParenthesisIn, new FunctionCallParselet());
+
 			foreach (TokenClass tc in BinaryInfixRegistry.GetTokens())
 			{
 				BinaryInfixRegistry.RegItem reg = BinaryInfixRegistry.Get(tc);
 				RegisterBinary(tc, reg.PrecedenceLevel, reg.IsRightAssociative);
 			}
 
-			//RegisterBinary(TokenClass.OperatorPlus, Precedence.ADDITIVE);
-			//RegisterBinary(TokenClass.OperatorMinus, Precedence.ADDITIVE);
-			//RegisterBinary(TokenClass.OperatorMultiply, Precedence.MULTIPLICATIVE);
-			//RegisterBinary(TokenClass.OperatorDivide, Precedence.MULTIPLICATIVE);
-			//RegisterBinary(TokenClass.OperatorExponent, Precedence.EXPONENTIAL, true);
+			if (InfixLoading != null)
+			{
+				InfixLoading(InfixParselets);
+			}
 
 			RegisterPostfix(TokenClass.OperatorFactorial, Precedence.POSTFIX);
 		}
@@ -74,7 +86,7 @@ namespace MathParser.Pratt
 		}
 
 		// Pratt Parser (http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/)
-		// TODO: Add the damn parentheses back in. And functions. And assignments.
+		// TODO: Add the assignments back in
 		public NodeFactor Parse(int precedence = 0)
 		{
 			Token token = Consume();
@@ -129,13 +141,37 @@ namespace MathParser.Pratt
 			IInfixParselet parselet = GetInfix(ahead.Class);
 			if (parselet != null)
 			{
-				return parselet.Precedence;
+				return parselet.PrecedenceLevel;
 			}
 
 			return 0;
 		}
 
-		private Token Consume()
+		public Token Consume(TokenClass tokClass)
+		{
+			Token tok = LookAhead(0);
+			if (tok.Class != tokClass)
+			{
+				throw new MismatchedRuleException("Expected token " + 
+					tokClass.ToString() + ". Found " + tok.Class.ToString());
+			}
+
+			return Consume();
+		}
+
+		public bool Match(TokenClass expected)
+		{
+			Token token = LookAhead();
+			if (token.Class != expected)
+			{
+				return false;
+			}
+
+			Consume();
+			return true;
+		}
+
+		public Token Consume()
 		{
 			LookAhead();
 
@@ -144,7 +180,7 @@ namespace MathParser.Pratt
 			return rem;
 		}
 
-		private Token LookAhead(int distance = 0)
+		public Token LookAhead(int distance = 0)
 		{
 			while (distance >= readTokens.Count)
 			{

@@ -36,7 +36,7 @@ namespace MathParser.ParseTree
 
 			NodeIdentifier idFirst = First as NodeIdentifier;
 			IResultValue res = Second.GetResult();
-			string name = idFirst.VariableName;
+			string name = idFirst.IdentifierName;
 
 			if (VariableRegistry.Global.ContainsVariable(name))
 			{

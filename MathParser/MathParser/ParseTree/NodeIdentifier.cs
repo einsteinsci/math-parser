@@ -14,7 +14,7 @@ namespace MathParser.ParseTree
 		public IResultValue StoredValue
 		{ get; set; }
 
-		public string VariableName
+		public string IdentifierName
 		{ get; set; }
 
 		public override List<NodeFactor> Children
@@ -25,7 +25,7 @@ namespace MathParser.ParseTree
 		public NodeIdentifier(string varName)
 		{
 			StoredValue = VariableRegistry.Get(varName);
-			VariableName = varName;
+			IdentifierName = varName;
 		}
 
 		public override IResultValue GetResult()
@@ -35,7 +35,7 @@ namespace MathParser.ParseTree
 
 		public override string ToString()
 		{
-			return VariableName;
+			return IdentifierName;
 		}
 	}
 }

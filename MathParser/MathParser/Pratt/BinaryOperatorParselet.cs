@@ -12,7 +12,7 @@ namespace MathParser.Pratt
 {
 	public class BinaryOperatorParselet : IInfixParselet
 	{
-		public int Precedence
+		public int PrecedenceLevel
 		{ get; protected set; }
 
 		public bool RightAssociative
@@ -20,13 +20,13 @@ namespace MathParser.Pratt
 
 		public BinaryOperatorParselet(int precedence, bool rightAssociative)
 		{
-			Precedence = precedence;
+			PrecedenceLevel = precedence;
 			RightAssociative = rightAssociative;
 		}
 
 		public NodeFactor Parse(PrattParser parser, NodeFactor left, Token token)
 		{
-			NodeFactor right = parser.Parse(RightAssociative ? Precedence - 1 : Precedence);
+			NodeFactor right = parser.Parse(RightAssociative ? PrecedenceLevel - 1 : PrecedenceLevel);
 			return BinaryInfixRegistry.MakeNode(token.Class, left, right);
 
 			//return MakeNode(token.Class as TokenClassOperator, left, right);

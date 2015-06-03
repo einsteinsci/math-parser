@@ -11,12 +11,12 @@ namespace MathParser.Pratt
 {
 	public class PostfixOperatorParselet : IInfixParselet
 	{
-		public int Precedence
+		public int PrecedenceLevel
 		{ get; private set; }
 
 		public PostfixOperatorParselet(int precedence)
 		{
-			Precedence = precedence;
+			PrecedenceLevel = precedence;
 		}
 
 		public NodeFactor Parse(PrattParser parser, NodeFactor left, Token token)

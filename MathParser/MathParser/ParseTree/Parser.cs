@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace MathParser.ParseTree
 {
+	[Obsolete]
 	public sealed class Parser
 	{
 		public static readonly Parser Instance = new Parser();
