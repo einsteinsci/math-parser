@@ -8,7 +8,7 @@ using MathParser.Tokens;
 namespace MathParser.Pratt
 {
 	[AttributeUsage(AttributeTargets.Class, Inherited = false)]
-	public sealed class BinaryOperatorAttribute : Attribute
+	public class PostfixOperatorAttribute : Attribute
 	{
 		public TokenClass TokenInstance
 		{ get; private set; }
@@ -16,18 +16,10 @@ namespace MathParser.Pratt
 		public Type NodeType
 		{ get; private set; }
 
-		public Precedence PrecedenceLevel
-		{ get; private set; }
-
-		public bool IsRightAssociative
-		{ get; private set; }
-
-		public BinaryOperatorAttribute(string instanceName, Type nodeType, Precedence precedence) : base()
+		public PostfixOperatorAttribute(string instanceName, Type nodeType) : base()
 		{
 			TokenInstance = TokenRegistry.Get(instanceName);
 			NodeType = nodeType;
-			PrecedenceLevel = precedence;
-			IsRightAssociative = false;
 		}
 	}
 }

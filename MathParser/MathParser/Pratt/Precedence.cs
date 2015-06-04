@@ -6,23 +6,28 @@ using System.Threading.Tasks;
 
 namespace MathParser.Pratt
 {
-	public static class Precedence
+	/// <summary>
+	/// Used much like an <see cref="int"/>. Explicit conversions 
+	/// from <see cref="int"/> is acceptable: 
+	/// <code>Precedence prec = (Precedence)5</code>
+	/// </summary>
+	public enum Precedence : int
 	{
-		public const int ASSIGNMENT = 0;
-		//public const int CONDITIONAL_TERNARY = 1;
-		public const int CONDITIONAL_OR = 2;
-		public const int CONDITIONAL_AND = 3;
-		//public const int LOGICAL_OR = 4;
-		//public const int LOGICAL_XOR = 5;
-		//public const int LOGICAL_AND = 6;
-		public const int EQUALITY = 7;
-		public const int RELATIONAL = 8;
-		public const int BITSHIFT = 9;
-		public const int ADDITIVE = 10;
-		public const int MULTIPLICATIVE = 11;
-		public const int PREFIX = 12;
-		public const int POSTFIX = 13;
-		public const int EXPONENTIAL = 14;
-		public const int PRIMARY = 15; // also method calls
+		ASSIGNMENT = 0,
+		//CONDITIONAL_TERNARY = 1,
+		CONDITIONAL_OR = 2,
+		CONDITIONAL_AND = 3,
+		//LOGICAL_OR = 4,
+		//LOGICAL_XOR = 5,
+		//LOGICAL_AND = 6,
+		EQUALITY = 7,
+		RELATIONAL = 8,
+		BITSHIFT = 9,
+		ADDITIVE = 10,
+		MULTIPLICATIVE = 11,
+		PREFIX = 12,
+		POSTFIX = 13,
+		EXPONENTIAL = 14,
+		PRIMARY = 15, // also method calls
 	}
 }

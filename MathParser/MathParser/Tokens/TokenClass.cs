@@ -8,25 +8,15 @@ using System.Reflection;
 
 namespace MathParser.Tokens
 {
-	public enum TokenType
-	{
-		Operator,
-		Literal,
-		Name,
-		Delimiter,
-		Encloser,
-		Ignored
-	}
-
 	public abstract class TokenClass
 	{
 		public abstract bool Matches(string lexeme);
-
-		public abstract TokenType Type
-		{ get; }
-
+		
 		public abstract int LexerPriority
 		{ get; }
+
+		public virtual bool IgnoreInTree
+		{ get { return false; } }
 
 		public virtual Dictionary<string, TokenClass> CustomRegistry
 		{ get { return null; } }
@@ -50,8 +40,6 @@ namespace MathParser.Tokens
 		public static TokenClass OperatorModulus		{ get { return TokenRegistry.Get("operatorModulus"); } }
 		public static TokenClass OperatorBitShiftLeft	{ get { return TokenRegistry.Get("operatorBitShiftLeft"); } }
 		public static TokenClass OperatorBitShiftRight	{ get { return TokenRegistry.Get("operatorBitShiftRight"); } }
-		[Obsolete]
-		public static TokenClass OperatorNegative		{ get { return TokenRegistry.Get("operatorNegative"); } }
 		public static TokenClass OperatorFactorial		{ get { return TokenRegistry.Get("operatorFactorial"); } }
 		public static TokenClass OperatorNot			{ get { return TokenRegistry.Get("operatorNot"); } }
 

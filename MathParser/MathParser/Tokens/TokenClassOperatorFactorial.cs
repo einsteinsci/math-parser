@@ -8,13 +8,14 @@ using MathParser.Pratt;
 
 namespace MathParser.Tokens
 {
+	[PostfixOperator("operatorFactorial", typeof(NodeOperatorFactorial))]
 	[MakeTokenClass("operatorFactorial")]
 	public class TokenClassOperatorFactorial : TokenClassOperator
 	{
 		public override string Operator
 		{ get { return "!"; } }
 
-		public override int PrecedenceLevel
+		public override Precedence PrecedenceLevel
 		{ get { return Precedence.PRIMARY; } } // highest precedence
 
 		public override int ArgumentCount

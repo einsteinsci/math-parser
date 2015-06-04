@@ -20,8 +20,6 @@ namespace MathParser
 		public static event Action<LogLevel, string> OnLog;
 
 		public const string LEXER = "tokenize";
-		[Obsolete]
-		public const string SEQUENCER = "sequencer";
 		public const string PARSER = "parse";
 		public const string EVALUATOR = "evaluate";
 		public const string REGISTRY = "register";

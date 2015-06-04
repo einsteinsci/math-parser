@@ -10,7 +10,7 @@ namespace MathParser.Pratt
 {
 	public interface IInfixParselet
 	{
-		int PrecedenceLevel
+		Precedence PrecedenceLevel
 		{ get; }
 
 		NodeFactor Parse(PrattParser parser, NodeFactor left, Token token);

@@ -11,31 +11,17 @@ namespace MathParser.Pratt
 {
 	public class PostfixOperatorParselet : IInfixParselet
 	{
-		public int PrecedenceLevel
+		public Precedence PrecedenceLevel
 		{ get; private set; }
 
-		public PostfixOperatorParselet(int precedence)
+		public PostfixOperatorParselet(Precedence precedence)
 		{
 			PrecedenceLevel = precedence;
 		}
 
 		public NodeFactor Parse(PrattParser parser, NodeFactor left, Token token)
 		{
-			return MakePostfix(token.Class as TokenClassOperator, left);
-		}
-
-		[Obsolete]
-		public NodeOperatorUnary MakePostfix(TokenClassOperator op, NodeFactor operand)
-		{
-			if (op == TokenClass.OperatorFactorial)
-			{
-				return new NodeOperatorFactorial(operand);
-			}
-			else
-			{
-				throw new Rules.MismatchedRuleException(
-					"Not a valid postfix unary operator: " + op.ToString());
-			}
+			return UnaryPostfixRegistry.MakeNode(token.Class, left);
 		}
 	}
 }

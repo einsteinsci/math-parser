@@ -12,10 +12,8 @@ namespace MathParser.Tokens
 		public override int LexerPriority
 		{ get { return 1; } }
 
-		public override TokenType Type
-		{
-			get { return TokenType.Ignored; }
-		}
+		public override bool IgnoreInTree
+		{ get { return true; } }
 
 		public override bool Matches(string lexeme)
 		{

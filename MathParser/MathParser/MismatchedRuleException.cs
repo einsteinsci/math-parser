@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathParser.Rules
+namespace MathParser
 {
 	public class MismatchedRuleException : Exception
 	{

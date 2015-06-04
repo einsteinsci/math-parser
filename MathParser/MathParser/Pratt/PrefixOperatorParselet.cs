@@ -5,17 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using MathParser.Lexing;
 using MathParser.ParseTree;
-using MathParser.Rules;
 using MathParser.Tokens;
 
 namespace MathParser.Pratt
 {
 	public class PrefixOperatorParselet : IPrefixParselet
 	{
-		public int Precedence
+		public Precedence Precedence
 		{ get; protected set; }
 
-		public PrefixOperatorParselet(int precedence)
+		public PrefixOperatorParselet(Precedence precedence)
 		{
 			Precedence = precedence;
 		}
@@ -24,24 +23,6 @@ namespace MathParser.Pratt
 		{
 			NodeFactor operand = parser.Parse(Precedence);
 			return UnaryPrefixRegistry.MakeNode(token.Class, operand);
-		}
-
-		[Obsolete]
-		public NodeOperatorUnary MakeNode(TokenClassOperator op, NodeFactor operand)
-		{
-			if (op == TokenClass.OperatorNot)
-			{
-				return new NodeOperatorNot(operand);
-			}
-			else if (op == TokenClass.OperatorNegative || op == TokenClass.OperatorMinus)
-			{
-				return new NodeOperatorNegative(operand);
-			}
-			else
-			{
-				throw new MismatchedRuleException(
-					"Not a valid unary prefix operator: " + op.ToString());
-			}
 		}
 	}
 }

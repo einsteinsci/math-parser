@@ -15,7 +15,7 @@ namespace MathParser.Tokens
 		public override string Operator
 		{ get { return "||"; } }
 
-		public override int PrecedenceLevel
+		public override Precedence PrecedenceLevel
 		{ get { return Precedence.CONDITIONAL_OR; } }
 
 		public override NodeFactor MakeFactor(NodeFactor[] args)

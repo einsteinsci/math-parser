@@ -12,11 +12,6 @@ namespace MathParser.Tokens
 		public override int LexerPriority
 		{ get { return TokenClassOperator.PRIORITY; } }
 
-		public override TokenType Type
-		{
-			get { return TokenType.Delimiter; }
-		}
-
 		public override bool Matches(string lexeme)
 		{
 			return lexeme == ",";

@@ -39,10 +39,6 @@ namespace MathParser.Pratt
 
 				Register(att.TokenInstance, att.NodeType);
 			}
-
-			//Register(TokenClass.OperatorNot, typeof(NodeOperatorNot));
-			//Register(TokenClass.OperatorMinus, typeof(NodeOperatorNegative));
-			//Register(TokenClass.OperatorNegative, typeof(NodeOperatorNegative));
 		}
 
 		public static void Register(TokenClass token, Type nodeType)

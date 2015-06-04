@@ -31,9 +31,6 @@ namespace MathParser.Tokens
 		public abstract string Closer
 		{ get; }
 
-		public override TokenType Type
-		{ get { return TokenType.Encloser; } }
-
 		public override bool Matches(string lexeme)
 		{
 			if (Side == EncloserSide.Opening)

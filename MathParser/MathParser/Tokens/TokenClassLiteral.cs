@@ -9,9 +9,6 @@ namespace MathParser.Tokens
 {
 	public abstract class TokenClassLiteral : TokenClass
 	{
-		public override TokenType Type
-		{ get { return TokenType.Literal; } }
-
 		public override int LexerPriority
 		{ get { return 5; } }
 

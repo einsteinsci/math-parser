@@ -22,7 +22,7 @@ namespace MathParser.Tokens
 
 			foreach (TokenClass t in TokenRegistry.Tokens)
 			{
-				if (t.Type == TokenType.Operator && t.Matches(lexeme))
+				if (t is TokenClassOperator && t.Matches(lexeme))
 				{
 					return false;
 				}

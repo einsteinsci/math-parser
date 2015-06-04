@@ -10,13 +10,40 @@ namespace MathParser.Pratt
 {
 	public static class UnaryPostfixRegistry
 	{
-		static Dictionary<TokenClass, RegItem> registry =
-			new Dictionary<TokenClass, RegItem>();
+		static Dictionary<TokenClass, Type> registry =
+			new Dictionary<TokenClass, Type>();
 
-		public static void Register(TokenClass token, Type nodeType, 
-			int precedence)
+		static UnaryPostfixRegistry()
 		{
-			Type _nodeTypeOperatorUnary = typeof(NodeOperatorBinary);
+			Init();
+		}
+
+		public static void Init()
+		{
+			List<Type> prefixes = Extensibility.
+				GetAllTypesWithAttribute<PostfixOperatorAttribute>();
+
+			foreach (Type t in prefixes)
+			{
+				object obj = t.GetCustomAttributes(typeof(PostfixOperatorAttribute),
+					false).FirstOrDefault();
+				PostfixOperatorAttribute att = obj as PostfixOperatorAttribute;
+
+				if (att == null)
+				{
+					Logger.Log(LogLevel.Error, Logger.REGISTRY,
+						"Attribute is null!");
+
+					System.Diagnostics.Debugger.Break();
+				}
+
+				Register(att.TokenInstance, att.NodeType);
+			}
+		}
+
+		public static void Register(TokenClass token, Type nodeType)
+		{
+			Type _nodeTypeOperatorUnary = typeof(NodeOperatorUnary);
 
 			if (!_nodeTypeOperatorUnary.IsAssignableFrom(nodeType))
 			{
@@ -24,40 +51,43 @@ namespace MathParser.Pratt
 					"Cannot register unary postfix operator without unary node.");
 			}
 
-			RegItem reg = new RegItem(nodeType, precedence);
-
 			if (registry.ContainsKey(token))
 			{
 				Logger.Log(LogLevel.Warning, Logger.REGISTRY,
 					"Key for " + token.ToString() + " already exists. Replacing with type " +
 					nodeType.ToString() + ".");
 
-				registry[token] = reg;
+				registry[token] = nodeType;
 			}
 			else
 			{
-				registry.Add(token, reg);
+				registry.Add(token, nodeType);
 			}
 		}
 
-		public sealed class RegItem
+		public static NodeOperatorUnary MakeNode(TokenClass token, NodeFactor left)
 		{
-			public Type NodeType
-			{ get; private set; }
-
-			public int PrecedenceLevel
-			{ get; private set; }
-
-			public RegItem(Type nodeType, int precedence)
+			if (!registry.ContainsKey(token))
 			{
-				NodeType = nodeType;
-				PrecedenceLevel = precedence;
+				throw new ArgumentOutOfRangeException(
+					"Cannot make unregistered node.");
 			}
 
-			public override string ToString()
-			{
-				return "{" + NodeType.Name + "}, PREC " + PrecedenceLevel;
-			}
+			Type nodeType = registry[token];
+
+			object obj = Activator.CreateInstance(nodeType, left);
+
+			return obj as NodeOperatorUnary;
+		}
+
+		public static Type Get(TokenClass tokenClass)
+		{
+			return registry[tokenClass];
+		}
+
+		public static List<TokenClass> GetTokens()
+		{
+			return registry.Keys.ToList();
 		}
 	}
 }

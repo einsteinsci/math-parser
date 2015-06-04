@@ -18,7 +18,7 @@ namespace MathParser.Test
 		{
 			Console.ForegroundColor = ConsoleColor.Green;
 			Logger.OnLog += Log;
-			Logger.DisableLogging("register");
+			//Logger.DisableLogging(Logger.REGISTRY);
 
 			string input = "";
 			Console.Write("Input> ");
@@ -30,12 +30,11 @@ namespace MathParser.Test
 			VariableRegistry.Global.Create("d", new ResultNumberReal(0));
 			VariableRegistry.Global.Create("e", new ResultNumberReal(0));
 
-			TokenStream stream = Lexer.Lex(input);
-			PrattParser pratt = new PrattParser(stream);
-			NodeFactor root = pratt.Parse();
+			TokenStream stream = Evaluator.Lex(input);
+			NodeFactor root = Evaluator.Parse(stream);
+			IResultValue res = Evaluator.Calculate(root);
 
-			// This is where evaluation occurs
-			IResultValue res = Evaluator.Evaluate(input);
+			//IResultValue res = Evaluator.Evaluate(input);
 			
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.Write("\nEvaluated: ");

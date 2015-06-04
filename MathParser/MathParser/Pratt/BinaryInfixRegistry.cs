@@ -43,7 +43,7 @@ namespace MathParser.Pratt
 		}
 
 		public static void Register(TokenClass token, Type nodeType, 
-			int precedence, bool rightAssociative = false)
+			Precedence precedence, bool rightAssociative = false)
 		{
 			Type _nodeOperatorBinary = typeof(NodeOperatorBinary);
 			if (!_nodeOperatorBinary.IsAssignableFrom(nodeType))
@@ -98,13 +98,13 @@ namespace MathParser.Pratt
 			public Type NodeType
 			{ get; private set; }
 
-			public int PrecedenceLevel
+			public Precedence PrecedenceLevel
 			{ get; private set; }
 
 			public bool IsRightAssociative
 			{ get; private set; }
 
-			public RegItem(Type nodeType, int precedence, bool rightAssociative = false)
+			public RegItem(Type nodeType, Precedence precedence, bool rightAssociative = false)
 			{
 				NodeType = nodeType;
 				PrecedenceLevel = precedence;

@@ -22,7 +22,7 @@ namespace MathParser.Pratt
 			}
 			else
 			{
-				throw new Rules.MismatchedRuleException("Not a valid boolean: " + token.Lexed);
+				throw new MismatchedRuleException("Not a valid boolean: " + token.Lexed);
 			}
 		}
 	}

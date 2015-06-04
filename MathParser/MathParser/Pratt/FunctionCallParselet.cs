@@ -12,7 +12,7 @@ namespace MathParser.Pratt
 {
 	public class FunctionCallParselet : IInfixParselet
 	{
-		public int PrecedenceLevel
+		public Precedence PrecedenceLevel
 		{ get { return Precedence.PRIMARY; } }
 
 		public NodeFactor Parse(PrattParser parser, NodeFactor left, Token token)

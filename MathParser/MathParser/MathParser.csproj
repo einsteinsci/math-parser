@@ -85,6 +85,7 @@
     <Compile Include="Pratt\NameParselet.cs" />
     <Compile Include="Pratt\NumberParselet.cs" />
     <Compile Include="Pratt\ParenthesisParselet.cs" />
+    <Compile Include="Pratt\PostfixOperatorAttribute.cs" />
     <Compile Include="Pratt\PostfixOperatorParselet.cs" />
     <Compile Include="Pratt\PrattParser.cs" />
     <Compile Include="Pratt\Precedence.cs" />
@@ -109,9 +110,7 @@
     <Compile Include="ParseTree\NodeOperatorModulus.cs" />
     <Compile Include="ParseTree\NodeOperatorMultiply.cs" />
     <Compile Include="ParseTree\NodeOperatorPlus.cs" />
-    <Compile Include="Rules\ITerm.cs" />
-    <Compile Include="Rules\MismatchedRuleException.cs" />
-    <Compile Include="Rules\Terminal.cs" />
+    <Compile Include="MismatchedRuleException.cs" />
     <Compile Include="TextUtils.cs" />
     <Compile Include="Lexing\Token.cs" />
     <Compile Include="Lexing\Lexer.cs" />
@@ -134,7 +133,6 @@
     <Compile Include="Tokens\TokenClassOperatorGreaterThanOrEqual.cs" />
     <Compile Include="Tokens\TokenClassOperatorLessThan.cs" />
     <Compile Include="Tokens\TokenClassOperatorLessThanOrEqual.cs" />
-    <Compile Include="Tokens\TokenClassOperatorNegative.cs" />
     <Compile Include="Tokens\TokenClassOperatorBitShiftLeft.cs" />
     <Compile Include="Tokens\TokenClassOperatorBitShiftRight.cs" />
     <Compile Include="Tokens\TokenClassOperatorDivide.cs" />
