@@ -10,13 +10,17 @@ using MathParser.ParseTree;
 namespace MathParser.Functions
 {
 	[FunctionLibrary("primary")]
-	public static class MathFunctions
+	public static class LibraryPrimaryFunctions
 	{
 		public static List<FunctionInfo> AllFunctions
 		{ get; private set; }
 
+		public static bool HasRegistered
+		{ get; private set; }
+
 		#region functions
 
+		#region trig
 		[Function]
 		public static FunctionInfo Sine
 		{ get { return sine; } }
@@ -59,6 +63,29 @@ namespace MathParser.Functions
 			(Func<double, double>)MathPlus.Trig.Cot, 
 			MathType.Real, "cot", MathType.Real);
 
+		[Function]
+		public static FunctionInfo ArcSine
+		{ get { return arcSine; } }
+		private static FunctionInfo arcSine = new FunctionInfo(
+			(Func<double, double>)MathPlus.Trig.ASin, 
+			MathType.Real, "asin", MathType.Real);
+
+		[Function]
+		public static FunctionInfo ArcCosine
+		{ get { return arcCosine; } }
+		private static FunctionInfo arcCosine = new FunctionInfo(
+			(Func<double, double>)MathPlus.Trig.ACos, 
+			MathType.Real, "acos", MathType.Real);
+
+		[Function]
+		public static FunctionInfo ArcTangent
+		{ get { return arcTangent; } }
+		private static FunctionInfo arcTangent = new FunctionInfo(
+			(Func<double, double>)MathPlus.Trig.ATan, 
+			MathType.Real, "atan", MathType.Real);
+		#endregion
+
+		#region numbers
 		[Function]
 		public static FunctionInfo LogarithmN
 		{ get { return logarithmN; } }
@@ -107,6 +134,7 @@ namespace MathParser.Functions
 		private static FunctionInfo min = new FunctionInfo(
 			(Func<double, double, double>)MathPlus.Min,
 			MathType.Real, "min", MathType.Real, MathType.Real);
+		#endregion
 
 		[Function]
 		public static FunctionInfo Substring
@@ -123,6 +151,13 @@ namespace MathParser.Functions
 			(Func<string, string>)HelpLibrary.GetHelp,
 			MathType.String, "help", MathType.String);
 
+		[Function]
+		public static FunctionInfo GetItem
+		{ get { return getItem; } }
+		private static FunctionInfo getItem = new FunctionInfo(
+			(Func<List<double>, long, double>)((list, i) => list[(int)i]),
+			MathType.Real, "get", MathType.List, MathType.Integer);
+
 		#endregion
 
 		public static FunctionInfo GetFunction(string name)
@@ -138,14 +173,27 @@ namespace MathParser.Functions
 			return null;
 		}
 
-		static MathFunctions()
+		static LibraryPrimaryFunctions()
 		{
+			Init();
+		}
+
+		public static void Init(bool force = false)
+		{
+			if (HasRegistered && !force)
+			{
+				return;
+			}
+
 			AllFunctions = new List<FunctionInfo>();
 			foreach (Assembly assembly in Extensibility.AllAssemblies)
 			{
+				Logger.Log(LogLevel.Info, Logger.REGISTRY, 
+					"Starting function registry for assembly " + assembly.GetName().Name);
+
 				foreach (Type type in assembly.GetTypes())
 				{
-					IEnumerable<FunctionLibraryAttribute> libatts = 
+					IEnumerable<FunctionLibraryAttribute> libatts =
 						type.GetCustomAttributes<FunctionLibraryAttribute>();
 
 					if (libatts == null || libatts.Count() == 0)
@@ -166,6 +214,7 @@ namespace MathParser.Functions
 						MethodInfo getter = prop.GetGetMethod(true);
 						FunctionInfo func = getter.Invoke(null, new object[0]) as FunctionInfo;
 
+						Logger.Log(LogLevel.Debug, Logger.REGISTRY, "Registering function: " + func.Name);
 						AllFunctions.Add(func);
 					}
 
@@ -184,10 +233,13 @@ namespace MathParser.Functions
 
 						FunctionInfo func = f.GetValue(null) as FunctionInfo;
 
+						Logger.Log(LogLevel.Debug, Logger.REGISTRY, "Registering function: " + func.Name);
 						AllFunctions.Add(func);
 					}
 				}
 			}
+
+			HasRegistered = true;
 		}
 	}
 }

@@ -17,7 +17,7 @@ namespace MathParser.Tokens
 		public const int PRIORITY = 3;
 
 		public abstract EncloserSide Side
-		{ get; protected set; }
+		{ get; }
 
 		public override int LexerPriority
 		{ get { return PRIORITY; } }
@@ -52,8 +52,7 @@ namespace MathParser.Tokens
 			case EncloserSide.Closing:
 				return "[" + EncloserName + "Out]";
 			default:
-				throw new ArgumentOutOfRangeException("this.Side", 
-					"Side is an invalid EncloserSide.");
+				return "[" + EncloserName + "Invalid]";
 			}
 		}
 	}

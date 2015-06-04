@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MathParser.Tokens
 {
 	[AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-	sealed class MakeTokenClassAttribute : Attribute
+	public sealed class MakeTokenClassAttribute : Attribute
 	{
 		public string TokenName
 		{ get; private set; }

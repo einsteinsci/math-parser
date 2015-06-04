@@ -8,6 +8,7 @@ using MathParser.Tokens;
 using MathParser.Lexing;
 using MathParser.ParseTree;
 using MathParser.Pratt;
+using MathParser.Functions;
 
 namespace MathParser
 {
@@ -31,6 +32,16 @@ namespace MathParser
 		static Evaluator()
 		{
 			Instance = new Evaluator();
+		}
+
+		/// <summary>
+		/// Option for preemptive initialization to prevent sudden lag during evaluation.
+		/// </summary>
+		public static void Initialize(bool force = false)
+		{
+			TokenRegistry.RegisterTokens(force);
+			LibraryPrimaryFunctions.Init(force);
+			PrattParser.Init(force);
 		}
 
 		#region parts

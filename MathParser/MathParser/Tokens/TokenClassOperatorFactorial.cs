@@ -15,15 +15,7 @@ namespace MathParser.Tokens
 		public override string Operator
 		{ get { return "!"; } }
 
-		public override Precedence PrecedenceLevel
-		{ get { return Precedence.PRIMARY; } } // highest precedence
-
 		public override int ArgumentCount
 		{ get { return 1; } }
-
-		public override NodeFactor MakeFactor(NodeFactor[] args)
-		{
-			return new NodeOperatorFactorial(args[0]);
-		}
 	}
 }

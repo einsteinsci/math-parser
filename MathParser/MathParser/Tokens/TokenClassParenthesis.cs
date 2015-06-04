@@ -10,7 +10,8 @@ namespace MathParser.Tokens
 	public sealed class TokenClassParenthesis : TokenClassEncloser
 	{
 		public override EncloserSide Side
-		{ get; protected set; }
+		{ get { return _side; } }
+		private EncloserSide _side;
 
 		public override string Opener
 		{
@@ -40,7 +41,7 @@ namespace MathParser.Tokens
 
 		public TokenClassParenthesis(EncloserSide side)
 		{
-			Side = side;
+			_side = side;
 		}
 
 		public TokenClassParenthesis() : this(EncloserSide.Opening)

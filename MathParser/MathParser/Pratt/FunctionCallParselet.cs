@@ -32,7 +32,7 @@ namespace MathParser.Pratt
 
 			NodeIdentifier name = left as NodeIdentifier;
 
-			return new NodeFunction(MathFunctions.GetFunction(name.IdentifierName), args.ToArray());
+			return new NodeFunction(LibraryPrimaryFunctions.GetFunction(name.IdentifierName), args.ToArray());
 		}
 	}
 }

@@ -13,14 +13,6 @@ namespace MathParser.Tokens
 	public class TokenClassOperatorNotEqual : TokenClassOperator
 	{
 		public override string Operator
-		{ get { return "<>"; } }
-
-		public override Precedence PrecedenceLevel
-		{ get { return Precedence.EQUALITY; } }
-
-		public override NodeFactor MakeFactor(NodeFactor[] args)
-		{
-			return new NodeOperatorNotEqual(args[0], args[1]);
-		}
+		{ get { return "~="; } }
 	}
 }

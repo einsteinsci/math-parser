@@ -8,11 +8,11 @@ using MathParser.Pratt;
 
 namespace MathParser.Tokens
 {
-	[BinaryOperator("operatorPlus", typeof(NodeOperatorPlus), Precedence.ADDITIVE)]
-	[MakeTokenClass("operatorPlus")]
-	public class TokenClassOperatorPlus : TokenClassOperator
+	[BinaryOperator("operatorConcatenate", typeof(NodeOperatorConcatenate), Precedence.ADDITIVE)]
+	[MakeTokenClass("operatorConcatenate")]
+	public class TokenClassOperatorConcatenate : TokenClassOperator
 	{
 		public override string Operator
-		{ get { return "+"; } }
+		{ get { return "&"; } }
 	}
 }

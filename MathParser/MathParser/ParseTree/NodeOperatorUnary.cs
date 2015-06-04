@@ -9,26 +9,34 @@ namespace MathParser.ParseTree
 {
 	public abstract class NodeOperatorUnary : NodeFactor
 	{
-		public virtual NodeFactor Term
+		public NodeFactor Operand
 		{ get; protected set; }
 
 		public abstract string StringForm
 		{ get; }
 
+		public override string NodeName
+		{ get { return "Operator " + StringForm + " "; } }
+
 		public override List<NodeFactor> Children
 		{
 			get
 			{
-				return new List<NodeFactor>() { Term };
+				return new List<NodeFactor>() { Operand };
 			}
 		}
 
 		public abstract TokenClass Operator
 		{ get; }
 
+		public NodeOperatorUnary(NodeFactor operand)
+		{
+			Operand = operand;
+		}
+
 		public override string ToString()
 		{
-			return "(" + StringForm + Term.ToString() + ")";
+			return "(" + StringForm + Operand.ToString() + ")";
 		}
 	}
 }

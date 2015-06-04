@@ -24,11 +24,6 @@ namespace MathParser.Tokens
 		public virtual bool IsRightAssociative
 		{ get { return false; } }
 
-		public abstract Precedence PrecedenceLevel
-		{ get; }
-
-		public abstract NodeFactor MakeFactor(NodeFactor[] args);
-
 		public override bool Matches(string lexeme)
 		{
 			return lexeme == Operator;

@@ -54,6 +54,11 @@ namespace MathParser.Functions
 			{
 				ReturnType = MathType.Boolean;
 			}
+			else if (ret == typeof(List<double>) || ret == typeof(double[]) ||
+				ret == typeof(List<float>) || ret == typeof(float[]))
+			{
+				ReturnType = MathType.List;
+			}
 			else if (ret == typeof(MathMatrix))
 			{
 				ReturnType = MathType.Matrix;
@@ -83,6 +88,11 @@ namespace MathParser.Functions
 				else if (t == typeof(bool))
 				{
 					ArgumentTypes.Add(MathType.Boolean);
+				}
+				else if (ret == typeof(List<double>) || ret == typeof(double[]) ||
+					ret == typeof(List<float>) || ret == typeof(float[]))
+				{
+					ArgumentTypes.Add(MathType.List);
 				}
 				else if (t == typeof(MathMatrix))
 				{
@@ -122,6 +132,9 @@ namespace MathParser.Functions
 				case MathType.Boolean:
 					argvals[i] = args[i].ToBoolean();
 					continue;
+				case MathType.List:
+					argvals[i] = args[i].ToList();
+					continue;
 				case MathType.Matrix:
 					argvals[i] = args[i].ToMatrix();
 					continue;
@@ -159,6 +172,22 @@ namespace MathParser.Functions
 					"Return type is of invalid Type: " +
 					res.GetType().ToString());
 			}
+		}
+
+		public override string ToString()
+		{
+			string res = ReturnType.ToString() + " " + Name + "(";
+			for (int i = 0; i < ArgumentCount; i++)
+			{
+				res += ArgumentTypes[i].ToString();
+
+				if (i < ArgumentCount - 1)
+				{
+					res += ", ";
+				}
+			}
+
+			return res + ")";
 		}
 	}
 }

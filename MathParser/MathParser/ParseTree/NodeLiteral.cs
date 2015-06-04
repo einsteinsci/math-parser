@@ -16,6 +16,9 @@ namespace MathParser.ParseTree
 			get { return new List<NodeFactor>(); }
 		}
 
+		public override string NodeName
+		{ get { return Type.ToString() + " " + Value.ToDisplay(); } }
+
 		public override IResultValue GetResult()
 		{
 			return Value;

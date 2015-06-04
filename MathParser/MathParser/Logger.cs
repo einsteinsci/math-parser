@@ -17,7 +17,9 @@ namespace MathParser
 
 	public static class Logger
 	{
-		public static event Action<LogLevel, string> OnLog;
+		public delegate void LogEvent(object sender, LoggerEventArgs e);
+
+		public static event LogEvent OnLog;
 
 		public const string LEXER = "tokenize";
 		public const string PARSER = "parse";
@@ -36,7 +38,7 @@ namespace MathParser
 			DisabledCategories = new List<string>();
 		}
 
-		public static void Log(LogLevel level, string category, string message)
+		public static void Log(LogLevel level, string category, string message, object sender = null)
 		{
 			if (level == LogLevel.Debug && !DebugLogging)
 			{
@@ -50,7 +52,7 @@ namespace MathParser
 
 			if (OnLog != null)
 			{
-				OnLog(level, "[" + category.ToUpper() + "] " + message);
+				OnLog(sender, new LoggerEventArgs(level, category, message));
 			}
 		}
 

@@ -9,14 +9,17 @@ namespace MathParser.ParseTree
 {
 	public abstract class NodeOperatorBinary : NodeFactor
 	{
-		public virtual NodeFactor First
+		public NodeFactor First
 		{ get; protected set; }
 
-		public virtual NodeFactor Second
+		public NodeFactor Second
 		{ get; protected set; }
 
 		public abstract string StringForm
 		{ get; }
+
+		public override string NodeName
+		{ get { return "Operator " + StringForm + " "; } }
 
 		public override List<NodeFactor> Children
 		{
@@ -34,6 +37,12 @@ namespace MathParser.ParseTree
 
 		public virtual bool IsRightAssociative
 		{ get { return false; } }
+
+		public NodeOperatorBinary(NodeFactor first, NodeFactor second)
+		{
+			First = first;
+			Second = second;
+		}
 
 		public override string ToString()
 		{

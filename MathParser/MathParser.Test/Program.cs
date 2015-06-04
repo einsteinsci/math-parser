@@ -16,10 +16,12 @@ namespace MathParser.Test
 	{
 		static void Main(string[] args)
 		{
-			Console.ForegroundColor = ConsoleColor.Green;
 			Logger.OnLog += Log;
-			//Logger.DisableLogging(Logger.REGISTRY);
+			Logger.DisableLogging(Logger.REGISTRY);
 
+			Evaluator.Initialize();
+
+			Console.ForegroundColor = ConsoleColor.Green;
 			string input = "";
 			Console.Write("Input> ");
 			input = Console.ReadLine();
@@ -37,7 +39,7 @@ namespace MathParser.Test
 			//IResultValue res = Evaluator.Evaluate(input);
 			
 			Console.ForegroundColor = ConsoleColor.Green;
-			Console.Write("\nEvaluated: ");
+			Console.Write("Evaluated: ");
 			Console.ForegroundColor = ConsoleColor.Yellow;
 			Console.Write(input); 
 			Console.ForegroundColor = ConsoleColor.Green;
@@ -46,9 +48,9 @@ namespace MathParser.Test
 			Console.ReadKey(true);
 		}
 
-		static void Log(LogLevel level, string message)
+		static void Log(object sender, LoggerEventArgs e)
 		{
-			switch (level)
+			switch (e.Level)
 			{
 			case LogLevel.Debug:
 				Console.ForegroundColor = ConsoleColor.Gray;
@@ -70,7 +72,7 @@ namespace MathParser.Test
 				break;
 			}
 
-			Console.WriteLine("" + message);
+			Console.WriteLine("" + e.FullText);
 
 			Console.ForegroundColor = ConsoleColor.White;
 		}

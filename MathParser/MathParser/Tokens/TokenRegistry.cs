@@ -86,12 +86,14 @@ namespace MathParser.Tokens
 			return null;
 		}
 
-		public static void RegisterTokens()
+		public static void RegisterTokens(bool force = false)
 		{
-			if (HasRegistered)
+			if (HasRegistered && !force)
 			{
 				return;
 			}
+
+			Logger.Log(LogLevel.Info, Logger.REGISTRY, "Starting token registration.");
 
 			Registry = new List<RegistryItem>();
 

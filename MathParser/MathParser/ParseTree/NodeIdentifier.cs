@@ -9,13 +9,16 @@ namespace MathParser.ParseTree
 	public class NodeIdentifier : NodeFactor
 	{
 		public override MathType Type
-		{ get { return StoredValue.Type; } }
+		{ get { return StoredValue != null ? StoredValue.Type : (MathType)0; } }
 
 		public IResultValue StoredValue
 		{ get; set; }
 
 		public string IdentifierName
 		{ get; set; }
+
+		public override string NodeName
+		{ get { return IdentifierName; } }
 
 		public override List<NodeFactor> Children
 		{

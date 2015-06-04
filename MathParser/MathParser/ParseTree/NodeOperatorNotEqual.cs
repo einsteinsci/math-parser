@@ -12,7 +12,7 @@ namespace MathParser.ParseTree
 	public class NodeOperatorNotEqual : NodeOperatorBinary
 	{
 		public override string StringForm
-		{ get { return "<>"; } }
+		{ get { return "~="; } }
 
 		public override TokenClass Operator
 		{ get { return TokenClass.OperatorNotEqual; } }
@@ -20,11 +20,9 @@ namespace MathParser.ParseTree
 		public override MathType Type
 		{ get { return MathType.Boolean; } }
 
-		public NodeOperatorNotEqual(NodeFactor first, NodeFactor second)
-		{
-			First = first;
-			Second = second;
-		}
+		public NodeOperatorNotEqual(NodeFactor first, NodeFactor second) :
+			base(first, second)
+		{ }
 
 		public override IResultValue GetResult()
 		{

@@ -12,17 +12,16 @@ namespace MathParser.ParseTree
 		public override TokenClass Operator
 		{ get { return TokenClass.OperatorPlus; } }
 
+		// VB style
 		public override string StringForm
-		{ get { return "+"; } }
+		{ get { return "&"; } }
 
 		public override MathType Type
 		{ get { return MathType.String; } }
 
-		public NodeOperatorConcatenate(NodeFactor first, NodeFactor second)
-		{
-			First = first;
-			Second = second;
-		}
+		public NodeOperatorConcatenate(NodeFactor first, NodeFactor second) :
+			base(first, second)
+		{ }
 
 		public override IResultValue GetResult()
 		{

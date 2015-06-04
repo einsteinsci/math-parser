@@ -14,15 +14,7 @@ namespace MathParser.Tokens
 		public override string Operator
 		{ get { return ":="; } }
 
-		public override Precedence PrecedenceLevel
-		{ get { return Precedence.ASSIGNMENT; } }
-
 		public override bool IsRightAssociative
 		{ get { return true; } }
-
-		public override NodeFactor MakeFactor(NodeFactor[] args)
-		{
-			return new NodeOperatorAssigment(args[0], args[1]);
-		}
 	}
 }

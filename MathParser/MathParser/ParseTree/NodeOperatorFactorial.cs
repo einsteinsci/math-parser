@@ -21,14 +21,12 @@ namespace MathParser.ParseTree
 		public override MathType Type
 		{ get { return MathType.Integer; } }
 
-		public NodeOperatorFactorial(NodeFactor term)
-		{
-			Term = term;
-		}
+		public NodeOperatorFactorial(NodeFactor operand) : base(operand)
+		{ }
 
 		public override IResultValue GetResult()
 		{
-			IResultValue res = Term.GetResult();
+			IResultValue res = Operand.GetResult();
 
 			if (!res.ToDouble().IsInteger(8))
 			{
@@ -41,7 +39,7 @@ namespace MathParser.ParseTree
 
 		public override string ToString()
 		{
-			return "(" + Term.ToString() + "!)";
+			return "(" + Operand.ToString() + "!)";
 		}
 	}
 }

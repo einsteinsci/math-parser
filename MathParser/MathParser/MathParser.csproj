@@ -53,7 +53,8 @@
     <Compile Include="Functions\FunctionAttribute.cs" />
     <Compile Include="Functions\FunctionInfo.cs" />
     <Compile Include="Functions\FunctionLibraryAttribute.cs" />
-    <Compile Include="Functions\MathFunctions.cs" />
+    <Compile Include="Functions\LibraryPrimaryFunctions.cs" />
+    <Compile Include="LoggerEventArgs.cs" />
     <Compile Include="ParseTree\NodeFactor.cs" />
     <Compile Include="ParseTree\NodeFunction.cs" />
     <Compile Include="ParseTree\NodeIdentifier.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="ParseTree\NodeOperatorNot.cs" />
     <Compile Include="ParseTree\NodeOperatorNotEqual.cs" />
     <Compile Include="ParseTree\NodeOperatorUnary.cs" />
+    <Compile Include="Pratt\InfixLoadingEventArgs.cs" />
     <Compile Include="Pratt\ListLiteralParselet.cs" />
     <Compile Include="Pratt\BinaryInfixRegistry.cs" />
     <Compile Include="Pratt\BinaryOperatorAttribute.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Pratt\PostfixOperatorParselet.cs" />
     <Compile Include="Pratt\PrattParser.cs" />
     <Compile Include="Pratt\Precedence.cs" />
+    <Compile Include="Pratt\PrefixLoadingEventArgs.cs" />
     <Compile Include="Pratt\PrefixOperatorAttribute.cs" />
     <Compile Include="Pratt\PrefixOperatorParselet.cs" />
     <Compile Include="Pratt\StringParselet.cs" />
@@ -125,6 +128,7 @@
     <Compile Include="Tokens\TokenClassIdentifier.cs" />
     <Compile Include="Tokens\TokenClassLiteral.cs" />
     <Compile Include="Tokens\TokenClassOperatorAssignment.cs" />
+    <Compile Include="Tokens\TokenClassOperatorConcatenate.cs" />
     <Compile Include="Tokens\TokenClassOperatorConditionalAnd.cs" />
     <Compile Include="Tokens\TokenClassOperatorConditionalOr.cs" />
     <Compile Include="Tokens\TokenClassOperatorEqual.cs" />

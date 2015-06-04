@@ -15,6 +15,9 @@ namespace MathParser.ParseTree
 		public override MathType Type
 		{ get { return MathType.List; } }
 
+		public override string NodeName
+		{ get { return "list"; } }
+
 		public NodeListLiteral(IEnumerable<NodeFactor> nodes)
 		{
 			elements = nodes.ToList();

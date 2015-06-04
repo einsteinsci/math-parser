@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 namespace MathParser.Tokens
 {
 	[MakeTokenClass("brace", Custom = true)]
-	public class TokenClassBrace : TokenClassEncloser
+	public sealed class TokenClassBrace : TokenClassEncloser
 	{
 		public override EncloserSide Side
-		{ get; protected set; }
+		{ get { return _side; } }
+		private EncloserSide _side;
 
 		public override string EncloserName
 		{
@@ -40,7 +41,7 @@ namespace MathParser.Tokens
 
 		public TokenClassBrace(EncloserSide side)
 		{
-			Side = side;
+			_side = side;
 		}
 
 		public TokenClassBrace() : this(EncloserSide.Opening)

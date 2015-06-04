@@ -30,6 +30,8 @@ namespace MathParser.Lexing
 				return;
 			}
 
+			Logger.Log(LogLevel.Info, Logger.LEXER, "Beginning lexing...");
+
 			string lexeme = "";
 
 			#region lexing
@@ -75,7 +77,7 @@ namespace MathParser.Lexing
 
 				if (validCurrent.Count == 0)
 				{
-					Logger.Log(LogLevel.Warning, Logger.LEXER, 
+					Logger.Log(LogLevel.Debug, Logger.LEXER, 
 						"No last-choice Tokens. Waiting on " + lexeme);
 					lexeme += c;
 					if (!lexeme.StartsWith("\""))
@@ -88,7 +90,7 @@ namespace MathParser.Lexing
 				if (validCurrent.Count > 1)
 				{
 					Logger.Log(LogLevel.Warning, Logger.LEXER,
-						"Multiple last-choice Tokens:  " +
+						"Multiple last-choice Tokens: " +
 						TokensToString(validCurrent));
 				}
 
@@ -118,11 +120,11 @@ namespace MathParser.Lexing
 			string info = "";
 			foreach (Token l in Lexed)
 			{
-				info += l.ToString() + "\n\t";
+				info += l.ToString() + "\n    ";
 			}
 			info = info.Trim();
-			Logger.Log(LogLevel.Debug, Logger.LEXER,
-				"Lexing complete:\n\t" + info);
+			Logger.Log(LogLevel.Info, Logger.LEXER, "Lexing complete.");
+			Logger.Log(LogLevel.Debug, Logger.LEXER, "Tokens: \n    " + info);
 		}
 
 		public void FinalizeToken(TokenClass token, string lexeme)

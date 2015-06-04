@@ -17,6 +17,9 @@ namespace MathParser.ParseTree
 		public abstract List<NodeFactor> Children
 		{ get; }
 
+		public virtual string NodeName
+		{ get { return GetType().Name; } }
+
 		public NodeFactor Parent
 		{ get; protected set; }
 
@@ -25,6 +28,17 @@ namespace MathParser.ParseTree
 		public virtual string GetResultString()
 		{
 			return GetResult().ToString();
+		}
+
+		public virtual string GetTreeString(string depthSpaces = "")
+		{
+			string res = depthSpaces + "<" + NodeName + ">\n";
+			foreach (NodeFactor child in Children)
+			{
+				res += child.GetTreeString(depthSpaces + "  ");
+			}
+
+			return res;
 		}
 	}
 }

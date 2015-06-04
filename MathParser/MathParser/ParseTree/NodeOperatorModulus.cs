@@ -22,6 +22,10 @@ namespace MathParser.ParseTree
 		public override string StringForm
 		{ get { return "%"; } }
 
+		public NodeOperatorModulus(NodeFactor first, NodeFactor second) :
+			base(first, second)
+		{ }
+
 		public override IResultValue GetResult()
 		{
 			IResultValue res1 = First.GetResult();
@@ -39,12 +43,6 @@ namespace MathParser.ParseTree
 			}
 
 			return new ResultNumberReal(res1.ToInteger() % res2.ToInteger());
-		}
-
-		public NodeOperatorModulus(NodeFactor first, NodeFactor second)
-		{
-			First = first;
-			Second = second;
 		}
 	}
 }

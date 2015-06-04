@@ -37,21 +37,23 @@ namespace MathParser.Tokens
 		public static TokenClass OperatorMultiply		{ get { return TokenRegistry.Get("operatorMultiply"); } }
 		public static TokenClass OperatorDivide			{ get { return TokenRegistry.Get("operatorDivide"); } }
 		public static TokenClass OperatorExponent		{ get { return TokenRegistry.Get("operatorExponent"); } }
+
 		public static TokenClass OperatorModulus		{ get { return TokenRegistry.Get("operatorModulus"); } }
 		public static TokenClass OperatorBitShiftLeft	{ get { return TokenRegistry.Get("operatorBitShiftLeft"); } }
 		public static TokenClass OperatorBitShiftRight	{ get { return TokenRegistry.Get("operatorBitShiftRight"); } }
 		public static TokenClass OperatorFactorial		{ get { return TokenRegistry.Get("operatorFactorial"); } }
-		public static TokenClass OperatorNot			{ get { return TokenRegistry.Get("operatorNot"); } }
 
+		public static TokenClass OperatorNot			{ get { return TokenRegistry.Get("operatorNot"); } }
 		public static TokenClass OperatorConditionalAnd	{ get { return TokenRegistry.Get("operatorConditionalAnd"); } }
 		public static TokenClass OperatorConditionalOr	{ get { return TokenRegistry.Get("operatorConditionalOr"); } }
-
 		public static TokenClass OperatorEqual			{ get { return TokenRegistry.Get("operatorEqual"); } }
 		public static TokenClass OperatorNotEqual		{ get { return TokenRegistry.Get("operatorNotEqual"); } }
 		public static TokenClass OperatorGreaterThan	{ get { return TokenRegistry.Get("operatorGreaterThan"); } }
 		public static TokenClass OperatorLessThan		{ get { return TokenRegistry.Get("operatorLessThan"); } }
 		public static TokenClass OperatorGreaterThanOrEqual		{ get { return TokenRegistry.Get("operatorGreaterThanOrEqual"); } }
 		public static TokenClass OperatorLessThanOrEqual		{ get { return TokenRegistry.Get("operatorLessThanOrEqual"); } }
+
+		public static TokenClass OperatorConcatenate	{ get { return TokenRegistry.Get("operatorConcatenate"); } }
 
 		public static TokenClass OperatorAssignment		{ get { return TokenRegistry.Get("operatorAssigment"); } }
 

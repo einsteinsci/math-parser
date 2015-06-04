@@ -18,11 +18,9 @@ namespace MathParser.ParseTree
 		public override MathType Type
 		{ get { return MathType.Boolean; } }
 
-		public NodeOperatorLessThanOrEqual(NodeFactor first, NodeFactor second)
-		{
-			First = first;
-			Second = second;
-		}
+		public NodeOperatorLessThanOrEqual(NodeFactor first, NodeFactor second) :
+			base(first, second)
+		{ }
 
 		public override IResultValue GetResult()
 		{

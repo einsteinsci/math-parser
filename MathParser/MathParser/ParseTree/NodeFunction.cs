@@ -19,6 +19,9 @@ namespace MathParser.ParseTree
 		{ get { return arguments; } }
 		protected List<NodeFactor> arguments;
 
+		public override string NodeName
+		{ get { return FuncInfo.Name + "()"; } }
+
 		public NodeFunction(FunctionInfo info, params NodeFactor[] args)
 		{
 			arguments = args.ToList();

@@ -18,14 +18,12 @@ namespace MathParser.ParseTree
 		public override MathType Type
 		{ get { return MathType.Boolean; } }
 
-		public NodeOperatorNot(NodeFactor term)
-		{
-			Term = term;
-		}
+		public NodeOperatorNot(NodeFactor operand) : base(operand)
+		{ }
 
 		public override IResultValue GetResult()
 		{
-			return new ResultBoolean(!Term.GetResult().ToBoolean());
+			return new ResultBoolean(!Operand.GetResult().ToBoolean());
 		}
 	}
 }
