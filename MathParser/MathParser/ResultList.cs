@@ -66,12 +66,17 @@ namespace MathParser
 		public override string ToString()
 		{
 			string res = "{ ";
-			foreach (double d in Value)
+			for (int i = 0; i < Value.Count; i++)
 			{
-				res += d.ToString() + ";";
+				res += Value[i].ToString();
+
+				if (i < Value.Count - 1)
+				{
+					res += ", ";
+				}
 			}
 
-			return res;
+			return res + " }";
 		}
 	}
 }

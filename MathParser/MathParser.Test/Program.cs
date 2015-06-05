@@ -32,6 +32,8 @@ namespace MathParser.Test
 			VariableRegistry.Global.Create("d", new ResultNumberReal(0));
 			VariableRegistry.Global.Create("e", new ResultNumberReal(0));
 
+			VariableRegistry.Global.Create("L1", new ResultList(1, 2, 3, 4, 5));
+
 			TokenStream stream = Evaluator.Lex(input);
 			NodeFactor root = Evaluator.Parse(stream);
 			IResultValue res = Evaluator.Calculate(root);

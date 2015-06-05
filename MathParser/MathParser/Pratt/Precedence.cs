@@ -28,6 +28,6 @@ namespace MathParser.Pratt
 		PREFIX = 12,
 		POSTFIX = 13,
 		EXPONENTIAL = 14,
-		PRIMARY = 15, // also method calls
+		PRIMARY = 15, // also method calls and ordinal access
 	}
 }

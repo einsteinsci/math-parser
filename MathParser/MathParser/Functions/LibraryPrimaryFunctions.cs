@@ -134,6 +134,20 @@ namespace MathParser.Functions
 		private static FunctionInfo min = new FunctionInfo(
 			(Func<double, double, double>)MathPlus.Min,
 			MathType.Real, "min", MathType.Real, MathType.Real);
+
+		[Function]
+		public static FunctionInfo Random
+		{ get { return random; } }
+		private static FunctionInfo random = new FunctionInfo(
+			(Func<double>)(() => MathPlus.Probability.Rand.NextDouble()),
+			MathType.Real, "rand");
+
+		[Function]
+		public static FunctionInfo RandInt
+		{ get { return randInt; } }
+		private static FunctionInfo randInt = new FunctionInfo(
+			(Func<long, long, double>)((a, b) => MathPlus.Probability.Rand.Next(a, b)),
+			MathType.Real, "randint", MathType.Integer, MathType.Integer);
 		#endregion
 
 		[Function]
@@ -152,11 +166,18 @@ namespace MathParser.Functions
 			MathType.String, "help", MathType.String);
 
 		[Function]
-		public static FunctionInfo GetItem
-		{ get { return getItem; } }
-		private static FunctionInfo getItem = new FunctionInfo(
-			(Func<List<double>, long, double>)((list, i) => list[(int)i]),
-			MathType.Real, "get", MathType.List, MathType.Integer);
+		public static FunctionInfo MaxList
+		{ get { return maxList; } }
+		private static FunctionInfo maxList = new FunctionInfo(
+			(Func<List<double>, double>)((list) => MathPlus.Max(list)),
+			MathType.Real, "maxl", MathType.List);
+
+		[Function]
+		public static FunctionInfo MinList
+		{ get { return minList; } }
+		private static FunctionInfo minList = new FunctionInfo(
+			(Func<List<double>, double>)((list) => MathPlus.Min(list)),
+			MathType.Real, "minl", MathType.List);
 
 		#endregion
 

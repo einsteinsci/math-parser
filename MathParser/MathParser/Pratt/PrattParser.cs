@@ -82,6 +82,7 @@ namespace MathParser.Pratt
 
 			Logger.Log(LogLevel.Debug, Logger.REGISTRY, "Registering infix and postfix parselets.");
 			InfixParselets.Add(TokenClass.ParenthesisIn, new FunctionCallParselet());
+			InfixParselets.Add(TokenClass.BracketIn, new ListOrdinalParselet());
 
 			foreach (TokenClass tc in BinaryInfixRegistry.GetTokens())
 			{

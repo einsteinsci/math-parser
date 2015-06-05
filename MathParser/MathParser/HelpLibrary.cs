@@ -44,8 +44,6 @@ namespace MathParser
 			RegisterHelp("substring", "String substring(String str, Integer start, Integer len)\n" +
 				" - Returns the substring of str starting from index start, len characters long");
 			RegisterHelp("help", "String help(string funcName)\n - Returns information on a function, like this");
-
-			RegisterHelp("get", "Real get(List, Integer)\n - Gets an item from a list");
 		}
 
 		public static void RegisterHelp(string functionName, string help)
