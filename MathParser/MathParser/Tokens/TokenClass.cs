@@ -21,6 +21,7 @@ namespace MathParser.Tokens
 		public virtual Dictionary<string, TokenClass> CustomRegistry
 		{ get { return null; } }
 
+		#region tokens
 		public static TokenClass Comment				{ get { return TokenRegistry.Get("comment"); } }
 
 		public static TokenClass Comma					{ get { return TokenRegistry.Get("comma"); } }
@@ -65,5 +66,6 @@ namespace MathParser.Tokens
 		public static TokenClass Identifier				{ get { return TokenRegistry.Get("identifier"); } }
 
 		public static TokenClass Unrecognized			{ get { return TokenRegistry.Get("unrecognized"); } }
+		#endregion
 	}
 }
