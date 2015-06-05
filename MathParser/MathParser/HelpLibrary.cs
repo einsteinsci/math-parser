@@ -43,7 +43,14 @@ namespace MathParser
 
 			RegisterHelp("substring", "String substring(String str, Integer start, Integer len)\n" +
 				" - Returns the substring of str starting from index start, len characters long");
+
 			RegisterHelp("help", "String help(string funcName)\n - Returns information on a function, like this");
+
+			RegisterHelp("minl", "Real minl(List)\n - Returns the lowest value of the list");
+			RegisterHelp("maxl", "Real maxl(List)\n - Returns the highest value of the list");
+			RegisterHelp("mean", "Real mean(List)\n - Returns the mean of all the values in the list");
+			RegisterHelp("sd", "Real sd(List)\n - Returns the standard deviation of all the values in the list");
+			RegisterHelp("rms", "Real rms(list)\n - Returns the root-mean-square value of the list");
 		}
 
 		public static void RegisterHelp(string functionName, string help)

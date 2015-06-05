@@ -146,7 +146,7 @@ namespace MathParser.Functions
 		public static FunctionInfo RandInt
 		{ get { return randInt; } }
 		private static FunctionInfo randInt = new FunctionInfo(
-			(Func<long, long, double>)((a, b) => MathPlus.Probability.Rand.Next(a, b)),
+			(Func<long, long, double>)((a, b) => MathPlus.Probability.Rand.Next((int)a, (int)b)),
 			MathType.Real, "randint", MathType.Integer, MathType.Integer);
 		#endregion
 
@@ -178,6 +178,27 @@ namespace MathParser.Functions
 		private static FunctionInfo minList = new FunctionInfo(
 			(Func<List<double>, double>)((list) => MathPlus.Min(list)),
 			MathType.Real, "minl", MathType.List);
+
+		[Function]
+		public static FunctionInfo Mean
+		{ get { return mean; } }
+		private static FunctionInfo mean = new FunctionInfo(
+			(Func<List<double>, double>)((list) => MathPlus.Stats.Mean(list)),
+			MathType.Real, "mean", MathType.List);
+
+		[Function]
+		public static FunctionInfo StdDev
+		{ get { return stdDev; } }
+		private static FunctionInfo stdDev = new FunctionInfo(
+			(Func<List<double>, double>)((list) => MathPlus.Stats.StandardDev(list)),
+			MathType.Real, "sd", MathType.List);
+
+		[Function]
+		public static FunctionInfo RootMeanSquare
+		{ get { return rootMeanSquare; } }
+		private static FunctionInfo rootMeanSquare = new FunctionInfo(
+			(Func<List<double>, double>)((list) => MathPlus.Stats.RootMeanSquare(list)),
+			MathType.Real, "rms", MathType.List);
 
 		#endregion
 

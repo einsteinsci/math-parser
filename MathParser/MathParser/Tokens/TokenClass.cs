@@ -55,7 +55,11 @@ namespace MathParser.Tokens
 
 		public static TokenClass OperatorConcatenate	{ get { return TokenRegistry.Get("operatorConcatenate"); } }
 
+		[Obsolete]
 		public static TokenClass OperatorAssignment		{ get { return TokenRegistry.Get("operatorAssigment"); } }
+
+		public static TokenClass OperatorQuestion		{ get { return TokenRegistry.Get("operatorQuestion"); } }
+		public static TokenClass OperatorColon			{ get { return TokenRegistry.Get("operatorColon"); } }
 
 		public static TokenClass Number					{ get { return TokenRegistry.Get("number"); } }
 		public static TokenClass String					{ get { return TokenRegistry.Get("string"); } }

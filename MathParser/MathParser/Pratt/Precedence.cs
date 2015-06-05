@@ -14,7 +14,7 @@ namespace MathParser.Pratt
 	public enum Precedence : int
 	{
 		ASSIGNMENT = 0,
-		//CONDITIONAL_TERNARY = 1,
+		CONDITIONAL_TERNARY = 1,
 		CONDITIONAL_OR = 2,
 		CONDITIONAL_AND = 3,
 		//LOGICAL_OR = 4,
