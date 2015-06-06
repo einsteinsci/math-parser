@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 using MathParser;
-using MathParser.Tokens;
+using MathParser.Lexing;
 using MathParser.Types;
 
 using MathParser.ParseTree;
-using MathParser.Pratt;
 
 namespace MathParser.Test
 {

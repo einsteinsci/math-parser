@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using MathParser.Tokens;
+using MathParser.Lexing;
 using MathParser.ParseTree;
-using MathParser.Pratt;
+using MathParser.Parsing;
 using MathParser.Functions;
 using MathParser.Types;
 

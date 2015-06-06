@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MathParser.Types;
 
-using MathParser.Tokens;
+using MathParser.Lexing;
 
 namespace MathParser.ParseTree
 {

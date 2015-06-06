@@ -9,9 +9,9 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorMinus : NodeOperatorBinary
 	{
-		public override Tokens.TokenType Operator
+		public override Lexing.TokenType Operator
 		{
-			get { return Tokens.TokenType.OperatorMinus; }
+			get { return Lexing.TokenType.OperatorMinus; }
 		}
 
 		public override MathType Type

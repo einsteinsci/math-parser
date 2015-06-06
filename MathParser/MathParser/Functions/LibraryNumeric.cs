@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MathPlusLib;
-using MathParser.Tokens;
+using MathParser.Lexing;
 using MathParser.Types;
 
 namespace MathParser.Functions
