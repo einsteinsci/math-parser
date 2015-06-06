@@ -10,9 +10,9 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorMultiply : NodeOperatorBinary
 	{
-		public override TokenClass Operator
+		public override TokenType Operator
 		{
-			get { return TokenClass.OperatorMultiply; }
+			get { return TokenType.OperatorMultiply; }
 		}
 
 		public override MathType Type

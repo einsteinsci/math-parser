@@ -20,9 +20,9 @@ namespace MathParser.Lexing
 
 		public void Lex()
 		{
-			if (!TokenRegistry.HasRegistered)
+			if (!TokenTypeRegistry.HasRegistered)
 			{
-				TokenRegistry.RegisterTokens();
+				TokenTypeRegistry.RegisterTokens();
 			}
 
 			if (Expression == null)
@@ -40,10 +40,10 @@ namespace MathParser.Lexing
 				char c = Expression[index];
 				char? nextC = index < Expression.Length - 1 ? (char?)Expression[index + 1] : null;
 
-				List<TokenClass> validCurrent = ValidTokens(lexeme);
-				List<TokenClass> validNext = ValidTokens(lexeme + c);
-				List<TokenClass> validNextNext = nextC != null ? 
-					ValidTokens(lexeme + c + nextC.Value) : new List<TokenClass>();
+				List<TokenType> validCurrent = ValidTokens(lexeme);
+				List<TokenType> validNext = ValidTokens(lexeme + c);
+				List<TokenType> validNextNext = nextC != null ? 
+					ValidTokens(lexeme + c + nextC.Value) : new List<TokenType>();
 
 				if (lexeme == "")
 				{
@@ -98,7 +98,7 @@ namespace MathParser.Lexing
 				lexeme = c.ToString();
 			}
 
-			List<TokenClass> validCurrent_ = ValidTokens(lexeme);
+			List<TokenType> validCurrent_ = ValidTokens(lexeme);
 
 			if (validCurrent_.Count == 0)
 			{
@@ -113,7 +113,7 @@ namespace MathParser.Lexing
 					TokensToString(validCurrent_));
 			}
 
-			TokenClass tok = validCurrent_.FirstOrDefault();
+			TokenType tok = validCurrent_.FirstOrDefault();
 			FinalizeToken(tok, lexeme);
 			#endregion
 
@@ -127,13 +127,13 @@ namespace MathParser.Lexing
 			Logger.Log(LogLevel.Debug, Logger.LEXER, "Tokens: \n    " + info);
 		}
 
-		public void FinalizeToken(TokenClass token, string lexeme)
+		public void FinalizeToken(TokenType token, string lexeme)
 		{
 			if (token == null)
 			{
 				Logger.Log(LogLevel.Error, Logger.LEXER, 
 					"Token is null. Filling with Unrecognized.");
-				Lexed.Add(new Token(TokenClass.Unrecognized, lexeme));
+				Lexed.Add(new Token(TokenType.Unrecognized, lexeme));
 				System.Diagnostics.Debugger.Break();
 				return;
 			}
@@ -143,10 +143,10 @@ namespace MathParser.Lexing
 			Lexed.Add(new Token(token, lexeme));
 		}
 		
-		public static string TokensToString(List<TokenClass> tokens)
+		public static string TokensToString(List<TokenType> tokens)
 		{
 			string res = "{ ";
-			foreach (TokenClass t in tokens)
+			foreach (TokenType t in tokens)
 			{
 				res += t.ToString() + ",";
 			}
@@ -154,17 +154,17 @@ namespace MathParser.Lexing
 			return res.TrimEnd(',') + " }";
 		}
 
-		public static List<TokenClass> ValidTokens(string lexeme)
+		public static List<TokenType> ValidTokens(string lexeme)
 		{
 			if (lexeme == "")
 			{
-				return TokenRegistry.Tokens;
+				return TokenTypeRegistry.Tokens;
 			}
 
-			List<TokenClass> res = new List<TokenClass>();
-			foreach (TokenClass token in TokenRegistry.Tokens)
+			List<TokenType> res = new List<TokenType>();
+			foreach (TokenType token in TokenTypeRegistry.Tokens)
 			{
-				if (token.Matches(lexeme) && token != TokenClass.Unrecognized)
+				if (token.Matches(lexeme) && token != TokenType.Unrecognized)
 				{
 					res.Add(token);
 				}

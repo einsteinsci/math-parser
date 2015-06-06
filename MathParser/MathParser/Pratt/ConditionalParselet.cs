@@ -17,7 +17,7 @@ namespace MathParser.Pratt
 		public NodeFactor Parse(PrattParser parser, NodeFactor left, Token token)
 		{
 			NodeFactor onTrue = parser.Parse();
-			parser.Consume(TokenClass.OperatorColon);
+			parser.Consume(TokenType.OperatorColon);
 			NodeFactor onFalse = parser.Parse();
 
 			return new NodeOperatorConditional(left, onTrue, onFalse);

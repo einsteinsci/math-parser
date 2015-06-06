@@ -9,8 +9,8 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorConcatenate : NodeOperatorBinary
 	{
-		public override TokenClass Operator
-		{ get { return TokenClass.OperatorPlus; } }
+		public override TokenType Operator
+		{ get { return TokenType.OperatorPlus; } }
 
 		// VB style
 		public override string StringForm

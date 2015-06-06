@@ -9,10 +9,10 @@ namespace MathParser.Pratt
 {
 	public class InfixLoadingEventArgs : EventArgs
 	{
-		public Dictionary<TokenClass, IInfixParselet> Existing
+		public Dictionary<TokenType, IInfixParselet> Existing
 		{ get; private set; }
 
-		internal InfixLoadingEventArgs(Dictionary<TokenClass, IInfixParselet> existing)
+		internal InfixLoadingEventArgs(Dictionary<TokenType, IInfixParselet> existing)
 		{
 			Existing = existing;
 		}

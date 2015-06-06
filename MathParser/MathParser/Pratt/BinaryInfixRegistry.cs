@@ -10,8 +10,8 @@ namespace MathParser.Pratt
 {
 	public static class BinaryInfixRegistry
 	{
-		static Dictionary<TokenClass, RegItem> registry =
-			new Dictionary<TokenClass, RegItem>();
+		static Dictionary<TokenType, RegItem> registry =
+			new Dictionary<TokenType, RegItem>();
 
 		static BinaryInfixRegistry()
 		{
@@ -42,7 +42,7 @@ namespace MathParser.Pratt
 			}
 		}
 
-		public static void Register(TokenClass token, Type nodeType, 
+		public static void Register(TokenType token, Type nodeType, 
 			Precedence precedence, bool rightAssociative = false)
 		{
 			Type _nodeOperatorBinary = typeof(NodeOperatorBinary);
@@ -67,7 +67,7 @@ namespace MathParser.Pratt
 			}
 		}
 
-		public static NodeOperatorBinary MakeNode(TokenClass token, 
+		public static NodeOperatorBinary MakeNode(TokenType token, 
 			NodeFactor left, NodeFactor right)
 		{
 			if (!registry.ContainsKey(token))
@@ -83,12 +83,12 @@ namespace MathParser.Pratt
 			return obj as NodeOperatorBinary;
 		}
 
-		public static RegItem Get(TokenClass key)
+		public static RegItem Get(TokenType key)
 		{
 			return registry[key];
 		}
 
-		public static List<TokenClass> GetTokens()
+		public static List<TokenType> GetTokens()
 		{
 			return registry.Keys.ToList();
 		}

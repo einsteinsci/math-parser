@@ -10,8 +10,8 @@ namespace MathParser.Pratt
 {
 	public static class UnaryPostfixRegistry
 	{
-		static Dictionary<TokenClass, Type> registry =
-			new Dictionary<TokenClass, Type>();
+		static Dictionary<TokenType, Type> registry =
+			new Dictionary<TokenType, Type>();
 
 		static UnaryPostfixRegistry()
 		{
@@ -41,7 +41,7 @@ namespace MathParser.Pratt
 			}
 		}
 
-		public static void Register(TokenClass token, Type nodeType)
+		public static void Register(TokenType token, Type nodeType)
 		{
 			Type _nodeTypeOperatorUnary = typeof(NodeOperatorUnary);
 
@@ -65,7 +65,7 @@ namespace MathParser.Pratt
 			}
 		}
 
-		public static NodeOperatorUnary MakeNode(TokenClass token, NodeFactor left)
+		public static NodeOperatorUnary MakeNode(TokenType token, NodeFactor left)
 		{
 			if (!registry.ContainsKey(token))
 			{
@@ -80,12 +80,12 @@ namespace MathParser.Pratt
 			return obj as NodeOperatorUnary;
 		}
 
-		public static Type Get(TokenClass tokenClass)
+		public static Type Get(TokenType tokenClass)
 		{
 			return registry[tokenClass];
 		}
 
-		public static List<TokenClass> GetTokens()
+		public static List<TokenType> GetTokens()
 		{
 			return registry.Keys.ToList();
 		}

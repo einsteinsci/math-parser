@@ -26,7 +26,7 @@ namespace MathParser.ParseTree
 			}
 		}
 
-		public abstract TokenClass Operator
+		public abstract TokenType Operator
 		{ get; }
 
 		public NodeOperatorUnary(NodeFactor operand)

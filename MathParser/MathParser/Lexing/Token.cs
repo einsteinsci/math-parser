@@ -10,13 +10,13 @@ namespace MathParser.Lexing
 {
 	public class Token
 	{
-		public TokenClass Class
+		public TokenType Class
 		{ get; internal set; }
 
 		public string Lexed
 		{ get; protected set; }
 
-		public Token(TokenClass token, string lexed)
+		public Token(TokenType token, string lexed)
 		{
 			Class = token;
 			Lexed = lexed;

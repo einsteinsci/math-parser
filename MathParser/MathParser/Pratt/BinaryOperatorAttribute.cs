@@ -10,7 +10,7 @@ namespace MathParser.Pratt
 	[AttributeUsage(AttributeTargets.Class, Inherited = false)]
 	public sealed class BinaryOperatorAttribute : Attribute
 	{
-		public TokenClass TokenInstance
+		public TokenType TokenInstance
 		{ get; private set; }
 
 		public Type NodeType
@@ -24,7 +24,7 @@ namespace MathParser.Pratt
 
 		public BinaryOperatorAttribute(string instanceName, Type nodeType, Precedence precedence) : base()
 		{
-			TokenInstance = TokenRegistry.Get(instanceName);
+			TokenInstance = TokenTypeRegistry.Get(instanceName);
 			NodeType = nodeType;
 			PrecedenceLevel = precedence;
 			IsRightAssociative = false;

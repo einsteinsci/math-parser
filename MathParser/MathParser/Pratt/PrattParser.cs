@@ -14,10 +14,10 @@ namespace MathParser.Pratt
 		public delegate void PrefixLoadEvent(object sender, PrefixLoadingEventArgs e);
 		public delegate void InfixLoadEvent(object sender, InfixLoadingEventArgs e);
 
-		public static Dictionary<TokenClass, IPrefixParselet> PrefixParselets
+		public static Dictionary<TokenType, IPrefixParselet> PrefixParselets
 		{ get; private set; }
 
-		public static Dictionary<TokenClass, IInfixParselet> InfixParselets
+		public static Dictionary<TokenType, IInfixParselet> InfixParselets
 		{ get; private set; }
 
 		public TokenStream Stream
@@ -56,19 +56,19 @@ namespace MathParser.Pratt
 			}
 
 			Logger.Log(LogLevel.Info, Logger.REGISTRY, "Starting parselet registry.");
-			PrefixParselets = new Dictionary<TokenClass, IPrefixParselet>();
+			PrefixParselets = new Dictionary<TokenType, IPrefixParselet>();
 
 			Logger.Log(LogLevel.Debug, Logger.REGISTRY, "Registering prefix parselets.");
-			PrefixParselets.Add(TokenClass.Identifier, new NameParselet());
-			PrefixParselets.Add(TokenClass.Number, new NumberParselet());
-			PrefixParselets.Add(TokenClass.String, new StringParselet());
-			PrefixParselets.Add(TokenClass.Boolean, new BooleanParselet());
+			PrefixParselets.Add(TokenType.Identifier, new NameParselet());
+			PrefixParselets.Add(TokenType.Number, new NumberParselet());
+			PrefixParselets.Add(TokenType.String, new StringParselet());
+			PrefixParselets.Add(TokenType.Boolean, new BooleanParselet());
 
-			PrefixParselets.Add(TokenClass.ParenthesisIn, new ParenthesisParselet());
+			PrefixParselets.Add(TokenType.ParenthesisIn, new ParenthesisParselet());
 
-			PrefixParselets.Add(TokenClass.BraceIn, new ListLiteralParselet());
+			PrefixParselets.Add(TokenType.BraceIn, new ListLiteralParselet());
 
-			foreach (TokenClass tc in UnaryPrefixRegistry.GetTokens())
+			foreach (TokenType tc in UnaryPrefixRegistry.GetTokens())
 			{
 				RegisterPrefixOperator(tc);
 			}
@@ -78,20 +78,20 @@ namespace MathParser.Pratt
 				PrefixLoading(null, new PrefixLoadingEventArgs(PrefixParselets));
 			}
 
-			InfixParselets = new Dictionary<TokenClass, IInfixParselet>();
+			InfixParselets = new Dictionary<TokenType, IInfixParselet>();
 
 			Logger.Log(LogLevel.Debug, Logger.REGISTRY, "Registering infix and postfix parselets.");
-			InfixParselets.Add(TokenClass.ParenthesisIn, new FunctionCallParselet());
-			InfixParselets.Add(TokenClass.BracketIn, new ListOrdinalParselet());
-			InfixParselets.Add(TokenClass.OperatorQuestion, new ConditionalParselet());
+			InfixParselets.Add(TokenType.ParenthesisIn, new FunctionCallParselet());
+			InfixParselets.Add(TokenType.BracketIn, new ListOrdinalParselet());
+			InfixParselets.Add(TokenType.OperatorQuestion, new ConditionalParselet());
 
-			foreach (TokenClass tc in BinaryInfixRegistry.GetTokens())
+			foreach (TokenType tc in BinaryInfixRegistry.GetTokens())
 			{
 				BinaryInfixRegistry.RegItem reg = BinaryInfixRegistry.Get(tc);
 				RegisterBinaryOperator(tc, reg.PrecedenceLevel, reg.IsRightAssociative);
 			}
 
-			foreach (TokenClass tc in UnaryPostfixRegistry.GetTokens())
+			foreach (TokenType tc in UnaryPostfixRegistry.GetTokens())
 			{
 				RegisterPostfixOperator(tc);
 			}
@@ -105,28 +105,28 @@ namespace MathParser.Pratt
 		}
 
 		#region register
-		public static void RegisterPrefix(TokenClass token, IPrefixParselet parselet)
+		public static void RegisterPrefix(TokenType token, IPrefixParselet parselet)
 		{
 			Logger.Log(LogLevel.Debug, Logger.REGISTRY,
 				"Registering prefix parselet for token " + token.ToString());
 			PrefixParselets.Add(token, parselet);
 		}
 
-		public static void RegisterPrefixOperator(TokenClass opToken)
+		public static void RegisterPrefixOperator(TokenType opToken)
 		{
 			Logger.Log(LogLevel.Debug, Logger.REGISTRY, 
 				"Registering prefix operator parselet for token " + opToken.ToString());
 			PrefixParselets.Add(opToken, new PrefixOperatorParselet(Precedence.PREFIX));
 		}
 
-		public static void RegisterInfix(TokenClass token, IInfixParselet parselet)
+		public static void RegisterInfix(TokenType token, IInfixParselet parselet)
 		{
 			Logger.Log(LogLevel.Debug, Logger.REGISTRY,
 				"Registering infix/postfix operator parselet for token " + token.ToString());
 			InfixParselets.Add(token, parselet);
 		}
 
-		public static void RegisterBinaryOperator(TokenClass opToken, Precedence precedence, 
+		public static void RegisterBinaryOperator(TokenType opToken, Precedence precedence, 
 			bool rightAssociative = false)
 		{
 			Logger.Log(LogLevel.Debug, Logger.REGISTRY, 
@@ -134,7 +134,7 @@ namespace MathParser.Pratt
 			InfixParselets.Add(opToken, new BinaryOperatorParselet(precedence, rightAssociative));
 		}
 
-		public static void RegisterPostfixOperator(TokenClass opToken)
+		public static void RegisterPostfixOperator(TokenType opToken)
 		{
 			Logger.Log(LogLevel.Debug, Logger.REGISTRY, 
 				"Registering postfix operator parselet for token " + opToken.ToString());
@@ -172,7 +172,7 @@ namespace MathParser.Pratt
 			return left;
 		}
 
-		public static IPrefixParselet GetPrefix(TokenClass tokenClass)
+		public static IPrefixParselet GetPrefix(TokenType tokenClass)
 		{
 			if (PrefixParselets.ContainsKey(tokenClass))
 			{
@@ -182,7 +182,7 @@ namespace MathParser.Pratt
 			return null;
 		}
 
-		public static IInfixParselet GetInfix(TokenClass tokenClass)
+		public static IInfixParselet GetInfix(TokenType tokenClass)
 		{
 			if (InfixParselets.ContainsKey(tokenClass))
 			{
@@ -209,7 +209,7 @@ namespace MathParser.Pratt
 			return 0;
 		}
 
-		public Token Consume(TokenClass tokClass)
+		public Token Consume(TokenType tokClass)
 		{
 			Token tok = LookAhead(0);
 			if (tok.Class != tokClass)
@@ -223,7 +223,7 @@ namespace MathParser.Pratt
 			return Consume();
 		}
 
-		public bool Match(TokenClass expected)
+		public bool Match(TokenType expected)
 		{
 			Token token = LookAhead();
 			if (token.Class != expected)

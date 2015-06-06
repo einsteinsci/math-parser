@@ -19,20 +19,20 @@ namespace MathParser.Pratt
 		{
 			List<NodeFactor> args = new List<NodeFactor>();
 
-			if (!parser.Match(TokenClass.ParenthesisOut))
+			if (!parser.Match(TokenType.ParenthesisOut))
 			{
 				do 
 				{
 					args.Add(parser.Parse());
 				} 
-				while (parser.Match(TokenClass.Comma));
+				while (parser.Match(TokenType.Comma));
 
-				parser.Consume(TokenClass.ParenthesisOut);
+				parser.Consume(TokenType.ParenthesisOut);
 			}
 
 			NodeIdentifier name = left as NodeIdentifier;
 
-			return new NodeFunction(LibraryPrimaryFunctions.GetFunction(name.IdentifierName), args.ToArray());
+			return new NodeFunction(Functions.Functions.GetFunction(name.IdentifierName), args.ToArray());
 		}
 	}
 }

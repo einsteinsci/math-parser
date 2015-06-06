@@ -10,7 +10,7 @@ namespace MathParser.Pratt
 	[AttributeUsage(AttributeTargets.Class, Inherited = false)]
 	public class PostfixOperatorAttribute : Attribute
 	{
-		public TokenClass TokenInstance
+		public TokenType TokenInstance
 		{ get; private set; }
 
 		public Type NodeType
@@ -18,7 +18,7 @@ namespace MathParser.Pratt
 
 		public PostfixOperatorAttribute(string instanceName, Type nodeType) : base()
 		{
-			TokenInstance = TokenRegistry.Get(instanceName);
+			TokenInstance = TokenTypeRegistry.Get(instanceName);
 			NodeType = nodeType;
 		}
 	}

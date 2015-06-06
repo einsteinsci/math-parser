@@ -10,8 +10,8 @@ namespace MathParser.Pratt
 {
 	public static class UnaryPrefixRegistry
 	{
-		static Dictionary<TokenClass, Type> registry = 
-			new Dictionary<TokenClass, Type>();
+		static Dictionary<TokenType, Type> registry = 
+			new Dictionary<TokenType, Type>();
 
 		static UnaryPrefixRegistry()
 		{
@@ -41,7 +41,7 @@ namespace MathParser.Pratt
 			}
 		}
 
-		public static void Register(TokenClass token, Type nodeType)
+		public static void Register(TokenType token, Type nodeType)
 		{
 			Type _nodeOperatorUnary = typeof(NodeOperatorUnary);
 			if (!_nodeOperatorUnary.IsAssignableFrom(nodeType))
@@ -63,7 +63,7 @@ namespace MathParser.Pratt
 			}
 		}
 
-		public static NodeOperatorUnary MakeNode(TokenClass token, NodeFactor operand)
+		public static NodeOperatorUnary MakeNode(TokenType token, NodeFactor operand)
 		{
 			if (!registry.ContainsKey(token))
 			{
@@ -78,7 +78,7 @@ namespace MathParser.Pratt
 			return obj as NodeOperatorUnary;
 		}
 
-		public static List<TokenClass> GetTokens()
+		public static List<TokenType> GetTokens()
 		{
 			return registry.Keys.ToList();
 		}

@@ -15,15 +15,15 @@ namespace MathParser.Pratt
 		{
 			List<NodeFactor> elements = new List<NodeFactor>();
 
-			if (!parser.Match(TokenClass.BraceOut))
+			if (!parser.Match(TokenType.BraceOut))
 			{
 				do
 				{
 					elements.Add(parser.Parse());
 				}
-				while (parser.Match(TokenClass.Comma));
+				while (parser.Match(TokenType.Comma));
 
-				parser.Consume(TokenClass.BraceOut);
+				parser.Consume(TokenType.BraceOut);
 			}
 
 			return new NodeListLiteral(elements);

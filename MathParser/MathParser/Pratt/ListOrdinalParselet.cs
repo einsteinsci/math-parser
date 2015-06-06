@@ -18,7 +18,7 @@ namespace MathParser.Pratt
 		{
 			NodeFactor ordinal = parser.Parse();
 
-			parser.Consume(TokenClass.BracketOut);
+			parser.Consume(TokenType.BracketOut);
 
 			return new NodeListOrdinal(left, ordinal);
 		}

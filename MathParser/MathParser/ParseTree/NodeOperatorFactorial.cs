@@ -15,8 +15,8 @@ namespace MathParser.ParseTree
 		public override string StringForm
 		{ get { return "!"; } }
 
-		public override TokenClass Operator
-		{ get { return TokenClass.OperatorFactorial; } }
+		public override TokenType Operator
+		{ get { return TokenType.OperatorFactorial; } }
 
 		public override MathType Type
 		{ get { return MathType.Integer; } }

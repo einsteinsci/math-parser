@@ -14,8 +14,8 @@ namespace MathParser.ParseTree
 		public override string StringForm
 		{ get { return "=="; } }
 
-		public override TokenClass Operator
-		{ get { return TokenClass.OperatorEqual; } }
+		public override TokenType Operator
+		{ get { return TokenType.OperatorEqual; } }
 
 		public override MathType Type
 		{ get { return MathType.Boolean; } }

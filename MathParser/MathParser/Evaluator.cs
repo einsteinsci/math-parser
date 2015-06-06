@@ -39,8 +39,8 @@ namespace MathParser
 		/// </summary>
 		public static void Initialize(bool force = false)
 		{
-			TokenRegistry.RegisterTokens(force);
-			LibraryPrimaryFunctions.Init(force);
+			TokenTypeRegistry.RegisterTokens(force);
+			Functions.Functions.Init(force);
 			PrattParser.Init(force);
 		}
 

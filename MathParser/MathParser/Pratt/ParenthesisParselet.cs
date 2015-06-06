@@ -14,7 +14,7 @@ namespace MathParser.Pratt
 		public NodeFactor Parse(PrattParser parser, Token token)
 		{
 			NodeFactor node = parser.Parse();
-			parser.Consume(TokenClass.ParenthesisOut);
+			parser.Consume(TokenType.ParenthesisOut);
 
 			return node;
 		}
