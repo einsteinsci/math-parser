@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using MathParser.Tokens;
+using MathParser.Types;
 using MathPlusLib.Extensions;
 
 namespace MathParser.ParseTree

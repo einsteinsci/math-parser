@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using MathParser.Tokens;
 using MathPlusLib;
+using MathParser.Types;
 
 namespace MathParser.ParseTree
 {

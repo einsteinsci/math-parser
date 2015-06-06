@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MathPlusLib;
 
-namespace MathParser
+namespace MathParser.Types
 {
 	public class ResultBoolean : IResultValue
 	{

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using MathPlusLib;
 using MathPlusLib.Extensions;
+using MathParser.Types;
 
 namespace MathParser.ParseTree
 {

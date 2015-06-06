@@ -9,6 +9,7 @@ using MathParser.Lexing;
 using MathParser.ParseTree;
 using MathParser.Pratt;
 using MathParser.Functions;
+using MathParser.Types;
 
 namespace MathParser
 {

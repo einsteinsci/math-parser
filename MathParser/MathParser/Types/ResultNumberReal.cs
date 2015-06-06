@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using MathPlusLib;
 
-namespace MathParser
+namespace MathParser.Types
 {
 	public sealed class ResultNumberReal : IResultValue
 	{

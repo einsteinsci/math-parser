@@ -53,7 +53,7 @@
     <Compile Include="Functions\LibraryNumeric.cs" />
     <Compile Include="Functions\LibraryString.cs" />
     <Compile Include="Functions\LibraryTrig.cs" />
-    <Compile Include="HelpLibrary.cs" />
+    <Compile Include="Functions\HelpLibrary.cs" />
     <Compile Include="Lexing\TokenStream.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Functions\FunctionAttribute.cs" />
