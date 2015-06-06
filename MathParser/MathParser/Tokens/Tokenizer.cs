@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 using MathParser.Tokens;
 
-namespace MathParser.Lexing
+namespace MathParser.Tokens
 {
-    public sealed class Lexer
+    public sealed class Tokenizer
     {
-		public static readonly Lexer Instance = new Lexer();
+		public static readonly Tokenizer Instance = new Tokenizer();
 
 		public string Expression
 		{ get; set; }

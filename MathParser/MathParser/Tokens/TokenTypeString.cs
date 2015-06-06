@@ -1,4 +1,6 @@
 ﻿using MathParser.ParseTree;
+using MathParser.Tokens;
+using MathParser.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;

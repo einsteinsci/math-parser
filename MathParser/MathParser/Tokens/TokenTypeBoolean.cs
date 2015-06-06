@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MathParser.ParseTree;
+using MathParser.Tokens;
+using MathParser.Types;
 
 namespace MathParser.Tokens
 {

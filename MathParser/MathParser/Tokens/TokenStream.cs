@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathParser.Lexing
+namespace MathParser.Tokens
 {
 	/// <summary>
 	/// Not really a stream

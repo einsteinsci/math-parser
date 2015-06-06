@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using MathParser.Tokens;
-using MathParser.Lexing;
 using MathParser.ParseTree;
 using MathParser.Pratt;
 using MathParser.Functions;
@@ -48,7 +47,7 @@ namespace MathParser
 		#region parts
 		public void Lex()
 		{
-			Lexed = Lexer.Lex(Input);
+			Lexed = Tokenizer.Lex(Input);
 		}
 
 		public static TokenStream Lex(string expression)

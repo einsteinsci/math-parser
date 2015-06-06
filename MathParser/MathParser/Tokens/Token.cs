@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using MathParser.Tokens;
 
-namespace MathParser.Lexing
+namespace MathParser.Tokens
 {
 	public class Token
 	{
