@@ -37,7 +37,7 @@ namespace MathParser.ParseTree
 				IResultValue res = node.GetResult();
 				if (res.Type != MathType.Real && res.Type != MathType.Integer)
 				{
-					throw new Exception("List item must be a number. Found " + 
+					throw new EvaluationException(this, "List item must be a number. Found " + 
 						res.Type + " instead.");
 				}
 				vals.Add(res.ToDouble());

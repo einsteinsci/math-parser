@@ -27,8 +27,6 @@ namespace MathParser.Pratt
 		{
 			NodeFactor right = parser.Parse(RightAssociative ? PrecedenceLevel - 1 : PrecedenceLevel);
 			return BinaryInfixRegistry.MakeNode(token.Class, left, right);
-
-			//return MakeNode(token.Class as TokenClassOperator, left, right);
 		}
 	}
 }

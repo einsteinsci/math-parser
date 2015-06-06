@@ -30,7 +30,7 @@ namespace MathParser.ParseTree
 
 			if (!res.ToDouble().IsInteger(8))
 			{
-				throw new ArgumentOutOfRangeException("[FIELD]:Term",
+				throw new EvaluationException(this,
 					"Cannot use floating-point types in factorial calculation.");
 			}
 

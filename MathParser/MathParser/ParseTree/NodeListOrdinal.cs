@@ -38,11 +38,11 @@ namespace MathParser.ParseTree
 
 			if (index.Type != MathType.Integer)
 			{
-				throw new ArgumentException("Ordinal index must be integer.");
+				throw new EvaluationException(this, "Ordinal index must be integer.");
 			}
 			if (list.Type != MathType.List)
 			{
-				throw new ArgumentException("Ordinal access can only be used on a list.");
+				throw new EvaluationException(this, "Ordinal access can only be used on a list.");
 			}
 
 			return new ResultNumberReal(list.ToList()[(int)index.ToInteger()]);

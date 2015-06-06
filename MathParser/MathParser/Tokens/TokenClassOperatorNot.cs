@@ -14,8 +14,5 @@ namespace MathParser.Tokens
 	{
 		public override string Operator
 		{ get { return "~"; } }
-
-		public override int ArgumentCount
-		{ get { return 1; } }
 	}
 }

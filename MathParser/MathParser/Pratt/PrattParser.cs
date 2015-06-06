@@ -143,7 +143,7 @@ namespace MathParser.Pratt
 		#endregion
 
 		// Pratt Parser (http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/)
-		public NodeFactor Parse(Precedence precedence = (Precedence)0)
+		public NodeFactor Parse(Precedence precedence = 0)
 		{
 			Logger.Log(LogLevel.Debug, Logger.PARSER, 
 				"Beginning parse for precedence " + precedence.ToString());

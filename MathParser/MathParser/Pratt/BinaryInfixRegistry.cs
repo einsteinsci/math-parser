@@ -73,7 +73,7 @@ namespace MathParser.Pratt
 			if (!registry.ContainsKey(token))
 			{
 				throw new ArgumentOutOfRangeException(
-					"Cannot make unregistered node.");
+					"Token does not exist in registry.");
 			}
 
 			Type nodeType = registry[token].NodeType;

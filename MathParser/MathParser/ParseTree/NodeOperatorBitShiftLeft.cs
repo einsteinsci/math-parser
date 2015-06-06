@@ -29,14 +29,9 @@ namespace MathParser.ParseTree
 			IResultValue res1 = First.GetResult();
 			IResultValue res2 = Second.GetResult();
 
-			if (!res1.ToDouble().IsInteger(8))
+			if (!res1.ToDouble().IsInteger(8) || !res2.ToDouble().IsInteger(8))
 			{
-				throw new ArgumentOutOfRangeException("[FIELD]:First",
-					"Cannot use floating-point types in bit-shift calculations.");
-			}
-			if (!res2.ToDouble().IsInteger(8))
-			{
-				throw new ArgumentOutOfRangeException("[FIELD]:Second",
+				throw new EvaluationException(this,
 					"Cannot use floating-point types in bit-shift calculations.");
 			}
 

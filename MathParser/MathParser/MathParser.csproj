@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\MathParser.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EvaluationException.cs" />
     <Compile Include="Evaluator.cs" />
     <Compile Include="Extensibility.cs" />
     <Compile Include="HelpLibrary.cs" />
@@ -104,7 +106,6 @@
     <Compile Include="Types\ResultList.cs" />
     <Compile Include="Types\ResultNumberInteger.cs" />
     <Compile Include="Types\ResultNumberReal.cs" />
-    <Compile Include="Types\ResultObject.cs" />
     <Compile Include="Types\ResultString.cs" />
     <Compile Include="Types\IResultValue.cs" />
     <Compile Include="ParseTree\IEvaluatable.cs" />

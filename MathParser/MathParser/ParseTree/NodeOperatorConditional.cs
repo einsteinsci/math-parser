@@ -47,7 +47,8 @@ namespace MathParser.ParseTree
 			IResultValue condition = Condition.GetResult();
 			if (condition.Type != MathType.Boolean)
 			{
-				throw new ArgumentException("Condition part of conditional operator must be boolean.");
+				throw new EvaluationException(this, 
+					"Condition part of conditional operator must be boolean.");
 			}
 
 			// See what I mean here?
