@@ -39,70 +39,74 @@ namespace MathParser.Functions
 			Function = function;
 
 			Type ret = function.Method.ReturnType;
-			if (ret == typeof(double) || ret == typeof(float))
-			{
-				ReturnType = MathType.Real;
-			}
-			else if (ret == typeof(long) || ret == typeof(int) || ret == typeof(short))
-			{
-				ReturnType = MathType.Integer;
-			}
-			else if (ret == typeof(string))
-			{
-				ReturnType = MathType.String;
-			}
-			else if (ret == typeof(bool))
-			{
-				ReturnType = MathType.Boolean;
-			}
-			else if (ret == typeof(List<double>) || ret == typeof(double[]) ||
-				ret == typeof(List<float>) || ret == typeof(float[]))
-			{
-				ReturnType = MathType.List;
-			}
-			else if (ret == typeof(MathMatrix))
-			{
-				ReturnType = MathType.Matrix;
-			}
-			else
-			{
-				throw new ArgumentException("Return type is of invalid type: " + ret.ToString());
-			}
+			ReturnType = ret.ToMathType();
+
+			//if (ret == typeof(double) || ret == typeof(float))
+			//{
+			//	ReturnType = MathType.Real;
+			//}
+			//else if (ret == typeof(long) || ret == typeof(int) || ret == typeof(short))
+			//{
+			//	ReturnType = MathType.Integer;
+			//}
+			//else if (ret == typeof(string))
+			//{
+			//	ReturnType = MathType.String;
+			//}
+			//else if (ret == typeof(bool))
+			//{
+			//	ReturnType = MathType.Boolean;
+			//}
+			//else if (ret == typeof(List<double>) || ret == typeof(double[]) ||
+			//	ret == typeof(List<float>) || ret == typeof(float[]))
+			//{
+			//	ReturnType = MathType.List;
+			//}
+			//else if (ret == typeof(MathMatrix))
+			//{
+			//	ReturnType = MathType.Matrix;
+			//}
+			//else
+			//{
+			//	throw new ArgumentException("Return type is of invalid type: " + ret.ToString());
+			//}
 
 			ParameterInfo[] args = function.Method.GetParameters();
 			ArgumentTypes = new List<MathType>();
 			foreach (ParameterInfo arg in args)
 			{
 				Type t = arg.GetType();
-				if (t == typeof(double) || t == typeof(float))
-				{
-					ArgumentTypes.Add(MathType.Real);
-				}
-				else if (t == typeof(long) || t == typeof(int) || t == typeof(short))
-				{
-					ArgumentTypes.Add(MathType.Integer);
-				}
-				else if (t == typeof(string))
-				{
-					ArgumentTypes.Add(MathType.String);
-				}
-				else if (t == typeof(bool))
-				{
-					ArgumentTypes.Add(MathType.Boolean);
-				}
-				else if (ret == typeof(List<double>) || ret == typeof(double[]) ||
-					ret == typeof(List<float>) || ret == typeof(float[]))
-				{
-					ArgumentTypes.Add(MathType.List);
-				}
-				else if (t == typeof(MathMatrix))
-				{
-					ArgumentTypes.Add(MathType.Matrix);
-				}
-				else
-				{
-					throw new ArgumentException("Argument is of invalid type: " + t.ToString());
-				}
+				ArgumentTypes.Add(t.ToMathType());
+
+				//if (t == typeof(double) || t == typeof(float))
+				//{
+				//	ArgumentTypes.Add(MathType.Real);
+				//}
+				//else if (t == typeof(long) || t == typeof(int) || t == typeof(short))
+				//{
+				//	ArgumentTypes.Add(MathType.Integer);
+				//}
+				//else if (t == typeof(string))
+				//{
+				//	ArgumentTypes.Add(MathType.String);
+				//}
+				//else if (t == typeof(bool))
+				//{
+				//	ArgumentTypes.Add(MathType.Boolean);
+				//}
+				//else if (t == typeof(List<double>) || t == typeof(double[]) ||
+				//	t == typeof(List<float>) || t == typeof(float[]))
+				//{
+				//	ArgumentTypes.Add(MathType.List);
+				//}
+				//else if (t == typeof(MathMatrix))
+				//{
+				//	ArgumentTypes.Add(MathType.Matrix);
+				//}
+				//else
+				//{
+				//	throw new ArgumentException("Argument is of invalid type: " + t.ToString());
+				//}
 			}
 		}
 
@@ -119,49 +123,51 @@ namespace MathParser.Functions
 			object[] argvals = new object[ArgumentCount];
 			for (int i = 0; i < ArgumentCount; i++)
 			{
-				switch (args[i].Type)
-				{
-				case MathType.Real:
-					argvals[i] = args[i].ToDouble();
-					continue;
-				case MathType.Integer:
-					argvals[i] = args[i].ToInteger();
-					continue;
-				case MathType.String:
-					argvals[i] = args[i].ToString();
-					continue;
-				case MathType.Boolean:
-					argvals[i] = args[i].ToBoolean();
-					continue;
-				case MathType.List:
-					argvals[i] = args[i].ToList();
-					continue;
-				case MathType.Matrix:
-					argvals[i] = args[i].ToMatrix();
-					continue;
-				default:
-					throw new ArgumentOutOfRangeException(
-						"Argument is of invalid MathType: " + 
-						args[i].Type.ToString());
-				}
+				argvals[i] = args[i].CoreValue;
+
+				//switch (args[i].Type)
+				//{
+				//case MathType.Real:
+				//	argvals[i] = args[i].ToDouble();
+				//	continue;
+				//case MathType.Integer:
+				//	argvals[i] = args[i].ToInteger();
+				//	continue;
+				//case MathType.String:
+				//	argvals[i] = args[i].ToString();
+				//	continue;
+				//case MathType.Boolean:
+				//	argvals[i] = args[i].ToBoolean();
+				//	continue;
+				//case MathType.List:
+				//	argvals[i] = args[i].ToList();
+				//	continue;
+				//case MathType.Matrix:
+				//	argvals[i] = args[i].ToMatrix();
+				//	continue;
+				//default:
+				//	throw new ArgumentOutOfRangeException(
+				//		"Argument is of invalid MathType: " + 
+				//		args[i].Type.ToString());
+				//}
 			}
 
 			object res = Function.DynamicInvoke(argvals);
 			if (res is double || res is float)
 			{
-				return new ResultNumberReal((double)res);
+				return new ResultNumberReal(Convert.ToDouble(res));
 			}
 			if (res is long || res is int || res is short)
 			{
-				return new ResultNumberInteger((long)res);
+				return new ResultNumberInteger(Convert.ToInt64(res));
 			}
 			else if (res is string)
 			{
-				return new ResultString((string)res);
+				return new ResultString(res as string);
 			}
 			else if (res is bool)
 			{
-				return new ResultBoolean((bool)res);
+				return new ResultBoolean(Convert.ToBoolean(res));
 			}
 			else if (res is MathMatrix)
 			{
@@ -174,7 +180,7 @@ namespace MathParser.Functions
 					res.GetType().ToString());
 			}
 		}
-
+		
 		public override string ToString()
 		{
 			string res = ReturnType.ToString() + " " + Name + "(";

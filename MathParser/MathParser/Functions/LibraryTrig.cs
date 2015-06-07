@@ -9,70 +9,91 @@ using MathParser.Types;
 
 namespace MathParser.Functions
 {
+	/// <summary>
+	/// Trigonometric functions
+	/// </summary>
 	[FunctionLibrary("trig")]
 	public class LibraryTrig
 	{
-		[Function]
-		public static FunctionInfo Sine
-		{ get { return sine; } }
-		private static FunctionInfo sine = new FunctionInfo(
-			(Func<double, double>)MathPlus.Trig.Sin,
-			MathType.Real, "sin", MathType.Real);
+		/// <summary>
+		/// Sine function
+		/// </summary>
+		[MathFunction("sin")]
+		public double Sine(double theta)
+		{
+			return MathPlus.Trig.Sin(theta);
+		}
 
-		[Function]
-		public static FunctionInfo Cosine
-		{ get { return cosine; } }
-		private static FunctionInfo cosine = new FunctionInfo(
-			(Func<double, double>)MathPlus.Trig.Cos,
-			MathType.Real, "cos", MathType.Real);
+		/// <summary>
+		/// Cosine function
+		/// </summary>
+		[MathFunction("cos")]
+		public double Cosine(double theta)
+		{
+			return MathPlus.Trig.Cos(theta);
+		}
 
-		[Function]
-		public static FunctionInfo Tangent
-		{ get { return tangent; } }
-		private static FunctionInfo tangent = new FunctionInfo(
-			(Func<double, double>)MathPlus.Trig.Tan,
-			MathType.Real, "tan", MathType.Real);
+		/// <summary>
+		/// Tangent function
+		/// </summary>
+		[MathFunction("tan")]
+		public double Tangent(double theta)
+		{
+			return MathPlus.Trig.Tan(theta);
+		}
 
-		[Function]
-		public static FunctionInfo Cosecant
-		{ get { return cosecant; } }
-		private static FunctionInfo cosecant = new FunctionInfo(
-			(Func<double, double>)MathPlus.Trig.Csc,
-			MathType.Real, "csc", MathType.Real);
+		/// <summary>
+		/// Cosecant function
+		/// </summary>
+		[MathFunction("csc")]
+		public double Cosecant(double theta)
+		{
+			return MathPlus.Trig.Csc(theta);
+		}
 
-		[Function]
-		public static FunctionInfo Secant
-		{ get { return secant; } }
-		private static FunctionInfo secant = new FunctionInfo(
-			(Func<double, double>)MathPlus.Trig.Sec,
-			MathType.Real, "sec", MathType.Real);
+		/// <summary>
+		/// Secant function
+		/// </summary>
+		[MathFunction("sec")]
+		public double Secant(double theta)
+		{
+			return MathPlus.Trig.Sec(theta);
+		}
 
-		[Function]
-		public static FunctionInfo Cotangent
-		{ get { return cotangent; } }
-		private static FunctionInfo cotangent = new FunctionInfo(
-			(Func<double, double>)MathPlus.Trig.Cot,
-			MathType.Real, "cot", MathType.Real);
+		/// <summary>
+		/// Cotangent function
+		/// </summary>
+		[MathFunction("cot")]
+		public double Cotangent(double theta)
+		{
+			return MathPlus.Trig.Cot(theta);
+		}
 
-		[Function]
-		public static FunctionInfo ArcSine
-		{ get { return arcSine; } }
-		private static FunctionInfo arcSine = new FunctionInfo(
-			(Func<double, double>)MathPlus.Trig.ASin,
-			MathType.Real, "asin", MathType.Real);
+		/// <summary>
+		/// Inverse sine function
+		/// </summary>
+		[MathFunction("asin")]
+		public double ArcSine(double ratio)
+		{
+			return MathPlus.Trig.ASin(ratio);
+		}
 
-		[Function]
-		public static FunctionInfo ArcCosine
-		{ get { return arcCosine; } }
-		private static FunctionInfo arcCosine = new FunctionInfo(
-			(Func<double, double>)MathPlus.Trig.ACos,
-			MathType.Real, "acos", MathType.Real);
+		/// <summary>
+		/// Inverse cosine function
+		/// </summary>
+		[MathFunction("acos")]
+		public double ArcCosine(double ratio)
+		{
+			return MathPlus.Trig.ACos(ratio);
+		}
 
-		[Function]
-		public static FunctionInfo ArcTangent
-		{ get { return arcTangent; } }
-		private static FunctionInfo arcTangent = new FunctionInfo(
-			(Func<double, double>)MathPlus.Trig.ATan,
-			MathType.Real, "atan", MathType.Real);
+		/// <summary>
+		/// Inverse tangent function
+		/// </summary>
+		[MathFunction("atan")]
+		public double ArcTangent(double ratio)
+		{
+			return MathPlus.Trig.ATan(ratio);
+		}
 	}
 }

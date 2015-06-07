@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace MathParser.Parsing
 {
@@ -32,7 +33,14 @@ namespace MathParser.Parsing
 
 			NodeIdentifier name = left as NodeIdentifier;
 
-			return new NodeFunction(Functions.Functions.GetFunction(name.IdentifierName), args.ToArray());
+			FunctionInfo info = FunctionRegistry.GetFunction(name.IdentifierName);
+
+			if (info == null)
+			{
+				throw new MismatchedRuleException("Function " + name + " not found.");
+			}
+
+			return new NodeFunction(info, args.ToArray());
 		}
 	}
 }

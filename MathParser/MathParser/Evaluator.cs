@@ -61,11 +61,12 @@ namespace MathParser
 
 		/// <summary>
 		/// Option for preemptive initialization to prevent sudden lag during evaluation.
+		/// Be sure to add any extending assemblies via the Extensibility class first.
 		/// </summary>
 		public static void Initialize(bool force = false)
 		{
 			TokenTypeRegistry.RegisterTokens(force);
-			Functions.Functions.Init(force);
+			Functions.FunctionRegistry.Init(force);
 			PrattParser.Init(force);
 		}
 

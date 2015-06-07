@@ -54,12 +54,12 @@
     <Compile Include="Functions\LibraryString.cs" />
     <Compile Include="Functions\LibraryTrig.cs" />
     <Compile Include="Functions\HelpLibrary.cs" />
+    <Compile Include="Functions\MathFunctionAttribute.cs" />
     <Compile Include="Lexing\TokenStream.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="Functions\FunctionAttribute.cs" />
     <Compile Include="Functions\FunctionInfo.cs" />
     <Compile Include="Functions\FunctionLibraryAttribute.cs" />
-    <Compile Include="Functions\Functions.cs" />
+    <Compile Include="Functions\FunctionRegistry.cs" />
     <Compile Include="LoggerEventArgs.cs" />
     <Compile Include="ParseTree\NodeFactor.cs" />
     <Compile Include="ParseTree\NodeFunction.cs" />
@@ -104,6 +104,7 @@
     <Compile Include="Parsing\StringParselet.cs" />
     <Compile Include="Parsing\UnaryPostfixRegistry.cs" />
     <Compile Include="Parsing\UnaryPrefixRegistry.cs" />
+    <Compile Include="Types\MathTypes.cs" />
     <Compile Include="Types\ResultBoolean.cs" />
     <Compile Include="Types\ResultList.cs" />
     <Compile Include="Types\ResultNumberInteger.cs" />

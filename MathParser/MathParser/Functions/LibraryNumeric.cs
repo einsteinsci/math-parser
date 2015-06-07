@@ -9,70 +9,92 @@ using MathParser.Types;
 
 namespace MathParser.Functions
 {
+	/// <summary>
+	/// Various numeric functions
+	/// </summary>
 	[FunctionLibrary("numeric")]
 	public static class LibraryNumeric
 	{
-		[Function]
-		public static FunctionInfo LogarithmN
-		{ get { return logarithmN; } }
-		private static FunctionInfo logarithmN = new FunctionInfo(
-			(Func<double, double, double>)MathPlus.Log,
-			MathType.Real, "logn", MathType.Real, MathType.Real);
+		/// <summary>
+		/// Returns the base-n logarithm of a number
+		/// </summary>
+		[MathFunction("logn")]
+		public static double LogarithmN(double val, double baseNum)
+		{
+			return MathPlus.Log(val, baseNum);
+		}
 
-		[Function]
-		public static FunctionInfo LogarithmE
-		{ get { return logarithmE; } }
-		private static FunctionInfo logarithmE = new FunctionInfo(
-			(Func<double, double>)MathPlus.Ln,
-			MathType.Real, "ln", MathType.Real);
+		/// <summary>
+		/// Returns the natural (base e) logarithm of a number
+		/// </summary>
+		[MathFunction("ln")]
+		public static double LogarithmE(double val)
+		{
+			return MathPlus.Ln(val);
+		}
 
-		[Function]
-		public static FunctionInfo Logarithm
-		{ get { return logarithm; } }
-		private static FunctionInfo logarithm = new FunctionInfo(
-			(Func<double, double>)MathPlus.Log10,
-			MathType.Real, "log", MathType.Real);
+		/// <summary>
+		/// Returns the base 10 logarithm of a number
+		/// </summary>
+		[MathFunction("log")]
+		public static double Logarithm(double val)
+		{
+			return MathPlus.Log10(val);
+		}
 
-		[Function]
-		public static FunctionInfo AbsoluteVal
-		{ get { return absoluteVal; } }
-		private static FunctionInfo absoluteVal = new FunctionInfo(
-			(Func<double, double>)MathPlus.Abs,
-			MathType.Real, "abs", MathType.Real);
+		/// <summary>
+		/// Absolute value function
+		/// </summary>
+		[MathFunction("abs")]
+		public static double AbsoluteValue(double val)
+		{
+			return MathPlus.Abs(val);
+		}
 
-		[Function]
-		public static FunctionInfo Sign
-		{ get { return sign; } }
-		private static FunctionInfo sign = new FunctionInfo(
-			(Func<double, double>)((d) => MathPlus.Sign(d)),
-			MathType.Real, "sign", MathType.Real);
+		/// <summary>
+		/// Sign (not sine) of a number:
+		/// -1 if negative, 0 if zero, 1 if positive
+		/// </summary>
+		[MathFunction("sign")]
+		public static double Sign(double val)
+		{
+			return MathPlus.Sign(val);
+		}
 
-		[Function]
-		public static FunctionInfo Max
-		{ get { return max; } }
-		private static FunctionInfo max = new FunctionInfo(
-			(Func<double, double, double>)MathPlus.Max,
-			MathType.Real, "max", MathType.Real, MathType.Real);
+		/// <summary>
+		/// Maximum of two values
+		/// </summary>
+		[MathFunction("max")]
+		public static double Maximum(double a, double b)
+		{
+			return MathPlus.Max(a, b);
+		}
 
-		[Function]
-		public static FunctionInfo Min
-		{ get { return min; } }
-		private static FunctionInfo min = new FunctionInfo(
-			(Func<double, double, double>)MathPlus.Min,
-			MathType.Real, "min", MathType.Real, MathType.Real);
+		/// <summary>
+		/// Minimum of two values
+		/// </summary>
+		[MathFunction("min")]
+		public static double Minimum(double a, double b)
+		{
+			return MathPlus.Min(a, b);
+		}
 
-		[Function]
-		public static FunctionInfo Random
-		{ get { return random; } }
-		private static FunctionInfo random = new FunctionInfo(
-			(Func<double>)(() => MathPlus.Probability.Rand.NextDouble()),
-			MathType.Real, "rand");
+		/// <summary>
+		/// Random number between 0 and 1
+		/// </summary>
+		[MathFunction("rand")]
+		public static double Random()
+		{
+			return MathPlus.Probability.Rand.NextDouble();
+		}
 
-		[Function]
-		public static FunctionInfo RandInt
-		{ get { return randInt; } }
-		private static FunctionInfo randInt = new FunctionInfo(
-			(Func<long, long, double>)((a, b) => MathPlus.Probability.Rand.Next((int)a, (int)b)),
-			MathType.Real, "randint", MathType.Integer, MathType.Integer);
+		/// <summary>
+		/// Random integer given a minimum and exclusive maximum
+		/// </summary>
+		[MathFunction("randint")]
+		public static int RandomInteger(int min, int max)
+		{
+			return MathPlus.Probability.Rand.Next(min, max);
+		}
 	}
 }

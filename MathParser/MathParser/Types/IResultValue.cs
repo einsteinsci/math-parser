@@ -7,16 +7,6 @@ using System.Threading.Tasks;
 
 namespace MathParser.Types
 {
-	public enum MathType
-	{
-		Real = 0,
-		Integer,
-		String,
-		Boolean,
-		List,
-		Matrix
-	}
-
 	public interface IResultValue
 	{
 		MathType Type

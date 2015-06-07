@@ -9,42 +9,72 @@ using MathParser.Types;
 
 namespace MathParser.Functions
 {
+	/// <summary>
+	/// Functions relating to lists
+	/// </summary>
 	[FunctionLibrary("list")]
 	public static class LibraryList
 	{
-		[Function]
-		public static FunctionInfo MaxList
-		{ get { return maxList; } }
-		private static FunctionInfo maxList = new FunctionInfo(
-			(Func<List<double>, double>)((list) => MathPlus.Max(list)),
-			MathType.Real, "maxl", MathType.List);
+		[MathFunction("maxl")]
+		public static double MaxList(List<double> list)
+		{
+			return MathPlus.Max(list);
+		}
 
-		[Function]
-		public static FunctionInfo MinList
-		{ get { return minList; } }
-		private static FunctionInfo minList = new FunctionInfo(
-			(Func<List<double>, double>)((list) => MathPlus.Min(list)),
-			MathType.Real, "minl", MathType.List);
+		[MathFunction("minl")]
+		public static double MinList(List<double> list)
+		{
+			return MathPlus.Min(list);
+		}
 
-		[Function]
-		public static FunctionInfo Mean
-		{ get { return mean; } }
-		private static FunctionInfo mean = new FunctionInfo(
-			(Func<List<double>, double>)((list) => MathPlus.Stats.Mean(list)),
-			MathType.Real, "mean", MathType.List);
+		[MathFunction("mean")]
+		public static double Mean(List<double> list)
+		{
+			return MathPlus.Stats.Mean(list);
+		}
 
-		[Function]
-		public static FunctionInfo StdDev
-		{ get { return stdDev; } }
-		private static FunctionInfo stdDev = new FunctionInfo(
-			(Func<List<double>, double>)((list) => MathPlus.Stats.StandardDev(list)),
-			MathType.Real, "sd", MathType.List);
+		[MathFunction("sd")]
+		public static double StandardDeviation(List<double> list)
+		{
+			return MathPlus.Stats.StandardDev(list);
+		}
 
-		[Function]
-		public static FunctionInfo RootMeanSquare
-		{ get { return rootMeanSquare; } }
-		private static FunctionInfo rootMeanSquare = new FunctionInfo(
-			(Func<List<double>, double>)((list) => MathPlus.Stats.RootMeanSquare(list)),
-			MathType.Real, "rms", MathType.List);
+		[MathFunction("rms")]
+		public static double RootMeanSquare(List<double> list)
+		{
+			return MathPlus.Stats.RootMeanSquare(list);
+		}
+
+		[MathFunction("sizeof")]
+		public static int SizeOf(List<double> list)
+		{
+			return list.Count;
+		}
+
+		[MathFunction("fill")]
+		public static List<double> Fill(double val, long count)
+		{
+			List<double> res = new List<double>();
+			for (int i = 0; i < count; i++)
+			{
+				res.Add(val);
+			}
+
+			return res;
+		}
+
+		[MathFunction("cumsum")]
+		public static List<double> CumulativeSum(List<double> list)
+		{
+			List<double> res = new List<double>();
+			double total = 0;
+			foreach (double d in list)
+			{
+				total += d;
+				res.Add(total);
+			}
+
+			return res;
+		}
 	}
 }

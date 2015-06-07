@@ -8,22 +8,28 @@ using MathParser.Types;
 
 namespace MathParser.Functions
 {
+	/// <summary>
+	/// Functions involving strings
+	/// </summary>
 	[FunctionLibrary("string")]
 	public static class LibraryString
 	{
-		[Function]
-		public static FunctionInfo Substring
-		{ get { return substring; } }
-		private static FunctionInfo substring = new FunctionInfo(
-			(Func<string, long, long, string>)((string str, long start, long len) =>
-				str.Substring((int)start, (int)len)),
-			MathType.String, "substring", MathType.String, MathType.Integer, MathType.Integer);
+		/// <summary>
+		/// Substring of a given string, given a start index and length
+		/// </summary>
+		[MathFunction("substring")]
+		public static string Substring(string str, int start, int len)
+		{
+			return str.Substring(start, len);
+		}
 
-		[Function]
-		public static FunctionInfo Help
-		{ get { return help; } }
-		private static FunctionInfo help = new FunctionInfo(
-			(Func<string, string>)HelpLibrary.GetHelp,
-			MathType.String, "help", MathType.String);
+		/// <summary>
+		/// Provides help on any given function name
+		/// </summary>
+		[MathFunction("help")]
+		public static string Help(string funcName)
+		{
+			return HelpLibrary.GetHelp(funcName);
+		}
 	}
 }

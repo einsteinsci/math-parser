@@ -9,6 +9,7 @@ using MathParser.Lexing;
 using MathParser.Types;
 
 using MathParser.ParseTree;
+using System.Reflection;
 
 namespace MathParser.Test
 {
@@ -19,14 +20,17 @@ namespace MathParser.Test
 			Logger.OnLog += Log;
 			Logger.DisableLogging(Logger.REGISTRY);
 
+			//Extensibility.LoadedExtensions.Add(Assembly.GetExecutingAssembly());
+
 			Evaluator.Initialize();
-			
+
+			Console.ForegroundColor = ConsoleColor.White;
 			Console.Write("Input> ");
 			string input = Console.ReadLine();
 			
 			IResultValue res = Evaluator.Evaluate(input);
 			
-			Console.Write("Evaluated: " + input);
+			Console.WriteLine("Evaluated: " + input);
 			Console.WriteLine("Result: " + res.ToDisplay());
 
 			Console.ReadKey(true);

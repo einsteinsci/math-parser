@@ -28,7 +28,7 @@ namespace MathParser
 			get
 			{
 				List<Assembly> res = new List<Assembly>(LoadedExtensions);
-				res.Add(Assembly.GetCallingAssembly());
+				res.Insert(0, Assembly.GetAssembly(typeof(Extensibility)));
 
 				return res;
 			}
