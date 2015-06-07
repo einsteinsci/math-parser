@@ -20,38 +20,23 @@ namespace MathParser.Test
 			Logger.DisableLogging(Logger.REGISTRY);
 
 			Evaluator.Initialize();
-
-			Console.ForegroundColor = ConsoleColor.Green;
-			string input = "";
-			Console.Write("Input> ");
-			input = Console.ReadLine();
-
-			VariableRegistry.Global.Create("a", new ResultNumberReal(0));
-			VariableRegistry.Global.Create("b", new ResultNumberReal(0));
-			VariableRegistry.Global.Create("c", new ResultNumberReal(0));
-			VariableRegistry.Global.Create("d", new ResultNumberReal(0));
-			VariableRegistry.Global.Create("e", new ResultNumberReal(0));
-
-			VariableRegistry.Global.Create("L1", new ResultList(1, 2, 3, 4, 5));
-
-			TokenStream stream = Evaluator.Lex(input);
-			NodeFactor root = Evaluator.Parse(stream);
-			IResultValue res = Evaluator.Calculate(root);
-
-			//IResultValue res = Evaluator.Evaluate(input);
 			
-			Console.ForegroundColor = ConsoleColor.Green;
-			Console.Write("Evaluated: ");
-			Console.ForegroundColor = ConsoleColor.Yellow;
-			Console.Write(input); 
-			Console.ForegroundColor = ConsoleColor.Green;
-			Console.Write(" = " + res.ToDisplay());
+			Console.Write("Input> ");
+			string input = Console.ReadLine();
+			
+			IResultValue res = Evaluator.Evaluate(input);
+			
+			Console.Write("Evaluated: " + input);
+			Console.WriteLine("Result: " + res.ToDisplay());
 
 			Console.ReadKey(true);
 		}
 
 		static void Log(object sender, LoggerEventArgs e)
 		{
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.Write("[" + e.Category.ToUpper() + "] ");
+
 			switch (e.Level)
 			{
 			case LogLevel.Debug:
@@ -74,7 +59,7 @@ namespace MathParser.Test
 				break;
 			}
 
-			Console.WriteLine("" + e.FullText);
+			Console.WriteLine(e.Message);
 
 			Console.ForegroundColor = ConsoleColor.White;
 		}

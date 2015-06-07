@@ -8,15 +8,29 @@ using MathParser.Types;
 
 namespace MathParser
 {
+	/// <summary>
+	/// Registry where all variables are stored.
+	/// </summary>
 	public sealed class VariableRegistry
 	{
-		public static VariableRegistry Global
-		{ get { return _global; } }
-		private static VariableRegistry _global = new VariableRegistry();
+		/// <summary>
+		/// Singleton instance of registry
+		/// </summary>
+		public static VariableRegistry Instance
+		{ get { return _instance; } }
+		private static VariableRegistry _instance = new VariableRegistry();
 
+		/// <summary>
+		/// Inner registry of variables
+		/// </summary>
 		public Dictionary<string, IResultValue> Registry
 		{ get; private set; }
 
+		/// <summary>
+		/// Gets the value stored in a variable
+		/// </summary>
+		/// <param name="name">Variable name</param>
+		/// <returns>The value stored in the specified variable</returns>
 		public IResultValue this[string name]
 		{
 			get
@@ -36,28 +50,71 @@ namespace MathParser
 			}
 		}
 
+		/// <summary>
+		/// Instantiates a VariableRegistry
+		/// </summary>
 		public VariableRegistry()
 		{
 			Registry = new Dictionary<string, IResultValue>();
 		}
 
+		/// <summary>
+		/// Gets the value stored in a variable
+		/// </summary>
+		/// <param name="varname">Variable name</param>
+		/// <returns>
+		///   Value stored in the specified variable, 
+		///   null if variable does not exist.
+		/// </returns>
 		public static IResultValue Get(string varname)
 		{
-			return Global[varname];
+			return Instance[varname];
 		}
+
+		/// <summary>
+		/// Sets a variable to a value
+		/// </summary>
+		/// <param name="varname">Variable name</param>
+		/// <param name="value">Value to set variable to</param>
 		public static void Set(string varname, IResultValue value)
 		{
-			Global[varname] = value;
+			if (ContainsVariable(varname))
+			{
+				Instance[varname] = value;
+			}
+			else
+			{
+				Logger.Log(LogLevel.Error, "variable",
+					"Variable " + varname + " does not exist.");
+			}
 		}
 
-		public bool ContainsVariable(string varname)
+		/// <summary>
+		/// Returns whether a variable exists in the registry.
+		/// </summary>
+		/// <param name="varname">Variable to check for</param>
+		/// <returns>True if the variable exists, false if not</returns>
+		public static bool ContainsVariable(string varname)
 		{
-			return this[varname] != null;
+			return Instance[varname] != null;
 		}
 
-		public void Create(string varname, IResultValue initialValue)
+		/// <summary>
+		/// Creates a variable within the registry.
+		/// </summary>
+		/// <param name="varname">Name of variable to create.</param>
+		/// <param name="initialValue">Value and type to initialize to</param>
+		public static void Create(string varname, IResultValue initialValue)
 		{
-			Registry.Add(varname, initialValue);
+			if (!ContainsVariable(varname))
+			{
+				Instance.Registry.Add(varname, initialValue);
+			}
+			else
+			{
+				Logger.Log(LogLevel.Warning, "variable",
+					"Variable " + varname + " already exists.");
+			}
 		}
 	}
 }

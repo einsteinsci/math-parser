@@ -30,7 +30,7 @@ namespace MathParser.Lexing
 				return;
 			}
 
-			Logger.Log(LogLevel.Info, Logger.LEXER, "Beginning lexing...");
+			Logger.Log(LogLevel.Info, Logger.TOKENIZER, "Beginning lexing...");
 
 			string lexeme = "";
 
@@ -77,7 +77,7 @@ namespace MathParser.Lexing
 
 				if (validCurrent.Count == 0)
 				{
-					Logger.Log(LogLevel.Debug, Logger.LEXER, 
+					Logger.Log(LogLevel.Debug, Logger.TOKENIZER, 
 						"No last-choice Tokens. Waiting on " + lexeme);
 					lexeme += c;
 					if (!lexeme.StartsWith("\""))
@@ -89,7 +89,7 @@ namespace MathParser.Lexing
 
 				if (validCurrent.Count > 1)
 				{
-					Logger.Log(LogLevel.Warning, Logger.LEXER,
+					Logger.Log(LogLevel.Warning, Logger.TOKENIZER,
 						"Multiple last-choice Tokens: " +
 						TokensToString(validCurrent));
 				}
@@ -102,13 +102,13 @@ namespace MathParser.Lexing
 
 			if (validCurrent_.Count == 0)
 			{
-				Logger.Log(LogLevel.Error, Logger.LEXER, 
+				Logger.Log(LogLevel.Error, Logger.TOKENIZER, 
 					"No last-choice Tokens. Disposing " + lexeme);
 			}
 
 			if (validCurrent_.Count > 2) // excluding unrecognized
 			{
-				Logger.Log(LogLevel.Warning, Logger.LEXER,
+				Logger.Log(LogLevel.Warning, Logger.TOKENIZER,
 					"Multiple last-choice Tokens:  " +
 					TokensToString(validCurrent_));
 			}
@@ -123,22 +123,22 @@ namespace MathParser.Lexing
 				info += l.ToString() + "\n    ";
 			}
 			info = info.Trim();
-			Logger.Log(LogLevel.Info, Logger.LEXER, "Lexing complete.");
-			Logger.Log(LogLevel.Debug, Logger.LEXER, "Tokens: \n    " + info);
+			Logger.Log(LogLevel.Info, Logger.TOKENIZER, "Lexing complete.");
+			Logger.Log(LogLevel.Debug, Logger.TOKENIZER, "Tokens: \n    " + info);
 		}
 
 		public void FinalizeToken(TokenType token, string lexeme)
 		{
 			if (token == null)
 			{
-				Logger.Log(LogLevel.Error, Logger.LEXER, 
+				Logger.Log(LogLevel.Error, Logger.TOKENIZER, 
 					"Token is null. Filling with Unrecognized.");
 				Lexed.Add(new Token(TokenType.Unrecognized, lexeme));
 				System.Diagnostics.Debugger.Break();
 				return;
 			}
 
-			Logger.Log(LogLevel.Debug, Logger.LEXER,
+			Logger.Log(LogLevel.Debug, Logger.TOKENIZER,
 				"Finalizing Token " + token.ToString() + " for lexeme: " + lexeme);
 			Lexed.Add(new Token(token, lexeme));
 		}

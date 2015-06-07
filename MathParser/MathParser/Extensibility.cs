@@ -8,11 +8,21 @@ using System.IO;
 
 namespace MathParser
 {
+	/// <summary>
+	/// Provides options for the extension of this library
+	/// </summary>
 	public static class Extensibility
 	{
+		/// <summary>
+		/// List of assemblies used in the extension of this library.
+		/// Add your assembly to this list for it to extend this library.
+		/// </summary>
 		public static List<Assembly> LoadedExtensions
 		{ get; private set; }
 
+		/// <summary>
+		/// List of all assemblies loaded by this library, including itself.
+		/// </summary>
 		public static List<Assembly> AllAssemblies
 		{
 			get
@@ -29,6 +39,10 @@ namespace MathParser
 			LoadedExtensions = new List<Assembly>();
 		}
 
+		/// <summary>
+		/// Adds all assemblies in a folder to LoadedExtensions.
+		/// </summary>
+		/// <param name="folderPath">Full path of folder to load from</param>
 		public static void AddAllAssembliesInPath(string folderPath)
 		{
 			DirectoryInfo di = new DirectoryInfo(folderPath);
@@ -56,7 +70,7 @@ namespace MathParser
 			}
 		}
 
-		public static List<Type> GetAllTypesWithAttribute(Type attType)
+		internal static List<Type> GetAllTypesWithAttribute(Type attType)
 		{
 			List<Type> res = new List<Type>();
 
@@ -74,14 +88,9 @@ namespace MathParser
 			return res;
 		}
 
-		public static List<Type> GetAllTypesWithAttribute<AttType>()
+		internal static List<Type> GetAllTypesWithAttribute<AttType>()
 		{
 			return GetAllTypesWithAttribute(typeof(AttType));
-		}
-
-		public static List<Type> GetAllTypesWithAttribute(Attribute attInstance)
-		{
-			return GetAllTypesWithAttribute(attInstance.GetType());
 		}
 	}
 }
