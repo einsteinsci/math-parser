@@ -23,14 +23,14 @@ namespace MathParser.ParseTree
 		public override string StringForm
 		{ get { return "%"; } }
 
-		public NodeOperatorModulus(NodeFactor first, NodeFactor second) :
+		public NodeOperatorModulus(NodeBase first, NodeBase second) :
 			base(first, second)
 		{ }
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
-			IResultValue res1 = First.GetResult();
-			IResultValue res2 = Second.GetResult();
+			IResultValue res1 = First.Evaluate();
+			IResultValue res2 = Second.Evaluate();
 
 			if (!res1.ToDouble().IsInteger(8) || !res2.ToDouble().IsInteger(8))
 			{

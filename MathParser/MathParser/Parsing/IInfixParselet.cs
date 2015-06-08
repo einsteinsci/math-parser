@@ -13,6 +13,6 @@ namespace MathParser.Parsing
 		Precedence PrecedenceLevel
 		{ get; }
 
-		NodeFactor Parse(PrattParser parser, NodeFactor left, Token token);
+		NodeBase Parse(PrattParser parser, NodeBase left, Token token);
 	}
 }

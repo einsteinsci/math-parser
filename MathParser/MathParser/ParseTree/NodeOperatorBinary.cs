@@ -8,12 +8,12 @@ using MathParser.Types;
 
 namespace MathParser.ParseTree
 {
-	public abstract class NodeOperatorBinary : NodeFactor
+	public abstract class NodeOperatorBinary : NodeBase
 	{
-		public NodeFactor First
+		public NodeBase First
 		{ get; protected set; }
 
-		public NodeFactor Second
+		public NodeBase Second
 		{ get; protected set; }
 
 		public abstract string StringForm
@@ -22,11 +22,11 @@ namespace MathParser.ParseTree
 		public override string NodeName
 		{ get { return "Operator " + StringForm + " "; } }
 
-		public override List<NodeFactor> Children
+		public override List<NodeBase> Children
 		{
 			get
 			{
-				List<NodeFactor> res = new List<NodeFactor>();
+				List<NodeBase> res = new List<NodeBase>();
 				res.Add(First);
 				res.Add(Second);
 				return res;
@@ -39,7 +39,7 @@ namespace MathParser.ParseTree
 		public virtual bool IsRightAssociative
 		{ get { return false; } }
 
-		public NodeOperatorBinary(NodeFactor first, NodeFactor second)
+		public NodeOperatorBinary(NodeBase first, NodeBase second)
 		{
 			First = first;
 			Second = second;

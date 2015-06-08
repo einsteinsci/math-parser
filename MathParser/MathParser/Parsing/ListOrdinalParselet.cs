@@ -14,9 +14,9 @@ namespace MathParser.Parsing
 		public Precedence PrecedenceLevel
 		{ get { return Precedence.PRIMARY; } }
 
-		public NodeFactor Parse(PrattParser parser, NodeFactor left, Token token)
+		public NodeBase Parse(PrattParser parser, NodeBase left, Token token)
 		{
-			NodeFactor ordinal = parser.Parse();
+			NodeBase ordinal = parser.Parse();
 
 			parser.Consume(TokenType.BracketOut);
 

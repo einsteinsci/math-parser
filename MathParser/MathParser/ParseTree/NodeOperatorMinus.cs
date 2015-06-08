@@ -20,13 +20,13 @@ namespace MathParser.ParseTree
 		public override string StringForm
 		{ get { return "-"; } }
 
-		public NodeOperatorMinus(NodeFactor first, NodeFactor second) :
+		public NodeOperatorMinus(NodeBase first, NodeBase second) :
 			base(first, second)
 		{ }
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
-			return new ResultNumberReal(First.GetResult().ToDouble() - Second.GetResult().ToDouble());
+			return new ResultNumberReal(First.Evaluate().ToDouble() - Second.Evaluate().ToDouble());
 		}
 	}
 }

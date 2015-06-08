@@ -7,8 +7,15 @@ using MathParser.Types;
 
 namespace MathParser.ParseTree
 {
+	/// <summary>
+	/// Represents a type that can be evaluated in the parser
+	/// </summary>
 	public interface IEvaluatable
 	{
-		 IResultValue GetResult();
+		/// <summary>
+		/// Evaluates the IEvaluatable
+		/// </summary>
+		/// <returns>The result value</returns>
+		IResultValue Evaluate();
 	}
 }

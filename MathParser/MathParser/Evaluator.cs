@@ -39,7 +39,7 @@ namespace MathParser
 		/// <summary>
 		/// Root node of parse tree, ready to evaluate
 		/// </summary>
-		public NodeFactor ParseTree
+		public NodeBase ParseTree
 		{ get; private set; }
 
 		/// <summary>
@@ -105,7 +105,7 @@ namespace MathParser
 		/// </summary>
 		/// <param name="stream">TokenStream to parse</param>
 		/// <returns>Parse tree of expression</returns>
-		public static NodeFactor Parse(TokenStream stream)
+		public static NodeBase Parse(TokenStream stream)
 		{
 			Instance.Lexed = stream;
 			Instance.Parse();
@@ -117,7 +117,7 @@ namespace MathParser
 		/// </summary>
 		public void Calculate()
 		{
-			Result = ParseTree.GetResult();
+			Result = ParseTree.Evaluate();
 		}
 
 		/// <summary>
@@ -125,7 +125,7 @@ namespace MathParser
 		/// </summary>
 		/// <param name="factor">Parse tree to evaluate</param>
 		/// <returns>Evaluated result of parse tree</returns>
-		public static IResultValue Calculate(NodeFactor factor)
+		public static IResultValue Calculate(NodeBase factor)
 		{
 			Instance.ParseTree = factor;
 			Instance.Calculate();

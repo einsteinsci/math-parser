@@ -22,12 +22,12 @@ namespace MathParser.ParseTree
 		public override MathType Type
 		{ get { return MathType.Integer; } }
 
-		public NodeOperatorFactorial(NodeFactor operand) : base(operand)
+		public NodeOperatorFactorial(NodeBase operand) : base(operand)
 		{ }
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
-			IResultValue res = Operand.GetResult();
+			IResultValue res = Operand.Evaluate();
 
 			if (!res.ToDouble().IsInteger(8))
 			{

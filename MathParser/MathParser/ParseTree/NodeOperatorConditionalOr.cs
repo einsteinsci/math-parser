@@ -19,13 +19,13 @@ namespace MathParser.ParseTree
 		public override MathType Type
 		{ get { return MathType.Boolean; } }
 
-		public NodeOperatorConditionalOr(NodeFactor first, NodeFactor second) :
+		public NodeOperatorConditionalOr(NodeBase first, NodeBase second) :
 			base(first, second)
 		{ }
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
-			return new ResultBoolean(First.GetResult().ToBoolean() || Second.GetResult().ToBoolean());
+			return new ResultBoolean(First.Evaluate().ToBoolean() || Second.Evaluate().ToBoolean());
 		}
 	}
 }

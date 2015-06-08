@@ -22,13 +22,13 @@ namespace MathParser.ParseTree
 		public override string StringForm
 		{ get { return "*"; } }
 
-		public NodeOperatorMultiply(NodeFactor first, NodeFactor second) :
+		public NodeOperatorMultiply(NodeBase first, NodeBase second) :
 			base(first, second)
 		{ }
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
-			return new ResultNumberReal(First.GetResult().ToDouble() * Second.GetResult().ToDouble());
+			return new ResultNumberReal(First.Evaluate().ToDouble() * Second.Evaluate().ToDouble());
 		}
 	}
 }

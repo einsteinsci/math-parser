@@ -8,9 +8,9 @@ using MathParser.Types;
 
 namespace MathParser.ParseTree
 {
-	public abstract class NodeOperatorUnary : NodeFactor
+	public abstract class NodeOperatorUnary : NodeBase
 	{
-		public NodeFactor Operand
+		public NodeBase Operand
 		{ get; protected set; }
 
 		public abstract string StringForm
@@ -19,18 +19,18 @@ namespace MathParser.ParseTree
 		public override string NodeName
 		{ get { return "Operator " + StringForm + " "; } }
 
-		public override List<NodeFactor> Children
+		public override List<NodeBase> Children
 		{
 			get
 			{
-				return new List<NodeFactor>() { Operand };
+				return new List<NodeBase>() { Operand };
 			}
 		}
 
 		public abstract TokenType Operator
 		{ get; }
 
-		public NodeOperatorUnary(NodeFactor operand)
+		public NodeOperatorUnary(NodeBase operand)
 		{
 			Operand = operand;
 		}

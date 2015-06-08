@@ -19,13 +19,13 @@ namespace MathParser.ParseTree
 		public override MathType Type
 		{ get { return MathType.Boolean; } }
 
-		public NodeOperatorLessThan(NodeFactor first, NodeFactor second) :
+		public NodeOperatorLessThan(NodeBase first, NodeBase second) :
 			base(first, second)
 		{ }
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
-			return new ResultBoolean(First.GetResult().ToDouble() < Second.GetResult().ToDouble());
+			return new ResultBoolean(First.Evaluate().ToDouble() < Second.Evaluate().ToDouble());
 		}
 	}
 }

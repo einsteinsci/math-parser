@@ -17,7 +17,7 @@ namespace MathParser
 		/// <summary>
 		/// Factor that caused the exception
 		/// </summary>
-		public NodeFactor InvalidFactor
+		public NodeBase InvalidFactor
 		{ get; private set; }
 
 		/// <summary>
@@ -32,7 +32,7 @@ namespace MathParser
 		/// </summary>
 		/// <param name="factor">Factor causing the exception</param>
 		/// <param name="message">Exception message</param>
-		public EvaluationException(NodeFactor factor, string message) : this(message)
+		public EvaluationException(NodeBase factor, string message) : this(message)
 		{
 			InvalidFactor = factor;
 		}

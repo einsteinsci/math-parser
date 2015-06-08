@@ -11,9 +11,9 @@ namespace MathParser.Parsing
 {
 	public class ListLiteralParselet : IPrefixParselet
 	{
-		public NodeFactor Parse(PrattParser parser, Token token)
+		public NodeBase Parse(PrattParser parser, Token token)
 		{
-			List<NodeFactor> elements = new List<NodeFactor>();
+			List<NodeBase> elements = new List<NodeBase>();
 
 			if (!parser.Match(TokenType.BraceOut))
 			{

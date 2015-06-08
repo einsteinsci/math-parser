@@ -61,7 +61,7 @@
     <Compile Include="Functions\FunctionLibraryAttribute.cs" />
     <Compile Include="Functions\FunctionRegistry.cs" />
     <Compile Include="LoggerEventArgs.cs" />
-    <Compile Include="ParseTree\NodeFactor.cs" />
+    <Compile Include="ParseTree\NodeBase.cs" />
     <Compile Include="ParseTree\NodeFunction.cs" />
     <Compile Include="ParseTree\NodeIdentifier.cs" />
     <Compile Include="ParseTree\NodeListLiteral.cs" />

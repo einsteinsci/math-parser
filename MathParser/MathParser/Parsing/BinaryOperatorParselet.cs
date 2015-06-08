@@ -22,9 +22,9 @@ namespace MathParser.Parsing
 			RightAssociative = rightAssociative;
 		}
 
-		public NodeFactor Parse(PrattParser parser, NodeFactor left, Token token)
+		public NodeBase Parse(PrattParser parser, NodeBase left, Token token)
 		{
-			NodeFactor right = parser.Parse(RightAssociative ? PrecedenceLevel - 1 : PrecedenceLevel);
+			NodeBase right = parser.Parse(RightAssociative ? PrecedenceLevel - 1 : PrecedenceLevel);
 			return BinaryInfixRegistry.MakeNode(token.Type, left, right);
 		}
 	}

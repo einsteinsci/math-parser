@@ -7,35 +7,35 @@ using MathParser.Types;
 
 namespace MathParser.ParseTree
 {
-	public class NodeListOrdinal : NodeFactor
+	public class NodeListOrdinal : NodeBase
 	{
 		public override MathType Type
 		{ get { return MathType.Real; } }
 
-		public override List<NodeFactor> Children
+		public override List<NodeBase> Children
 		{
 			get
 			{
-				return new List<NodeFactor>() { List, Index };
+				return new List<NodeBase>() { List, Index };
 			}
 		}
 
-		public NodeFactor List
+		public NodeBase List
 		{ get; private set; }
 
-		public NodeFactor Index
+		public NodeBase Index
 		{ get; private set; }
 
-		public NodeListOrdinal(NodeFactor list, NodeFactor index)
+		public NodeListOrdinal(NodeBase list, NodeBase index)
 		{
 			List = list;
 			Index = index;
 		}
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
-			IResultValue list = List.GetResult();
-			IResultValue index = Index.GetResult();
+			IResultValue list = List.Evaluate();
+			IResultValue index = Index.Evaluate();
 
 			if (index.Type != MathType.Integer)
 			{

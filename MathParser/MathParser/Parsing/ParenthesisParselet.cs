@@ -11,9 +11,9 @@ namespace MathParser.Parsing
 {
 	public class ParenthesisParselet : IPrefixParselet
 	{
-		public NodeFactor Parse(PrattParser parser, Token token)
+		public NodeBase Parse(PrattParser parser, Token token)
 		{
-			NodeFactor node = parser.Parse();
+			NodeBase node = parser.Parse();
 			parser.Consume(TokenType.ParenthesisOut);
 
 			return node;

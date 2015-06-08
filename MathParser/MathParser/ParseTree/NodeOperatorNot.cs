@@ -19,12 +19,12 @@ namespace MathParser.ParseTree
 		public override MathType Type
 		{ get { return MathType.Boolean; } }
 
-		public NodeOperatorNot(NodeFactor operand) : base(operand)
+		public NodeOperatorNot(NodeBase operand) : base(operand)
 		{ }
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
-			return new ResultBoolean(!Operand.GetResult().ToBoolean());
+			return new ResultBoolean(!Operand.Evaluate().ToBoolean());
 		}
 	}
 }

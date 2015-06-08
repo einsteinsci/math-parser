@@ -19,12 +19,12 @@ namespace MathParser.ParseTree
 		public override MathType Type
 		{ get { return MathType.Real; } }
 
-		public NodeOperatorNegative(NodeFactor operand) : base(operand)
+		public NodeOperatorNegative(NodeBase operand) : base(operand)
 		{ }
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
-			return new ResultNumberReal(-1.0 * Operand.GetResult().ToDouble());
+			return new ResultNumberReal(-1.0 * Operand.Evaluate().ToDouble());
 		}
 	}
 }

@@ -16,9 +16,9 @@ namespace MathParser.Parsing
 		public Precedence PrecedenceLevel
 		{ get { return Precedence.PRIMARY; } }
 
-		public NodeFactor Parse(PrattParser parser, NodeFactor left, Token token)
+		public NodeBase Parse(PrattParser parser, NodeBase left, Token token)
 		{
-			List<NodeFactor> args = new List<NodeFactor>();
+			List<NodeBase> args = new List<NodeBase>();
 
 			if (!parser.Match(TokenType.ParenthesisOut))
 			{

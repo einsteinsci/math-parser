@@ -19,9 +19,14 @@ namespace MathParser.Lexing
 		public string TokenName
 		{ get; private set; }
 
-		// named
+		/// <summary>
+		/// Whether the TokenType has a custom token registry to load from
+		/// </summary>
 		public bool Custom;
-
+		
+		/// <summary>
+		/// Instantiates a TokenTypeAttribute
+		/// </summary>
 		public TokenTypeAttribute(string tokenName)
 		{
 			TokenName = tokenName.ToLower();

@@ -8,7 +8,7 @@ using MathParser.Types;
 
 namespace MathParser.ParseTree
 {
-	public class NodeFunction : NodeFactor
+	public class NodeFunction : NodeBase
 	{
 		public override MathType Type
 		{ get { return FuncInfo.ReturnType; } }
@@ -16,25 +16,25 @@ namespace MathParser.ParseTree
 		public FunctionInfo FuncInfo
 		{ get; protected set; }
 
-		public override List<NodeFactor> Children
+		public override List<NodeBase> Children
 		{ get { return arguments; } }
-		protected List<NodeFactor> arguments;
+		protected List<NodeBase> arguments;
 
 		public override string NodeName
 		{ get { return FuncInfo.Name + "()"; } }
 
-		public NodeFunction(FunctionInfo info, params NodeFactor[] args)
+		public NodeFunction(FunctionInfo info, params NodeBase[] args)
 		{
 			arguments = args.ToList();
 			FuncInfo = info;
 		}
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
 			List<IResultValue> argResults = new List<IResultValue>();
-			foreach (NodeFactor fact in Children)
+			foreach (NodeBase fact in Children)
 			{
-				argResults.Add(fact.GetResult());
+				argResults.Add(fact.Evaluate());
 			}
 
 			return FuncInfo.Invoke(argResults.ToArray());
@@ -43,7 +43,7 @@ namespace MathParser.ParseTree
 		public override string ToString()
 		{
 			string args = "";
-			foreach (NodeFactor fact in Children)
+			foreach (NodeBase fact in Children)
 			{
 				args += fact.ToString() + ",";
 			}

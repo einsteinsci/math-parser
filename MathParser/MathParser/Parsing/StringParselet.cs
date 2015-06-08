@@ -12,7 +12,7 @@ namespace MathParser.Parsing
 {
 	public class StringParselet : IPrefixParselet
 	{
-		public NodeFactor Parse(PrattParser parser, Token token)
+		public NodeBase Parse(PrattParser parser, Token token)
 		{
 			string str = token.Lexeme.TrimEnd('"').TrimStart('"');
 			return new NodeLiteral(new ResultString(str));

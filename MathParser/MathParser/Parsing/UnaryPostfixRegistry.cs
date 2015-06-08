@@ -65,7 +65,7 @@ namespace MathParser.Parsing
 			}
 		}
 
-		public static NodeOperatorUnary MakeNode(TokenType token, NodeFactor left)
+		public static NodeOperatorUnary MakeNode(TokenType token, NodeBase left)
 		{
 			if (!registry.ContainsKey(token))
 			{

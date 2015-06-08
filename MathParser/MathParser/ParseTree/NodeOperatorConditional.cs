@@ -7,16 +7,16 @@ using MathParser.Types;
 
 namespace MathParser.ParseTree
 {
-	public class NodeOperatorConditional : NodeFactor
+	public class NodeOperatorConditional : NodeBase
 	{
 		public override MathType Type
 		{ get { return OnTrue.Type; } }
 
-		public override List<NodeFactor> Children
+		public override List<NodeBase> Children
 		{
 			get 
 			{
-				return new List<NodeFactor>() {
+				return new List<NodeBase>() {
 					Condition,
 					OnTrue,
 					OnFalse
@@ -27,25 +27,25 @@ namespace MathParser.ParseTree
 		public override string NodeName
 		{ get { return "Operator ?:"; } }
 
-		public NodeFactor Condition
+		public NodeBase Condition
 		{ get; private set; }
 
-		public NodeFactor OnTrue
+		public NodeBase OnTrue
 		{ get; private set; }
 
-		public NodeFactor OnFalse
+		public NodeBase OnFalse
 		{ get; private set; }
 
-		public NodeOperatorConditional(NodeFactor condition, NodeFactor onTrue, NodeFactor onFalse)
+		public NodeOperatorConditional(NodeBase condition, NodeBase onTrue, NodeBase onFalse)
 		{
 			Condition = condition;
 			OnTrue = onTrue;
 			OnFalse = onFalse;
 		}
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
-			IResultValue condition = Condition.GetResult();
+			IResultValue condition = Condition.Evaluate();
 			if (condition.Type != MathType.Boolean)
 			{
 				throw new EvaluationException(this, 
@@ -53,7 +53,7 @@ namespace MathParser.ParseTree
 			}
 
 			// See what I mean here?
-			return condition.ToBoolean() ? OnTrue.GetResult() : OnFalse.GetResult();
+			return condition.ToBoolean() ? OnTrue.Evaluate() : OnFalse.Evaluate();
 		}
 	}
 }

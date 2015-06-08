@@ -12,7 +12,7 @@ namespace MathParser.Parsing
 {
 	public class BooleanParselet : IPrefixParselet
 	{
-		public NodeFactor Parse(PrattParser parser, Token token)
+		public NodeBase Parse(PrattParser parser, Token token)
 		{
 			if (token.Lexeme.ToLower() == "true")
 			{

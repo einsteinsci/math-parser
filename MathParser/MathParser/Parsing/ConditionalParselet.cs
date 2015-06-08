@@ -14,11 +14,11 @@ namespace MathParser.Parsing
 		public Precedence PrecedenceLevel
 		{ get { return Precedence.CONDITIONAL_TERNARY; } }
 
-		public NodeFactor Parse(PrattParser parser, NodeFactor left, Token token)
+		public NodeBase Parse(PrattParser parser, NodeBase left, Token token)
 		{
-			NodeFactor onTrue = parser.Parse();
+			NodeBase onTrue = parser.Parse();
 			parser.Consume(TokenType.OperatorColon);
-			NodeFactor onFalse = parser.Parse();
+			NodeBase onFalse = parser.Parse();
 
 			return new NodeOperatorConditional(left, onTrue, onFalse);
 		}

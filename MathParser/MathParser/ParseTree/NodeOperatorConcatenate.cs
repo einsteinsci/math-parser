@@ -20,16 +20,16 @@ namespace MathParser.ParseTree
 		public override MathType Type
 		{ get { return MathType.String; } }
 
-		public NodeOperatorConcatenate(NodeFactor first, NodeFactor second) :
+		public NodeOperatorConcatenate(NodeBase first, NodeBase second) :
 			base(first, second)
 		{ }
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
-			IResultValue first = First.GetResult();
-			IResultValue second = Second.GetResult();
+			IResultValue first = First.Evaluate();
+			IResultValue second = Second.Evaluate();
 
-			return new ResultString(First.GetResult().ToString() + Second.GetResult().ToString());
+			return new ResultString(First.Evaluate().ToString() + Second.Evaluate().ToString());
 		}
 	}
 }

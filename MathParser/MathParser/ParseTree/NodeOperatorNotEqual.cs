@@ -21,14 +21,14 @@ namespace MathParser.ParseTree
 		public override MathType Type
 		{ get { return MathType.Boolean; } }
 
-		public NodeOperatorNotEqual(NodeFactor first, NodeFactor second) :
+		public NodeOperatorNotEqual(NodeBase first, NodeBase second) :
 			base(first, second)
 		{ }
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
-			IResultValue num1 = First.GetResult();
-			IResultValue num2 = Second.GetResult();
+			IResultValue num1 = First.Evaluate();
+			IResultValue num2 = Second.Evaluate();
 
 			return new ResultBoolean(!num1.ToDouble().AlmostEqualTo(num2.ToDouble()));
 		}

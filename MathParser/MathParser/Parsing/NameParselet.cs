@@ -11,7 +11,7 @@ namespace MathParser.Parsing
 {
 	public class NameParselet : IPrefixParselet
 	{
-		public NodeFactor Parse(PrattParser parser, Token token)
+		public NodeBase Parse(PrattParser parser, Token token)
 		{
 			return new NodeIdentifier(token.Lexeme);
 		}

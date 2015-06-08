@@ -11,6 +11,6 @@ namespace MathParser.Parsing
 {
 	public interface IPrefixParselet
 	{
-		NodeFactor Parse(PrattParser parser, Token token);
+		NodeBase Parse(PrattParser parser, Token token);
 	}
 }

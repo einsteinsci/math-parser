@@ -7,11 +7,11 @@ using MathParser.Types;
 
 namespace MathParser.ParseTree
 {
-	public class NodeListLiteral : NodeFactor
+	public class NodeListLiteral : NodeBase
 	{
-		public override List<NodeFactor> Children
+		public override List<NodeBase> Children
 		{ get { return elements; } }
-		private List<NodeFactor> elements;
+		private List<NodeBase> elements;
 
 		public override MathType Type
 		{ get { return MathType.List; } }
@@ -19,23 +19,23 @@ namespace MathParser.ParseTree
 		public override string NodeName
 		{ get { return "list"; } }
 
-		public NodeListLiteral(IEnumerable<NodeFactor> nodes)
+		public NodeListLiteral(IEnumerable<NodeBase> nodes)
 		{
 			elements = nodes.ToList();
 		}
-		public NodeListLiteral(params NodeFactor[] nodes) : this(nodes.ToList())
+		public NodeListLiteral(params NodeBase[] nodes) : this(nodes.ToList())
 		{ }
 		public NodeListLiteral()
 		{
-			elements = new List<NodeFactor>();
+			elements = new List<NodeBase>();
 		}
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
 			List<double> vals = new List<double>();
-			foreach (NodeFactor node in Children)
+			foreach (NodeBase node in Children)
 			{
-				IResultValue res = node.GetResult();
+				IResultValue res = node.Evaluate();
 				if (res.Type != MathType.Real && res.Type != MathType.Integer)
 				{
 					throw new EvaluationException(this, "List item must be a number. Found " + 

@@ -8,6 +8,9 @@ using MathParser.Lexing;
 
 namespace MathParser.Parsing
 {
+	/// <summary>
+	/// Class containing all regular binary operators
+	/// </summary>
 	public static class BinaryInfixRegistry
 	{
 		static Dictionary<TokenType, RegItem> registry =
@@ -18,6 +21,9 @@ namespace MathParser.Parsing
 			Init();
 		}
 
+		/// <summary>
+		/// Initializes and loads binary operators via reflection
+		/// </summary>
 		public static void Init()
 		{
 			List<Type> infixes = Extensibility.
@@ -42,6 +48,13 @@ namespace MathParser.Parsing
 			}
 		}
 
+		/// <summary>
+		/// Registers a token type for a binary operator
+		/// </summary>
+		/// <param name="token">Token type in between operator sides</param>
+		/// <param name="nodeType">Type of node to register to</param>
+		/// <param name="precedence">Precedence level of operator</param>
+		/// <param name="rightAssociative">Whether the operator is right-associative</param>
 		public static void Register(TokenType token, Type nodeType, 
 			Precedence precedence, bool rightAssociative = false)
 		{
@@ -67,8 +80,15 @@ namespace MathParser.Parsing
 			}
 		}
 
+		/// <summary>
+		/// Creates a node from a token and two sides
+		/// </summary>
+		/// <param name="token">Token identifying the operator</param>
+		/// <param name="left">Left side of operator</param>
+		/// <param name="right">Right side of operator</param>
+		/// <returns>Node of the tokens</returns>
 		public static NodeOperatorBinary MakeNode(TokenType token, 
-			NodeFactor left, NodeFactor right)
+			NodeBase left, NodeBase right)
 		{
 			if (!registry.ContainsKey(token))
 			{

@@ -7,7 +7,7 @@ using MathParser.Types;
 
 namespace MathParser.ParseTree
 {
-	public class NodeIdentifier : NodeFactor
+	public class NodeIdentifier : NodeBase
 	{
 		public override MathType Type
 		{ get { return StoredValue != null ? StoredValue.Type : (MathType)0; } }
@@ -21,9 +21,9 @@ namespace MathParser.ParseTree
 		public override string NodeName
 		{ get { return IdentifierName; } }
 
-		public override List<NodeFactor> Children
+		public override List<NodeBase> Children
 		{
-			get { return new List<NodeFactor>(); }
+			get { return new List<NodeBase>(); }
 		}
 
 		public NodeIdentifier(string varName)
@@ -32,7 +32,7 @@ namespace MathParser.ParseTree
 			IdentifierName = varName;
 		}
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
 			return StoredValue;
 		}

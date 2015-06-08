@@ -19,7 +19,7 @@ namespace MathParser.Parsing
 			PrecedenceLevel = precedence;
 		}
 
-		public NodeFactor Parse(PrattParser parser, NodeFactor left, Token token)
+		public NodeBase Parse(PrattParser parser, NodeBase left, Token token)
 		{
 			return UnaryPostfixRegistry.MakeNode(token.Type, left);
 		}

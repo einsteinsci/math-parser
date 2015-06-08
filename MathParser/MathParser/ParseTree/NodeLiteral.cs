@@ -7,20 +7,20 @@ using MathParser.Types;
 
 namespace MathParser.ParseTree
 {
-	public class NodeLiteral : NodeFactor
+	public class NodeLiteral : NodeBase
 	{
 		public IResultValue Value
 		{ get; set; }
 
-		public override List<NodeFactor> Children
+		public override List<NodeBase> Children
 		{
-			get { return new List<NodeFactor>(); }
+			get { return new List<NodeBase>(); }
 		}
 
 		public override string NodeName
 		{ get { return Type.ToString() + " " + Value.ToDisplay(); } }
 
-		public override IResultValue GetResult()
+		public override IResultValue Evaluate()
 		{
 			return Value;
 		}
