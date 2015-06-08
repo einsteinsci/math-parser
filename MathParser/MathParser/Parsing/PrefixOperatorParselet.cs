@@ -22,7 +22,7 @@ namespace MathParser.Parsing
 		public NodeFactor Parse(PrattParser parser, Token token)
 		{
 			NodeFactor operand = parser.Parse(Precedence);
-			return UnaryPrefixRegistry.MakeNode(token.Class, operand);
+			return UnaryPrefixRegistry.MakeNode(token.Type, operand);
 		}
 	}
 }

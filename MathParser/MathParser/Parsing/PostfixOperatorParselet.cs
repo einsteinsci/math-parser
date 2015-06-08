@@ -21,7 +21,7 @@ namespace MathParser.Parsing
 
 		public NodeFactor Parse(PrattParser parser, NodeFactor left, Token token)
 		{
-			return UnaryPostfixRegistry.MakeNode(token.Class, left);
+			return UnaryPostfixRegistry.MakeNode(token.Type, left);
 		}
 	}
 }

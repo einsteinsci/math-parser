@@ -11,21 +11,39 @@ namespace MathParser.Functions
 {
 	public sealed class FunctionInfo
 	{
+		/// <summary>
+		/// Specifies what type the function returns
+		/// </summary>
 		public MathType ReturnType
 		{ get; private set; }
 
+		/// <summary>
+		/// List of the types for each argument
+		/// </summary>
 		public List<MathType> ArgumentTypes
 		{ get; private set; }
 
+		/// <summary>
+		/// Number of arguments in the function
+		/// </summary>
 		public int ArgumentCount
 		{ get { return ArgumentTypes.Count; } }
 
+		/// <summary>
+		/// Name of the function
+		/// </summary>
 		public string Name
 		{ get; private set; }
 
+		/// <summary>
+		/// Functional type to run for the function
+		/// </summary>
 		public Delegate Function
 		{ get; private set; }
 
+		/// <summary>
+		/// Instantiates a new FunctionInfo
+		/// </summary>
 		public FunctionInfo(Delegate function, MathType ret, string name, params MathType[] args)
 		{
 			Function = function;
@@ -34,82 +52,30 @@ namespace MathParser.Functions
 			ArgumentTypes = args.ToList();
 		}
 
+		/// <summary>
+		/// Instantiates a new FunctionInfo
+		/// </summary>
 		public FunctionInfo(Delegate function)
 		{
 			Function = function;
 
 			Type ret = function.Method.ReturnType;
 			ReturnType = ret.ToMathType();
-
-			//if (ret == typeof(double) || ret == typeof(float))
-			//{
-			//	ReturnType = MathType.Real;
-			//}
-			//else if (ret == typeof(long) || ret == typeof(int) || ret == typeof(short))
-			//{
-			//	ReturnType = MathType.Integer;
-			//}
-			//else if (ret == typeof(string))
-			//{
-			//	ReturnType = MathType.String;
-			//}
-			//else if (ret == typeof(bool))
-			//{
-			//	ReturnType = MathType.Boolean;
-			//}
-			//else if (ret == typeof(List<double>) || ret == typeof(double[]) ||
-			//	ret == typeof(List<float>) || ret == typeof(float[]))
-			//{
-			//	ReturnType = MathType.List;
-			//}
-			//else if (ret == typeof(MathMatrix))
-			//{
-			//	ReturnType = MathType.Matrix;
-			//}
-			//else
-			//{
-			//	throw new ArgumentException("Return type is of invalid type: " + ret.ToString());
-			//}
-
+			
 			ParameterInfo[] args = function.Method.GetParameters();
 			ArgumentTypes = new List<MathType>();
 			foreach (ParameterInfo arg in args)
 			{
 				Type t = arg.GetType();
 				ArgumentTypes.Add(t.ToMathType());
-
-				//if (t == typeof(double) || t == typeof(float))
-				//{
-				//	ArgumentTypes.Add(MathType.Real);
-				//}
-				//else if (t == typeof(long) || t == typeof(int) || t == typeof(short))
-				//{
-				//	ArgumentTypes.Add(MathType.Integer);
-				//}
-				//else if (t == typeof(string))
-				//{
-				//	ArgumentTypes.Add(MathType.String);
-				//}
-				//else if (t == typeof(bool))
-				//{
-				//	ArgumentTypes.Add(MathType.Boolean);
-				//}
-				//else if (t == typeof(List<double>) || t == typeof(double[]) ||
-				//	t == typeof(List<float>) || t == typeof(float[]))
-				//{
-				//	ArgumentTypes.Add(MathType.List);
-				//}
-				//else if (t == typeof(MathMatrix))
-				//{
-				//	ArgumentTypes.Add(MathType.Matrix);
-				//}
-				//else
-				//{
-				//	throw new ArgumentException("Argument is of invalid type: " + t.ToString());
-				//}
 			}
 		}
 
+		/// <summary>
+		/// Runs the code in the function, given the required arguments.
+		/// </summary>
+		/// <param name="args">Arguments used by function</param>
+		/// <returns>The return value once the function completes</returns>
 		public IResultValue Invoke(params IResultValue[] args)
 		{
 			if (args.Length != ArgumentCount)
@@ -124,32 +90,6 @@ namespace MathParser.Functions
 			for (int i = 0; i < ArgumentCount; i++)
 			{
 				argvals[i] = args[i].CoreValue;
-
-				//switch (args[i].Type)
-				//{
-				//case MathType.Real:
-				//	argvals[i] = args[i].ToDouble();
-				//	continue;
-				//case MathType.Integer:
-				//	argvals[i] = args[i].ToInteger();
-				//	continue;
-				//case MathType.String:
-				//	argvals[i] = args[i].ToString();
-				//	continue;
-				//case MathType.Boolean:
-				//	argvals[i] = args[i].ToBoolean();
-				//	continue;
-				//case MathType.List:
-				//	argvals[i] = args[i].ToList();
-				//	continue;
-				//case MathType.Matrix:
-				//	argvals[i] = args[i].ToMatrix();
-				//	continue;
-				//default:
-				//	throw new ArgumentOutOfRangeException(
-				//		"Argument is of invalid MathType: " + 
-				//		args[i].Type.ToString());
-				//}
 			}
 
 			object res = Function.DynamicInvoke(argvals);
@@ -181,6 +121,9 @@ namespace MathParser.Functions
 			}
 		}
 		
+		/// <summary>
+		/// Converts the function to a C-style function declaration
+		/// </summary>
 		public override string ToString()
 		{
 			string res = ReturnType.ToString() + " " + Name + "(";

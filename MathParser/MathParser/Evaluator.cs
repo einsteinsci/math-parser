@@ -67,6 +67,7 @@ namespace MathParser
 		{
 			TokenTypeRegistry.RegisterTokens(force);
 			Functions.FunctionRegistry.Init(force);
+			HelpLibrary.Init();
 			PrattParser.Init(force);
 		}
 
@@ -76,7 +77,7 @@ namespace MathParser
 		/// </summary>
 		public void Tokenize()
 		{
-			Lexed = Tokenizer.Lex(Input);
+			Lexed = Tokenizer.Tokenize(Input);
 		}
 
 		/// <summary>

@@ -8,17 +8,33 @@ using MathParser.Lexing;
 
 namespace MathParser.Lexing
 {
+	/// <summary>
+	/// Class to turn an input string into a token stream,
+	/// ready to parse
+	/// </summary>
     public sealed class Tokenizer
     {
+		/// <summary>
+		/// Singleton instance
+		/// </summary>
 		public static readonly Tokenizer Instance = new Tokenizer();
 
+		/// <summary>
+		/// Input expression
+		/// </summary>
 		public string Expression
 		{ get; set; }
 
+		/// <summary>
+		/// Output token stream
+		/// </summary>
 		public TokenStream Lexed
 		{ get; private set; }
 
-		public void Lex()
+		/// <summary>
+		/// Converts Expression into a TokenStream, and stores it in Lexed.
+		/// </summary>
+		public void Tokenize()
 		{
 			if (!TokenTypeRegistry.HasRegistered)
 			{
@@ -127,7 +143,8 @@ namespace MathParser.Lexing
 			Logger.Log(LogLevel.Debug, Logger.TOKENIZER, "Tokens: \n    " + info);
 		}
 
-		public void FinalizeToken(TokenType token, string lexeme)
+		// Helper function
+		private void FinalizeToken(TokenType token, string lexeme)
 		{
 			if (token == null)
 			{
@@ -143,6 +160,9 @@ namespace MathParser.Lexing
 			Lexed.Add(new Token(token, lexeme));
 		}
 		
+		/// <summary>
+		/// Lists all token types into a string
+		/// </summary>
 		public static string TokensToString(List<TokenType> tokens)
 		{
 			string res = "{ ";
@@ -154,7 +174,7 @@ namespace MathParser.Lexing
 			return res.TrimEnd(',') + " }";
 		}
 
-		public static List<TokenType> ValidTokens(string lexeme)
+		private static List<TokenType> ValidTokens(string lexeme)
 		{
 			if (lexeme == "")
 			{
@@ -173,12 +193,17 @@ namespace MathParser.Lexing
 			return res;
 		}
 
-		public static TokenStream Lex(string expression)
+		/// <summary>
+		/// Tokenizes statically.
+		/// </summary>
+		/// <param name="expression">Expression to tokenize</param>
+		/// <returns>TokenStream, ready to parse</returns>
+		public static TokenStream Tokenize(string expression)
 		{
 			Instance.Lexed = new TokenStream();
 			Instance.Expression = expression;
 
-			Instance.Lex();
+			Instance.Tokenize();
 
 			return Instance.Lexed;
 		}

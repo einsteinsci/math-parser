@@ -13,7 +13,7 @@ namespace MathParser.Parsing
 	{
 		public NodeFactor Parse(PrattParser parser, Token token)
 		{
-			return new NodeIdentifier(token.Lexed);
+			return new NodeIdentifier(token.Lexeme);
 		}
 	}
 }

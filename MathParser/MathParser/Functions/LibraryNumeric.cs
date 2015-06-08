@@ -62,6 +62,15 @@ namespace MathParser.Functions
 		}
 
 		/// <summary>
+		/// Square root function
+		/// </summary>
+		[MathFunction("sqrt")]
+		public static double SquareRoot(double val)
+		{
+			return MathPlus.Sqrt(val);
+		}
+
+		/// <summary>
 		/// Maximum of two values
 		/// </summary>
 		[MathFunction("max")]

@@ -14,7 +14,7 @@ namespace MathParser.Parsing
 	{
 		public NodeFactor Parse(PrattParser parser, Token token)
 		{
-			string str = token.Lexed.TrimEnd('"').TrimStart('"');
+			string str = token.Lexeme.TrimEnd('"').TrimStart('"');
 			return new NodeLiteral(new ResultString(str));
 		}
 	}

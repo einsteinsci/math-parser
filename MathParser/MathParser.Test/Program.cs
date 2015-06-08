@@ -19,6 +19,7 @@ namespace MathParser.Test
 		{
 			Logger.OnLog += Log;
 			Logger.DisableLogging(Logger.REGISTRY);
+			Logger.DebugLogging = true;
 
 			//Extensibility.LoadedExtensions.Add(Assembly.GetExecutingAssembly());
 

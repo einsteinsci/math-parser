@@ -14,17 +14,17 @@ namespace MathParser.Parsing
 	{
 		public NodeFactor Parse(PrattParser parser, Token token)
 		{
-			if (token.Lexed.ToLower() == "true")
+			if (token.Lexeme.ToLower() == "true")
 			{
 				return new NodeLiteral(new ResultBoolean(true));
 			}
-			else if (token.Lexed.ToLower() == "false")
+			else if (token.Lexeme.ToLower() == "false")
 			{
 				return new NodeLiteral(new ResultBoolean(false));
 			}
 			else
 			{
-				throw new MismatchedRuleException("Not a valid boolean: " + token.Lexed);
+				throw new MismatchedRuleException("Not a valid boolean: " + token.Lexeme);
 			}
 		}
 	}

@@ -148,7 +148,7 @@ namespace MathParser.Parsing
 			Logger.Log(LogLevel.Debug, Logger.PARSER, 
 				"Beginning parse for precedence " + precedence.ToString());
 			Token token = Consume();
-			IPrefixParselet prefix = GetPrefix(token.Class);
+			IPrefixParselet prefix = GetPrefix(token.Type);
 
 			if (prefix == null)
 			{
@@ -165,7 +165,7 @@ namespace MathParser.Parsing
 			{
 				token = Consume();
 
-				IInfixParselet infix = GetInfix(token.Class);
+				IInfixParselet infix = GetInfix(token.Type);
 				left = infix.Parse(this, left, token);
 			}
 
@@ -200,7 +200,7 @@ namespace MathParser.Parsing
 				return 0;
 			}
 
-			IInfixParselet parselet = GetInfix(ahead.Class);
+			IInfixParselet parselet = GetInfix(ahead.Type);
 			if (parselet != null)
 			{
 				return parselet.PrecedenceLevel;
@@ -212,12 +212,12 @@ namespace MathParser.Parsing
 		public Token Consume(TokenType tokClass)
 		{
 			Token tok = LookAhead(0);
-			if (tok.Class != tokClass)
+			if (tok.Type != tokClass)
 			{
 				Logger.Log(LogLevel.Error, Logger.PARSER, "Unexpected token found: " + 
-					tok.Class.ToString());
+					tok.Type.ToString());
 				throw new MismatchedRuleException("Expected token " + 
-					tokClass.ToString() + ". Found " + tok.Class.ToString());
+					tokClass.ToString() + ". Found " + tok.Type.ToString());
 			}
 
 			return Consume();
@@ -226,7 +226,7 @@ namespace MathParser.Parsing
 		public bool Match(TokenType expected)
 		{
 			Token token = LookAhead();
-			if (token.Class != expected)
+			if (token.Type != expected)
 			{
 				return false;
 			}

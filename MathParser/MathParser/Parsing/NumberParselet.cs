@@ -16,13 +16,13 @@ namespace MathParser.Parsing
 		public NodeFactor Parse(PrattParser parser, Token token)
 		{
 			long n = -1;
-			if (long.TryParse(token.Lexed, out n))
+			if (long.TryParse(token.Lexeme, out n))
 			{
 				return new NodeLiteral(new ResultNumberInteger(n));
 			}
 			else
 			{
-				return new NodeLiteral(new ResultNumberReal(double.Parse(token.Lexed)));
+				return new NodeLiteral(new ResultNumberReal(double.Parse(token.Lexeme)));
 			}
 		}
 	}

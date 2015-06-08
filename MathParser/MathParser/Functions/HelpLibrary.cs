@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace MathParser.Functions
 {
+	/// <summary>
+	/// Library for help info on each function
+	/// </summary>
 	public static class HelpLibrary
 	{
 		private static Dictionary<string, string> library = new Dictionary<string, string>();
@@ -17,6 +20,9 @@ namespace MathParser.Functions
 			Init();
 		}
 
+		/// <summary>
+		/// Initializes the help library
+		/// </summary>
 		public static void Init()
 		{
 			library.Clear();
@@ -53,6 +59,11 @@ namespace MathParser.Functions
 			RegisterHelp("rms", "Real rms(list)\n - Returns the root-mean-square value of the list");
 		}
 
+		/// <summary>
+		/// Registers a function for the library
+		/// </summary>
+		/// <param name="functionName">Name of function in library</param>
+		/// <param name="help">Information on function</param>
 		public static void RegisterHelp(string functionName, string help)
 		{
 			if (library.ContainsKey(functionName))
@@ -67,11 +78,21 @@ namespace MathParser.Functions
 				library.Add(functionName, help);
 			}
 		}
+		/// <summary>
+		/// Registers help for a function in the library
+		/// </summary>
+		/// <param name="info">FunctionInfo designating function referenced</param>
+		/// <param name="help">Help info on function</param>
 		public static void RegisterHelp(FunctionInfo info, string help)
 		{
 			RegisterHelp(info.Name, help);
 		}
 
+		/// <summary>
+		/// Gets the help stored for a function name
+		/// </summary>
+		/// <param name="functionName">Name of function</param>
+		/// <returns>Help on given function</returns>
 		public static string GetHelp(string functionName)
 		{
 			if (!library.ContainsKey(functionName))

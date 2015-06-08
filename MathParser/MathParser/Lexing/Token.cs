@@ -8,23 +8,35 @@ using MathParser.Lexing;
 
 namespace MathParser.Lexing
 {
+	/// <summary>
+	/// A specific token created from the input string
+	/// </summary>
 	public class Token
 	{
-		public TokenType Class
+		/// <summary>
+		/// Type of token
+		/// </summary>
+		public TokenType Type
 		{ get; internal set; }
 
-		public string Lexed
+		/// <summary>
+		/// Lexeme containing original string turned into token
+		/// </summary>
+		public string Lexeme
 		{ get; protected set; }
 
+		/// <summary>
+		/// Instantiates a new Token
+		/// </summary>
 		public Token(TokenType token, string lexed)
 		{
-			Class = token;
-			Lexed = lexed;
+			Type = token;
+			Lexeme = lexed;
 		}
 
 		public override string ToString()
 		{
-			return "{" + Class.ToString() + ":'" + Lexed + "'}";
+			return "{" + Type.ToString() + ":'" + Lexeme + "'}";
 		}
 	}
 }
