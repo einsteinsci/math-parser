@@ -17,13 +17,13 @@ namespace MathParser.Parsing
 		/// Precedence level defined by operator
 		/// </summary>
 		public Precedence PrecedenceLevel
-		{ get; protected set; }
+		{ get; private set; }
 
 		/// <summary>
 		/// True if the operator is right-associative, false if not
 		/// </summary>
 		public bool RightAssociative
-		{ get; protected set; }
+		{ get; private set; }
 
 		/// <summary>
 		/// Instantiates a new BinaryOperatorParselet
