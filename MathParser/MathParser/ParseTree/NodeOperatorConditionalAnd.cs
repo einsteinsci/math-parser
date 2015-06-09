@@ -14,7 +14,7 @@ namespace MathParser.ParseTree
 		{ get { return TokenType.OperatorConditionalAnd; } }
 
 		public override string StringForm
-		{ get { return "&&"; } }
+		{ get { return "&"; } }
 
 		public override MathType Type
 		{ get { return MathType.Boolean; } }
