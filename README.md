@@ -100,7 +100,7 @@ This allows this expression: `"plusthree(4.2)"` to evaluate to `7.2`.
 - Apply a `BinaryOperatorAttribute`, `PrefixOperatorAttribute`, or `PostfixOperatorAttribute` to the original token type class. Supply the same string name given to the `TokenTypeAttribute` along with the typeof the new node class, and the precedence level if the operator is binary. If the operator is right-associative, that is an optional named property for the `BinaryOperatorAttribute`.
 - If all your methods and properties are implemented correctly, you will have a new operator to use.
 
-This example operator, using the \$ sign, takes a string on the left side and an integer on the right, and returns a string containing the left repeated a number of times equal to the right. In other words, `"Test" $ 3` evaluates to `"TestTestTest"`.
+This example operator, using the $ sign, takes a string on the left side and an integer on the right, and returns a string containing the left repeated a number of times equal to the right. In other words, `"Test" $ 3` evaluates to `"TestTestTest"`.
 
 ```csharp
 // TokenTypeDollar.cs
