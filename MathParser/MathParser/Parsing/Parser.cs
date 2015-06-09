@@ -10,25 +10,25 @@ using MathParser.Lexing;
 namespace MathParser.Parsing
 {
 	/// <summary>
+	/// Used for loading prefix parselets
+	/// </summary>
+	/// <param name="sender">Object triggering the load. Mostly useless.</param>
+	/// <param name="e">EventArgs containing all the required data for load</param>
+	public delegate void PrefixLoadEvent(object sender, PrefixLoadingEventArgs e);
+
+	/// <summary>
+	/// Used for loading infix, postfix, and mixfix parselets
+	/// </summary>
+	/// <param name="sender">Object triggering the load. Mostly useless.</param>
+	/// <param name="e">EventArgs containing all the required data for load</param>
+	public delegate void InfixLoadEvent(object sender, InfixLoadingEventArgs e);
+
+	/// <summary>
 	/// Class that does the parsing of a token stream into a parse tree.
 	/// This is where the important stuff happens.
 	/// </summary>
 	public sealed class Parser
 	{
-		/// <summary>
-		/// Used for loading prefix parselets
-		/// </summary>
-		/// <param name="sender">Object triggering the load. Mostly useless.</param>
-		/// <param name="e">EventArgs containing all the required data for load</param>
-		public delegate void PrefixLoadEvent(object sender, PrefixLoadingEventArgs e);
-
-		/// <summary>
-		/// Used for loading infix, postfix, and mixfix parselets
-		/// </summary>
-		/// <param name="sender">Object triggering the load. Mostly useless.</param>
-		/// <param name="e">EventArgs containing all the required data for load</param>
-		public delegate void InfixLoadEvent(object sender, InfixLoadingEventArgs e);
-
 		/// <summary>
 		/// Registry of loaded prefix parselets
 		/// </summary>

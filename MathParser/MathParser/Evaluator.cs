@@ -60,7 +60,7 @@ namespace MathParser
 		}
 
 		/// <summary>
-		/// Option for preemptive initialization to prevent sudden lag during evaluation.
+		/// Option for on-demand initialization to prevent sudden lag during evaluation.
 		/// Be sure to add any extending assemblies via the Extensibility class first.
 		/// </summary>
 		public static void Initialize(bool force = false)
