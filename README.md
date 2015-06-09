@@ -16,13 +16,13 @@ The syntax to this language is mostly a blend of C-based languages with mathemat
 #### Types
 The types used by this library are listed in the enumeration `MathType`. Each of these types has multiple equivalent system types so that excessive casting is avoided. To convert from a `MathType` to a system `Type`, use the static class `MathTypes`. All of these types can be converted to all the others, though some with more difficulty or risk of exceptions than others.
 
-| MathType | Stored Internal Type | Valid Convertible System Types |
-|:--------:|:--------------------:| ----------------------- |
-| `Real` | `double` | `double`, `float`, `decimal` |
-| `Integer` | `long` | `long`, `int`, `short` |
-| `String` | `string` | `string` |
-| `Boolean` | `bool` | `bool` |
-| `List` | `List<double>` | Various* |
+| MathType | IResultValue Type | Stored Internal Type | Valid Convertible System Types |
+|:--------:|:-----------------:|:--------------------:| ------------------------------ |
+| `Real` | `ResultNumberReal` | `double` | `double`, `float`, `decimal` |
+| `Integer` | `ResultNumberInteger` | `long` | `long`, `int`, `short` |
+| `String` | `ResultString` | `string` | `string` |
+| `Boolean` | `ResultBoolean` | `bool` | `bool` |
+| `List` | `ResultList` | `List<double>` | Various* |
 \* Specifically, `List<double>`, `List<float>`, `List<decimal>`, `double[]`, `float[]`, and `decimal[]`.
 
 #### Operators
@@ -63,3 +63,92 @@ Functions are called using the same syntax in C: `functionName(arg1, arg2, ...)`
 ## Extensibility
 One of the main goals of this project is extensibility. The user of this library should be able to add their own additions to the language for their own use, without having to recompile the original source code (right here). The user can add their own functions very easily by simply applying a few attributes and loading the assembly into the `Extensibility` class. Custom infix, prefix, and suffix operators can be created quite easily by creating several classes, implementing the abstract methods and properties, and applying the necessary atributes. For the more adventurous, custom sytax rules can be created by also implementing the `IInfixParselet` or `IPrefixParselet` interfaces and loading them in your initialization code. For now, only the types mentioned earlier are useable, but custom types may eventually be implemented.
 
+
+
+### Examples
+All of these examples assume you have loaded the assembly of the classes extending this library during some initialization code. If your extending classes are in the same project that initializes the program, you would load your code like this:
+```csharp
+// Load current running assembly
+Extensibility.LoadedExtensions.Add(Assembly.GetExecutingAssembly());
+
+// It's good to follow this with an initialization call to prevent lag later
+Evaluator.Initialize();
+```
+
+#### Custom Function
+```csharp
+// File: TestFunctionLib.cs
+
+// The string in this attribute currently means absolutely nothing.
+[FunctionLibrary("testAndStuff")]
+public static class TestFunctionLib
+{
+	// The string entered in this attribute is the name of the function when parsing.
+	[MathFunction("plusthree")]
+	public static double PlusThree(double val)
+	{
+		return val + 3
+	}
+}
+```
+This allows this expression: `"plusthree(4.2)"` to evaluate to `7.2`.
+
+#### Custom Operator
+- Create a class that inherits from `TokenTypeOperator` and implement the abstract property `Operator`. It should be a string that represents the symbol your operator will use.
+- Apply a `TokenTypeAttribute` to the class and supply the attribute with a unique string name of the token type for the registry.
+- Create a class inheriting from `NodeOperatorBinary` or `NodeOperatorUnary` and implement the abstract methods and properties, and create a constructor that matches the signature of the base class (two `NodeBase`'s for `NodeOperatorBinary`, one for `NodeOperatorUnary`). The abstract property `Operator` is exactly the same as in the token type. 
+- Apply a `BinaryOperatorAttribute`, `PrefixOperatorAttribute`, or `PostfixOperatorAttribute` to the original token type class. Supply the same string name given to the `TokenTypeAttribute` along with the typeof the new node class, and the precedence level if the operator is binary. If the operator is right-associative, that is an optional named property for the `BinaryOperatorAttribute`.
+- If all your methods and properties are implemented correctly, you will have a new operator to use.
+
+This example operator, using the \$ sign, takes a string on the left side and an integer on the right, and returns a string containing the left repeated a number of times equal to the right. In other words, `"Test" $ 3` evaluates to `"TestTestTest"`.
+
+```csharp
+// TokenTypeDollar.cs
+[BinaryOperator(DOLLAR, typeof(NodeStringRepeat), Precedence.MULTIPLICATIVE)]
+[TokenType(DOLLAR)]
+public class TokenTypeDollar : TokenTypeOperator
+{
+	const string DOLLAR = "operatorDollar";
+
+	public static TokenType DollarInstance
+	{ get { return TokenTypeRegistry.Get(DOLLAR); } }
+
+	public override string Operator
+	{ get { return "$"; } }
+}
+```
+```csharp
+// NodeStringRepeat.cs
+public class NodeStringRepeat : NodeOperatorBinary
+{
+	public override TokenType Operator
+	{ get { return TokenTypeDollar.DollarInstance; } }
+
+	public override string StringForm
+	{ get { return "$"; } }
+
+	public override MathType Type
+	{ get { return MathType.String; } }
+
+	public NodeStringRepeat(NodeBase first, NodeBase second) : base(first, second)
+	{ }
+
+	public override IResultValue Evaluate()
+	{
+		string str = First.Evaluate().ToString();
+		IResultValue countIRV = Second.Evaluate();
+		if (countIRV.Type != MathType.Integer)
+		{
+			throw new EvaluationException("That's no integer....");
+		}
+		int count = (int)countIRV.ToInteger();
+		string res = "";
+		for (int i = 0; i < count; i++)
+		{
+			res += str;
+		}
+
+		return new ResultString(res);
+	}
+}
+```
