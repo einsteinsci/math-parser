@@ -15,7 +15,7 @@ namespace MathParser.ParseTree
 
 		// VB style
 		public override string StringForm
-		{ get { return "&"; } }
+		{ get { return "<>"; } }
 
 		public override MathType Type
 		{ get { return MathType.String; } }

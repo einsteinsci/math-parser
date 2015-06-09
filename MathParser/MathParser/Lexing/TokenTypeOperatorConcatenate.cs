@@ -13,6 +13,6 @@ namespace MathParser.Lexing
 	public class TokenTypeOperatorConcatenate : TokenTypeOperator
 	{
 		public override string Operator
-		{ get { return "&"; } }
+		{ get { return "<>"; } }
 	}
 }
