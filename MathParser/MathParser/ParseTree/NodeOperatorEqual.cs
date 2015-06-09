@@ -13,7 +13,7 @@ namespace MathParser.ParseTree
 	public class NodeOperatorEqual : NodeOperatorBinary
 	{
 		public override string StringForm
-		{ get { return "=="; } }
+		{ get { return "="; } }
 
 		public override TokenType Operator
 		{ get { return TokenType.OperatorEqual; } }
