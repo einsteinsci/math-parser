@@ -36,10 +36,8 @@
       <HintPath>..\ref\MathPlusLib.Desktop.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -97,7 +95,7 @@
     <Compile Include="Parsing\ParenthesisParselet.cs" />
     <Compile Include="Parsing\PostfixOperatorAttribute.cs" />
     <Compile Include="Parsing\PostfixOperatorParselet.cs" />
-    <Compile Include="Parsing\PrattParser.cs" />
+    <Compile Include="Parsing\Parser.cs" />
     <Compile Include="Parsing\Precedence.cs" />
     <Compile Include="Parsing\PrefixLoadingEventArgs.cs" />
     <Compile Include="Parsing\PrefixOperatorAttribute.cs" />
