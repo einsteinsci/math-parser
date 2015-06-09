@@ -13,7 +13,7 @@ The result of `Evaluator.Evaluate()`, or the result from evaluating a parse tree
 ## Syntax
 The syntax to this language is mostly a blend of C-based languages with mathematical notation.
 
-### Types
+#### Types
 The types used by this library are listed in the enumeration `MathType`. Each of these types has multiple equivalent system types so that excessive casting is avoided. To convert from a `MathType` to a system `Type`, use the static class `MathTypes`. All of these types can be converted to all the others, though some with more difficulty or risk of exceptions than others.
 
 | MathType | Stored Internal Type | Valid Convertible System Types |
@@ -25,7 +25,7 @@ The types used by this library are listed in the enumeration `MathType`. Each of
 | `List` | `List<double>` | Various* |
 \* Specifically, `List<double>`, `List<float>`, `List<decimal>`, `double[]`, `float[]`, and `decimal[]`.
 
-### Operators
+#### Operators
 | Operator | Functionality | Valid Types | C# Equivalent |
 |:--------:|:-------------:|:-----------:|:-------------:|
 | `+` | Addition | Real, Integer | `+` |
@@ -47,20 +47,19 @@ The types used by this library are listed in the enumeration `MathType`. Each of
 
 \** This uses the same mixfix syntax as in C.
 
-### Comments and Whitespace
+#### Comments and Whitespace
 Portions of math can be "commented out" by surrounding them with /* and */, just as in C. Note that there is no "line comment" alternative.
 
 Whitespace only serves the purpose of separating tokens, and is ignored. This is the same as with any C-based language.
 
-### Lists
-List literals use a simplified format based on C-style array literals: `{Expr1, Expr2, Expr3, ...}`. The syntax `{ }` denotes a list with no elements. Note that the contents of a list can include expressions, but if any expression in the list evaluates to something other than a `Real`, an exception will be thrown during the evaluation of the parse tree. Accessing a member from a list is again copied from C, using braces around the element index (zero-based) to access the element. Lists can be used in functions and expressions just as any other type can be.
+#### Lists
+List literals use a simplified format based on C-style array literals: `{Expr1, Expr2, Expr3, ...}`. The syntax `{ }` denotes a list with no elements. Note that the contents of a list can include expressions, but if any expression in the list evaluates to something other than a `Real` or `Integer`, an exception will be thrown during the evaluation of the parse tree. Accessing a member from a list is again copied from C, using braces around the element index (zero-based) to access the element. Lists can be used in functions and expressions just as any other type can be.
 
-### Functions
+#### Functions
 Functions are called using the same syntax in C: `functionName(arg1, arg2, ...)`. A list of all registered functions can be found by calling the function `helpall()`. It will return a string listing all the functions in a table-like format.
 
 ---
 
 ## Extensibility
 One of the main goals of this project is extensibility. The user of this library should be able to add their own additions to the language for their own use, without having to recompile the original source code (right here). The user can add their own functions very easily by simply applying a few attributes and loading the assembly into the `Extensibility` class. Custom infix, prefix, and suffix operators can be created quite easily by creating several classes, implementing the abstract methods and properties, and applying the necessary atributes. For the more adventurous, custom sytax rules can be created by also implementing the `IInfixParselet` or `IPrefixParselet` interfaces and loading them in your initialization code. For now, only the types mentioned earlier are useable, but custom types may eventually be implemented.
-
 
