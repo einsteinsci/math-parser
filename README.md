@@ -152,3 +152,10 @@ public class NodeStringRepeat : NodeOperatorBinary
 	}
 }
 ```
+
+#### Custom Syntax
+Advanced users have the ability to add completely different syntaxes for the grammar of the language, by creating and registering new parselets. Parselets are singleton objects that specify how to parse a token based on its type and turn it into a node. Custom operators simply facilitate this through reflection, but lose the ability to create custom syntax. An infix parselet (such as the function call parslet, triggering off of a `(` token) will be provided the node from parsing the stream up to that point, while a prefix parselet (such as the list literal parselet, triggering off of a `{` token) will not have that information. Due to the logic of a Pratt parser, prefix parselets always have priority over infix parselets, which allows both function calls and parenthesized groups to both trigger off of a `(` token.
+
+To create a parselet, create a class that implements `IPrefixParselet` or `IInfixParselet`. In the `Parse()` method, use the provided Parser parameter to move through the stream and parse tree. Use `Parser.Parse()` to get the next full node available, starting with the next token. Use `Parser.Consume()` to get the next token by itself. Use `Parser.Match()` to check if the next token is of the type you expect. Use these to define your syntax.
+
+To load the parselet, simply subscribe a `PrefixLoadEvent` or `InfixLoadEvent` function to `Parser.PrefixLoading` or to `Parser.InfixLoading` sometime in your initialization logic, before `Evaluator.Initialize()` is called (which should always be called in the initialization logic if custom syntax is being implemented).
