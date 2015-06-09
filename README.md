@@ -1,5 +1,5 @@
 # Math Parser
-A [Pratt Parser](http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/) to parse mathematical expresssions in a made-up language. This library takes a string, can convert it into a token stream, parse that stream into a parse tree (returning the root node), and evaluate that into a result. The language has support for multiple types, currently only integers, reals (`double`), lists (`List<double>`), booleans, and strings. This library provides many built-in functions for many mathematical calculations, from square roots to permutations to a help function.
+This project uses a [Pratt Parser](http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/) to parse mathematical expresssions in a made-up language. This library takes a string, can convert it into a token stream, parse that stream into a parse tree (returning the root node), and evaluate that into a result. The language has support for multiple types, currently only integers, reals (`double`), lists (`List<double>`), booleans, and strings. This library provides many built-in functions for many mathematical calculations, from square roots to permutations to a help function.
 
 ## Usage
 In order to use this library, go ahead and download the corresponding Nuget package, which is currently being uploaded this very minute. This library depends on the MathPlus library for some of its functions ([nuget](https://www.nuget.org/packages/MathPlus.Desktop/0.2.0)) ([github](https://github.com/einsteinsci/math-plus)), but it should be downloaded with this package if Nuget is used.
@@ -47,12 +47,15 @@ The types used by this library are listed in the enumeration `MathType`. Each of
 
 \** This uses the same mixfix syntax as in C.
 
+### Comments
 Portions of math can be "commented out" by surrounding them with /* and */, just as in C. Note that there is no "line comment" alternative.
 
 ### Functions
-Functions are called using the same syntax in C: `functionName(arg1, arg2, ...)`. A list of all built-in functions can be found on the wiki.
+Functions are called using the same syntax in C: `functionName(arg1, arg2, ...)`. A list of all registered functions can be found by calling the function `helpall()`. It will return a string listing all the functions in a table-like format.
 
 ---
 
 ## Extensibility
 One of the main goals of this project is extensibility. The user of this library should be able to add their own additions to the language for their own use, without having to recompile the original source code (right here). The user can add their own functions very easily by simply applying a few attributes and loading the assembly into the `Extensibility` class. Custom infix, prefix, and suffix operators can be created quite easily by creating several classes, implementing the abstract methods and properties, and applying the necessary atributes. For the more adventurous, custom sytax rules can be created by also implementing the `IInfixParselet` or `IPrefixParselet` interfaces and loading them in your initialization code. For now, only the types mentioned earlier are useable, but custom types may eventually be implemented.
+
+
