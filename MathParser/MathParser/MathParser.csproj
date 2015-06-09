@@ -162,10 +162,6 @@
     <Compile Include="Lexing\TokenTypeUnrecognized.cs" />
     <Compile Include="VariableRegistry.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="math++.bnf" />
-    <None Include="math++.dbnf" />
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
