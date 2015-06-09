@@ -122,5 +122,32 @@ namespace MathParser.Functions
 
 			return library[functionName];
 		}
+
+		/// <summary>
+		/// Lists all functions registered in the help library into a big table-like string.
+		/// </summary>
+		public static string ListFunctions()
+		{
+			string res = "";
+			int col = 0;
+			foreach (string funcName in library.Keys)
+			{
+				res += funcName + "\t";
+				if (funcName.Length <= 8)
+				{
+					res += "\t";
+				}
+				col++;
+
+				if (col == 4)
+				{
+					res = res.TrimEnd('\t');
+					res += "\n";
+					col = 0;
+				}
+			}
+
+			return res.TrimEnd('\t', '\n');
+		}
 	}
 }

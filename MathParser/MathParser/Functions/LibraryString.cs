@@ -31,5 +31,14 @@ namespace MathParser.Functions
 		{
 			return HelpLibrary.GetHelp(funcName);
 		}
+
+		/// <summary>
+		/// Lists all registered functions in a table
+		/// </summary>
+		[MathFunction("helpall")]
+		public static string AllFunctions()
+		{
+			return HelpLibrary.ListFunctions();
+		}
 	}
 }

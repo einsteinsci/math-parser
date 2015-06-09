@@ -44,7 +44,7 @@ namespace MathParser.Types
 		/// </summary>
 		public static MathType ToMathType(this Type type)
 		{
-			if (type == typeof(double) || type == typeof(float))
+			if (type == typeof(double) || type == typeof(float) || type == typeof(decimal))
 			{
 				return MathType.Real;
 			}
@@ -61,7 +61,8 @@ namespace MathParser.Types
 				return MathType.Boolean;
 			}
 			else if (type == typeof(List<double>) || type == typeof(double[]) ||
-				type == typeof(List<float>) || type == typeof(float[]))
+				type == typeof(List<float>) || type == typeof(float[]) ||
+				type == typeof(List<decimal>) || type == typeof(decimal[]))
 			{
 				return MathType.List;
 			}
