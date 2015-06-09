@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MathPlusLib;
 using MathParser.Lexing;
 using MathParser.Types;
+using MathPlusLib.Extensions;
 
 namespace MathParser.Functions
 {
@@ -48,7 +49,7 @@ namespace MathParser.Functions
 		[MathFunction("abs")]
 		public static double AbsoluteValue(double val)
 		{
-			return MathPlus.Abs(val);
+			return val.Abs();
 		}
 
 		/// <summary>
@@ -58,7 +59,7 @@ namespace MathParser.Functions
 		[MathFunction("sign")]
 		public static double Sign(double val)
 		{
-			return MathPlus.Sign(val);
+			return val.Sign();
 		}
 
 		/// <summary>
@@ -68,6 +69,15 @@ namespace MathParser.Functions
 		public static double SquareRoot(double val)
 		{
 			return MathPlus.Sqrt(val);
+		}
+
+		/// <summary>
+		/// Generic root function
+		/// </summary>
+		[MathFunction("root")]
+		public static double NthRoot(double radicand, double radical)
+		{
+			return MathPlus.Root(radicand, radical);
 		}
 
 		/// <summary>
@@ -89,6 +99,15 @@ namespace MathParser.Functions
 		}
 
 		/// <summary>
+		/// Returns a constrained value between a minimum and maximum.
+		/// </summary>
+		[MathFunction("constrain")]
+		public static double Constrain(double value, double min, double max)
+		{
+			return value.Constrain(min, max);
+		}
+
+		/// <summary>
 		/// Random number between 0 and 1
 		/// </summary>
 		[MathFunction("rand")]
@@ -100,10 +119,93 @@ namespace MathParser.Functions
 		/// <summary>
 		/// Random integer given a minimum and exclusive maximum
 		/// </summary>
-		[MathFunction("randint")]
+		[MathFunction("randInt")]
 		public static int RandomInteger(int min, int max)
 		{
 			return MathPlus.Probability.Rand.Next(min, max);
+		}
+
+		/// <summary>
+		/// Returns the integral part of a number (the '3' of 3.86)
+		/// </summary>
+		[MathFunction("int")]
+		public static int IntegralPart(double val)
+		{
+			return (int)val;
+		}
+
+		/// <summary>
+		/// Returns the fractional part of a number (the '.86' part of 3.86)
+		/// </summary>
+		[MathFunction("frac")]
+		public static double FractionalPart(double val)
+		{
+			return val.Fractional();
+		}
+
+		/// <summary>
+		/// Returns the least common multiple (LCM) of two values.
+		/// </summary>
+		[MathFunction("lcm")]
+		public static int LeastCommonMultiple(int a, int b)
+		{
+			return MathPlus.Numerics.LeastCommonMultiple(a, b);
+		}
+
+		/// <summary>
+		/// Rounds a number to the nearest n decimal places
+		/// </summary>
+		[MathFunction("round")]
+		public static double Round(double value, int n)
+		{
+			return value.Round(n);
+		}
+
+		/// <summary>
+		/// Rounds a number up.
+		/// </summary>
+		[MathFunction("ceiling")]
+		public static int Ceiling(double value)
+		{
+			return value.Ceiling();
+		}
+
+		/// <summary>
+		/// Rounds a number down.
+		/// </summary>
+		[MathFunction("floor")]
+		public static int Floor(double value)
+		{
+			return value.Floor();
+		}
+
+		/// <summary>
+		/// Permutation function
+		/// </summary>
+		[MathFunction("nPr")]
+		public static long Permutation(long n, long r)
+		{
+			return MathPlus.Probability.Permutation(n, r);
+		}
+
+		/// <summary>
+		/// Combination function
+		/// </summary>
+		[MathFunction("nCr")]
+		public static long Combination(long n, long r)
+		{
+			return MathPlus.Probability.Combination(n, r);
+		}
+
+		/// <summary>
+		/// Random integer list, no repeats. Returns a double
+		/// as MathType.List only corresponds with lists of doubles.
+		/// </summary>
+		[MathFunction("randIntsNoRep")]
+		public static List<double> RandomIntsNoRep(int min, int max, int count)
+		{
+			return MathPlus.Probability.RandomIntsNoRepeat(min, max, count)
+				.Select<int, double>(n => n).ToList();
 		}
 	}
 }

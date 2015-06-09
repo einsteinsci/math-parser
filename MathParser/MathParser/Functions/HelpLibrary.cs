@@ -27,6 +27,9 @@ namespace MathParser.Functions
 		{
 			library.Clear();
 
+			RegisterHelp("sqrt", "Real sqrt(Real)\n - Returns the square root of a value");
+			RegisterHelp("root", "Real root(Real val, Real n)\n - Returns the nth root of val");
+
 			RegisterHelp("sin", "Real sin(Real)\n - Returns the sine of a value");
 			RegisterHelp("cos", "Real cos(Real)\n - Returns the cosine of a value");
 			RegisterHelp("tan", "Real tan(Real)\n - Returns the tangent of a value");
@@ -42,10 +45,27 @@ namespace MathParser.Functions
 			RegisterHelp("log", "Real log(Real)\n - Returns the base-10 logarithm of a value");
 
 			RegisterHelp("abs", "Real abs(Real)\n - Returns the absolute value of a value");
-			RegisterHelp("sign", "Real sign(Real)\n - Returns the sign of a number: -1 if negative, 0 if zero, 1 if positive.");
+			RegisterHelp("sign", "Real sign(Real)\n - Returns the sign of a number:" + 
+				" -1 if negative, 0 if zero, 1 if positive.");
+			RegisterHelp("int", "Real int(Real)\n - Returns the integral part of a number");
+			RegisterHelp("frac", "Real frac(Real)\n - Returns the fractional part of a number");
+			RegisterHelp("lcm", "Integer lcm(Integer, Integer)\n - Returns the lowest common multiple of two numbers");
+			RegisterHelp("round", "Real round(Real val, Integer n)\n - Rounds val to the nearest n decimal places");
+			RegisterHelp("ceiling", "Integer ceiling(Real)\n - Rounds a number up");
+			RegisterHelp("floor", "Integer floor(Real)\n - Rounds a number down");
+
+			RegisterHelp("rand", "Real rand()\n - Returns a random number between 0 and 1");
+			RegisterHelp("randInt", "Integer rand(int min, int max)\n" +
+				" - Returns a random bound by an inclusive minimum and exclusive maximum");
+			RegisterHelp("nPr", "Integer nPr(Integer n, Integer r)\n - Permutation function");
+			RegisterHelp("nCr", "Integer nCr(Integer n, Integer r)\n - Combination function");
+			RegisterHelp("randIntsNoRep", "List randIntsNoRep(Integer min, Integer max, Integer n)\n" +
+				" - Returns a list of n integers in the range [min, max)");
 
 			RegisterHelp("max", "Real max(Real, Real)\n - Returns the higher of two values");
 			RegisterHelp("min", "Real min(Real, Real)\n - Returns the lower of two values");
+			RegisterHelp("constrain", "Real constrain(Real val, Real min, Real max)\n" + 
+				" - Constrains val to between min and max");
 
 			RegisterHelp("substring", "String substring(String str, Integer start, Integer len)\n" +
 				" - Returns the substring of str starting from index start, len characters long");
