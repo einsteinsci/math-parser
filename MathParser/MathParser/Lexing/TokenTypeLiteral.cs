@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 
 namespace MathParser.Lexing
 {
+	/// <summary>
+	/// Base class for all tokens that represent literal values
+	/// (except lists)
+	/// </summary>
 	public abstract class TokenTypeLiteral : TokenType
 	{
+		/// <summary>
+		/// Priority of token in lexer
+		/// </summary>
 		public override int LexerPriority
 		{ get { return 5; } }
-
-		public abstract NodeLiteral MakeNode(string lexeme);
 	}
 }

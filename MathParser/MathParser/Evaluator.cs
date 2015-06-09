@@ -68,7 +68,7 @@ namespace MathParser
 			TokenTypeRegistry.RegisterTokens(force);
 			Functions.FunctionRegistry.Init(force);
 			HelpLibrary.Init();
-			PrattParser.Init(force);
+			Parser.Init(force);
 		}
 
 		#region parts
@@ -97,7 +97,7 @@ namespace MathParser
 		/// </summary>
 		public void Parse()
 		{
-			ParseTree = PrattParser.Parse(Lexed);
+			ParseTree = Parser.Parse(Lexed);
 		}
 
 		/// <summary>

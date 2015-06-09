@@ -11,7 +11,7 @@ namespace MathParser.Parsing
 {
 	public class ListLiteralParselet : IPrefixParselet
 	{
-		public NodeBase Parse(PrattParser parser, Token token)
+		public NodeBase Parse(Parser parser, Token token)
 		{
 			List<NodeBase> elements = new List<NodeBase>();
 

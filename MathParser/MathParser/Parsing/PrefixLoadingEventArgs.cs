@@ -7,8 +7,14 @@ using MathParser.Lexing;
 
 namespace MathParser.Parsing
 {
+	/// <summary>
+	/// Event args for PrefixLoadingEvent.
+	/// </summary>
 	public class PrefixLoadingEventArgs : EventArgs
 	{
+		/// <summary>
+		/// Dictionary of existing prefix parselets.
+		/// </summary>
 		public Dictionary<TokenType, IPrefixParselet> Existing
 		{ get; private set; }
 

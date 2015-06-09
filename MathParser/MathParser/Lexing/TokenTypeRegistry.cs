@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace MathParser.Lexing
 {
+	/// <summary>
+	/// Registry where all token types are stored, in the form of a priority list.
+	/// Generally only handled internally.
+	/// </summary>
 	public static class TokenTypeRegistry
 	{
+		/// <summary>
+		/// Gets whether initial registration is completed
+		/// </summary>
 		public static bool HasRegistered
 		{
 			get
@@ -22,17 +29,32 @@ namespace MathParser.Lexing
 		}
 		static bool _hasRegistered = false;
 
+		/// <summary>
+		/// Class containing registered token type data
+		/// </summary>
 		public class RegistryItem
 		{
+			/// <summary>
+			/// Token in datum
+			/// </summary>
 			public TokenType Token
 			{ get; private set; }
 
+			/// <summary>
+			/// Priority of token in registry
+			/// </summary>
 			public int Priority
 			{ get; private set; }
 
+			/// <summary>
+			/// Key used in registry
+			/// </summary>
 			public string Key
 			{ get; private set; }
 
+			/// <summary>
+			/// Instantiates a new TokenTypeRegistry.RegistryItem
+			/// </summary>
 			public RegistryItem(string key, TokenType token, int priority)
 			{
 				Key = key;
@@ -40,15 +62,24 @@ namespace MathParser.Lexing
 				Priority = priority;
 			}
 
+			/// <summary>
+			/// Converts the datum to a string
+			/// </summary>
 			public override string ToString()
 			{
 				return "[" + Key + "] [" + Priority + "] " + Token.ToString();
 			}
 		}
 
+		/// <summary>
+		/// Inner list of registry items. Avoid referencing directly.
+		/// </summary>
 		public static List<RegistryItem> Registry
 		{ get; private set; }
 
+		/// <summary>
+		/// List of all token types registered
+		/// </summary>
 		public static List<TokenType> Tokens
 		{
 			get
@@ -68,6 +99,11 @@ namespace MathParser.Lexing
 			}
 		}
 
+		/// <summary>
+		/// Gets the token type of a given key
+		/// </summary>
+		/// <param name="key">Key to check</param>
+		/// <returns>Token type for the given key</returns>
 		public static TokenType Get(string key)
 		{
 			if (Registry == null)
@@ -86,6 +122,10 @@ namespace MathParser.Lexing
 			return null;
 		}
 
+		/// <summary>
+		/// Does initial registration, redoing if specified
+		/// </summary>
+		/// <param name="force">Set to true to force re-registration.</param>
 		public static void RegisterTokens(bool force = false)
 		{
 			if (HasRegistered && !force)
@@ -138,11 +178,21 @@ namespace MathParser.Lexing
 			HasRegistered = true;
 		}
 
+		/// <summary>
+		/// Registers a token type with a key and priority
+		/// </summary>
+		/// <param name="key">Key stored in registry. Must be unique.</param>
+		/// <param name="token">TokenType singleton to register</param>
+		/// <param name="priority">Tokenizer priority of token type</param>
 		public static void Register(string key, TokenType token, int priority)
 		{
 			Registry.Add(new RegistryItem(key, token, priority));
 		}
 
+		/// <summary>
+		/// Dictionary of all priorities, each priority mapped to a list
+		/// of all token types with that priority.
+		/// </summary>
 		public static Dictionary<int, List<TokenType>> TokensByPriority()
 		{
 			Dictionary<int, List<TokenType>> res = new Dictionary<int, List<TokenType>>();
@@ -159,11 +209,23 @@ namespace MathParser.Lexing
 			return res;
 		}
 
+		/// <summary>
+		/// Gets a list of all token types with a given priority.
+		/// </summary>
+		/// <param name="priority">Priority level to check</param>
 		public static List<TokenType> TokensByPriority(int priority)
 		{
 			return TokensByPriority()[priority];
 		}
 
+		/// <summary>
+		/// Gets the priority of a token type.
+		/// </summary>
+		/// <param name="token">Token type to check.</param>
+		/// <returns>
+		///   Priority of specified token type, -1 if token type is 
+		///   not found.
+		/// </returns>
 		public static int PriorityOf(TokenType token)
 		{
 			foreach (RegistryItem r in Registry)
@@ -177,6 +239,14 @@ namespace MathParser.Lexing
 			return -1;
 		}
 
+		/// <summary>
+		/// Gets the key of a token type
+		/// </summary>
+		/// <param name="token">Token type to check.</param>
+		/// <returns>
+		///   The key used to register the token type, null if no
+		///   token type is found.
+		/// </returns>
 		public static string KeyOf(TokenType token)
 		{
 			foreach (RegistryItem r in Registry)

@@ -39,19 +39,6 @@ namespace MathParser.Lexing
 			return double.TryParse(lexeme, out res);
 		}
 
-		public override NodeLiteral MakeNode(string lexeme)
-		{
-			long n = -1;
-			if (long.TryParse(lexeme, out n))
-			{
-				return new NodeLiteral(new ResultNumberInteger(n));
-			}
-			else
-			{
-				return new NodeLiteral(new ResultNumberReal(double.Parse(lexeme)));
-			}
-		}
-
 		public override string ToString()
 		{
 			return "[Number]";

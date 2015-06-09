@@ -103,27 +103,51 @@ namespace MathParser.Parsing
 			return obj as NodeOperatorBinary;
 		}
 
+		/// <summary>
+		/// Gets the inner RegItem for the given token type as key
+		/// </summary>
+		/// <param name="key">Key when finding a RegItem</param>
+		/// <returns>The RegItem for the corresponding key</returns>
 		public static RegItem Get(TokenType key)
 		{
 			return registry[key];
 		}
 
+		/// <summary>
+		/// Gets all the tokens in the registry
+		/// </summary>
+		/// <returns>A list of all tokens stored in the registry</returns>
 		public static List<TokenType> GetTokens()
 		{
 			return registry.Keys.ToList();
 		}
 
+		/// <summary>
+		/// Inner class used for the registry for data
+		/// </summary>
 		public sealed class RegItem
 		{
+			/// <summary>
+			/// Type of the node class for the operator
+			/// </summary>
 			public Type NodeType
 			{ get; private set; }
 
+			/// <summary>
+			/// Precedence level of the operator
+			/// </summary>
 			public Precedence PrecedenceLevel
 			{ get; private set; }
 
+			/// <summary>
+			/// Whether the operator is right-associative
+			/// </summary>
 			public bool IsRightAssociative
 			{ get; private set; }
 
+			/// <summary>
+			/// Instantiates a BinaryInfixRegistry.RegItem
+			/// </summary>
 			public RegItem(Type nodeType, Precedence precedence, bool rightAssociative = false)
 			{
 				NodeType = nodeType;
@@ -131,6 +155,9 @@ namespace MathParser.Parsing
 				IsRightAssociative = rightAssociative;
 			}
 
+			/// <summary>
+			/// Simplifies the RegItem to a string
+			/// </summary>
 			public override string ToString()
 			{
 				string res = "{" + NodeType.Name + "}, PREC " + PrecedenceLevel;

@@ -8,21 +8,40 @@ using MathParser.Lexing;
 
 namespace MathParser.Parsing
 {
-	public class BinaryOperatorParselet : IInfixParselet
+	/// <summary>
+	/// Parselet for parsing binary operators. 
+	/// </summary>
+	public sealed class BinaryOperatorParselet : IInfixParselet
 	{
+		/// <summary>
+		/// Precedence level defined by operator
+		/// </summary>
 		public Precedence PrecedenceLevel
 		{ get; protected set; }
 
+		/// <summary>
+		/// True if the operator is right-associative, false if not
+		/// </summary>
 		public bool RightAssociative
 		{ get; protected set; }
 
+		/// <summary>
+		/// Instantiates a new BinaryOperatorParselet
+		/// </summary>
 		public BinaryOperatorParselet(Precedence precedence, bool rightAssociative)
 		{
 			PrecedenceLevel = precedence;
 			RightAssociative = rightAssociative;
 		}
-
-		public NodeBase Parse(PrattParser parser, NodeBase left, Token token)
+		
+		/// <summary>
+		/// Parses an expression with the parser through recursion
+		/// </summary>
+		/// <param name="parser">Parser to continue recursion</param>
+		/// <param name="left">Already-parsed left side of operator</param>
+		/// <param name="token">Identifying token for operator</param>
+		/// <returns></returns>
+		public NodeBase Parse(Parser parser, NodeBase left, Token token)
 		{
 			NodeBase right = parser.Parse(RightAssociative ? PrecedenceLevel - 1 : PrecedenceLevel);
 			return BinaryInfixRegistry.MakeNode(token.Type, left, right);

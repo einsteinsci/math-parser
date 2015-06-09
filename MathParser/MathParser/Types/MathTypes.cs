@@ -7,19 +7,41 @@ using MathPlusLib;
 
 namespace MathParser.Types
 {
+	/// <summary>
+	/// Enum representing all evaluatable types in the library
+	/// </summary>
 	public enum MathType
 	{
+		/// <summary>
+		/// A real number. Equivalent to a double.
+		/// </summary>
 		Real = 0,
+		/// <summary>
+		/// An integer. Equivalent to an int.
+		/// </summary>
 		Integer,
+		/// <summary>
+		/// A string of text. Equivalent to a string.
+		/// </summary>
 		String,
+		/// <summary>
+		/// A boolean value. Equivalent to a bool.
+		/// </summary>
 		Boolean,
-		List,
-		Matrix
+		/// <summary>
+		/// A list of numbers. Equivalent to a List&lt;double&gt;
+		/// </summary>
+		List
 	}
 
-
+	/// <summary>
+	/// Specifies methods involving the conversion between MathType and System.Type.
+	/// </summary>
 	public static class MathTypes
 	{
+		/// <summary>
+		/// Converts a System.Type to a MathType.
+		/// </summary>
 		public static MathType ToMathType(this Type type)
 		{
 			if (type == typeof(double) || type == typeof(float))
@@ -43,17 +65,16 @@ namespace MathParser.Types
 			{
 				return MathType.List;
 			}
-			else if (type == typeof(MathMatrix))
-			{
-				return MathType.Matrix;
-			}
 			else
 			{
 				throw new ArgumentException("No recognized MathType for " + type.ToString());
 			}
 		}
 
-		public static Type ToCodeType(this MathType mtype)
+		/// <summary>
+		/// Converts a MathTYpe to a System.Type.
+		/// </summary>
+		public static Type ToSystemType(this MathType mtype)
 		{
 			switch (mtype)
 			{
@@ -67,8 +88,6 @@ namespace MathParser.Types
 				return typeof(bool);
 			case MathType.List:
 				return typeof(List<double>);
-			case MathType.Matrix:
-				return typeof(MathMatrix);
 			default:
 				throw new ArgumentException("Not a valid MathType: " + mtype.ToString());
 			}

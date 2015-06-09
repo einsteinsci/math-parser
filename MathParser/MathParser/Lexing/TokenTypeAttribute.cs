@@ -22,7 +22,8 @@ namespace MathParser.Lexing
 		/// <summary>
 		/// Whether the TokenType has a custom token registry to load from
 		/// </summary>
-		public bool Custom;
+		public bool Custom
+		{ get; set; }
 		
 		/// <summary>
 		/// Instantiates a TokenTypeAttribute

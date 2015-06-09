@@ -18,7 +18,7 @@ namespace MathParser.ParseTree
 		}
 
 		public override string NodeName
-		{ get { return Type.ToString() + " " + Value.ToDisplay(); } }
+		{ get { return Type.ToString() + " " + Value.ToDisplayString(); } }
 
 		public override IResultValue Evaluate()
 		{
@@ -37,7 +37,7 @@ namespace MathParser.ParseTree
 
 		public override string ToString()
 		{
-			return Value.ToDisplay();
+			return Value.ToDisplayString();
 		}
 	}
 }

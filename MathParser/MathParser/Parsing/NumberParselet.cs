@@ -13,7 +13,7 @@ namespace MathParser.Parsing
 {
 	public sealed class NumberParselet : IPrefixParselet
 	{
-		public NodeBase Parse(PrattParser parser, Token token)
+		public NodeBase Parse(Parser parser, Token token)
 		{
 			long n = -1;
 			if (long.TryParse(token.Lexeme, out n))

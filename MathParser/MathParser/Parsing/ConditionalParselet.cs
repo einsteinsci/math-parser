@@ -14,7 +14,7 @@ namespace MathParser.Parsing
 		public Precedence PrecedenceLevel
 		{ get { return Precedence.CONDITIONAL_TERNARY; } }
 
-		public NodeBase Parse(PrattParser parser, NodeBase left, Token token)
+		public NodeBase Parse(Parser parser, NodeBase left, Token token)
 		{
 			NodeBase onTrue = parser.Parse();
 			parser.Consume(TokenType.OperatorColon);

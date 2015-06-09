@@ -13,7 +13,7 @@ namespace MathParser.Parsing
 	/// Class that does the parsing of a token stream into a parse tree.
 	/// This is where the important stuff happens.
 	/// </summary>
-	public sealed class PrattParser
+	public sealed class Parser
 	{
 		/// <summary>
 		/// Used for loading prefix parselets
@@ -67,7 +67,7 @@ namespace MathParser.Parsing
 		/// <summary>
 		/// Instantiates a new PrattParser
 		/// </summary>
-		public PrattParser(TokenStream stream)
+		public Parser(TokenStream stream)
 		{
 			Stream = stream;
 			Init();
@@ -80,7 +80,7 @@ namespace MathParser.Parsing
 		/// <returns>A Node containing the entire parse tree of the expression</returns>
 		public static NodeBase Parse(TokenStream stream)
 		{
-			PrattParser inst = new PrattParser(stream);
+			Parser inst = new Parser(stream);
 			NodeBase res = inst.Parse();
 
 			Logger.Log(LogLevel.Info, Logger.PARSER, "Parsing Complete.");

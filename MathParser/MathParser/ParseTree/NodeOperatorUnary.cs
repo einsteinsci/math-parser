@@ -10,15 +10,28 @@ namespace MathParser.ParseTree
 {
 	public abstract class NodeOperatorUnary : NodeBase
 	{
+		/// <summary>
+		/// Node the operator is applied to
+		/// </summary>
 		public NodeBase Operand
 		{ get; protected set; }
 
+		/// <summary>
+		/// The string form of the operator, for debugging
+		/// purposes
+		/// </summary>
 		public abstract string StringForm
 		{ get; }
 
+		/// <summary>
+		/// Name of node in debug displays
+		/// </summary>
 		public override string NodeName
 		{ get { return "Operator " + StringForm + " "; } }
 
+		/// <summary>
+		/// List of all children of the node
+		/// </summary>
 		public override List<NodeBase> Children
 		{
 			get
@@ -27,14 +40,23 @@ namespace MathParser.ParseTree
 			}
 		}
 
+		/// <summary>
+		/// Token type used when identifying the operator
+		/// </summary>
 		public abstract TokenType Operator
 		{ get; }
 
+		/// <summary>
+		/// Constructor to inherit
+		/// </summary>
 		public NodeOperatorUnary(NodeBase operand)
 		{
 			Operand = operand;
 		}
 
+		/// <summary>
+		/// Converts the operator to a string
+		/// </summary>
 		public override string ToString()
 		{
 			return "(" + StringForm + Operand.ToString() + ")";

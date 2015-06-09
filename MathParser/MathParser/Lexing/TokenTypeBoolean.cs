@@ -12,12 +12,6 @@ namespace MathParser.Lexing
 	[TokenType("boolean")]
 	public class TokenTypeBoolean : TokenTypeLiteral
 	{
-		public override NodeLiteral MakeNode(string lexeme)
-		{
-			bool val = bool.Parse(lexeme);
-			return new NodeLiteral(new ResultBoolean(val));
-		}
-
 		public override bool Matches(string lexeme)
 		{
 			return lexeme.ToLower() == "false" || lexeme.ToLower() == "true";

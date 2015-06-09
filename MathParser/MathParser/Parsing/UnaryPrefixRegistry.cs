@@ -8,6 +8,9 @@ using MathParser.Lexing;
 
 namespace MathParser.Parsing
 {
+	/// <summary>
+	/// Registry of all unary prefix operator parselets
+	/// </summary>
 	public static class UnaryPrefixRegistry
 	{
 		static Dictionary<TokenType, Type> registry = 
@@ -18,6 +21,9 @@ namespace MathParser.Parsing
 			Init();
 		}
 
+		/// <summary>
+		/// Initialization code for the registry.
+		/// </summary>
 		public static void Init()
 		{
 			List<Type> prefixes = Extensibility.
@@ -41,6 +47,14 @@ namespace MathParser.Parsing
 			}
 		}
 
+		/// <summary>
+		/// Registers a token to a node type
+		/// </summary>
+		/// <param name="token">Token to register</param>
+		/// <param name="nodeType">
+		///   Node type to register to. Must inherit from 
+		///   NodeOperatorUnary.
+		/// </param>
 		public static void Register(TokenType token, Type nodeType)
 		{
 			Type _nodeOperatorUnary = typeof(NodeOperatorUnary);
@@ -63,6 +77,12 @@ namespace MathParser.Parsing
 			}
 		}
 
+		/// <summary>
+		/// Creates a node from a token type and operand
+		/// </summary>
+		/// <param name="token">Token type identifying the node</param>
+		/// <param name="operand">Contents of the new node</param>
+		/// <returns>A new node of the operator type</returns>
 		public static NodeOperatorUnary MakeNode(TokenType token, NodeBase operand)
 		{
 			if (!registry.ContainsKey(token))
@@ -78,6 +98,22 @@ namespace MathParser.Parsing
 			return obj as NodeOperatorUnary;
 		}
 
+
+
+		/// <summary>
+		/// Gets the type registered for a particular token type
+		/// </summary>
+		/// <param name="tokenType">Token type as the key in the registry</param>
+		/// <returns>Node type stored for the specified TokenType</returns>
+		public static Type Get(TokenType tokenType)
+		{
+			return registry[tokenType];
+		}
+
+		/// <summary>
+		/// Gets all the token types stored in the registry.
+		/// </summary>
+		/// <returns>A list of all token types stored</returns>
 		public static List<TokenType> GetTokens()
 		{
 			return registry.Keys.ToList();

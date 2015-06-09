@@ -19,7 +19,7 @@ namespace MathParser.Parsing
 			Precedence = precedence;
 		}
 
-		public NodeBase Parse(PrattParser parser, Token token)
+		public NodeBase Parse(Parser parser, Token token)
 		{
 			NodeBase operand = parser.Parse(Precedence);
 			return UnaryPrefixRegistry.MakeNode(token.Type, operand);

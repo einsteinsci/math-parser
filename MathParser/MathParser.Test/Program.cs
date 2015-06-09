@@ -32,7 +32,7 @@ namespace MathParser.Test
 			IResultValue res = Evaluator.Evaluate(input);
 			
 			Console.WriteLine("Evaluated: " + input);
-			Console.WriteLine("Result: " + res.ToDisplay());
+			Console.WriteLine("Result: " + res.ToDisplayString());
 
 			Console.ReadKey(true);
 		}
