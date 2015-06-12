@@ -10,11 +10,9 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorNot : NodeOperatorUnary
 	{
-		public override string StringForm
-		{ get { return "~"; } }
 
-		public override TokenType Operator
-		{ get { return TokenType.OperatorNot; } }
+		public override TokenTypeOperator Operator
+		{ get { return TokenTypes.OperatorNot as TokenTypeOperator; } }
 
 		public override MathType Type
 		{ get { return MathType.Boolean; } }

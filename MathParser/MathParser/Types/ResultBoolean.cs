@@ -49,9 +49,9 @@ namespace MathParser.Types
 		/// <summary>
 		/// Converts the result to a double.
 		/// </summary>
-		public double ToDouble()
+		public decimal ToDecimal()
 		{
-			return (double)ToInteger();
+			return ToInteger();
 		}
 
 		/// <summary>
@@ -73,9 +73,9 @@ namespace MathParser.Types
 		/// <summary>
 		/// Converts the result to a list
 		/// </summary>
-		public List<double> ToList()
+		public List<decimal> ToList()
 		{
-			return new List<double>() { ToDouble() };
+			return new List<decimal>() { ToDecimal() };
 		}
 
 		/// <summary>

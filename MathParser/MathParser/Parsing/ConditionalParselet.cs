@@ -17,7 +17,7 @@ namespace MathParser.Parsing
 		public NodeBase Parse(Parser parser, NodeBase left, Token token)
 		{
 			NodeBase onTrue = parser.Parse();
-			parser.Consume(TokenType.OperatorColon);
+			parser.Consume(TokenTypes.OperatorColon);
 			NodeBase onFalse = parser.Parse();
 
 			return new NodeOperatorConditional(left, onTrue, onFalse);

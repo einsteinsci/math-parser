@@ -27,9 +27,9 @@ namespace MathParser.Types
 		{ get; }
 
 		/// <summary>
-		/// Converts the result to a double.
+		/// Converts the result to a decimal.
 		/// </summary>
-		double ToDouble();
+		decimal ToDecimal();
 
 		/// <summary>
 		/// Converts the result to an int
@@ -44,6 +44,6 @@ namespace MathParser.Types
 		/// <summary>
 		/// Converts the result to a list
 		/// </summary>
-		List<double> ToList();
+		List<decimal> ToList();
 	}
 }

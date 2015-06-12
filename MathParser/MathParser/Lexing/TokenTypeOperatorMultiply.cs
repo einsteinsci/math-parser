@@ -12,7 +12,7 @@ namespace MathParser.Lexing
 	[TokenType("operatorMultiply")]
 	public class TokenTypeOperatorMultiply : TokenTypeOperator
 	{
-		public override string Operator
+		public override string StringForm
 		{ get { return "*"; } }
 	}
 }

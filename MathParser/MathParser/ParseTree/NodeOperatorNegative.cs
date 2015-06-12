@@ -10,11 +10,8 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorNegative : NodeOperatorUnary
 	{
-		public override string StringForm
-		{ get { return "-"; } }
-
-		public override TokenType Operator
-		{ get { return TokenType.OperatorMinus; } }
+		public override TokenTypeOperator Operator
+		{ get { return TokenTypes.OperatorMinus as TokenTypeOperator; } }
 
 		public override MathType Type
 		{ get { return MathType.Real; } }
@@ -24,7 +21,7 @@ namespace MathParser.ParseTree
 
 		public override IResultValue Evaluate()
 		{
-			return new ResultNumberReal(-1.0 * Operand.Evaluate().ToDouble());
+			return new ResultNumberReal(-1.0m * Operand.Evaluate().ToDecimal());
 		}
 	}
 }

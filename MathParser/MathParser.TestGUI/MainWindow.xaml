@@ -1,0 +1,59 @@
+﻿<Window x:Class="MathParser.TestGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MathParser.TestGUI"
+        mc:Ignorable="d"
+        Title="MathParser Tester" Height="600" Width="400" Initialized="Window_Initialized">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="2*" x:Name="LoggerColumn" MaxWidth="0" />
+		</Grid.ColumnDefinitions>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<TextBox x:Name="EntryBox" 
+							 Margin="5" 
+							 VerticalContentAlignment="Center" />
+			<Button x:Name="GoBtn"
+							Content="Go"
+							Grid.Column="1" 
+							Margin="0,5,5,5" 
+							IsDefault="True" 
+							Click="GoBtn_Click" Height="24" Width="64" />
+			<Button x:Name="ShowBtn"
+							Content="&gt;&gt;"
+							Grid.Column="2" Margin="0,5,5,5" Height="24" Click="ShowBtn_Click" Width="32" />
+		</Grid>
+
+		<ListBox x:Name="HistoryBox"
+						 Grid.Row="1" 
+						 ScrollViewer.VerticalScrollBarVisibility="Visible" 
+						 Margin="5,0,5,5" />
+		<Grid Grid.Column="1">
+			<ToggleButton x:Name="DebugLogToggle"
+										Content="Debug Logging"
+										Margin="5" 
+										Click="DebugLogToggle_Click" 
+										IsChecked="True" />
+		</Grid>
+
+		<ListBox x:Name="LoggerBox"
+						 Grid.Column="1"
+						 Grid.Row="1"
+						 Margin="5" 
+						 ScrollViewer.VerticalScrollBarVisibility="Visible" />
+	</Grid>
+</Window>

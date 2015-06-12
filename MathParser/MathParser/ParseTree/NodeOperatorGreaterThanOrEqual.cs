@@ -10,11 +10,8 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorGreaterThanOrEqual : NodeOperatorBinary
 	{
-		public override string StringForm
-		{ get { return ">="; } }
-
-		public override TokenType Operator
-		{ get { return TokenType.OperatorGreaterThanOrEqual; } }
+		public override TokenTypeOperator Operator
+		{ get { return TokenTypes.OperatorGreaterThanOrEqual as TokenTypeOperator; } }
 
 		public override MathType Type
 		{ get { return MathType.Boolean; } }
@@ -25,7 +22,7 @@ namespace MathParser.ParseTree
 
 		public override IResultValue Evaluate()
 		{
-			return new ResultBoolean(First.Evaluate().ToDouble() >= Second.Evaluate().ToDouble());
+			return new ResultBoolean(First.Evaluate().ToDecimal() >= Second.Evaluate().ToDecimal());
 		}
 	}
 }

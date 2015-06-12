@@ -12,7 +12,7 @@ namespace MathParser.Lexing
 	[TokenType("operatorDivide")]
 	public class TokenTypeOperatorDivide : TokenTypeOperator
 	{
-		public override string Operator
+		public override string StringForm
 		{ get { return "/"; } }
 	}
 }

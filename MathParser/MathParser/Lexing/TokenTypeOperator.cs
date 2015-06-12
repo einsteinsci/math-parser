@@ -21,7 +21,7 @@ namespace MathParser.Lexing
 		/// <summary>
 		/// String representing the operator itself. "+", for example.
 		/// </summary>
-		public abstract string Operator
+		public abstract string StringForm
 		{ get; }
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace MathParser.Lexing
 		/// <returns>True if the operator matches the lexeme, false if not.</returns>
 		public override bool Matches(string lexeme)
 		{
-			return lexeme == Operator;
+			return lexeme == StringForm;
 		}
 
 		/// <summary>
@@ -51,7 +51,7 @@ namespace MathParser.Lexing
 		/// </summary>
 		public override string ToString()
 		{
-			return "[Operator" + Operator + "]";
+			return "[Operator" + StringForm + "]";
 		}
 	}
 }

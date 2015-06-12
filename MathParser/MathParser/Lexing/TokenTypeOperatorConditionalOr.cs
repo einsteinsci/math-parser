@@ -12,7 +12,7 @@ namespace MathParser.Lexing
 	[TokenType("operatorConditionalOr")]
 	public class TokenTypeOperatorConditionalOr : TokenTypeOperator
 	{
-		public override string Operator
+		public override string StringForm
 		{ get { return "|"; } }
 	}
 }

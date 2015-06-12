@@ -150,7 +150,7 @@ namespace MathParser.Lexing
 			{
 				Logger.Log(LogLevel.Error, Logger.TOKENIZER, 
 					"Token is null. Filling with Unrecognized.");
-				Lexed.Add(new Token(TokenType.Unrecognized, lexeme));
+				Lexed.Add(new Token(TokenTypes.Unrecognized, lexeme));
 				System.Diagnostics.Debugger.Break();
 				return;
 			}
@@ -184,7 +184,7 @@ namespace MathParser.Lexing
 			List<TokenType> res = new List<TokenType>();
 			foreach (TokenType token in TokenTypeRegistry.Tokens)
 			{
-				if (token.Matches(lexeme) && token != TokenType.Unrecognized)
+				if (token.Matches(lexeme) && token != TokenTypes.Unrecognized)
 				{
 					res.Add(token);
 				}

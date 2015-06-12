@@ -20,7 +20,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\MathParser.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,6 +56,7 @@
     <Compile Include="Functions\HelpLibrary.cs" />
     <Compile Include="Functions\MathFunctionAttribute.cs" />
     <Compile Include="Lexing\TokenStream.cs" />
+    <Compile Include="Lexing\TokenTypes.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Functions\FunctionInfo.cs" />
     <Compile Include="Functions\FunctionLibraryAttribute.cs" />

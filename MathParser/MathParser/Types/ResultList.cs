@@ -27,33 +27,33 @@ namespace MathParser.Types
 		/// <summary>
 		/// Internal number list stored.
 		/// </summary>
-		public List<double> Value
+		public List<decimal> Value
 		{ get; private set; }
 
 		/// <summary>
 		/// Instantiates a new ResultList.
 		/// </summary>
-		public ResultList(List<double> value)
+		public ResultList(List<decimal> value)
 		{
 			Value = value;
 		}
 		/// <summary>
 		/// Instantiates a new ResultList.
 		/// </summary>
-		public ResultList() : this(new List<double>())
+		public ResultList() : this(new List<decimal>())
 		{ }
 		/// <summary>
 		/// Instantiates a new ResultList.
 		/// </summary>
-		public ResultList(params double[] value) : this(value.ToList())
+		public ResultList(params decimal[] value) : this(value.ToList())
 		{ }
 
 		/// <summary>
 		/// Converts the result to a double.
 		/// </summary>
-		public double ToDouble()
+		public decimal ToDecimal()
 		{
-			return Value.FirstOrDefault();
+			throw new InvalidCastException("Cannot convert List to Real.");
 		}
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace MathParser.Types
 		/// </summary>
 		public long ToInteger()
 		{
-			return (long)ToDouble();
+			throw new InvalidCastException("Cannot convert List to Integer.");
 		}
 
 		/// <summary>
@@ -69,13 +69,13 @@ namespace MathParser.Types
 		/// </summary>
 		public bool ToBoolean()
 		{
-			return ToDouble() != 0;
+			throw new InvalidCastException("Cannot convert List to Boolean.");
 		}
 
 		/// <summary>
 		/// Converts the result to a list
 		/// </summary>
-		public List<double> ToList()
+		public List<decimal> ToList()
 		{
 			return Value;
 		}

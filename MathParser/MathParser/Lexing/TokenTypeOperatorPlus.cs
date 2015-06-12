@@ -12,7 +12,7 @@ namespace MathParser.Lexing
 	[TokenType("operatorPlus")]
 	public class TokenTypeOperatorPlus : TokenTypeOperator
 	{
-		public override string Operator
+		public override string StringForm
 		{ get { return "+"; } }
 	}
 }

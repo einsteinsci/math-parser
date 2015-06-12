@@ -12,7 +12,7 @@ namespace MathParser.Functions
 	/// <summary>
 	/// Trigonometric functions
 	/// </summary>
-	[FunctionLibrary("trig")]
+	[FunctionLibrary]
 	public class LibraryTrig
 	{
 		/// <summary>

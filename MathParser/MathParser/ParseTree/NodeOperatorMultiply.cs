@@ -11,9 +11,9 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorMultiply : NodeOperatorBinary
 	{
-		public override TokenType Operator
+		public override TokenTypeOperator Operator
 		{
-			get { return TokenType.OperatorMultiply; }
+			get { return TokenTypes.OperatorMultiply as TokenTypeOperator; }
 		}
 
 		public override MathType Type
@@ -28,7 +28,7 @@ namespace MathParser.ParseTree
 
 		public override IResultValue Evaluate()
 		{
-			return new ResultNumberReal(First.Evaluate().ToDouble() * Second.Evaluate().ToDouble());
+			return new ResultNumberReal(First.Evaluate().ToDecimal() * Second.Evaluate().ToDecimal());
 		}
 	}
 }

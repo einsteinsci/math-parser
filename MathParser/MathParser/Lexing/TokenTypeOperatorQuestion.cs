@@ -9,7 +9,7 @@ namespace MathParser.Lexing
 	[TokenType("operatorQuestion")]
 	public class TokenTypeOperatorQuestion : TokenTypeOperator
 	{
-		public override string Operator
+		public override string StringForm
 		{ get { return "?"; } }
 	}
 }

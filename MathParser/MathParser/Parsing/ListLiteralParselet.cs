@@ -15,15 +15,15 @@ namespace MathParser.Parsing
 		{
 			List<NodeBase> elements = new List<NodeBase>();
 
-			if (!parser.Match(TokenType.BraceOut))
+			if (!parser.Match(TokenTypes.BraceOut))
 			{
 				do
 				{
 					elements.Add(parser.Parse());
 				}
-				while (parser.Match(TokenType.Comma));
+				while (parser.Match(TokenTypes.Comma));
 
-				parser.Consume(TokenType.BraceOut);
+				parser.Consume(TokenTypes.BraceOut);
 			}
 
 			return new NodeListLiteral(elements);

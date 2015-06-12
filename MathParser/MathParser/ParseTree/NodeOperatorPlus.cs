@@ -11,16 +11,13 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorPlus : NodeOperatorBinary
 	{
-		public override TokenType Operator
+		public override TokenTypeOperator Operator
 		{
-			get { return TokenType.OperatorPlus; }
+			get { return TokenTypes.OperatorPlus as TokenTypeOperator; }
 		}
 
 		public override MathType Type
 		{ get { return MathType.Real; } }
-
-		public override string StringForm
-		{ get { return "+"; } }
 
 		public NodeOperatorPlus(NodeBase first, NodeBase second) :
 			base(first, second)
@@ -28,7 +25,7 @@ namespace MathParser.ParseTree
 
 		public override IResultValue Evaluate()
 		{
-			return new ResultNumberReal(First.Evaluate().ToDouble() + Second.Evaluate().ToDouble());
+			return new ResultNumberReal(First.Evaluate().ToDecimal() + Second.Evaluate().ToDecimal());
 		}
 	}
 }

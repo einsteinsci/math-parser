@@ -29,6 +29,8 @@ namespace MathParser.Parsing
 	/// </summary>
 	public sealed class Parser
 	{
+		//public static Parser Instance;
+
 		/// <summary>
 		/// Registry of loaded prefix parselets
 		/// </summary>
@@ -104,14 +106,14 @@ namespace MathParser.Parsing
 			PrefixParselets = new Dictionary<TokenType, IPrefixParselet>();
 
 			Logger.Log(LogLevel.Debug, Logger.REGISTRY, "Registering prefix parselets.");
-			PrefixParselets.Add(TokenType.Identifier, new NameParselet());
-			PrefixParselets.Add(TokenType.Number, new NumberParselet());
-			PrefixParselets.Add(TokenType.String, new StringParselet());
-			PrefixParselets.Add(TokenType.Boolean, new BooleanParselet());
+			PrefixParselets.Add(TokenTypes.Identifier, new NameParselet());
+			PrefixParselets.Add(TokenTypes.Number, new NumberParselet());
+			PrefixParselets.Add(TokenTypes.String, new StringParselet());
+			PrefixParselets.Add(TokenTypes.Boolean, new BooleanParselet());
 
-			PrefixParselets.Add(TokenType.ParenthesisIn, new ParenthesisParselet());
+			PrefixParselets.Add(TokenTypes.ParenthesisIn, new ParenthesisParselet());
 
-			PrefixParselets.Add(TokenType.BraceIn, new ListLiteralParselet());
+			PrefixParselets.Add(TokenTypes.BraceIn, new ListLiteralParselet());
 
 			foreach (TokenType tc in UnaryPrefixRegistry.GetTokens())
 			{
@@ -126,9 +128,9 @@ namespace MathParser.Parsing
 			InfixParselets = new Dictionary<TokenType, IInfixParselet>();
 
 			Logger.Log(LogLevel.Debug, Logger.REGISTRY, "Registering infix and postfix parselets.");
-			InfixParselets.Add(TokenType.ParenthesisIn, new FunctionCallParselet());
-			InfixParselets.Add(TokenType.BracketIn, new ListOrdinalParselet());
-			InfixParselets.Add(TokenType.OperatorQuestion, new ConditionalParselet());
+			InfixParselets.Add(TokenTypes.ParenthesisIn, new FunctionCallParselet());
+			InfixParselets.Add(TokenTypes.BracketIn, new ListOrdinalParselet());
+			InfixParselets.Add(TokenTypes.OperatorQuestion, new ConditionalParselet());
 
 			foreach (TokenType tc in BinaryInfixRegistry.GetTokens())
 			{
@@ -146,7 +148,7 @@ namespace MathParser.Parsing
 				InfixLoading(null, new InfixLoadingEventArgs(InfixParselets));
 			}
 
-			hasRegistered = false;
+			hasRegistered = true;
 		}
 
 		#region register

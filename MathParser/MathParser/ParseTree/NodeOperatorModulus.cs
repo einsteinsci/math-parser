@@ -12,16 +12,13 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorModulus : NodeOperatorBinary
 	{
-		public override TokenType Operator
+		public override TokenTypeOperator Operator
 		{
-			get { return TokenType.OperatorModulus; }
+			get { return TokenTypes.OperatorModulus as TokenTypeOperator; }
 		}
 
 		public override MathType Type
 		{ get { return MathType.Integer; } }
-
-		public override string StringForm
-		{ get { return "%"; } }
 
 		public NodeOperatorModulus(NodeBase first, NodeBase second) :
 			base(first, second)
@@ -32,13 +29,13 @@ namespace MathParser.ParseTree
 			IResultValue res1 = First.Evaluate();
 			IResultValue res2 = Second.Evaluate();
 
-			if (!res1.ToDouble().IsInteger(8) || !res2.ToDouble().IsInteger(8))
+			if (!((double)res1.ToDecimal()).IsInteger(8) || !((double)res2.ToDecimal()).IsInteger(8))
 			{
 				throw new EvaluationException(this, 
 					"Cannot use floating-point types in modulus calculation.");
 			}
 
-			return new ResultNumberReal(res1.ToInteger() % res2.ToInteger());
+			return new ResultNumberReal((decimal)(res1.ToInteger() % res2.ToInteger()));
 		}
 	}
 }

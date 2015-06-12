@@ -13,7 +13,7 @@ namespace MathParser.Types
 	public enum MathType
 	{
 		/// <summary>
-		/// A real number. Equivalent to a double.
+		/// A real number. Equivalent to a decimal.
 		/// </summary>
 		Real = 0,
 		/// <summary>
@@ -29,7 +29,7 @@ namespace MathParser.Types
 		/// </summary>
 		Boolean,
 		/// <summary>
-		/// A list of numbers. Equivalent to a List&lt;double&gt;
+		/// A list of numbers. Equivalent to a <c>List&lt;decimal&gt;</c>
 		/// </summary>
 		List
 	}
@@ -80,7 +80,7 @@ namespace MathParser.Types
 			switch (mtype)
 			{
 			case MathType.Real:
-				return typeof(double);
+				return typeof(decimal);
 			case MathType.Integer:
 				return typeof(long);
 			case MathType.String:
@@ -88,7 +88,7 @@ namespace MathParser.Types
 			case MathType.Boolean:
 				return typeof(bool);
 			case MathType.List:
-				return typeof(List<double>);
+				return typeof(List<decimal>);
 			default:
 				throw new ArgumentException("Not a valid MathType: " + mtype.ToString());
 			}

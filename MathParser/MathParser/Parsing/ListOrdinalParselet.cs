@@ -18,7 +18,7 @@ namespace MathParser.Parsing
 		{
 			NodeBase ordinal = parser.Parse();
 
-			parser.Consume(TokenType.BracketOut);
+			parser.Consume(TokenTypes.BracketOut);
 
 			return new NodeListOrdinal(left, ordinal);
 		}

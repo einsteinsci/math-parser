@@ -32,13 +32,6 @@ namespace MathParser.ParseTree
 		{ get { return GetType().Name; } }
 
 		/// <summary>
-		/// Parent node
-		/// </summary>
-		[Obsolete]
-		public NodeBase Parent
-		{ get; protected set; }
-
-		/// <summary>
 		/// Evaluates the node
 		/// </summary>
 		public abstract IResultValue Evaluate();

@@ -12,7 +12,7 @@ namespace MathParser.Lexing
 	[TokenType("operatorExponent")]
 	public class TokenTypeOperatorExponent : TokenTypeOperator
 	{
-		public override string Operator
+		public override string StringForm
 		{ get { return "^"; } }
 
 		public override bool IsRightAssociative

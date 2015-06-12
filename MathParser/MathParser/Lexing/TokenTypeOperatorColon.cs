@@ -9,7 +9,7 @@ namespace MathParser.Lexing
 	[TokenType("operatorColon")]
 	public class TokenTypeOperatorColon : TokenTypeOperator
 	{
-		public override string Operator
+		public override string StringForm
 		{ get { return ":"; } }
 	}
 }

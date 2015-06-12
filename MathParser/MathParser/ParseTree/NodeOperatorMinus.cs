@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MathParser.Lexing;
 using MathParser.Types;
 
 namespace MathParser.ParseTree
 {
 	public class NodeOperatorMinus : NodeOperatorBinary
 	{
-		public override Lexing.TokenType Operator
+		public override TokenTypeOperator Operator
 		{
-			get { return Lexing.TokenType.OperatorMinus; }
+			get { return TokenTypes.OperatorMinus as TokenTypeOperator; }
 		}
 
 		public override MathType Type
 		{ get { return MathType.Real; } }
-
-		public override string StringForm
-		{ get { return "-"; } }
 
 		public NodeOperatorMinus(NodeBase first, NodeBase second) :
 			base(first, second)
@@ -26,7 +24,7 @@ namespace MathParser.ParseTree
 
 		public override IResultValue Evaluate()
 		{
-			return new ResultNumberReal(First.Evaluate().ToDouble() - Second.Evaluate().ToDouble());
+			return new ResultNumberReal(First.Evaluate().ToDecimal() - Second.Evaluate().ToDecimal());
 		}
 	}
 }

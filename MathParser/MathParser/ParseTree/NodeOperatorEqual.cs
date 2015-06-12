@@ -12,11 +12,8 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorEqual : NodeOperatorBinary
 	{
-		public override string StringForm
-		{ get { return "="; } }
-
-		public override TokenType Operator
-		{ get { return TokenType.OperatorEqual; } }
+		public override TokenTypeOperator Operator
+		{ get { return TokenTypes.OperatorEqual as TokenTypeOperator; } }
 
 		public override MathType Type
 		{ get { return MathType.Boolean; } }
@@ -30,7 +27,10 @@ namespace MathParser.ParseTree
 			IResultValue num1 = First.Evaluate();
 			IResultValue num2 = Second.Evaluate();
 
-			return new ResultBoolean(num1.ToDouble().AlmostEqualTo(num2.ToDouble()));
+			double d1 = (double)num1.ToDecimal();
+			double d2 = (double)num2.ToDecimal();
+
+			return new ResultBoolean(d1.AlmostEqualTo(d2));
 		}
 	}
 }

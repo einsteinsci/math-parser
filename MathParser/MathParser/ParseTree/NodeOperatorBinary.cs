@@ -29,8 +29,8 @@ namespace MathParser.ParseTree
 		/// The symbol used in the operator, for debugging
 		/// purposes.
 		/// </summary>
-		public abstract string StringForm
-		{ get; }
+		public virtual string StringForm
+		{ get { return Operator.StringForm; } }
 
 		/// <summary>
 		/// The name used for the node when debugging
@@ -55,7 +55,7 @@ namespace MathParser.ParseTree
 		/// <summary>
 		/// TokenType used to link token type to operator
 		/// </summary>
-		public abstract TokenType Operator
+		public abstract TokenTypeOperator Operator
 		{ get; }
 
 		/// <summary>

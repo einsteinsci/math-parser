@@ -14,7 +14,7 @@ namespace MathParser.Parsing
 		public NodeBase Parse(Parser parser, Token token)
 		{
 			NodeBase node = parser.Parse();
-			parser.Consume(TokenType.ParenthesisOut);
+			parser.Consume(TokenTypes.ParenthesisOut);
 
 			return node;
 		}

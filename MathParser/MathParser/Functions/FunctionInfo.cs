@@ -89,13 +89,34 @@ namespace MathParser.Functions
 			object[] argvals = new object[ArgumentCount];
 			for (int i = 0; i < ArgumentCount; i++)
 			{
-				argvals[i] = args[i].CoreValue;
+				Type argType = Function.GetMethodInfo().GetParameters()[i].ParameterType;
+
+				if (argType == typeof(float))
+				{
+					argvals[i] = Convert.ToSingle(args[i].CoreValue);
+				}
+				else if (argType == typeof(double))
+				{
+					argvals[i] = Convert.ToDouble(args[i].CoreValue);
+				}
+				else if (argType == typeof(short))
+				{
+					argvals[i] = Convert.ToInt16(args[i].CoreValue);
+				}
+				else if (argType == typeof(int))
+				{
+					argvals[i] = Convert.ToInt32(args[i].CoreValue);
+				}
+				else
+				{
+					argvals[i] = args[i].CoreValue;
+				}
 			}
 
 			object res = Function.DynamicInvoke(argvals);
-			if (res is double || res is float)
+			if (res is decimal || res is double || res is float)
 			{
-				return new ResultNumberReal(Convert.ToDouble(res));
+				return new ResultNumberReal(Convert.ToDecimal(res));
 			}
 			if (res is long || res is int || res is short)
 			{

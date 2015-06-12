@@ -17,18 +17,18 @@ namespace MathParser
 		/// List of assemblies used in the extension of this library.
 		/// Add your assembly to this list for it to extend this library.
 		/// </summary>
-		public static List<Assembly> LoadedExtensions
+		public static ISet<Assembly> LoadedExtensions
 		{ get; private set; }
 
 		/// <summary>
 		/// List of all assemblies loaded by this library, including itself.
 		/// </summary>
-		public static List<Assembly> AllAssemblies
+		public static ISet<Assembly> AllAssemblies
 		{
 			get
 			{
-				List<Assembly> res = new List<Assembly>(LoadedExtensions);
-				res.Insert(0, Assembly.GetAssembly(typeof(Extensibility)));
+				ISet<Assembly> res = new HashSet<Assembly>(LoadedExtensions);
+				res.Add(Assembly.GetAssembly(typeof(Extensibility))); // this assembly
 
 				return res;
 			}
@@ -36,7 +36,7 @@ namespace MathParser
 
 		static Extensibility()
 		{
-			LoadedExtensions = new List<Assembly>();
+			LoadedExtensions = new HashSet<Assembly>();
 		}
 
 		/// <summary>

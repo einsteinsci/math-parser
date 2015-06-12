@@ -12,7 +12,7 @@ namespace MathParser.Lexing
 	[TokenType("operatorModulus")]
 	public class TokenTypeOperatorModulus : TokenTypeOperator
 	{
-		public override string Operator
+		public override string StringForm
 		{ get { return "%"; } }
 	}
 }

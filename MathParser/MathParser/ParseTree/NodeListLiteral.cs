@@ -32,7 +32,7 @@ namespace MathParser.ParseTree
 
 		public override IResultValue Evaluate()
 		{
-			List<double> vals = new List<double>();
+			List<decimal> vals = new List<decimal>();
 			foreach (NodeBase node in Children)
 			{
 				IResultValue res = node.Evaluate();
@@ -41,7 +41,7 @@ namespace MathParser.ParseTree
 					throw new EvaluationException(this, "List item must be a number. Found " + 
 						res.Type + " instead.");
 				}
-				vals.Add(res.ToDouble());
+				vals.Add(res.ToDecimal());
 			}
 
 			return new ResultList(vals);

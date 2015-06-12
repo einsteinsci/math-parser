@@ -12,7 +12,7 @@ namespace MathParser.Lexing
 	[TokenType("operatorLessThanOrEqual")]
 	public class TokenTypeOperatorLessThanOrEqual : TokenTypeOperator
 	{
-		public override string Operator
+		public override string StringForm
 		{ get { return "<="; } }
 	}
 }

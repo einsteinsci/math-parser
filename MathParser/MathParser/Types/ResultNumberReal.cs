@@ -28,21 +28,37 @@ namespace MathParser.Types
 		/// <summary>
 		/// Internal floating-point value stored
 		/// </summary>
-		public double Value
+		public decimal Value
 		{ get; set; }
+
+		/// <summary>
+		/// Instantiates a new ResultNumberReal.
+		/// </summary>
+		public ResultNumberReal(decimal d)
+		{
+			Value = d;
+		}
 
 		/// <summary>
 		/// Instantiates a new ResultNumberReal.
 		/// </summary>
 		public ResultNumberReal(double d)
 		{
-			Value = d;
+			Value = (decimal)d;
 		}
 
 		/// <summary>
-		/// Converts the result to a double.
+		/// Instantiates a new ResultNumberReal.
 		/// </summary>
-		public double ToDouble()
+		public ResultNumberReal(float f)
+		{
+			Value = (decimal)f;
+		}
+
+		/// <summary>
+		/// Converts the result to a decimal.
+		/// </summary>
+		public decimal ToDecimal()
 		{
 			return Value;
 		}
@@ -66,9 +82,9 @@ namespace MathParser.Types
 		/// <summary>
 		/// Converts the result to a list
 		/// </summary>
-		public List<double> ToList()
+		public List<decimal> ToList()
 		{
-			return new List<double>() { ToDouble() };
+			return new List<decimal>() { ToDecimal() };
 		}
 
 		/// <summary>

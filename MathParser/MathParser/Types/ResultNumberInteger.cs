@@ -46,11 +46,11 @@ namespace MathParser.Types
 		}
 
 		/// <summary>
-		/// Converts the result to a double.
+		/// Converts the result to a decimal.
 		/// </summary>
-		public double ToDouble()
+		public decimal ToDecimal()
 		{
-			return (double)Value;
+			return Value;
 		}
 
 		/// <summary>
@@ -72,9 +72,9 @@ namespace MathParser.Types
 		/// <summary>
 		/// Converts the result to a list
 		/// </summary>
-		public List<double> ToList()
+		public List<decimal> ToList()
 		{
-			return new List<double>() { ToDouble() };
+			return new List<decimal>() { ToDecimal() };
 		}
 
 		/// <summary>
@@ -98,7 +98,7 @@ namespace MathParser.Types
 		/// </summary>
 		public static implicit operator ResultNumberReal(ResultNumberInteger _int)
 		{
-			return new ResultNumberReal(_int.ToDouble());
+			return new ResultNumberReal(_int.ToDecimal());
 		}
 	}
 }

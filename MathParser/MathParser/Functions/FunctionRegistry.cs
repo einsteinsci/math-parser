@@ -18,7 +18,8 @@ namespace MathParser.Functions
 	{
 		private static Dictionary<string, FunctionInfo> registry;
 
-		private static bool hasInitialized;
+		private static bool hasInitialized = false;
+		private static bool isInitializing = false;
 
 		/// <summary>
 		/// Gets a loaded function from the registry by name.
@@ -27,6 +28,8 @@ namespace MathParser.Functions
 		/// <returns>Function with the corresponding name</returns>
 		public static FunctionInfo GetFunction(string name)
 		{
+			Init();
+
 			if (registry.ContainsKey(name))
 			{
 				return registry[name];
@@ -37,17 +40,19 @@ namespace MathParser.Functions
 			}
 		}
 
-		static FunctionRegistry()
-		{
-			Init();
-		}
-
 		/// <summary>
 		/// Initializes the Function registry
 		/// </summary>
 		/// <param name="force"></param>
 		public static void Init(bool force = false)
 		{
+			if (isInitializing)
+			{
+				return;
+			}
+
+			isInitializing = true;
+
 			if (hasInitialized && !force)
 			{
 				return;
@@ -75,14 +80,11 @@ namespace MathParser.Functions
 				}
 			}
 
+			isInitializing = false;
 			hasInitialized = true;
 		}
-
-		/// <summary>
-		/// Loads math functions from FunctionInfo fields defined in a type
-		/// </summary>
-		/// <param name="type"></param>
-		public static void LoadFromFields(Type type)
+		
+		private static void LoadFromFields(Type type)
 		{
 			FieldInfo[] fields = type.GetFields();
 
@@ -115,11 +117,7 @@ namespace MathParser.Functions
 			}
 		}
 
-		/// <summary>
-		/// Loads math functions from FunctionInfo properties defined in a type
-		/// </summary>
-		/// <param name="type"></param>
-		public static void LoadFromProperties(Type type)
+		private static void LoadFromProperties(Type type)
 		{
 			PropertyInfo[] properties = type.GetProperties();
 
@@ -153,12 +151,8 @@ namespace MathParser.Functions
 				RegisterFunction(func);
 			}
 		}
-
-		/// <summary>
-		/// Loads math functions from methods defined in a type
-		/// </summary>
-		/// <param name="type">Function library type</param>
-		public static void LoadFromMethods(Type type)
+		
+		private static void LoadFromMethods(Type type)
 		{
 			MethodInfo[] methods = type.GetMethods();
 
@@ -225,6 +219,8 @@ namespace MathParser.Functions
 		/// <param name="function">FunctionInfo to load</param>
 		public static void RegisterFunction(FunctionInfo function)
 		{
+			Init(false);
+
 			if (registry.ContainsKey(function.Name))
 			{
 				Logger.Log(LogLevel.Warning, Logger.REGISTRY, "Function " + function.Name +

@@ -13,6 +13,8 @@ namespace MathParser.Functions
 	/// </summary>
 	public static class HelpLibrary
 	{
+		private static bool hasRegistered = false;
+
 		private static Dictionary<string, string> library = new Dictionary<string, string>();
 
 		static HelpLibrary()
@@ -23,8 +25,13 @@ namespace MathParser.Functions
 		/// <summary>
 		/// Initializes the help library
 		/// </summary>
-		public static void Init()
+		public static void Init(bool force = false)
 		{
+			if (hasRegistered && !force)
+			{
+				return;
+			}
+
 			library.Clear();
 
 			RegisterHelp("sqrt", "Real sqrt(Real)\n - Returns the square root of a value");
@@ -77,6 +84,8 @@ namespace MathParser.Functions
 			RegisterHelp("mean", "Real mean(List)\n - Returns the mean of all the values in the list");
 			RegisterHelp("sd", "Real sd(List)\n - Returns the standard deviation of all the values in the list");
 			RegisterHelp("rms", "Real rms(list)\n - Returns the root-mean-square value of the list");
+
+			hasRegistered = true;
 		}
 
 		/// <summary>

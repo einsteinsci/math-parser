@@ -11,14 +11,11 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorDivide : NodeOperatorBinary
 	{
-		public override TokenType Operator
-		{ get { return TokenType.OperatorDivide; } }
+		public override TokenTypeOperator Operator
+		{ get { return TokenTypes.OperatorDivide as TokenTypeOperator; } }
 
 		public override MathType Type
 		{ get { return MathType.Real; } }
-
-		public override string StringForm
-		{ get { return "/"; } }
 
 		public NodeOperatorDivide(NodeBase first, NodeBase second) :
 			base(first, second)
@@ -26,7 +23,7 @@ namespace MathParser.ParseTree
 
 		public override IResultValue Evaluate()
 		{
-			return new ResultNumberReal(First.Evaluate().ToDouble() / Second.Evaluate().ToDouble());
+			return new ResultNumberReal(First.Evaluate().ToDecimal() / Second.Evaluate().ToDecimal());
 		}
 	}
 }

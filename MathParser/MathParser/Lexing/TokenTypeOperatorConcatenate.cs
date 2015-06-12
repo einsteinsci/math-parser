@@ -12,7 +12,7 @@ namespace MathParser.Lexing
 	[TokenType("operatorConcatenate")]
 	public class TokenTypeOperatorConcatenate : TokenTypeOperator
 	{
-		public override string Operator
+		public override string StringForm
 		{ get { return "<>"; } }
 	}
 }

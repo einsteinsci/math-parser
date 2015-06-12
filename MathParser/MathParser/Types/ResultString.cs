@@ -42,9 +42,9 @@ namespace MathParser.Types
 		/// <summary>
 		/// Converts the result to a double.
 		/// </summary>
-		public double ToDouble()
+		public decimal ToDecimal()
 		{
-			return double.Parse(Value);
+			return decimal.Parse(Value);
 		}
 
 		/// <summary>
@@ -60,15 +60,27 @@ namespace MathParser.Types
 		/// </summary>
 		public bool ToBoolean()
 		{
-			return ToInteger() == 0 ? false : true;
+			int nothing = 0;
+			if (Value == "0" || Value.ToLower() == "false")
+			{
+				return false;
+			}
+			else if (int.TryParse(Value, out nothing) || Value.ToLower() == "true")
+			{
+				return true;
+			}
+			else
+			{
+				throw new InvalidCastException("Cannot convert " + ToDisplayString() + " to Boolean.");
+			}
 		}
 
 		/// <summary>
 		/// Converts the result to a list
 		/// </summary>
-		public List<double> ToList()
+		public List<decimal> ToList()
 		{
-			return new List<double>() { ToDouble() };
+			return new List<decimal>() { ToDecimal() };
 		}
 
 		/// <summary>

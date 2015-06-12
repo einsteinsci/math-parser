@@ -20,15 +20,15 @@ namespace MathParser.Parsing
 		{
 			List<NodeBase> args = new List<NodeBase>();
 
-			if (!parser.Match(TokenType.ParenthesisOut))
+			if (!parser.Match(TokenTypes.ParenthesisOut))
 			{
 				do 
 				{
 					args.Add(parser.Parse());
 				} 
-				while (parser.Match(TokenType.Comma));
+				while (parser.Match(TokenTypes.Comma));
 
-				parser.Consume(TokenType.ParenthesisOut);
+				parser.Consume(TokenTypes.ParenthesisOut);
 			}
 
 			NodeIdentifier name = left as NodeIdentifier;

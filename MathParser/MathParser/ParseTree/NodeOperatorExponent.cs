@@ -12,22 +12,19 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorExponent : NodeOperatorBinary
 	{
-		public override TokenType Operator
-		{ get { return TokenType.OperatorExponent; } }
+		public override TokenTypeOperator Operator
+		{ get { return TokenTypes.OperatorExponent as TokenTypeOperator; } }
 
 		public override MathType Type
 		{ get { return MathType.Real; } }
-
-		public override string StringForm
-		{ get { return "^"; } }
-
+		
 		public NodeOperatorExponent(NodeBase first, NodeBase second) :
 			base(first, second)
 		{ }
 
 		public override IResultValue Evaluate()
 		{
-			return new ResultNumberReal(MathPlus.Pow(First.Evaluate().ToDouble(), Second.Evaluate().ToDouble()));
+			return new ResultNumberReal(MathPlus.Pow((double)First.Evaluate().ToDecimal(), (double)Second.Evaluate().ToDecimal()));
 		}
 	}
 }

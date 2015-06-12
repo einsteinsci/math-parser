@@ -12,7 +12,7 @@ namespace MathParser.Functions
 	/// <summary>
 	/// Functions relating to lists
 	/// </summary>
-	[FunctionLibrary("list")]
+	[FunctionLibrary]
 	public static class LibraryList
 	{
 		/// <summary>

@@ -11,8 +11,8 @@ namespace MathParser.Test
 {
 	public class NodeStringRepeat : NodeOperatorBinary
 	{
-		public override TokenType Operator
-		{ get { return TokenTypeDollar.Instance; } }
+		public override TokenTypeOperator Operator
+		{ get { return TokenTypeDollar.Instance as TokenTypeOperator; } }
 
 		public override string StringForm
 		{ get { return "$"; } }

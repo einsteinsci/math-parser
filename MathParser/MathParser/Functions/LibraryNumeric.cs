@@ -13,7 +13,7 @@ namespace MathParser.Functions
 	/// <summary>
 	/// Various numeric functions
 	/// </summary>
-	[FunctionLibrary("numeric")]
+	[FunctionLibrary]
 	public static class LibraryNumeric
 	{
 		/// <summary>

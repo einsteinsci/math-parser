@@ -18,10 +18,7 @@ namespace MathParser.Test
 		static void Main(string[] args)
 		{
 			Logger.OnLog += Log;
-			Logger.DisableLogging(Logger.REGISTRY);
 			Logger.DebugLogging = true;
-
-			//Extensibility.LoadedExtensions.Add(Assembly.GetExecutingAssembly());
 
 			Evaluator.Initialize();
 
@@ -39,7 +36,7 @@ namespace MathParser.Test
 
 		static void Log(object sender, LoggerEventArgs e)
 		{
-			Console.ForegroundColor = ConsoleColor.Green;
+			Console.ForegroundColor = ConsoleColor.White;
 			Console.Write("[" + e.Category.ToUpper() + "] ");
 
 			switch (e.Level)

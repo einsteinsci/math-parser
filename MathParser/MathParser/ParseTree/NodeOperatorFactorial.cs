@@ -13,11 +13,8 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorFactorial : NodeOperatorUnary
 	{
-		public override string StringForm
-		{ get { return "!"; } }
-
-		public override TokenType Operator
-		{ get { return TokenType.OperatorFactorial; } }
+		public override TokenTypeOperator Operator
+		{ get { return TokenTypes.OperatorFactorial as TokenTypeOperator; } }
 
 		public override MathType Type
 		{ get { return MathType.Integer; } }
@@ -29,13 +26,13 @@ namespace MathParser.ParseTree
 		{
 			IResultValue res = Operand.Evaluate();
 
-			if (!res.ToDouble().IsInteger(8))
+			if (!((double)res.ToDecimal()).IsInteger(8))
 			{
 				throw new EvaluationException(this,
 					"Cannot use floating-point types in factorial calculation.");
 			}
 
-			return new ResultNumberReal(MathPlus.Probability.Factorial(res.ToInteger()));
+			return new ResultNumberReal((decimal)MathPlus.Probability.Factorial(res.ToInteger()));
 		}
 
 		public override string ToString()

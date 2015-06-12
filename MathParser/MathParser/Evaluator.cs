@@ -9,6 +9,7 @@ using MathParser.ParseTree;
 using MathParser.Parsing;
 using MathParser.Functions;
 using MathParser.Types;
+using System.Reflection;
 
 namespace MathParser
 {
@@ -61,13 +62,20 @@ namespace MathParser
 
 		/// <summary>
 		/// Option for on-demand initialization to prevent sudden lag during evaluation.
-		/// Be sure to add any extending assemblies via the Extensibility class first.
+		/// The calling assembly is loaded via Extensibility unless specified otherwise.
 		/// </summary>
-		public static void Initialize(bool force = false)
+		public static void Initialize(bool loadCallingAssembly = true, bool force = false)
 		{
+			if (loadCallingAssembly)
+			{
+				Assembly callingAssembly = Assembly.GetCallingAssembly();
+
+				Extensibility.LoadedExtensions.Add(callingAssembly);
+			}
+
+			FunctionRegistry.Init(force);
 			TokenTypeRegistry.RegisterTokens(force);
-			Functions.FunctionRegistry.Init(force);
-			HelpLibrary.Init();
+			HelpLibrary.Init(force);
 			Parser.Init(force);
 		}
 

@@ -11,7 +11,7 @@ namespace MathParser.Functions
 	/// <summary>
 	/// Functions involving strings
 	/// </summary>
-	[FunctionLibrary("string")]
+	[FunctionLibrary]
 	public static class LibraryString
 	{
 		/// <summary>

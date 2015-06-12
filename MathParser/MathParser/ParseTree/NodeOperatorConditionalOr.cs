@@ -10,11 +10,8 @@ namespace MathParser.ParseTree
 {
 	public class NodeOperatorConditionalOr : NodeOperatorBinary
 	{
-		public override TokenType Operator
-		{ get { return TokenType.OperatorConditionalOr; } }
-
-		public override string StringForm
-		{ get { return "|"; } }
+		public override TokenTypeOperator Operator
+		{ get { return TokenTypes.OperatorConditionalOr as TokenTypeOperator; } }
 
 		public override MathType Type
 		{ get { return MathType.Boolean; } }
